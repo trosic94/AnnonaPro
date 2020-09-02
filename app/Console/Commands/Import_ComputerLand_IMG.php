@@ -58,8 +58,7 @@ class Import_ComputerLand_IMG extends Command
                                         'id',
                                         'import_id'
                                     )
-                                    //->where('id','>',9519) // id 
-                                    ->where('id','<',9519) // id proizvoda ako je negde zapelo
+                                    ->where('id','>',0) // id proizvoda ako je negde zapelo
                                     ->get();
 
         $imgForImport = array();

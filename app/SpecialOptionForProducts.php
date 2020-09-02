@@ -63,7 +63,6 @@ class SpecialOptionForProducts extends Model
                                             ->where('P.status',1)
                                             ->get();
 
-
         return $SPECproductOptions_ByOPT_ID;
     }
 
