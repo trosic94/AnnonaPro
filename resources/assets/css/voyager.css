@@ -1,0 +1,92 @@
+hr {
+  margin: 5px 0;
+  padding: 0; }
+
+.text-bold {
+  font-weight: bold; }
+
+.text-center {
+  text-align: center; }
+
+.text-right {
+  text-align: right; }
+
+.text-left {
+  text-align: left; }
+
+.text-bold {
+  font-weight: bold; }
+
+.table_v1 {
+  width: 100%;
+  margin: 0;
+  padding: 0; }
+  .table_v1 thead {
+    padding: 5px 0;
+    background-color: #22a7f0;
+    color: #ffffff;
+    border-bottom: 1px solid #eee; }
+    .table_v1 thead th {
+      padding: 3px 5px;
+      text-align: center; }
+  .table_v1 tbody {
+    padding: 5px 0;
+    border-bottom: 1px solid #eee; }
+    .table_v1 tbody tr td {
+      padding: 3px 5px; }
+    .table_v1 tbody tr.itemRow:nth-child(even) {
+      background: #eee; }
+
+.borderBottom_v1 {
+  border-bottom: 1px solid #76838f; }
+
+.padd_l_5 {
+  padding-left: 5px; }
+
+.padd_r_5 {
+  padding-right: 5px; }
+
+.padd_l_15 {
+  padding-left: 15px; }
+
+.padd_r_15 {
+  padding-right: 15px; }
+
+.mar_b_0 {
+  margin-bottom: 0px !important; }
+
+.mar_b_5 {
+  margin-bottom: 5px !important; }
+
+.mar_l_10 {
+  margin-left: 10px !important; }
+
+.mar_r_10 {
+  margin-right: 10px !important; }
+
+.img100 {
+  width: 100%;
+  height: auto; }
+
+.blockFormat img {
+  width: 100%;
+  height: auto; }
+
+.ORD_subTotal {
+  padding: 10px;
+  font-size: 18px;
+  background-color: #76838f;
+  color: #ffffff; }
+
+.ORD_Discount {
+  padding: 5px;
+  font-size: 16px; }
+
+.ORD_Total {
+  padding: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: #37474f;
+  color: #ffffff; }
+
+/*# sourceMappingURL=voyager.css.map */

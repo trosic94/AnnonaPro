@@ -1,0 +1,26 @@
+// colors
+
+// blue => #0DACD2
+//$red: #D93648;
+//$yellow: #FCBE0A;
+//$grey-lighten-5 => #F1F1F1
+$grey: #0A0A0B;
+$grey-dark: #131314; // body back, breadcrumb
+$grey-card: #1b1b1c; // card back
+$grey-light: #e0e0e0; // search back, padding disabled
+$grey-line: #7E7E7E; // accordian border
+$grey-form: #3a3a3d; // product page select
+$grey-light-dark: #232325; // blockquote
+$blue: #33b5e5; // main blue collor
+$white-border: #dee2e6; // table bottom border, cart right bottom border
+$yellow: #FCBE0A; // button
+
+// site max width
+$site-max-width: 1200px;
+
+//$lato-font: 'Lato', sans-serif;
+
+
+.grey-lighten-5-text {
+	color: $grey-lighten-5;
+}
