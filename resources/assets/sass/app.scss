@@ -18,7 +18,7 @@
 // GLOBAL --------------------------------------------------------------------------------------------------------- //
 body {
 	color: $white-base;
-	background-color: $grey-dark;
+	background-color: $white;
 }
 
 .site-max-width {
@@ -101,12 +101,12 @@ hr { margin: 40px 0;
 // BREADCRUMB ----------------------------------------------------------------------------------------------------- //
 ol.breadcrumb {
 
-	background-color: $grey-dark;
+	background-color: $white;
 
 	li {
 
 		a {
-			color: $white;
+			color: $grey-dark;
 			font-size: 90%;
 
 			&:hover {
@@ -1074,7 +1074,7 @@ div.prodTABs {
 
 div#lefNav {
 
-	background-color: $grey-dark;
+	background-color: $white;
 
 	border-bottom: 1px solid $grey-line;
 

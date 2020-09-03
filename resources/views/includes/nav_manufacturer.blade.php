@@ -10,7 +10,7 @@
 	</div>
 
 	<div id="collapseMNFC" class="collapse show" role="tabpanel" aria-labelledby="manufacturer" data-parent="#accordionEx">
-	  <div class="card-body p-0 pb-3 text-white">
+	  <div class="card-body p-0 pb-3 .text-annona-gray">
 
 	  	<div id="mfcCHKwrap" class="mnfcScroll my-custom-scrollbar-primary">
 

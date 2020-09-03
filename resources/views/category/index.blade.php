@@ -23,39 +23,53 @@
 			<div class="row pl-4 pl-lg-0 pr-4 pr-lg-0">
 
 				@foreach ($allProducts as $key => $prod)
-				<div class="col-md-4 pl-2 pl-lg-0 pr-2 pr-lg-0 pb-4 d-flex wow animated fadeIn">
+				<div class="col-md-3 pl-2 pl-lg-0 pr-2 pr-lg-0 pb-4 d-flex wow animated fadeIn">
 			          <div class="prodOne white pl-0 pr-0 ml-2 mr-2 text-default">
 
 			            <div class="imgWrap">
-			            	@if ($prod->sop_count > 0)
-			            		<div class="akcijaNOTE">@lang('shop.title_action')</div>
-			            	@endif
+			            	<div class="row pr-3 pl-3">
+				            	<div class="col">
+				              		<div id="addTo_FAV" class="prod_{{ $prod->prod_id }}" onclick="FavEvent({{ $prod->prod_id }})">
+				                      <i class="far fa-heart fa-2x text-annona-gray {{ (in_array($prod->prod_id,$favLIST))? 'd-none':'d-block' }}"></i>
+				                      <i class="fas fa-heart fa-2x text-annona-gray {{ (in_array($prod->prod_id,$favLIST))? 'd-block':'d-none' }}"></i>
+				              		</div>
+				              	</div>
+				              	<div class="col">
+					            	@if ($prod->sop_count > 0)
+					            		<div class="akcijaNOTE">@lang('shop.title_action')</div>
+					            	@endif
+					            </div>
+			            	</div>
+			            	
 			              <a href="{{ ($prod->pcat_id != 3)? trans('shop.slug_url_products'):'' }}/{{ $prod->pcat_slug }}/{{ $prod->cat_slug }}/{{ $prod->prod_slug }}"><img src="/storage/products/{{ ($prod->prod_image != null)? $prod->prod_image:'no_image.jpg' }}" alt="{{ $prod->prod_title }}" class="img100"></a>
 			            </div>
 
 			            <h3><a href="{{ ($prod->pcat_id != 3)? trans('shop.slug_url_products'):'' }}/{{ $prod->pcat_slug }}/{{ $prod->cat_slug }}/{{ $prod->prod_slug }}">{{ $prod->prod_title }}</a></h3>
 
-			            <div class="prodFooter">
-
-			              <div class="priceWrap">
-			              	@if ($prod->prod_price_with_discount != null)
-				                <span class="fullPrice">{{ number_format($prod->prod_price,0,"",".") }} {{ setting('site.valuta') }}</span>
-				                <span class="discountPrice">{{ number_format($prod->prod_price_with_discount,0,"",".") }} {{ setting('site.valuta') }}</span>
-			                @else
-			                	<span class="singlePrice">{{ number_format($prod->prod_price,0,"",".") }} {{ setting('site.valuta') }}</span>
-			                @endif
-			              </div>
-
-			              <div class="row">
-			              	<div class="col">
-			              		<div id="addTo_FAV" class="prod_{{ $prod->prod_id }}" onclick="FavEvent({{ $prod->prod_id }})">
-			                      <i class="far fa-heart fa-2x red-text {{ (in_array($prod->prod_id,$favLIST))? 'd-none':'d-block' }}"></i>
-			                      <i class="fas fa-heart fa-2x red-text {{ (in_array($prod->prod_id,$favLIST))? 'd-block':'d-none' }}"></i>
+			            <div class="container productCardBottom">
+			            		<div class="row justify-content-center">
+			            			<div class="priceWrap">
+			            				@if ($prod->prod_price_with_discount != null)
+			            				<div class="row justify-content-center">
+			            					<span class="fullPriceDiscounted">Cena:{{ number_format($prod->prod_price,0,"",".") }} {{ setting('site.valuta') }}</span>
+			            				</div>
+			            				<div class="row justify-content-center">
+			            					<span class="discountPrice">{{ number_format($prod->prod_price_with_discount,0,"",".") }} {{ setting('site.valuta') }}</span>
+			            				</div>
+						                @else
+						                	<span class="singlePrice">{{ number_format($prod->prod_price,0,"",".") }} {{ setting('site.valuta') }}</span>
+						                @endif
+			            			</div>
+					            </div>
+			              		<div class="row justify-content-center mt-3">
+				              		<div id="" class="rounded-pill purple btnBuy text-white pt-1 pb-2 pl-3 pr-3 align-middle" onclick="CartEvent({{ $prod->prod_id }})">
+				              			 @lang('shop.btn_buy')
+				              		</div>
 			              		</div>
-			              	</div>
-			              	<div class="col"><div id="addTo_CART" class="rounded-pill yellow btnBuy" onclick="CartEvent({{ $prod->prod_id }})"><i class="fas fa-shopping-cart"></i> @lang('shop.btn_buy')</div></div>
-			              </div>
-
+								<div class="row justify-content-center mt-3">
+									<span class="border purple  col-12 border-5"></span>
+								</div>
+			              		
 			            </div>
 
 			          </div>

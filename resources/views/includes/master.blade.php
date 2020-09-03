@@ -14,6 +14,7 @@
 
 
 <link rel="stylesheet" type="text/css" href="{{ URL::to('/css/app.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ URL::to('/css/m_app.css') }}">
 
 <link rel="icon" href="{{ URL::asset('/favicon.ico') }}" type="image/x-icon">
 

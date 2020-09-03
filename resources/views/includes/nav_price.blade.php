@@ -10,7 +10,7 @@
 	</div>
 
 	<div id="collapsePRICE" class="collapse show" role="tabpanel" aria-labelledby="price" data-parent="#accordionEx">
-	  <div class="card-body p-0 pb-3 text-white">
+	  <div class="card-body p-0 pb-3 .text-annona-gray">
 
 		<div class="form-check">
 		    <input type="checkbox" name="price" class="form-check-input" id="price_1" value="1|5000" onclick='getVal()' {{ (in_array('1|5000', $searchREQ['price']))? 'checked':'' }}>
