@@ -290,6 +290,7 @@ return [
 
     /* MY CART */
     'my_cart_title' => 'Moja korpa',
+    'my_cart_title_header' => 'Korpa:',
     'my_cart_total' => 'Ukupno',
     'my_cart_continue_shoppin' => 'Nastavi kupovinu',
     'my_cart_my_cart' => 'Moja korpa',

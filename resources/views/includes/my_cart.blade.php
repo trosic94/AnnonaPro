@@ -2,14 +2,15 @@
 
 	<div id="myCart" class="row rounded-pill" data-toggle="modal" data-target="#myCartModal">
 
-		<div id="cartCount" class="col-auto pr-0">
-				<span class="badge red {{ ($cartDATA['count'] > 0)? '':'d-none' }}">{{ $cartDATA['count'] }}</span>
+		<div id="cartCount" class="col-auto d-flex justify-content-center pr-0">
+				<span class="badge rounded-circle primary-color {{ ($cartDATA['count'] > 0)? '':'d-none' }}">{{ $cartDATA['count'] }}</span>
 			<img src="/images/header/korpa - icon - header.svg" alt="Moja korpa">
 		</div>
 
-		<div class="col-auto pl-2 pr-0">
-			<div class="font-weight-bold small">@lang('shop.my_cart_title')</div>
-				<div id="cartCountTXT" class="small font-italic {{ ($cartDATA['count'] > 0)? 'd-none':'' }}">@lang('shop.shop_my_cart_empty')</div>
+		<div class="col-auto pl-0">
+			<div class="font-weight-bold small">@lang('shop.my_cart_title_header')</div>
+        <div id="cartCountTXT" class="small font-italic {{ ($cartDATA['count'] > 0)? 'd-none':'d-block' }}">@lang('shop.shop_my_cart_empty')</div>
+        <div id="cartPrice" class="small font-italic {{ ($cartDATA['count'] == 0)? 'd-none':'d-block' }}">{{ $cartDATA['price'] }}</div>
 		</div>
 
 	</div>

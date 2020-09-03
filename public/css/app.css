@@ -37387,9 +37387,9 @@ form#siteSearch input[name=PRETRAGA] {
 a.profileLNK {
   display: inline-block;
   height: 38px;
-  line-height: 34px;
+  line-height: 38px;
   padding: 0 40px;
-  background-color: #2196f3;
+  background-color: #4285f4;
   color: #fff !important;
 }
 
@@ -37399,7 +37399,7 @@ a.profileLNK img {
 }
 
 a.profileLNK:hover {
-  background-color: rgba(33, 150, 243, 0.8);
+  background-color: rgba(66, 133, 244, 0.8);
 }
 
 a.favouritesLNK {
@@ -37437,8 +37437,11 @@ div#myCart div#cartCount {
 div#myCart div#cartCount span.badge {
   position: absolute;
   z-index: 50;
-  right: 0;
-  border-radius: 3px;
+  top: 17px;
+  padding-left: 3px;
+  padding-right: 3px;
+  padding-top: 2px;
+  padding-bottom: 2px;
 }
 
 div#myCart:hover {
