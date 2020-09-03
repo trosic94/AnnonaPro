@@ -94,6 +94,7 @@ class AppServiceProvider extends ServiceProvider
             $cartDATA['products'] = '';
 
             $cartDATA['count'] = 0;
+            $cartDATA['price'] = 0;
 
             $addToCart['total'] = 0;
 
@@ -159,6 +160,7 @@ class AppServiceProvider extends ServiceProvider
                 }
 
                 $cartDATA['count'] = $cartCOUNT;
+                
 
                 if ($cartDATA['count'] > 0):
 
@@ -177,7 +179,7 @@ class AppServiceProvider extends ServiceProvider
                     else:
                         $total = $addToCart['total'];
                     endif;
-
+                    $cartDATA['price'] = $total;
                     $cartVIEW .= '<div id="cartTOTAL" class="row rounded-pill">';
                     $cartVIEW .= '  <div class="col">';
                     $cartVIEW .= '  <div id="cartTOTALtxt">'.trans('shop.my_cart_total').'</div>';
@@ -188,7 +190,7 @@ class AppServiceProvider extends ServiceProvider
                     $cartVIEW .= '</div>';
 
                 endif;
-
+                
                 $cartDATA['products'] = $cartVIEW;
 
             endif;           

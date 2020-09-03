@@ -137,12 +137,12 @@ class ProductController extends Controller
                     $cartVIEW .= '  <span class="fullPrice">'.number_format($addToCart['products'][$c]['prod_price'],0,"",".").' '.setting('site.valuta').'</span>';
 
                     $fullAmount = $addToCart['products'][$c]['quantity'] * $addToCart['products'][$c]['prod_price_with_discount'];
-                    $cartVIEW .= '  <div id="finalAmount"><span class="qty">'.$addToCart['products'][$c]['quantity'].'</span> x <span class="discountPrice">'.number_format($fullAmount,0,"",".").' '.setting('site.valuta').'</span></div>';
+                    $cartVIEW .= '  <div id="finalAmount"><span class="qty">'.$addToCart['products'][$c]['quantity'].'</span> x <span class="discountPrice">'.number_format($addToCart['products'][$c]['prod_price_with_discount'],0,"",".").' '.setting('site.valuta').'</span></div>';
 
                 else:
 
                     $fullAmount = $addToCart['products'][$c]['quantity'] * $addToCart['products'][$c]['prod_price'];
-                    $cartVIEW .= '  <div id="finalAmount"><span class="qty">'.$addToCart['products'][$c]['quantity'].'</span> x <span class="singlePrice">'.number_format($fullAmount,0,"",".").' '.setting('site.valuta').'</span></div>';
+                    $cartVIEW .= '  <div id="finalAmount"><span class="qty">'.$addToCart['products'][$c]['quantity'].'</span> x <span class="singlePrice">'.number_format($addToCart['products'][$c]['prod_price'],0,"",".").' '.setting('site.valuta').'</span></div>';
 
                 endif;
                 $cartVIEW .= '      </div>';
@@ -188,8 +188,8 @@ class ProductController extends Controller
             $cartVIEW .= '  <div class="col">';
             $cartVIEW .= '  <div id="cartTOTALtxt">'.trans('shop.my_cart_total').'</div>';
             $cartVIEW .= '  </div>';
-            $cartVIEW .= '  <div class="col text-right">';
-            $cartVIEW .= '  <span>'.number_format($total,0,"",".").' '.setting('site.valuta').'</span>';
+            $cartVIEW .= '  <div class="col text-right" id="price_modal">';
+            $cartVIEW .= '  <span id="priceH">'.number_format($total,0,"",".").'</span><span> '.setting('site.valuta').'</span>';
             $cartVIEW .= '  </div>';
             $cartVIEW .= '</div>';
 
@@ -220,6 +220,7 @@ class ProductController extends Controller
         // default values
         $addToCart['total'] = 0;
         $cartDATA['count'] = 0;
+        $cartDATA['price'] = 0;
         $fullAmount = 0;
 
         // uklanjam odabrani proizvod iz sesije
@@ -251,11 +252,12 @@ class ProductController extends Controller
 
             // kreiram COUNT za cart
             $cartDATA['count'] = $cartDATA['count'] + $reorderCRT[$a]['quantity'];
-
+            $cartDATA['price'] = $fullAmount;
         }
 
         // Kreiram TOTAL za KORPU
         $addToCart['total'] = $addToCart['total'] + $fullAmount;
+        
 
         Session::forget('crt');
         Session::put('crt', $addToCart);
@@ -310,13 +312,14 @@ class ProductController extends Controller
 
             // kreiram COUNT za cart
             $cartDATA['count'] = $cartDATA['count'] + $crt['products'][$a]['quantity'];
+            $cartDATA['price'] = $fullAmount;
         }
 
         $addToCart['products'] = $crt['products'];
 
         // Kreiram TOTAL za KORPU
         $addToCart['total'] = $fullAmount;
-
+        
         Session::forget('crt');
         Session::put('crt', $addToCart);
 
