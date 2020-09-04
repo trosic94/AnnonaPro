@@ -16,9 +16,9 @@
 
 		<div class="col-lg-9">
 			
-			<div class="mainTitle mt-3 mt-lg-0 pl-4 pl-lg-0 pr-4 pr-lg-0">
+			{{-- <div class="mainTitle mt-3 mt-lg-0 pl-4 pl-lg-0 pr-4 pr-lg-0">
 				<h1>{{ $category->name }}</h1>
-			</div>
+			</div> --}}
 
 			<div class="row pl-4 pl-lg-0 pr-4 pr-lg-0">
 
@@ -62,12 +62,13 @@
 			            			</div>
 					            </div>
 			              		<div class="row justify-content-center mt-3">
-				              		<div id="" class="rounded-pill purple btnBuy text-white pt-1 pb-2 pl-3 pr-3 align-middle" onclick="CartEvent({{ $prod->prod_id }})">
+				              		<div id="" class="rounded-pill btnBuy {{ ($prod->cat_color == null)? 'primary-color':'' }} text-white pt-1 pb-2 pl-3 pr-3 align-middle" style="background-color: {{ ($prod->cat_color != null)? $prod->cat_color:'' }};"  onclick="CartEvent({{ $prod->prod_id }})">
 				              			 @lang('shop.btn_buy')
 				              		</div>
 			              		</div>
+			              		{{-- style="color: {{ ($prod->cat_color != null)? $prod->cat_color:'#7C7C7C' }};" --}}
 								<div class="row justify-content-center mt-3">
-									<span class="border purple  col-12 border-5"></span>
+									<span class="border {{ ($prod->cat_color == null)? 'primary-color':'' }}  col-12 border-5" style="background-color: {{ ($prod->cat_color != null)? $prod->cat_color:'' }};"></span>
 								</div>
 			              		
 			            </div>
