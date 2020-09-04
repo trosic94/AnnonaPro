@@ -1,5 +1,6 @@
-/node_modules/*
-!/node_modules/mdbootstrap-pro/**
+node_modules/**
+# Explicitly track certain content nested in the 'application' folder:
+!node_modules/mdbootstrap-pro/**
 /public/hot
 /public/storage
 /storage/*.key
