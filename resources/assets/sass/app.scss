@@ -941,33 +941,6 @@ div.prodTABs {
 // PRODUCT DATA ************************************************************************************************* //
 // LEFT ---------------------------------------------------------------------------------------------------------- //
 div#lefNav {
-<<<<<<< HEAD
-	background-color: $white;
-
-	border-bottom: 1px solid $grey-line;
-
-
-	ul#catNAV { margin: 0; padding: 0;
-
-		list-style: none;
-		font-size: 110%;
-
-		a {
-			color: $grey;
-			
-			&:hover {
-				color: $red;
-			}	
-		}
-
-	}
-
-	div.mnfcScroll {
-		@include scrollable_filter;
-	}
-
-
-=======
     background-color: $white;
     border-bottom: 1px solid $grey-line;
     ul#catNAV {
@@ -976,7 +949,7 @@ div#lefNav {
         list-style: none;
         font-size: 110%;
         a {
-            color: $white;
+            color: $grey;
             &:hover {
                 color: $red;
             }
@@ -985,7 +958,6 @@ div#lefNav {
     div.mnfcScroll {
         @include scrollable_filter;
     }
->>>>>>> 9435b862065c328e60db245a3c399c5cc386ed59
 }
 
 // STATIC --------------------------------------------------------------------------------------------------------- //
