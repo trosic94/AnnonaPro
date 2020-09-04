@@ -8,7 +8,7 @@
 
 				<div class="col-lg-12 pl-0">
 					<div class="row">
-						<div  class="col-xl-6 small pt-2 pb-0 mb-n1 text-muted">
+						<div id="contactINFOhead" class="col-xl-6 small pt-2 pb-0 mb-n1 text-muted">
 							{!! setting('site.kontakt') !!}
 						</div>
 						<div id="social" class="small col-xl-4 text-right">
@@ -32,6 +32,9 @@
 						@include ('includes.my_cart')
 						@include ('includes.my_profile')
 					</div>
+					<div class="row justify-content-end pr-3">
+						{!! menu('Glavni Meni', 'includes.nav_glavni') !!}
+					</div>
 				</div>
 			</div>
 
@@ -43,7 +46,7 @@
 
 </header>
 
-{!! menu('Product Menu', 'includes.nav_product') !!}
+
 
 <script type="text/javascript">
 $(document).ready(function() {

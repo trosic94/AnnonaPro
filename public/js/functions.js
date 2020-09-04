@@ -218,7 +218,7 @@ function qtyPLUS(prodID) {
     var cartSUM_QTY = cart_SumAllQTY();
     $('div#cartCount span.badge').html(cartSUM_QTY);
     var cartSUM_Pr = cart_SumAllPrice();
-    $('div#cartPrice').html(currencyFormat(cartSUM_Pr));
+    $('div#cartPrice').prepend(currencyFormat(cartSUM_Pr));
 
     $('#mdb-preloader').delay(500).fadeOut(300);
 
@@ -261,7 +261,7 @@ function qtyMINUS(prodID) {
         var cartSUM_QTY = cart_SumAllQTY();
         $('div#cartCount span.badge').html(cartSUM_QTY);
         var cartSUM_Pr = cart_SumAllPrice();
-        $('div#cartPrice').html(currencyFormat(cartSUM_Pr));
+        $('div#cartPrice').prepend(currencyFormat(cartSUM_Pr));
 
         $('#mdb-preloader').delay(500).fadeOut(300);
 
@@ -358,7 +358,6 @@ function CartEvent(prodID) {
             _token: _token
         },
         success: function(rsp) {
-
             $('#mdb-preloader').delay(500).fadeOut(300);
 
             if (cartCOUNT == undefined) {
@@ -371,15 +370,14 @@ function CartEvent(prodID) {
 
                 var newCartCOUNT = Number(cartCOUNT) + 1;
 
-
                 $('div#cartCount span.badge').removeClass('d-none').addClass('d-block').html(newCartCOUNT);
                 $('div#myCart div#cartCountTXT').removeClass('d-block').addClass('d-none');
                 $('div#myCart div#cartPrice').removeClass('d-none').addClass('d-block');
-
+                $('div#cartPrice').prepend(currencyFormat(rsp.header_price));
 
             }
 
-            $('header div#cartDATA').html(rsp);
+            $('header div#cartDATA').html(rsp.cart);
             $('#myCartModal').modal('show');
 
             new WOW().init();
@@ -399,8 +397,6 @@ function remove_CartEvent(prodID) {
 
     var newCartCOUNT = Number(cartCOUNT) - Number(prodCartCount);
 
-    console.log(prodCartCount);
-
     $('table#cartTable tr#row_' + prodID + '').remove();
     $('div#myCartModal div#cartDATA [name=row_' + prodID + ']').remove();
 
@@ -418,7 +414,7 @@ function remove_CartEvent(prodID) {
         $('div#cartCount span.badge').removeClass('d-none').addClass('d-block').html(newCartCOUNT);
         $('div#myCart div#cartPrice').removeClass('d-none').addClass('d-block');
         var cartSUM_Pr = cart_SumAllPrice();
-        $('div#cartPrice').html(currencyFormat(cartSUM_Pr));
+        $('div#cartPrice').prepend(currencyFormat(cartSUM_Pr));
     }
 
     cart_SumAllInputs();
@@ -460,7 +456,6 @@ function FavEvent(prodID) {
             _token: _token
         },
         success: function(rsp) {
-
             if (favCNTold > rsp) {
 
                 $('div#addTo_FAV.prod_' + prodID + ' i.fas').removeClass('d-block').addClass('d-none');

@@ -8,7 +8,7 @@
 @include('home.banner_1')
 
 @include('home.row_1')
-@include('home.row_2')
+{{-- @include('home.row_2') --}}
 
 
 <script type="text/javascript">

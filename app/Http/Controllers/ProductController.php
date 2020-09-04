@@ -137,12 +137,12 @@ class ProductController extends Controller
                     $cartVIEW .= '  <span class="fullPrice">'.number_format($addToCart['products'][$c]['prod_price'],0,"",".").' '.setting('site.valuta').'</span>';
 
                     $fullAmount = $addToCart['products'][$c]['quantity'] * $addToCart['products'][$c]['prod_price_with_discount'];
-                    $cartVIEW .= '  <div id="finalAmount"><span class="qty">'.$addToCart['products'][$c]['quantity'].'</span> x <span class="discountPrice">'.number_format($addToCart['products'][$c]['prod_price_with_discount'],0,"",".").' '.setting('site.valuta').'</span></div>';
+                    $cartVIEW .= '  <div id="finalAmount"><span class="qty">'.$addToCart['products'][$c]['quantity'].'</span> x <span class="discountPrice">'.number_format($addToCart['products'][$c]['prod_price_with_discount'],0,"",".").'</span><span> '.setting('site.valuta').'</span></div>';
 
                 else:
 
                     $fullAmount = $addToCart['products'][$c]['quantity'] * $addToCart['products'][$c]['prod_price'];
-                    $cartVIEW .= '  <div id="finalAmount"><span class="qty">'.$addToCart['products'][$c]['quantity'].'</span> x <span class="singlePrice">'.number_format($addToCart['products'][$c]['prod_price'],0,"",".").' '.setting('site.valuta').'</span></div>';
+                    $cartVIEW .= '  <div id="finalAmount"><span class="qty">'.$addToCart['products'][$c]['quantity'].'</span> x <span class="singlePrice">'.number_format($addToCart['products'][$c]['prod_price'],0,"",".").'</span><span> '.setting('site.valuta').'</span></div>';
 
                 endif;
                 $cartVIEW .= '      </div>';
@@ -197,7 +197,7 @@ class ProductController extends Controller
             Session::forget('crt');
             Session::put('crt', $addToCart);
 
-            return $cartVIEW;
+            return response()->json(['cart'=>$cartVIEW,'header_price'=>$total]);
 
         else:
 
