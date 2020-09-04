@@ -112,7 +112,7 @@ ol.breadcrumb {
             color: $grey-dark;
             font-size: 90%;
             &:hover {
-                color: $red;
+                color: $primary-color;
             }
         }
     }
@@ -243,7 +243,7 @@ div#contactINFOhead {
 form#siteSearch input[name=PRETRAGA] {
     padding: 0 40px 0 20px;
     background-image: url('/images/header/search - icon - header.svg');
-    background-color: $secondary-color !important;
+    background-color: $annona-gray-light !important;
     background-repeat: no-repeat;
     background-position: center right 10px;
 }
@@ -253,8 +253,7 @@ a.profileLNK {
 }
 
 div#cartPrice {
-    font-family: 'Maven Pro', sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 500;
 }
 
@@ -298,7 +297,7 @@ div#myCart {
         }
     }
     &:hover {
-        background-color: $grey-light;
+        background-color: $annona-gray-light;
     }
 }
 
@@ -658,6 +657,7 @@ div#cartWrap {
 div.productNAV {
     display: block;
     width: 100%;
+    font-size: 18px;
     // background-color: $blue;
     ul {
         width: 100%;
@@ -669,10 +669,15 @@ div.productNAV {
             // display: table-cell; width: auto;
             a {
                 display: block;
+                color: $secondary-color;
             }
-            &:hover {
-                background-color: $red;
+             :hover {
+                color: $primary-color;
+                font-weight: 500;
             }
+        }
+         :last-of-type {
+            padding-right: 0 !important;
         }
     }
 }
@@ -942,17 +947,29 @@ div.prodTABs {
 // LEFT ---------------------------------------------------------------------------------------------------------- //
 div#lefNav {
     background-color: $white;
-    border-bottom: 1px solid $grey-line;
+    border-bottom: 1px solid $annona-gray-light;
     ul#catNAV {
         margin: 0;
         padding: 0;
         list-style: none;
         font-size: 110%;
         a {
-            color: $grey;
+            color: $secondary-color;
             &:hover {
-                color: $red;
+                color: $primary-color;
             }
+        }
+    }
+    h5 {
+        color: $primary-color;
+        a {
+            color: $primary-color;
+            &:hover {
+                color: $annona-green-light;
+            }
+        }
+        i {
+            color: $annona-gray-dark;
         }
     }
     div.mnfcScroll {

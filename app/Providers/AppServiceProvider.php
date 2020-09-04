@@ -179,7 +179,7 @@ class AppServiceProvider extends ServiceProvider
                     else:
                         $total = $addToCart['total'];
                     endif;
-                    $cartDATA['price'] = $total;
+                    $cartDATA['price'] = number_format($total,0,"",".");
                     $cartVIEW .= '<div id="cartTOTAL" class="row rounded-pill">';
                     $cartVIEW .= '  <div class="col">';
                     $cartVIEW .= '  <div id="cartTOTALtxt">'.trans('shop.my_cart_total').'</div>';

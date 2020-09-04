@@ -1,4 +1,4 @@
-<div class="col-auto pl-1 pl-sm-2 pr-1 pr-sm-2">
+<div class="col-auto pl-1 pl-sm-2 pr-1 pr-sm-2 mx-4">
 
 	<div id="myCart" class="row rounded-pill" data-toggle="modal" data-target="#myCartModal">
 
@@ -10,7 +10,7 @@
 		<div class="col-auto pl-0">
 			<div class="small">@lang('shop.my_cart_title_header')</div>
         <div id="cartCountTXT" class="small font-italic {{ ($cartDATA['count'] > 0)? 'd-none':'d-block' }}">@lang('shop.shop_my_cart_empty')</div>
-        <div id="cartPrice" class="text-primary {{ ($cartDATA['count'] == 0)? 'd-none':'d-block' }}"> <span class="text-lowercase">{{ setting('site.valuta') }}</span></div> 
+        <div id="cartPrice" class="text-primary {{ ($cartDATA['count'] == 0)? 'd-none':'d-block' }}"><span id="head_price">{{ $cartDATA['price'] }} </span> <span class="text-lowercase">{{ setting('site.valuta') }}</span></div> 
 		</div>
 
 	</div>

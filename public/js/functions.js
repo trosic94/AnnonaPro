@@ -218,7 +218,7 @@ function qtyPLUS(prodID) {
     var cartSUM_QTY = cart_SumAllQTY();
     $('div#cartCount span.badge').html(cartSUM_QTY);
     var cartSUM_Pr = cart_SumAllPrice();
-    $('div#cartPrice').prepend(currencyFormat(cartSUM_Pr));
+    $('span#head_price').html(currencyFormat(cartSUM_Pr));
 
     $('#mdb-preloader').delay(500).fadeOut(300);
 
@@ -261,7 +261,7 @@ function qtyMINUS(prodID) {
         var cartSUM_QTY = cart_SumAllQTY();
         $('div#cartCount span.badge').html(cartSUM_QTY);
         var cartSUM_Pr = cart_SumAllPrice();
-        $('div#cartPrice').prepend(currencyFormat(cartSUM_Pr));
+        $('span#head_price').html(currencyFormat(cartSUM_Pr));
 
         $('#mdb-preloader').delay(500).fadeOut(300);
 
@@ -373,7 +373,7 @@ function CartEvent(prodID) {
                 $('div#cartCount span.badge').removeClass('d-none').addClass('d-block').html(newCartCOUNT);
                 $('div#myCart div#cartCountTXT').removeClass('d-block').addClass('d-none');
                 $('div#myCart div#cartPrice').removeClass('d-none').addClass('d-block');
-                $('div#cartPrice').prepend(currencyFormat(rsp.header_price));
+                $('span#head_price').html(currencyFormat(rsp.header_price));
 
             }
 
@@ -414,7 +414,7 @@ function remove_CartEvent(prodID) {
         $('div#cartCount span.badge').removeClass('d-none').addClass('d-block').html(newCartCOUNT);
         $('div#myCart div#cartPrice').removeClass('d-none').addClass('d-block');
         var cartSUM_Pr = cart_SumAllPrice();
-        $('div#cartPrice').prepend(currencyFormat(cartSUM_Pr));
+        $('span#head_price').html(currencyFormat(cartSUM_Pr));
     }
 
     cart_SumAllInputs();

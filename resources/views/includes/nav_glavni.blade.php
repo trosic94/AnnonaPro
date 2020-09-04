@@ -1,14 +1,12 @@
 <div class="productNAV">
 
-	<div class="container-fluid">
+	<div class="container-fluid pr-0">
 
-		<div class="row">
+		<div class="row text-right pt-3 d-flex justify-content-end">
 
-			<div class="col col-lg-0 m-0 p-0"></div>
+				<div class="col-xl-8 col-lg-12">
 
-				<div class="col-xl-8 col-lg-12 minWidth">
-
-				<ul class="nav">
+				<ul class="nav d-flex justify-content-end">
 
 @php
 
@@ -52,8 +50,8 @@
 
     @endphp
 
-				    <li class="{{ $isActive }} nav-item col p-2">
-				        <a href="{{ url($item->link()) }}" target="{{ $item->target }}" class="text-white" style="{{ $styles }}">
+				    <li class="{{ $isActive }} nav-item col-auto px-3 py-2">
+				        <a href="{{ url($item->link()) }}" target="{{ $item->target }}" class="" style="{{ $styles }}">
 				            {!! $icon !!}
 				            <span class="ml-2">{{ $item->title }}</span>
 				        </a>
@@ -64,7 +62,6 @@
 
 				</div>
 
-			<div class="col col-lg-0 m-0 p-0"></div>
 
 		</div>
 

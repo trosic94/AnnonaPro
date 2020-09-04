@@ -1,10 +1,10 @@
 <header>
 
-	<div class="container-fluid pb-3 pt-1">
+	<div class="container-fluid pb-2 pt-1">
 		<div class="row">
 			<div class="col col-lg-0 m-0 p-0"></div>
 
-			<div class="col-xl-8 col-lg-12 minWidth">
+			<div class="col-xl-8 col-lg-12 minWidth p-0">
 
 				<div class="col-lg-12 pl-0">
 					<div class="row">
