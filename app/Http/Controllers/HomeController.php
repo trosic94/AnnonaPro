@@ -48,7 +48,7 @@ class HomeController extends Controller
 
         // 4 tabs - Special PRoduct Options --------------------------- //
 
-        $optIDs = array(1,2,3,4); // opcije za 4xTAB 
+        $optIDs = array(8); // opcije za 4xTAB 
 
         $specialOptions_tabs = DB::table('special_options as SO')
                                 ->whereIn('id',$optIDs)

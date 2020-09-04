@@ -755,6 +755,10 @@ div.homeSlider {
 div.specTABs {
     display: block;
     margin: 30px 0;
+    font-size: 24px;
+    letter-spacing: 2.4px;
+    background-color: transparent !important;
+    color: $primary-color;
     .tab-content {
         background-color: transparent;
     }
@@ -763,7 +767,8 @@ div.specTABs {
         letter-spacing: 1px;
     }
     .nav .active {
-        background-color: $red !important;
+        // background-color: $red !important;
+        color: $primary-color;
     }
     // enable slickSlider load on tabs --------------------------- //
     .tab-content {
