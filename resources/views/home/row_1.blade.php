@@ -15,8 +15,20 @@
 			@endif
 
 		</div>
+		<div class="col-lg-6 mt-3 mt-lg-0">
+			@if (!$banners_homeRow_2->isEmpty())
+			<div id="bannerWrap">
 
-		<div class="col-lg-6">
+				@foreach($banners_homeRow_2->random(1) as $bKey => $banner)
+					<a href="{{ $banner->ban_url }}" target="{{ $banner->ban_target }}" title="{{ $banner->ban_name }}" onclick="clickCount(event,{{ $banner->ban_id }},{{ $banner->ban_position_id }},'{{ $banner->ban_url }}','{{ $banner->ban_target }}')"><img src="/storage/banners/{{ $banner->ban_image }}" alt="{{ $banner->ban_name }}"></a>
+				@endforeach
+
+			</div>
+			@endif
+
+		</div>
+
+		{{-- <div class="col-lg-6">
 
 			<div class="row">
 
@@ -79,7 +91,7 @@
 
 			</div>
 
-		</div>
+		</div> --}}
 
 	</div>
 

@@ -8,9 +8,9 @@
 		</div>
 
 		<div class="col-auto pl-0">
-			<div class="font-weight-bold small">@lang('shop.my_cart_title_header')</div>
+			<div class="small">@lang('shop.my_cart_title_header')</div>
         <div id="cartCountTXT" class="small font-italic {{ ($cartDATA['count'] > 0)? 'd-none':'d-block' }}">@lang('shop.shop_my_cart_empty')</div>
-        <div id="cartPrice" class="small font-italic {{ ($cartDATA['count'] == 0)? 'd-none':'d-block' }}">{{ $cartDATA['price'] }}</div>
+        <div id="cartPrice" class="text-primary {{ ($cartDATA['count'] == 0)? 'd-none':'d-block' }}"> <span class="text-lowercase">{{ setting('site.valuta') }}</span></div> 
 		</div>
 
 	</div>
