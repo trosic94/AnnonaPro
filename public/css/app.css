@@ -37442,6 +37442,14 @@ div.datepicker input ~ i.input-prefix {
   color: #F1F1F1;
 }
 
+.fav-grey {
+  color: #707070;
+}
+
+.text-grey {
+  color: #707070;
+}
+
 body {
   color: #fff;
   background-color: #fff;
@@ -37635,7 +37643,7 @@ div#paginateBlock ul.pagination {
 div#paginateBlock ul.pagination li {
   display: inline-block;
   margin: 0 5px;
-  color: #0A0A0B;
+  color: #707070;
   font-size: 90%;
   font-weight: 500;
   background-color: #fff;
@@ -37646,7 +37654,7 @@ div#paginateBlock ul.pagination li {
 div#paginateBlock ul.pagination li a {
   display: block;
   padding: 0 8px;
-  color: #0A0A0B;
+  color: #707070;
 }
 
 div#paginateBlock ul.pagination li span {
@@ -37858,7 +37866,7 @@ div#cartDATA div#cartPRODrow div#cartTXT div.priceWrap span.fullPrice {
 
 div#cartDATA div#cartPRODrow div#cartTXT div.priceWrap div#finalAmount {
   display: block;
-  color: #0A0A0B;
+  color: #707070;
   font-size: 110%;
   font-weight: 600;
 }
@@ -37879,7 +37887,7 @@ div#cartDATA div#cartPRODrow div#cartTXT div.priceWrap div#finalAmount span.sing
 div#cartDATA div#cartPRODrow div#cartTXT div.priceWrap span.finalPrice {
   display: block;
   margin-top: 20px;
-  color: #0A0A0B;
+  color: #707070;
   font-size: 110%;
   font-weight: 600;
 }
@@ -37926,7 +37934,7 @@ div#cartDATA div#cartTOTAL div#cartTOTALtxt {
   padding: 0;
   font-size: 140%;
   font-weight: 500;
-  color: #0A0A0B;
+  color: #707070;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
@@ -37959,7 +37967,7 @@ div#myCartModal a#btnMyCart:hover {
 div#myCartModal a#btnContinue {
   padding: 0.7rem 1.8rem;
   background-color: #FCBE0A;
-  color: #0A0A0B;
+  color: #707070;
   letter-spacing: 1px;
   transition: all 0.1s ease-in;
 }
@@ -38031,13 +38039,13 @@ div#myProfileModal a#btnLogout {
 }
 
 div#myProfileModal a#btnLogout:hover {
-  background-color: #0A0A0B !important;
+  background-color: #707070 !important;
   color: #fff !important;
 }
 
 div#myProfileModal a#btnProfil {
   padding: 0.7rem 1.8rem;
-  color: #0A0A0B !important;
+  color: #707070 !important;
   text-transform: uppercase;
   letter-spacing: 1px;
   font-size: 100%;
@@ -38169,7 +38177,7 @@ div#cartWrap table#cartTable tr td div.priceWrap span.fullPrice {
 
 div#cartWrap table#cartTable tr td div.priceWrap div#finalAmount {
   display: block;
-  color: #0A0A0B;
+  color: #707070;
   font-size: 110%;
   font-weight: 600;
 }
@@ -38190,7 +38198,7 @@ div#cartWrap table#cartTable tr td div.priceWrap div#finalAmount span.singlePric
 div#cartWrap table#cartTable tr td div.priceWrap span.finalPrice {
   display: block;
   margin-top: 20px;
-  color: #0A0A0B;
+  color: #707070;
   font-size: 110%;
   font-weight: 600;
 }
@@ -38327,7 +38335,7 @@ div#cartWrap div#shippingAddress ul li label {
 }
 
 div#cartWrap button#orderConfirm {
-  color: #0A0A0B !important;
+  color: #707070 !important;
   text-transform: uppercase;
   letter-spacing: 1px;
   font-size: 100%;
@@ -38490,7 +38498,7 @@ div.prodOne h3 {
 }
 
 div.prodOne h3 a {
-  color: #0A0A0B;
+  color: #707070;
 }
 
 div.prodOne h3 a:hover {
@@ -38520,7 +38528,7 @@ div.prodOne div.prodFooter div.priceWrap span.fullPrice {
 
 div.prodOne div.prodFooter div.priceWrap div#finalAmount {
   display: block;
-  color: #0A0A0B;
+  color: #707070;
   font-size: 110%;
   font-weight: 600;
 }
@@ -38541,7 +38549,7 @@ div.prodOne div.prodFooter div.priceWrap div#finalAmount span.singlePrice {
 div.prodOne div.prodFooter div.priceWrap span.finalPrice {
   display: block;
   margin-top: 20px;
-  color: #0A0A0B;
+  color: #707070;
   font-size: 110%;
   font-weight: 600;
 }
@@ -38553,7 +38561,7 @@ div.prodOne div.prodFooter div#addTo_CART {
   cursor: pointer;
   padding: 10px 15px;
   margin-left: auto;
-  color: #0A0A0B !important;
+  color: #707070 !important;
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: 500;
@@ -38657,7 +38665,7 @@ div#productDATA form#addToCart div#addTo_CART {
   display: inline-block;
   cursor: pointer;
   padding: 10px 30px;
-  color: #0A0A0B !important;
+  color: #707070 !important;
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: 500;
@@ -38740,7 +38748,7 @@ div#lefNav ul#catNAV {
 }
 
 div#lefNav ul#catNAV a {
-  color: #fff;
+  color: #707070;
 }
 
 div#lefNav ul#catNAV a:hover {
@@ -38927,7 +38935,7 @@ div#modalCookie div.modal-content div.modal-body a:hover {
 }
 
 div#modalCookie div.modal-content div.modal-body a#cookieConfirm {
-  color: #0A0A0B !important;
+  color: #707070 !important;
   text-transform: uppercase;
   letter-spacing: 1px;
   font-size: 100%;

@@ -4,7 +4,7 @@
 //$red: #D93648;
 //$yellow: #FCBE0A;
 //$grey-lighten-5 => #F1F1F1
-$grey: #0A0A0B;
+$grey: #707070;//#0A0A0B;
 $grey-dark: #131314; // body back, breadcrumb
 $grey-card: #1b1b1c; // card back
 $grey-light: #e0e0e0; // search back, padding disabled
@@ -23,4 +23,13 @@ $site-max-width: 1200px;
 
 .grey-lighten-5-text {
 	color: $grey-lighten-5;
+}
+
+
+.fav-grey{
+	color: $grey;
+}
+
+.text-grey{
+	color: $grey;
 }
