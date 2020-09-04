@@ -38444,6 +38444,10 @@ div.homeSlider ul.slick-dots {
 div.specTABs {
   display: block;
   margin: 30px 0;
+  font-size: 24px;
+  letter-spacing: 2.4px;
+  background-color: transparent !important;
+  color: #389178;
 }
 
 div.specTABs .tab-content {
@@ -38456,7 +38460,7 @@ div.specTABs .nav {
 }
 
 div.specTABs .nav .active {
-  background-color: #dc3545 !important;
+  color: #389178;
 }
 
 div.specTABs .tab-content {
