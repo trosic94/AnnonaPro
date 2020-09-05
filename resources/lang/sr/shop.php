@@ -137,7 +137,11 @@ return [
     'title_loyalty_barcode' => 'Barkod',
     'title_favourites' => 'Omiljeni proizvodi',
     'title_favourites_none_note' => 'Vaša lista želja je prazna.',
-    'title_online_kupovina' => 'Online kupovina',
+    'title_online_kupovina' => 'Korisnički servis',
+    'title_glavni_meni' => 'Meni',
+    'title_prodavnica' => 'Prodavnica',
+    'title_radno_vreme' => 'Radno vreme',
+    'title_newsletter' => 'Prijava za newsletter',
     'title_link' => 'link',
 
     'title_input_select' => 'Lista',

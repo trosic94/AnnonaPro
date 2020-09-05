@@ -1,4 +1,4 @@
-<div id="myFAV" class="col-auto pl-1 pl-sm-2 mr-2 pr-sm-2 pt-1">
+<div id="myFAV" class="col-auto pl-1 pl-sm-2 mr-2 pr-sm-2">
 	<a class="rounded-pill favouritesLNK" href="/favourites">
 		<span class="badge red text-prim {{ ($favouritesCNT > 0)? '':'d-none' }}">{{ $favouritesCNT }}</span>
         <div id="addTo_FAV">

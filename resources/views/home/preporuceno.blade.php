@@ -20,7 +20,7 @@
         @if (array_key_exists($tab->id,$productWithSelectedOptions_groupped))
 
         @foreach($productWithSelectedOptions_groupped[$tab->id] as $tab1 => $tab1Spec)
-          <div class="prodOne white pl-0 pr-0 ml-2 mr-2 text-default">
+          <div class="prodOne white pl-0 pr-0 ml-2 mr-2">
 
             <div class="imgWrap">
               <div class="akcijaNOTE">@lang('shop.title_action')</div>

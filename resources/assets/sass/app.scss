@@ -1041,13 +1041,23 @@ div#freeSHIPPING {
     }
 }
 
+footer.annona-footer-bg {
+    background-color: $annona-footer-bg;
+}
+
+footer .border-annona {
+    border-bottom: 1px solid $annona-gray-dark;
+}
+
 div#shopNAV {
     h5 {
-        @include blueTitle;
-        font-size: 120%;
+        // @include blueTitle;
+        color: $annona-green-light;
+        font-size: 18px;
         text-transform: uppercase;
         font-weight: 500;
         margin-bottom: 1rem;
+        letter-spacing: 0px;
     }
     ul {
         margin: 0;
@@ -1055,9 +1065,10 @@ div#shopNAV {
         list-style: none;
         li {
             a {
+                font-size: 16px;
                 color: $white;
                 &:hover {
-                    color: $red;
+                    color: $primary-color;
                 }
             }
         }

@@ -25,7 +25,7 @@
 	        	@endphp
 
 
-	        <div class="col-md-6 pl-2 pl-lg-0 pr-2 pr-lg-0 mt-3 m-lg-0 d-flex wow animated fadeIn">
+	        {{-- <div class="col-md-6 pl-2 pl-lg-0 pr-2 pr-lg-0 mt-3 m-lg-0 d-flex wow animated fadeIn">
 		          <div class="prodOne white pl-0 pr-0 ml-2 mr-2 text-default">
 
 		            <div class="imgWrap">
@@ -58,7 +58,7 @@
 		            </div>
 
 		          </div>
-	        </div>
+	        </div> --}}
 
 	        	@endif
 

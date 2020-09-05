@@ -77,6 +77,8 @@ class HomeController extends Controller
         $banners_homeRow_1 = Banner::allBannersByPosition(4);
         // Row 2
         $banners_homeRow_2 = Banner::allBannersByPosition(5);
+        // Row 2 - company
+        $banners_homeRow_3 = Banner::allBannersByPosition(6);
 
         $nesto = 'dasdasd';
 
@@ -84,7 +86,7 @@ class HomeController extends Controller
     	return view('home.index', compact('sliderHOME','favLIST',
                                             'specialOptions_tabs','productWithSelectedOptions_groupped',
                                             'productsFor_Row1','productsFor_Row2',
-                                            'banners_homeWide','banners_homeRow_1','banners_homeRow_2',
+                                            'banners_homeWide','banners_homeRow_1','banners_homeRow_2','banners_homeRow_3',
                                             'nesto'));
     }
 }
