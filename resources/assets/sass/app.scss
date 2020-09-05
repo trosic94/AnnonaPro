@@ -27,7 +27,7 @@ body {
 
 div#pageWrap {
     display: block;
-    margin: 0 0 5%;
+    // margin: 0 0 0%;
 }
 
 div.mainTitle {
@@ -107,6 +107,7 @@ hr {
 // BREADCRUMB ----------------------------------------------------------------------------------------------------- //
 ol.breadcrumb {
     background-color: $white;
+    padding: 0px;
     li {
         a {
             color: $grey-dark;

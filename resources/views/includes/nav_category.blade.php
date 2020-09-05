@@ -14,7 +14,7 @@
 	<div id="collapseCAT" class="collapse show" role="tabpanel" aria-labelledby="categories" data-parent="#accordionEx">
 	  <div class="card-body p-0 pb-3 text-white">
 
-	  	<ul id="catNAV" class="ml-2">
+	  	<ul id="catNAV" class="">
 
 	  		@php
 	  			// proveravam da li se se nalazimo na SEARCH

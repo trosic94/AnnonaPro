@@ -1,4 +1,4 @@
-<div class="leftCol pl-3 pr-3">
+<div class="leftCol  pr-3">
 
 	<!--Accordion wrapper-->
 	<div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">

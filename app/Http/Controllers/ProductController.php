@@ -21,6 +21,7 @@ use PDO;
 use Carbon\Carbon;
 use Intervention\Image\ImageManagerStatic as Image;
 use Input;
+use App\Banner;
 
 
 class ProductController extends Controller
@@ -50,10 +51,13 @@ class ProductController extends Controller
         // PAYMENT METHODS
         $paymenOptions = PaymentMethod::paymentMethods();
 
+         // Home Wide
+        $banners_homeWide = Banner::allBannersByPosition(7);
+
 
         //return $cart;
 
-        return view('product.cart', compact('intro','ulogovan','cart','discount','paymenOptions'));
+        return view('product.cart', compact('intro','ulogovan','cart','discount','paymenOptions','banners_homeWide'));
     }
 
     public function addToCart(Request $request)

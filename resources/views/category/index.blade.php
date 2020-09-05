@@ -3,10 +3,18 @@
 @section ('content')
 
 <div id="pageWrap">
-
+	<div id="bannerWrap">
+				@foreach($banners_homeWide->random(1) as $bKey => $banner)
+				{{"radd"}}
+					<a href="{{ $banner->ban_url }}" target="{{ $banner->ban_target }}" title="{{ $banner->ban_name }}" onclick="clickCount(event,{{ $banner->ban_id }},{{ $banner->ban_position_id }},'{{ $banner->ban_url }}','{{ $banner->ban_target }}')"><img src="/storage/banners/{{ $banner->ban_image }}" alt="{{ $banner->ban_name }}"></a>
+				}
+				}
+				@endforeach
+		
+	</div>
 	@include('includes.breadcrumb')
 
-	<div class="row pr-4">
+	<div class="row">
 
 		<div class="col-lg-3">
 			
@@ -48,26 +56,16 @@
 
 			            <div class="container productCardBottom">
 			            		<div class="row justify-content-center">
-			            			<div class="priceWrap" style="color: {{ ($prod->cat_color == null)? '#389178':'$prod->cat_colo' }};">
+			            			<div class="priceWrap" >
 			            				@if ($prod->prod_price_with_discount != null)
 			            				<div class="row justify-content-center text-secondary">
-			            					Cena:<span class="fullPrice">{{ number_format($prod->prod_price,0,"",".") }} {{ setting('site.valuta') }}</span>
+			            					Cena:<span class="fullPrice ">{{ number_format($prod->prod_price,0,"",".") }} {{ setting('site.valuta') }}</span>
 			            				</div>
 			            				<div class="row justify-content-center ">
-			            					<span class="discountPrice">{{ number_format($prod->prod_price_with_discount,0,"",".") }} {{ setting('site.valuta') }}</span>
+			            					<span class="discountPrice {{ ($prod->cat_color == null)? 'primary-color':'' }} " style="color: {{ ($prod->cat_color != null)? $prod->cat_color:'' }};">{{ number_format($prod->prod_price_with_discount,0,"",".") }} {{ setting('site.valuta') }}</span>
 			            				</div>
 						                @else
-											<label class="text-secondary m-0" style="display: block;" align="middle">Cena:</label><span class="singlePrice m-0">{{ number_format($prod->prod_price,0,"",".") }} {{ setting('site.valuta') }}</span>
-{{-- =======
-			            				<div class="row justify-content-center">
-			            					<span class="fullPriceDiscounted"><div class="pt-2 col-12 text-center small text-secondary">Cena:</div><div class="col-12 text-lowercase font-weight-bold">{{ number_format($prod->prod_price,0,"",".") }} {{ setting('site.valuta') }}</div></span>
-			            				</div>
-			            				<div class="row justify-content-center">
-			            					<span class="discountPrice"><div class="pt-2 col-12 text-center small text-secondary">Cena:</div><div class="col-12 text-lowercase font-weight-bold">{{ number_format($prod->prod_price_with_discount,0,"",".") }} {{ setting('site.valuta') }}</div></span>
-			            				</div>
-						                @else
-						                	<span class="singlePrice"><div class="pt-2 col-12 text-center small text-secondary">Cena:</div><div class="col-12 text-lowercase font-weight-bold">{{ number_format($prod->prod_price,0,"",".") }} {{ setting('site.valuta') }}</div></span>
->>>>>>> 843bc2a65f17d2dde8f886d180768ae2aaaf6c63 --}}
+											<label class="text-secondary m-0" style="display: block;" align="middle">Cena:</label><span class="singlePrice m-0 " style="color: {{ ($prod->cat_color != null)? $prod->cat_color:'' }};">{{ number_format($prod->prod_price,0,"",".") }} {{ setting('site.valuta') }}</span>
 						                @endif
 			            			</div>
 					            </div>
@@ -76,7 +74,6 @@
 				              			 @lang('shop.btn_buy')
 				              		</div>
 			              		</div>
-			              		{{-- style="color: {{ ($prod->cat_color != null)? $prod->cat_color:'#7C7C7C' }};" --}}
 								<div class="row justify-content-center mt-3 ">
 									<span class="border {{ ($prod->cat_color == null)? 'primary-color':'' }}  col-12 border-5" style="background-color: {{ ($prod->cat_color != null)? $prod->cat_color:'' }};"></span>
 								</div>
