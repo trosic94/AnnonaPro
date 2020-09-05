@@ -1121,3 +1121,15 @@ div#bannerWrap {
         @include img100;
     }
 }
+
+// Products bottom start
+.productCardBottom{
+	position: absolute;
+	bottom: 0px;
+}
+
+.border-5{
+	border-style:solid;
+ 	height: 5px;
+}
+// Products bottom end

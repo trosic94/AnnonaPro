@@ -145,6 +145,7 @@ class Product extends Model
                                 'CAT.slug as cat_slug',
                                 'CAT.cat_image as cat_image',
                                 'CAT.published as cat_published',
+                                'CAT.cat_color as cat_color',
                                 'CAT.use_product_price as cat_use_product_price',
                                 'PCAT.id as pcat_id',
                                 'PCAT.name as pcat_name',
