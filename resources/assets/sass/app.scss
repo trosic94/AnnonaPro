@@ -185,32 +185,37 @@ div#paginateBlock {
         li {
             display: inline-block;
             margin: 0 5px;
-            color: $grey;
+            color: $secondary-color;
             font-size: 90%;
             font-weight: 500;
-            background-color: $white;
-            -webkit-border-radius: 5px;
-            -moz-border-radius: 5px;
-            border-radius: 5px;
+            background-color: $annona-gray-light;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            border-radius: 50%;
             @include trans_05;
             a {
                 display: block;
-                padding: 0 8px;
-                color: $grey;
+                padding: 2px 8px;
+                color: $secondary-color;
             }
             span {
                 display: block;
-                padding: 0 8px;
+                padding: 2px 8px;
             }
             &:hover {
-                background-color: $yellow;
+                background-color: $primary-color;
+                color: $white !important;
+            }
+             :hover {
+                color: $white;
             }
         }
         li.active {
-            background-color: $yellow;
+            background-color: $primary-color;
+            color: $white;
         }
         li.disabled {
-            background-color: $grey-light;
+            background-color: $annona-gray-light;
         }
     }
 }
@@ -795,6 +800,11 @@ div.specTABs {
 div#row_1 {
     display: block;
     margin: 0 0 5%;
+    background-color: $annona-gray-light;
+}
+
+div.slider_company {
+    //     background-color: $annona-gray-light;
 }
 
 // HOME ROW 2 ------------------------------------------------------------------------------------------------- //
@@ -819,7 +829,7 @@ div.prodOne {
         a {
             color: $grey;
             &:hover {
-                color: $red;
+                color: $primary-color;
             }
         }
     }
@@ -1123,13 +1133,14 @@ div#bannerWrap {
 }
 
 // Products bottom start
-.productCardBottom{
-	position: absolute;
-	bottom: 0px;
+.productCardBottom {
+    position: absolute;
+    bottom: 0px;
 }
 
-.border-5{
-	border-style:solid;
- 	height: 5px;
+.border-5 {
+    border-style: solid;
+    height: 5px;
 }
+
 // Products bottom end

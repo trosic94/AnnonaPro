@@ -30,8 +30,8 @@
 			            	<div class="row pr-3 pl-3">
 				            	<div class="col">
 				              		<div id="addTo_FAV" class="prod_{{ $prod->prod_id }}" onclick="FavEvent({{ $prod->prod_id }})">
-				                      <i class="far fa-heart fa-2x text-grey {{ (in_array($prod->prod_id,$favLIST))? 'd-none':'d-block' }}"></i>
-				                      <i class="fas fa-heart fa-2x text-annona-gray {{ (in_array($prod->prod_id,$favLIST))? 'd-block':'d-none' }}"></i>
+				                      <i class="far fa-heart fa-2x text-primary {{ (in_array($prod->prod_id,$favLIST))? 'd-none':'d-block' }}"></i>
+				                      <i class="fas fa-heart fa-2x text-primary {{ (in_array($prod->prod_id,$favLIST))? 'd-block':'d-none' }}"></i>
 				              		</div>
 				              	</div>
 				              	<div class="col">
@@ -48,16 +48,16 @@
 
 			            <div class="container productCardBottom">
 			            		<div class="row justify-content-center">
-			            			<div class="priceWrap">
+			            			<div class="priceWrap" style="color: {{ ($prod->cat_color == null)? '#389178':'$prod->cat_colo' }};">
 			            				@if ($prod->prod_price_with_discount != null)
 			            				<div class="row justify-content-center">
-			            					<span class="fullPriceDiscounted">Cena:{{ number_format($prod->prod_price,0,"",".") }} {{ setting('site.valuta') }}</span>
+			            					<span class="fullPriceDiscounted"><div class="pt-2 col-12 text-center small text-secondary">Cena:</div><div class="col-12 text-lowercase font-weight-bold">{{ number_format($prod->prod_price,0,"",".") }} {{ setting('site.valuta') }}</div></span>
 			            				</div>
 			            				<div class="row justify-content-center">
-			            					<span class="discountPrice">{{ number_format($prod->prod_price_with_discount,0,"",".") }} {{ setting('site.valuta') }}</span>
+			            					<span class="discountPrice"><div class="pt-2 col-12 text-center small text-secondary">Cena:</div><div class="col-12 text-lowercase font-weight-bold">{{ number_format($prod->prod_price_with_discount,0,"",".") }} {{ setting('site.valuta') }}</div></span>
 			            				</div>
 						                @else
-						                	<span class="singlePrice">{{ number_format($prod->prod_price,0,"",".") }} {{ setting('site.valuta') }}</span>
+						                	<span class="singlePrice"><div class="pt-2 col-12 text-center small text-secondary">Cena:</div><div class="col-12 text-lowercase font-weight-bold">{{ number_format($prod->prod_price,0,"",".") }} {{ setting('site.valuta') }}</div></span>
 						                @endif
 			            			</div>
 					            </div>

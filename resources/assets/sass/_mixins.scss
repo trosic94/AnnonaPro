@@ -34,7 +34,7 @@
     margin: 0 0 10px;
     span.fullPrice {
         display: block;
-        color: $yellow;
+        color: $primary-color;
         text-decoration: line-through;
         font-size: 90%;
     }
@@ -52,6 +52,8 @@
         span.singlePrice {
             display: inline-block;
             margin-top: 20px;
+            font-size: 16px !important;
+            font-weight: 500;
         }
     }
     span.finalPrice {
