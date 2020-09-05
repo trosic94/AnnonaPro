@@ -5,7 +5,6 @@
 <div id="pageWrap">
 	<div id="bannerWrap">
 				@foreach($banners_homeWide->random(1) as $bKey => $banner)
-				{{"radd"}}
 					<a href="{{ $banner->ban_url }}" target="{{ $banner->ban_target }}" title="{{ $banner->ban_name }}" onclick="clickCount(event,{{ $banner->ban_id }},{{ $banner->ban_position_id }},'{{ $banner->ban_url }}','{{ $banner->ban_target }}')"><img src="/storage/banners/{{ $banner->ban_image }}" alt="{{ $banner->ban_name }}"></a>
 				}
 				}
@@ -32,7 +31,7 @@
 
 				@foreach ($allProducts as $key => $prod)
 				<div class="col-md-3 pl-2 pl-lg-0 pr-2 pr-lg-0 pb-4 d-flex wow animated fadeIn">
-			          <div class="prodOne white pl-0 pr-0 ml-3 mr-3">
+			         <div class="prodOne white pl-0 pr-0 ml-3 mr-3">
 
 			            <div class="imgWrap">
 			            	<div class="row pr-3 pl-3">
@@ -56,7 +55,7 @@
 
 			            <div class="container productCardBottom">
 			            		<div class="row justify-content-center">
-			            			<div class="priceWrap" >
+			            			<div class="priceWrap" style="color: {{ ($prod->cat_color == null)? '#389178':'$prod->cat_color' }};">
 			            				@if ($prod->prod_price_with_discount != null)
 			            				<div class="row justify-content-center text-secondary">
 			            					Cena:<span class="fullPrice ">{{ number_format($prod->prod_price,0,"",".") }} {{ setting('site.valuta') }}</span>
@@ -77,9 +76,7 @@
 								<div class="row justify-content-center mt-3 ">
 									<span class="border {{ ($prod->cat_color == null)? 'primary-color':'' }}  col-12 border-5" style="background-color: {{ ($prod->cat_color != null)? $prod->cat_color:'' }};"></span>
 								</div>
-			              		
 			            </div>
-
 			          </div>
 		        </div>
 				@endforeach

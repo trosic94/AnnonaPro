@@ -1052,9 +1052,17 @@ div#freeSHIPPING {
     }
 }
 
+footer.annona-footer-bg {
+    background-color: $annona-footer-bg;
+}
+
+footer .border-annona {
+    border-bottom: 1px solid $annona-gray-dark;
+}
+
 div#shopNAV {
     h5 {
-        @include blueTitle;
+        color: $primary-color;
         font-size: 120%;
         text-transform: uppercase;
         font-weight: 500;
@@ -1068,7 +1076,7 @@ div#shopNAV {
             a {
                 color: $white;
                 &:hover {
-                    color: $red;
+                    color: $primary-color;
                 }
             }
         }
@@ -1137,21 +1145,23 @@ div#bannerWrap {
     color: $secondary-color;
     text-decoration: line-through;
 }
+
 .singlePrice {
     color: $primary-color;
     margin-top: 0;
 }
+
 .discountPrice {
     color: $primary-color;
     margin-top: 0;
 }
 
-.buyButton{
-	font-size: x-small;
+.buyButton {
+    font-size: x-small;
 }
+
 .buyButton:hover {
-  background-color: rgba(56, 145, 120, 0.8);
+    background-color: rgba(56, 145, 120, 0.8);
 }
+
 // Products bottom end
-
-

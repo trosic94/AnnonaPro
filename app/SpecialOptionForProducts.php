@@ -56,6 +56,7 @@ class SpecialOptionForProducts extends Model
                                                 'CAT.id as cat_id',
                                                 'CAT.name as cat_name',
                                                 'CAT.slug as cat_slug',
+                                                'CAT.cat_color as cat_color',
                                                 'PCAT.id as pcat_id',
                                                 'PCAT.name as pcat_name',
                                                 'PCAT.slug as pcat_slug',
