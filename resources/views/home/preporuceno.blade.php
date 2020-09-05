@@ -68,7 +68,7 @@
                         <div class="priceWrap">
                           @if ($tab1Spec->p_product_price_with_discount != null)
                           <div class="row justify-content-center">
-                            <span class="fullPriceDiscounted">Cena:{{ number_format($tab1Spec->p_product_price,0,"",".") }} {{ setting('site.valuta') }}</span>
+                            <span class="fullPrice">Cena:{{ number_format($tab1Spec->p_product_price,0,"",".") }} {{ setting('site.valuta') }}</span>
                           </div>
                           <div class="row justify-content-center">
                             <span class="discountPrice">{{ number_format($tab1Spec->p_product_price_with_discount,0,"",".") }} {{ setting('site.valuta') }}</span>
@@ -79,7 +79,7 @@
                         </div>
                       </div>
                         <div class="row justify-content-center mt-3">
-                          <div id="" class="rounded-pill btnBuy {{ ($tab1Spec->cat_color == null)? 'primary-color':'' }} text-white pt-1 pb-2 pl-3 pr-3 align-middle" style="background-color: {{ ($tab1Spec->cat_color != null)? $tab1Spec->cat_color:'' }};"  onclick="CartEvent({{ $tab1Spec->p_id }})">
+                          <div id="" class="rounded-pill buyButton {{ ($tab1Spec->cat_color == null)? 'primary-color':'' }} text-white pt-1 pb-2 pl-3 pr-3 align-middle" style="background-color: {{ ($tab1Spec->cat_color != null)? $tab1Spec->cat_color:'' }};"  onclick="CartEvent({{ $tab1Spec->p_id }})">
                              @lang('shop.btn_buy')
                           </div>
                         </div>
