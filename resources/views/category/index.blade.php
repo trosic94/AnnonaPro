@@ -24,14 +24,14 @@
 
 				@foreach ($allProducts as $key => $prod)
 				<div class="col-md-3 pl-2 pl-lg-0 pr-2 pr-lg-0 pb-4 d-flex wow animated fadeIn">
-			          <div class="prodOne white pl-0 pr-0 ml-2 mr-2">
+			          <div class="prodOne white pl-0 pr-0 ml-3 mr-3">
 
 			            <div class="imgWrap">
 			            	<div class="row pr-3 pl-3">
 				            	<div class="col">
 				              		<div id="addTo_FAV" class="prod_{{ $prod->prod_id }}" onclick="FavEvent({{ $prod->prod_id }})">
-				                      <i class="far fa-heart fa-2x text-grey {{ (in_array($prod->prod_id,$favLIST))? 'd-none':'d-block' }}"></i>
-				                      <i class="fas fa-heart fa-2x text-annona-gray {{ (in_array($prod->prod_id,$favLIST))? 'd-block':'d-none' }}"></i>
+				                      <i class="far fa-heart fa-2x text-primary {{ (in_array($prod->prod_id,$favLIST))? 'd-none':'d-block' }}"></i>
+				                      <i class="fas fa-heart fa-2x text-primary {{ (in_array($prod->prod_id,$favLIST))? 'd-block':'d-none' }}"></i>
 				              		</div>
 				              	</div>
 				              	<div class="col">

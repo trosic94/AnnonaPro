@@ -7,7 +7,7 @@
 			@if (!$banners_homeRow_1->isEmpty())
 			<div id="bannerWrap">
 
-				@foreach($banners_homeRow_1->random(1) as $bKey => $banner)
+				@foreach($banners_homeRow_1 as $bKey => $banner)
 					<a href="{{ $banner->ban_url }}" target="{{ $banner->ban_target }}" title="{{ $banner->ban_name }}" onclick="clickCount(event,{{ $banner->ban_id }},{{ $banner->ban_position_id }},'{{ $banner->ban_url }}','{{ $banner->ban_target }}')"><img src="/storage/banners/{{ $banner->ban_image }}" alt="{{ $banner->ban_name }}"></a>
 				@endforeach
 
@@ -19,7 +19,7 @@
 			@if (!$banners_homeRow_2->isEmpty())
 			<div id="bannerWrap">
 
-				@foreach($banners_homeRow_2->random(1) as $bKey => $banner)
+				@foreach($banners_homeRow_2 as $bKey => $banner)
 					<a href="{{ $banner->ban_url }}" target="{{ $banner->ban_target }}" title="{{ $banner->ban_name }}" onclick="clickCount(event,{{ $banner->ban_id }},{{ $banner->ban_position_id }},'{{ $banner->ban_url }}','{{ $banner->ban_target }}')"><img src="/storage/banners/{{ $banner->ban_image }}" alt="{{ $banner->ban_name }}"></a>
 				@endforeach
 
