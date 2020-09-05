@@ -37649,32 +37649,38 @@ div#paginateBlock ul.pagination li {
   color: #707070;
   font-size: 90%;
   font-weight: 500;
-  background-color: #fff;
-  border-radius: 5px;
+  background-color: #F9F9F9;
+  border-radius: 50%;
   transition: all 0.05s ease-in;
 }
 
 div#paginateBlock ul.pagination li a {
   display: block;
-  padding: 0 8px;
+  padding: 2px 8px;
   color: #707070;
 }
 
 div#paginateBlock ul.pagination li span {
   display: block;
-  padding: 0 8px;
+  padding: 2px 8px;
 }
 
 div#paginateBlock ul.pagination li:hover {
-  background-color: #FCBE0A;
+  background-color: #389178;
+  color: #fff !important;
+}
+
+div#paginateBlock ul.pagination li :hover {
+  color: #fff;
 }
 
 div#paginateBlock ul.pagination li.active {
-  background-color: #FCBE0A;
+  background-color: #389178;
+  color: #fff;
 }
 
 div#paginateBlock ul.pagination li.disabled {
-  background-color: #e0e0e0;
+  background-color: #F9F9F9;
 }
 
 div.card {
@@ -37752,7 +37758,7 @@ div#contactINFOhead ul li:last-child {
 form#siteSearch input[name=PRETRAGA] {
   padding: 0 40px 0 20px;
   background-image: url("/images/header/search - icon - header.svg");
-  background-color: #F0F0F0 !important;
+  background-color: #F9F9F9 !important;
   background-repeat: no-repeat;
   background-position: center right 10px;
 }
@@ -37823,7 +37829,7 @@ div#myCart div#cartCount span.badge {
 }
 
 div#myCart:hover {
-  background-color: #F0F0F0;
+  background-color: #F9F9F9;
 }
 
 div#myCartModal div.modal-content {
@@ -37861,7 +37867,7 @@ div#cartDATA div#cartPRODrow div#cartTXT div.priceWrap {
 
 div#cartDATA div#cartPRODrow div#cartTXT div.priceWrap span.fullPrice {
   display: block;
-  color: #FCBE0A;
+  color: #389178;
   text-decoration: line-through;
   font-size: 90%;
 }
@@ -37884,6 +37890,8 @@ div#cartDATA div#cartPRODrow div#cartTXT div.priceWrap div#finalAmount span.disc
 div#cartDATA div#cartPRODrow div#cartTXT div.priceWrap div#finalAmount span.singlePrice {
   display: inline-block;
   margin-top: 20px;
+  font-size: 16px !important;
+  font-weight: 500;
 }
 
 div#cartDATA div#cartPRODrow div#cartTXT div.priceWrap span.finalPrice {
@@ -38172,7 +38180,7 @@ div#cartWrap table#cartTable tr td div.priceWrap {
 
 div#cartWrap table#cartTable tr td div.priceWrap span.fullPrice {
   display: block;
-  color: #FCBE0A;
+  color: #389178;
   text-decoration: line-through;
   font-size: 90%;
 }
@@ -38195,6 +38203,8 @@ div#cartWrap table#cartTable tr td div.priceWrap div#finalAmount span.discountPr
 div#cartWrap table#cartTable tr td div.priceWrap div#finalAmount span.singlePrice {
   display: inline-block;
   margin-top: 20px;
+  font-size: 16px !important;
+  font-weight: 500;
 }
 
 div#cartWrap table#cartTable tr td div.priceWrap span.finalPrice {
@@ -38487,6 +38497,7 @@ div.specTABs ul.slick-dots {
 div#row_1 {
   display: block;
   margin: 0 0 5%;
+  background-color: #F9F9F9;
 }
 
 div#row_2 {
@@ -38515,7 +38526,7 @@ div.prodOne h3 a {
 }
 
 div.prodOne h3 a:hover {
-  color: #dc3545;
+  color: #389178;
 }
 
 div.prodOne div.prodFooter {
@@ -38534,7 +38545,7 @@ div.prodOne div.prodFooter div.priceWrap {
 
 div.prodOne div.prodFooter div.priceWrap span.fullPrice {
   display: block;
-  color: #FCBE0A;
+  color: #389178;
   text-decoration: line-through;
   font-size: 90%;
 }
@@ -38557,6 +38568,8 @@ div.prodOne div.prodFooter div.priceWrap div#finalAmount span.discountPrice {
 div.prodOne div.prodFooter div.priceWrap div#finalAmount span.singlePrice {
   display: inline-block;
   margin-top: 20px;
+  font-size: 16px !important;
+  font-weight: 500;
 }
 
 div.prodOne div.prodFooter div.priceWrap span.finalPrice {
@@ -38750,7 +38763,7 @@ div.prodTABs .tab-pane img {
 
 div#lefNav {
   background-color: #fff;
-  border-bottom: 1px solid #F0F0F0;
+  border-bottom: 1px solid #F9F9F9;
 }
 
 div#lefNav ul#catNAV {

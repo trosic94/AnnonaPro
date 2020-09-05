@@ -30,8 +30,8 @@
 			            	<div class="row pr-3 pl-3">
 				            	<div class="col">
 				              		<div id="addTo_FAV" class="prod_{{ $prod->prod_id }}" onclick="FavEvent({{ $prod->prod_id }})">
-				                      <i class="far fa-heart fa-2x text-grey {{ (in_array($prod->prod_id,$favLIST))? 'd-none':'d-block' }}"></i>
-				                      <i class="fas fa-heart fa-2x text-annona-gray {{ (in_array($prod->prod_id,$favLIST))? 'd-block':'d-none' }}"></i>
+				                      <i class="far fa-heart fa-2x text-primary {{ (in_array($prod->prod_id,$favLIST))? 'd-none':'d-block' }}"></i>
+				                      <i class="fas fa-heart fa-2x text-primary {{ (in_array($prod->prod_id,$favLIST))? 'd-block':'d-none' }}"></i>
 				              		</div>
 				              	</div>
 				              	<div class="col">
@@ -48,27 +48,28 @@
 			            
 			            <div class="container productCardBottom">
 			            		<div class="row justify-content-center">
-			            			<div class="priceWrap">
+			            			<div class="priceWrap" style="color: {{ ($prod->cat_color == null)? '#389178':'$prod->cat_colo' }};">
 			            				@if ($prod->prod_price_with_discount != null)
 			            				<div class="row justify-content-center">
-			            					<span class="fullPriceDiscounted">Cena:{{ number_format($prod->prod_price,0,"",".") }} {{ setting('site.valuta') }}</span>
+			            					<span class="fullPriceDiscounted"><div class="pt-2 col-12 text-center small text-secondary">Cena:</div><div class="col-12 text-lowercase font-weight-bold">{{ number_format($prod->prod_price,0,"",".") }} {{ setting('site.valuta') }}</div></span>
 			            				</div>
 			            				<div class="row justify-content-center">
-			            					<span class="discountPrice">{{ number_format($prod->prod_price_with_discount,0,"",".") }} {{ setting('site.valuta') }}</span>
+			            					<span class="discountPrice"><div class="pt-2 col-12 text-center small text-secondary">Cena:</div><div class="col-12 text-lowercase font-weight-bold">{{ number_format($prod->prod_price_with_discount,0,"",".") }} {{ setting('site.valuta') }}</div></span>
 			            				</div>
 						                @else
-						                	<span class="singlePrice">{{ number_format($prod->prod_price,0,"",".") }} {{ setting('site.valuta') }}</span>
+						                	<span class="singlePrice"><div class="pt-2 col-12 text-center small text-secondary">Cena:</div><div class="col-12 text-lowercase font-weight-bold">{{ number_format($prod->prod_price,0,"",".") }} {{ setting('site.valuta') }}</div></span>
 						                @endif
 			            			</div>
 					            </div>
-			              		<div class="row justify-content-center mt-3">
-				              		<div id="" class="rounded-pill purple btnBuy text-white pt-1 pb-2 pl-3 pr-3 align-middle" onclick="CartEvent({{ $prod->prod_id }})">
-				              			 @lang('shop.btn_buy')
-				              		</div>
-			              		</div>
 								<div class="row justify-content-center mt-3">
-									<span class="border purple  col-12 border-5"></span>
+									<div id="" class="rounded-pill btnBuy {{ ($prod->cat_color == null)? 'primary-color':'' }} text-white pt-1 pb-2 pl-3 pr-3 align-middle" style="background-color: {{ ($prod->cat_color != null)? $prod->cat_color:'' }};"  onclick="CartEvent({{ $prod->prod_id }})">
+										 @lang('shop.btn_buy')
+									</div>
 								</div>
+								{{-- style="color: {{ ($prod->cat_color != null)? $prod->cat_color:'#7C7C7C' }};" --}}
+							  <div class="row justify-content-center mt-3">
+								  <span class="border {{ ($prod->cat_color == null)? 'primary-color':'' }}  col-12 border-5" style="background-color: {{ ($prod->cat_color != null)? $prod->cat_color:'' }};"></span>
+							  </div>
 			              		
 			            </div>
 

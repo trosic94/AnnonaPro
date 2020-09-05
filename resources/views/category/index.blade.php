@@ -48,7 +48,7 @@
 
 			            <div class="container productCardBottom">
 			            		<div class="row justify-content-center">
-			            			<div class="priceWrap">
+			            			<div class="priceWrap" style="color: {{ ($prod->cat_color == null)? '#389178':'$prod->cat_colo' }};">
 			            				@if ($prod->prod_price_with_discount != null)
 			            				<div class="row justify-content-center text-secondary">
 			            					Cena:<span class="fullPrice">{{ number_format($prod->prod_price,0,"",".") }} {{ setting('site.valuta') }}</span>
@@ -58,6 +58,16 @@
 			            				</div>
 						                @else
 											<label class="text-secondary m-0" style="display: block;" align="middle">Cena:</label><span class="singlePrice m-0">{{ number_format($prod->prod_price,0,"",".") }} {{ setting('site.valuta') }}</span>
+{{-- =======
+			            				<div class="row justify-content-center">
+			            					<span class="fullPriceDiscounted"><div class="pt-2 col-12 text-center small text-secondary">Cena:</div><div class="col-12 text-lowercase font-weight-bold">{{ number_format($prod->prod_price,0,"",".") }} {{ setting('site.valuta') }}</div></span>
+			            				</div>
+			            				<div class="row justify-content-center">
+			            					<span class="discountPrice"><div class="pt-2 col-12 text-center small text-secondary">Cena:</div><div class="col-12 text-lowercase font-weight-bold">{{ number_format($prod->prod_price_with_discount,0,"",".") }} {{ setting('site.valuta') }}</div></span>
+			            				</div>
+						                @else
+						                	<span class="singlePrice"><div class="pt-2 col-12 text-center small text-secondary">Cena:</div><div class="col-12 text-lowercase font-weight-bold">{{ number_format($prod->prod_price,0,"",".") }} {{ setting('site.valuta') }}</div></span>
+>>>>>>> 843bc2a65f17d2dde8f886d180768ae2aaaf6c63 --}}
 						                @endif
 			            			</div>
 					            </div>

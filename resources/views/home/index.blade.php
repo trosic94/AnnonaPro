@@ -1,5 +1,7 @@
 @extends ('includes.page')
 
+
+
 @section ('content')
 
 @include('home.slider')
