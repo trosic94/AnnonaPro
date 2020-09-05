@@ -62,13 +62,13 @@
         $(document).ready(function(){
 
           $('#specOPT{{ $tab->id }}_slider').slick({
-            arrows: false,
-            dots: true,
+            arrows: true,
+            dots: false,
             draggable: true,
             infinite: false,
             autoplay: true,
             autoplaySpeed: 4000,
-            slidesToShow: 4,
+            slidesToShow: 6,
             slidesToScroll: 4,
             row: 0,
             responsive: [

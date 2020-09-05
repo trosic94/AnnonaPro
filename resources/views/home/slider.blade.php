@@ -4,13 +4,12 @@
 		@if ($slide->url != null)
 			<a href="{{ $slide->url }}" target="{{ $slide->url_target }}">
 		@endif
-
-			@if ($slide->text != null)
-				<div class="slideContent">
-					<h2>{{ $slide->title }}</h2>
-					<div class="slideTXT">{{ $slide->text }}</div>
-				</div>
-			@endif
+		@if ($slide->text != null)
+			<div class="slideContent">
+				<h2>{{ $slide->title }}</h2>
+				<div class="slideTXT">{{ $slide->text }}</div>
+			</div>
+		@endif
 
 			<img src="/storage/slides/{{ $slide->image }}">
 

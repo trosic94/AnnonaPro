@@ -24,7 +24,7 @@
 
 				@foreach ($allProducts as $key => $prod)
 				<div class="col-md-3 pl-2 pl-lg-0 pr-2 pr-lg-0 pb-4 d-flex wow animated fadeIn">
-			          <div class="prodOne white pl-0 pr-0 ml-2 mr-2">
+			          <div class="prodOne white pl-0 pr-0 ml-3 mr-3">
 
 			            <div class="imgWrap">
 			            	<div class="row pr-3 pl-3">
