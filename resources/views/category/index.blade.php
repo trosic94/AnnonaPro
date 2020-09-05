@@ -47,41 +47,31 @@
 			            <h3><a href="{{ ($prod->pcat_id != 3)? trans('shop.slug_url_products'):'' }}/{{ $prod->pcat_slug }}/{{ $prod->cat_slug }}/{{ $prod->prod_slug }}">{{ $prod->prod_title }}</a></h3>
 
 			            <div class="container productCardBottom">
-			            		<div class="row justify-content-center">
-			            			<div class="priceWrap" style="color: {{ ($prod->cat_color == null)? '#389178':'$prod->cat_colo' }};">
-			            				@if ($prod->prod_price_with_discount != null)
-			            				<div class="row justify-content-center text-secondary">
-			            					Cena:<span class="fullPrice">{{ number_format($prod->prod_price,0,"",".") }} {{ setting('site.valuta') }}</span>
-			            				</div>
-			            				<div class="row justify-content-center ">
-			            					<span class="discountPrice">{{ number_format($prod->prod_price_with_discount,0,"",".") }} {{ setting('site.valuta') }}</span>
-			            				</div>
-						                @else
-											<label class="text-secondary m-0" style="display: block;" align="middle">Cena:</label><span class="singlePrice m-0">{{ number_format($prod->prod_price,0,"",".") }} {{ setting('site.valuta') }}</span>
-{{-- =======
-			            				<div class="row justify-content-center">
-			            					<span class="fullPriceDiscounted"><div class="pt-2 col-12 text-center small text-secondary">Cena:</div><div class="col-12 text-lowercase font-weight-bold">{{ number_format($prod->prod_price,0,"",".") }} {{ setting('site.valuta') }}</div></span>
-			            				</div>
-			            				<div class="row justify-content-center">
-			            					<span class="discountPrice"><div class="pt-2 col-12 text-center small text-secondary">Cena:</div><div class="col-12 text-lowercase font-weight-bold">{{ number_format($prod->prod_price_with_discount,0,"",".") }} {{ setting('site.valuta') }}</div></span>
-			            				</div>
-						                @else
-						                	<span class="singlePrice"><div class="pt-2 col-12 text-center small text-secondary">Cena:</div><div class="col-12 text-lowercase font-weight-bold">{{ number_format($prod->prod_price,0,"",".") }} {{ setting('site.valuta') }}</div></span>
->>>>>>> 843bc2a65f17d2dde8f886d180768ae2aaaf6c63 --}}
-						                @endif
-			            			</div>
-					            </div>
-			              		<div class="row justify-content-center mt-3">
-				              		<div id=""  class="rounded-pill buyButton {{ ($prod->cat_color == null)? 'primary-color':'' }} text-white  pl-3 pr-3 pt-1 pb-1" style="background-color: {{ ($prod->cat_color != null)? $prod->cat_color:'' }};"  onclick="CartEvent({{ $prod->prod_id }})">
-				              			 @lang('shop.btn_buy')
-				              		</div>
-			              		</div>
-			              		{{-- style="color: {{ ($prod->cat_color != null)? $prod->cat_color:'#7C7C7C' }};" --}}
-								<div class="row justify-content-center mt-3 ">
-									<span class="border {{ ($prod->cat_color == null)? 'primary-color':'' }}  col-12 border-5" style="background-color: {{ ($prod->cat_color != null)? $prod->cat_color:'' }};"></span>
+							<div class="row justify-content-center">
+								<div class="priceWrap" style="color: {{ ($prod->cat_color == null)? '#389178':'$prod->cat_color' }};">
+									@if ($prod->prod_price_with_discount != null)
+									<div class="row justify-content-center">
+										<span class="fullPriceDiscounted"><div class="pt-2 col-12 text-center small text-secondary">Cena:</div><div class="col-12 text-lowercase font-weight-bold">{{ number_format($prod->prod_price,0,"",".") }} {{ setting('site.valuta') }}</div></span>
+									</div>
+									<div class="row justify-content-center">
+										<span class="discountPrice"><div class="pt-2 col-12 text-center small text-secondary">Cena:</div><div class="col-12 text-lowercase font-weight-bold">{{ number_format($prod->prod_price_with_discount,0,"",".") }} {{ setting('site.valuta') }}</div></span>
+									</div>
+									@else
+										<span class="singlePrice"><div class="pt-2 col-12 text-center small text-secondary">Cena:</div><div class="col-12 text-lowercase font-weight-bold">{{ number_format($prod->prod_price,0,"",".") }} {{ setting('site.valuta') }}</div></span>
+									@endif
 								</div>
-			              		
-			            </div>
+							</div>
+							<div class="row justify-content-center mt-3">
+								<div id="" class="rounded-pill btnBuy {{ ($prod->cat_color == null)? 'primary-color':'' }} text-white pt-1 pb-2 pl-3 pr-3 align-middle" style="background-color: {{ ($prod->cat_color != null)? $prod->cat_color:'' }};"  onclick="CartEvent({{ $prod->prod_id }})">
+									 @lang('shop.btn_buy')
+								</div>
+							</div>
+							{{-- style="color: {{ ($prod->cat_color != null)? $prod->cat_color:'#7C7C7C' }};" --}}
+						  <div class="row justify-content-center mt-3">
+							  <span class="border {{ ($prod->cat_color == null)? 'primary-color':'' }}  col-12 border-5" style="background-color: {{ ($prod->cat_color != null)? $prod->cat_color:'' }};"></span>
+						  </div>
+							  
+					</div>
 
 			          </div>
 		        </div>
