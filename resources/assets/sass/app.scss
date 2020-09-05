@@ -558,7 +558,7 @@ div#cartWrap {
                         color: $white;
                     }
                     span.singlePrice {
-                        color: $white;
+                        color: #389178;
                         margin-top: 0;
                     }
                     span.finalPrice {
@@ -1041,23 +1041,13 @@ div#freeSHIPPING {
     }
 }
 
-footer.annona-footer-bg {
-    background-color: $annona-footer-bg;
-}
-
-footer .border-annona {
-    border-bottom: 1px solid $annona-gray-dark;
-}
-
 div#shopNAV {
     h5 {
-        // @include blueTitle;
-        color: $annona-green-light;
-        font-size: 18px;
+        @include blueTitle;
+        font-size: 120%;
         text-transform: uppercase;
         font-weight: 500;
         margin-bottom: 1rem;
-        letter-spacing: 0px;
     }
     ul {
         margin: 0;
@@ -1065,10 +1055,9 @@ div#shopNAV {
         list-style: none;
         li {
             a {
-                font-size: 16px;
                 color: $white;
                 &:hover {
-                    color: $primary-color;
+                    color: $red;
                 }
             }
         }
@@ -1132,4 +1121,25 @@ div#bannerWrap {
 	border-style:solid;
  	height: 5px;
 }
+
+.fullPrice {
+    color: $secondary-color;
+    text-decoration: line-through;
+}
+.singlePrice {
+    color: $primary-color;
+    margin-top: 0;
+}
+.discountPrice {
+    color: $primary-color;
+    margin-top: 0;
+}
+
+.buyButton{
+	font-size: x-small;
+}
+.buyButton:hover {
+  background-color: rgba(56, 145, 120, 0.8);
+}
 // Products bottom end
+

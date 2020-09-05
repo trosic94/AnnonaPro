@@ -58,7 +58,8 @@ class SpecialOptionForProducts extends Model
                                                 'CAT.slug as cat_slug',
                                                 'PCAT.id as pcat_id',
                                                 'PCAT.name as pcat_name',
-                                                'PCAT.slug as pcat_slug'
+                                                'PCAT.slug as pcat_slug',
+                                                'PCAT.cat_color as cat_color'
                                             )
                                             ->where('P.status',1)
                                             ->get();

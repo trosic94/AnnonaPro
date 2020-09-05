@@ -38210,7 +38210,7 @@ div#cartWrap table#cartTable tr td div.priceWrap span.discountPrice {
 }
 
 div#cartWrap table#cartTable tr td div.priceWrap span.singlePrice {
-  color: #fff;
+  color: #389178;
   margin-top: 0;
 }
 
@@ -38669,7 +38669,7 @@ div#productDATA form#addToCart div.priceWrap span.discountPrice {
 div#productDATA form#addToCart div.priceWrap span.singlePrice {
   display: block;
   margin-top: 20px;
-  color: #fff;
+  color: #389178;
   font-size: 150%;
   font-weight: 600;
 }
@@ -38854,21 +38854,18 @@ div#freeSHIPPING img {
   }
 }
 
-footer.annona-footer-bg {
-  background-color: #262424;
-}
-
-footer .border-annona {
-  border-bottom: 1px solid #7C7C7C;
-}
-
 div#shopNAV h5 {
-  color: #36947C;
-  font-size: 18px;
+  display: block;
+  width: 100%;
+  padding-top: 1.1rem;
+  color: #33b5e5;
+  font-size: 100%;
+  letter-spacing: 1px;
+  font-weight: 600;
+  font-size: 120%;
   text-transform: uppercase;
   font-weight: 500;
   margin-bottom: 1rem;
-  letter-spacing: 0px;
 }
 
 div#shopNAV ul {
@@ -38878,12 +38875,11 @@ div#shopNAV ul {
 }
 
 div#shopNAV ul li a {
-  font-size: 16px;
   color: #fff;
 }
 
 div#shopNAV ul li a:hover {
-  color: #389178;
+  color: #dc3545;
 }
 
 div#contactINFOfooter ul {
@@ -39001,5 +38997,28 @@ div#bannerWrap img {
 .border-5 {
   border-style: solid;
   height: 5px;
+}
+
+.fullPrice {
+  color: #707070;
+  text-decoration: line-through;
+}
+
+.singlePrice {
+  color: #389178;
+  margin-top: 0;
+}
+
+.discountPrice {
+  color: #389178;
+  margin-top: 0;
+}
+
+.buyButton {
+  font-size: x-small;
+}
+
+.buyButton:hover {
+  background-color: rgba(56, 145, 120, 0.8);
 }
 
