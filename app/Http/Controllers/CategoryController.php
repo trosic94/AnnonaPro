@@ -11,6 +11,7 @@ use App\Manufacturer;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use App\Banner;
 
 class CategoryController extends Controller
 {
@@ -67,10 +68,13 @@ class CategoryController extends Controller
         // svi proizvodi
         $allProducts = Product::allProducts();
 
+        // Home Wide
+        $banners_homeWide = Banner::allBannersByPosition(7);
+
 
     	return view('category.index', compact('intro','title','slug','searchREQ','favLIST','category','CATCurrent','metaTitle','metaDescription','metaKeywords',
                                                 'navCategory','manufacturers',
-                                                'allProducts'));
+                                                'allProducts','banners_homeWide'));
     }
 
     public function categories($categories)
@@ -170,9 +174,11 @@ class CategoryController extends Controller
                 $productsFor_CAT = Product::productsFor_CAT($currentCAT->id);
             endif;
 
+        // Home Wide
+        $banners_homeWide = Banner::allBannersByPosition(7);
             return view('category.category', compact('intro','slug','favLIST','searchREQ','currentCAT','CATCurrent','metaTitle','metaDescription','metaKeywords',
                                                         'navCategory','manufacturers',
-                                                        'productsFor_CAT'));
+                                                        'productsFor_CAT','banners_homeWide'));
 
         else:
 

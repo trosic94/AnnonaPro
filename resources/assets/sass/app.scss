@@ -9,6 +9,8 @@
 //addon
 @import 'variables';
 @import 'mixins';
+
+@import url("/css/ekko-lightbox.css");
 // GLOBAL --------------------------------------------------------------------------------------------------------- //
 body {
     color: $white-base;
@@ -27,7 +29,7 @@ body {
 
 div#pageWrap {
     display: block;
-    margin: 0 0 5%;
+    // margin: 0 0 0%;
 }
 
 div.mainTitle {
@@ -37,7 +39,7 @@ div.mainTitle {
         display: block;
         width: 100%;
         margin: 0 0 30px;
-        color: $blue;
+        color: $secondary-color;
         font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 1px;
@@ -107,6 +109,7 @@ hr {
 // BREADCRUMB ----------------------------------------------------------------------------------------------------- //
 ol.breadcrumb {
     background-color: $white;
+    padding: 0px;
     li {
         a {
             color: $grey-dark;
@@ -1160,7 +1163,7 @@ div#banner_1 {
 
 div#bannerWrap {
     img {
-        @include img100;
+        @include imgBanner;
     }
 }
 
@@ -1194,8 +1197,6 @@ div#bannerWrap {
     font-size: x-small;
 }
 
-.buyButton:hover {
-    background-color: rgba(56, 145, 120, 0.8);
-}
+
 
 // Products bottom end

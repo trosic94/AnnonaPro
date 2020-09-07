@@ -3,7 +3,7 @@
 <!-- Accordion card -->
 <div id="lefNav" class="card">
 
-	<div class="card-header p-0 pb-3 pt-3" role="tab" id="categories">
+	<div class="card-header p-0 pb-3 " role="tab" id="categories">
 	  <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseCAT" aria-expanded="true" aria-controls="collapseCAT">
 	    <h5 id="filterTitle" class="mb-0">
 	      @lang('shop.title_categories') <i class="fas fa-angle-down rotate-icon"></i>
@@ -14,7 +14,7 @@
 	<div id="collapseCAT" class="collapse show" role="tabpanel" aria-labelledby="categories" data-parent="#accordionEx">
 	  <div class="card-body p-0 pb-3 text-white">
 
-	  	<ul id="catNAV" class="ml-2">
+	  	<ul id="catNAV" class="">
 
 	  		@php
 	  			// proveravam da li se se nalazimo na SEARCH

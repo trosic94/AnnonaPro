@@ -13,6 +13,7 @@ use Auth;
 use URL;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use App\Banner;
 
 class SearchController extends Controller
 {
@@ -363,6 +364,7 @@ class SearchController extends Controller
                                 'CAT.cat_image as cat_image',
                                 'CAT.published as cat_published',
                                 'CAT.use_product_price as cat_use_product_price',
+                                'CAT.cat_color as cat_color',
                                 'PCAT.id as pcat_id',
                                 'PCAT.name as pcat_name',
                                 'PCAT.slug as pcat_slug',
@@ -391,8 +393,11 @@ class SearchController extends Controller
         // MANUFACTURERS
         $manufacturers = Manufacturer::manufacturersByCAT($currentCAT->id);
 
+            // Home Wide
+        $banners_homeWide = Banner::allBannersByPosition(7);
 
-		return view('search.index', compact('slug','CATCurrent','searchREQ','currentCAT','favLIST','searchREZ','navCategory','manufacturers'));
+
+		return view('search.index', compact('slug','CATCurrent','searchREQ','currentCAT','favLIST','searchREZ','navCategory','manufacturers','banners_homeWide'));
     }
 
 
