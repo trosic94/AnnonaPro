@@ -45,6 +45,14 @@
 								<label for="form2_0" class="mt-n2">unesi e-mail adresu </label>
 							  </div>
 						</div>
+						<div class="row pt-4">
+							<div class="col-auto text-left pr-2">
+								<a href="{!! setting('site.facebook') !!}" target="_blank"><i class="fab fa-facebook-f text-primary {{ (setting('site.facebook') == '')? 'd-none':'d-block' }}"></i></a>
+							</div>	
+							<div class="col-auto text-left pl-2">
+								<a href="{!! setting('site.instagram') !!}" target="_blank"><i class="fab fa-instagram text-primary {{ (setting('site.instagram') == '')? 'd-none':'d-block' }}"></i></a>
+							</div>
+						</div>
 					</div>
 
 					{{-- <div class="col-xl-7 col-lg-12">

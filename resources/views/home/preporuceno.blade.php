@@ -20,7 +20,7 @@
         @if (array_key_exists($tab->id,$productWithSelectedOptions_groupped))
 
         @foreach($productWithSelectedOptions_groupped[$tab->id] as $tab1 => $tab1Spec)
-        <div class="prodOne white pl-0 pr-0 ml-3 mr-3">
+        <div class="prodOne white pl-0 pr-0 ml-3 mr-3 wow animated fadeIn shadow-sm">
 
           <div class="imgWrap">
             <div class="row pr-3 pl-3">

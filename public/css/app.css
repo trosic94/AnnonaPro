@@ -1,10 +1,6 @@
 @import url(https://fonts.googleapis.com/css2?family=Lato:wght@300;
 
-<<<<<<< HEAD
-400;700;900);@import url(https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500;600;700;800;900&display=swap);@import url(https://use.fontawesome.com/releases/v5.13.0/css/all.css);/*!
-=======
-400;700;900);@import url(https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500;600;700;800;900&display=swap);@import url(https://use.fontawesome.com/releases/v5.11.2/css/all.css);@import url(/css/ekko-lightbox.css);/*!
->>>>>>> 351a8c5e0125cf0bc3b195990e68a7bb7d1756f3
+400;700;900);@import url(https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500;600;700;800;900&display=swap);@import url(https://use.fontawesome.com/releases/v5.13.0/css/all.css);@import url(/css/ekko-lightbox.css);/*!
  * Bootstrap v4.5.0 (https://getbootstrap.com/)
  * Copyright 2011-2020 The Bootstrap Authors
  * Copyright 2011-2020 Twitter, Inc.
@@ -41354,38 +41350,44 @@ div#cartDATA div#cartPRODrow div#cartTXT div.priceWrap {
 
 div#cartDATA div#cartPRODrow div#cartTXT div.priceWrap span.fullPrice {
   display: block;
-  color: #389178;
-  text-decoration: line-through;
-  font-size: 90%;
+  width: 100%;
+  margin: 0 0 10px;
 }
 
-div#cartDATA div#cartPRODrow div#cartTXT div.priceWrap div#finalAmount {
+div#cartDATA div#cartPRODrow div#cartTXT div.priceWrap span.fullPrice span.fullPrice {
+  display: block;
+  color: #389178;
+  text-decoration: line-through;
+  font-size: 100%;
+}
+
+div#cartDATA div#cartPRODrow div#cartTXT div.priceWrap span.fullPrice div#finalAmount {
   display: block;
   color: #707070;
-  font-size: 110%;
+  font-size: 120%;
   font-weight: 600;
 }
 
-div#cartDATA div#cartPRODrow div#cartTXT div.priceWrap div#finalAmount span.qty {
+div#cartDATA div#cartPRODrow div#cartTXT div.priceWrap span.fullPrice div#finalAmount span.qty {
   display: inline-block;
 }
 
-div#cartDATA div#cartPRODrow div#cartTXT div.priceWrap div#finalAmount span.discountPrice {
+div#cartDATA div#cartPRODrow div#cartTXT div.priceWrap span.fullPrice div#finalAmount span.discountPrice {
   display: inline-block;
 }
 
-div#cartDATA div#cartPRODrow div#cartTXT div.priceWrap div#finalAmount span.singlePrice {
+div#cartDATA div#cartPRODrow div#cartTXT div.priceWrap span.fullPrice div#finalAmount span.singlePrice {
   display: inline-block;
   margin-top: 20px;
   font-size: 16px !important;
   font-weight: 500;
 }
 
-div#cartDATA div#cartPRODrow div#cartTXT div.priceWrap span.finalPrice {
+div#cartDATA div#cartPRODrow div#cartTXT div.priceWrap span.fullPrice span.finalPrice {
   display: block;
   margin-top: 20px;
   color: #707070;
-  font-size: 110%;
+  font-size: 120%;
   font-weight: 600;
 }
 
@@ -41671,38 +41673,44 @@ div#cartWrap table#cartTable tr td div.priceWrap {
 
 div#cartWrap table#cartTable tr td div.priceWrap span.fullPrice {
   display: block;
-  color: #389178;
-  text-decoration: line-through;
-  font-size: 90%;
+  width: 100%;
+  margin: 0 0 10px;
 }
 
-div#cartWrap table#cartTable tr td div.priceWrap div#finalAmount {
+div#cartWrap table#cartTable tr td div.priceWrap span.fullPrice span.fullPrice {
+  display: block;
+  color: #389178;
+  text-decoration: line-through;
+  font-size: 100%;
+}
+
+div#cartWrap table#cartTable tr td div.priceWrap span.fullPrice div#finalAmount {
   display: block;
   color: #707070;
-  font-size: 110%;
+  font-size: 120%;
   font-weight: 600;
 }
 
-div#cartWrap table#cartTable tr td div.priceWrap div#finalAmount span.qty {
+div#cartWrap table#cartTable tr td div.priceWrap span.fullPrice div#finalAmount span.qty {
   display: inline-block;
 }
 
-div#cartWrap table#cartTable tr td div.priceWrap div#finalAmount span.discountPrice {
+div#cartWrap table#cartTable tr td div.priceWrap span.fullPrice div#finalAmount span.discountPrice {
   display: inline-block;
 }
 
-div#cartWrap table#cartTable tr td div.priceWrap div#finalAmount span.singlePrice {
+div#cartWrap table#cartTable tr td div.priceWrap span.fullPrice div#finalAmount span.singlePrice {
   display: inline-block;
   margin-top: 20px;
   font-size: 16px !important;
   font-weight: 500;
 }
 
-div#cartWrap table#cartTable tr td div.priceWrap span.finalPrice {
+div#cartWrap table#cartTable tr td div.priceWrap span.fullPrice span.finalPrice {
   display: block;
   margin-top: 20px;
   color: #707070;
-  font-size: 110%;
+  font-size: 120%;
   font-weight: 600;
 }
 
@@ -41945,10 +41953,22 @@ div.homeSlider ul.slick-dots {
 div.specTABs {
   display: block;
   margin: 30px 0;
-  font-size: 24px;
-  letter-spacing: 2.4px;
   background-color: transparent !important;
   color: #389178;
+  text-align: center;
+  font-weight: 400;
+}
+
+div.specTABs a.nav-link {
+  font-size: 24px;
+}
+
+div.specTABs div.prodOne h3 {
+  font-size: 16px !important;
+}
+
+div.specTABs i {
+  font-size: 20px;
 }
 
 div.specTABs .tab-content {
@@ -42006,7 +42026,7 @@ div.prodOne {
 div.prodOne h3 {
   display: block;
   margin: 20px;
-  font-size: 120%;
+  font-size: 100%;
   text-align: center;
   font-weight: 400;
   line-height: 100%;
@@ -42036,38 +42056,44 @@ div.prodOne div.prodFooter div.priceWrap {
 
 div.prodOne div.prodFooter div.priceWrap span.fullPrice {
   display: block;
-  color: #389178;
-  text-decoration: line-through;
-  font-size: 90%;
+  width: 100%;
+  margin: 0 0 10px;
 }
 
-div.prodOne div.prodFooter div.priceWrap div#finalAmount {
+div.prodOne div.prodFooter div.priceWrap span.fullPrice span.fullPrice {
+  display: block;
+  color: #389178;
+  text-decoration: line-through;
+  font-size: 100%;
+}
+
+div.prodOne div.prodFooter div.priceWrap span.fullPrice div#finalAmount {
   display: block;
   color: #707070;
-  font-size: 110%;
+  font-size: 120%;
   font-weight: 600;
 }
 
-div.prodOne div.prodFooter div.priceWrap div#finalAmount span.qty {
+div.prodOne div.prodFooter div.priceWrap span.fullPrice div#finalAmount span.qty {
   display: inline-block;
 }
 
-div.prodOne div.prodFooter div.priceWrap div#finalAmount span.discountPrice {
+div.prodOne div.prodFooter div.priceWrap span.fullPrice div#finalAmount span.discountPrice {
   display: inline-block;
 }
 
-div.prodOne div.prodFooter div.priceWrap div#finalAmount span.singlePrice {
+div.prodOne div.prodFooter div.priceWrap span.fullPrice div#finalAmount span.singlePrice {
   display: inline-block;
   margin-top: 20px;
   font-size: 16px !important;
   font-weight: 500;
 }
 
-div.prodOne div.prodFooter div.priceWrap span.finalPrice {
+div.prodOne div.prodFooter div.priceWrap span.fullPrice span.finalPrice {
   display: block;
   margin-top: 20px;
   color: #707070;
-  font-size: 110%;
+  font-size: 120%;
   font-weight: 600;
 }
 
@@ -42159,7 +42185,7 @@ div#productDATA form#addToCart div.priceWrap span.fullPrice {
   display: block;
   color: #FCBE0A;
   text-decoration: line-through;
-  font-size: 110%;
+  font-size: 120%;
   font-weight: 500;
 }
 
@@ -42517,6 +42543,7 @@ div#bannerWrap img {
 .singlePrice {
   color: #389178;
   margin-top: 0;
+  font-size: 16px;
 }
 
 .discountPrice {
