@@ -26,18 +26,18 @@
 			            			<div class="priceWrap" style="color: {{ ($prod->cat_color == null)? '#389178':'$prod->cat_color' }};">
 			            				@if ($prod->prod_price_with_discount != null)
 			            				<div class="row justify-content-center text-secondary">
-			            					Cena:<span class="fullPrice ">{{ number_format($prod->prod_price,0,"",".") }} {{ setting('site.valuta') }}</span>
+			            					<div class="col-12 small">Cena:</div><span class="fullPrice font-weight-bold text-lowercase">{{ number_format($prod->prod_price,0,"",".") }} {{ setting('site.valuta') }}</span>
 			            				</div>
-			            				<div class="row justify-content-center ">
-			            					<span class="discountPrice {{ ($prod->cat_color == null)? 'primary-color':'' }} " style="color: {{ ($prod->cat_color != null)? $prod->cat_color:'' }};">{{ number_format($prod->prod_price_with_discount,0,"",".") }} {{ setting('site.valuta') }}</span>
+			            				<div class="row justify-content-center text-secondary">
+			            					<div class="col-12 small">Cena:</div><span class="discountPrice font-weight-bold text-lowercase {{ ($prod->cat_color == null)? 'primary-color':'' }} " style="color: {{ ($prod->cat_color != null)? $prod->cat_color:'' }};">{{ number_format($prod->prod_price_with_discount,0,"",".") }} {{ setting('site.valuta') }}</span>
 			            				</div>
 						                @else
-											<label class="text-secondary m-0" style="display: block;" align="middle">Cena:</label><span class="singlePrice m-0 " style="color: {{ ($prod->cat_color != null)? $prod->cat_color:'' }};">{{ number_format($prod->prod_price,0,"",".") }} {{ setting('site.valuta') }}</span>
+										<div class="col-12 small text-secondary">Cena:</div><span class="singlePrice m-0 font-weight-bold text-lowercase " style="color: {{ ($prod->cat_color != null)? $prod->cat_color:'' }};">{{ number_format($prod->prod_price,0,"",".") }} {{ setting('site.valuta') }}</span>
 						                @endif
 			            			</div>
 					            </div>
 			              		<div class="row justify-content-center mt-3">
-				              		<button id=""  class="btn btn-rounded buyButton {{ ($prod->cat_color == null)? 'primary-color':'' }} text-white  pl-3 pr-3 pt-1 pb-1" style="background-color: {{ ($prod->cat_color != null)? $prod->cat_color:'' }};"  onclick="CartEvent({{ $prod->prod_id }})">
+				              		<button id="addTo_CART"  class="btn btn-rounded btnBuy {{ ($prod->cat_color == null)? 'primary-color':'' }} text-white  pl-3 pr-3 pt-1 pb-1" style="background-color: {{ ($prod->cat_color != null)? $prod->cat_color:'' }};"  onclick="CartEvent({{ $prod->prod_id }})">
 				              			 @lang('shop.btn_buy')
 				              		</button>
 			              		</div>
