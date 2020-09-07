@@ -2,7 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900");
 @import url('https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500;600;700;800;900&display=swap');
 // Fontawesome
-@import url('https://use.fontawesome.com/releases/v5.11.2/css/all.css');
+@import url("https://use.fontawesome.com/releases/v5.13.0/css/all.css");
 @import '~mdbootstrap-pro/css/bootstrap.css';
 // mdbootstrap pro
 @import '~mdbootstrap-pro/scss/mdb-pro';
@@ -245,6 +245,27 @@ div#contactINFOhead {
     @include contactDisplayHead;
 }
 
+div#langHead .select-wrapper input.select-dropdown {
+    font-size: 12px !important;
+    border-bottom: none !important;
+    margin: 0 !important;
+    line-height: unset !important;
+    height: unset !important;
+    top: 0.3rem !important;
+    text-align: right !important;
+    &:hover {
+        color: $primary-color;
+    }
+    &:active {
+        color: $primary-color;
+    }
+}
+
+div#langHead .select-wrapper span.caret {
+    top: 0.4rem !important;
+    right: 30px !important;
+}
+
 form#siteSearch input[name=PRETRAGA] {
     padding: 0 40px 0 20px;
     background-image: url('/images/header/search - icon - header.svg');
@@ -282,6 +303,20 @@ a.favouritesLNK {
             font-size: 38px;
         }
     }
+}
+
+@media (max-width: 768px) {
+    div#langHead {
+        justify-content: flex-start;
+        display: flex;
+    }
+    div#langHead .select-wrapper input.select-dropdown {
+        text-align: center !important;
+    }
+    div#langHead .select-wrapper span.caret {
+        right: 85px !important;
+    }
+    form#siteSearch input[name=PRETRAGA] {}
 }
 
 // MY CART ---------------------------------------------------------------------------------------------------- //

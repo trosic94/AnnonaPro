@@ -1,4 +1,4 @@
-<div class="col-auto pl-1 pl-sm-2 pr-1 pr-sm-2 mx-4">
+<div class="col-auto pl-1 pl-sm-2 pr-0 pr-sm-2 mx-md-4">
 
 	<div id="myCart" class="row rounded-pill" data-toggle="modal" data-target="#myCartModal">
 
