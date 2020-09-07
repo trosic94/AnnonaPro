@@ -19,6 +19,12 @@
 @mixin img100 {
     width: 100%;
     height: auto;
+    max-height: 220px;
+    max-width: 220px;
+}
+@mixin imgBanner {
+    width: 100%;
+    height: auto;
 }
 
 @mixin scrollable_filter {

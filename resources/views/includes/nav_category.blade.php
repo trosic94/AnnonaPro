@@ -3,7 +3,7 @@
 <!-- Accordion card -->
 <div id="lefNav" class="card">
 
-	<div class="card-header p-0 pb-3 pt-3" role="tab" id="categories">
+	<div class="card-header p-0 pb-3 " role="tab" id="categories">
 	  <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseCAT" aria-expanded="true" aria-controls="collapseCAT">
 	    <h5 id="filterTitle" class="mb-0">
 	      @lang('shop.title_categories') <i class="fas fa-angle-down rotate-icon"></i>

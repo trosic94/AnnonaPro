@@ -1,6 +1,6 @@
 @import url(https://fonts.googleapis.com/css2?family=Lato:wght@300;
 
-400;700;900);@import url(https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500;600;700;800;900&display=swap);@import url(https://use.fontawesome.com/releases/v5.11.2/css/all.css);/*!
+400;700;900);@import url(https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500;600;700;800;900&display=swap);@import url(https://use.fontawesome.com/releases/v5.11.2/css/all.css);@import url(/css/ekko-lightbox.css);/*!
  * Bootstrap v4.5.0 (https://getbootstrap.com/)
  * Copyright 2011-2020 The Bootstrap Authors
  * Copyright 2011-2020 Twitter, Inc.
@@ -37467,6 +37467,8 @@ body {
 .img100 {
   width: 100%;
   height: auto;
+  max-height: 220px;
+  max-width: 220px;
 }
 
 div#pageWrap {
@@ -37482,7 +37484,7 @@ div.mainTitle h1 {
   display: block;
   width: 100%;
   margin: 0 0 30px;
-  color: #33b5e5;
+  color: #707070;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -37909,6 +37911,8 @@ div#cartDATA div#cartPRODrow div#cartTXT div.priceWrap div#finalAmount {
 div#cartDATA div#cartPRODrow div#cartIMG img {
   width: 100%;
   height: auto;
+  max-height: 220px;
+  max-width: 220px;
 }
 
 div#cartDATA div#cartDISCOUNT {
@@ -38087,6 +38091,8 @@ div#cartWrap table#cartTable tr td {
 div#cartWrap table#cartTable tr td img {
   width: 100%;
   height: auto;
+  max-height: 220px;
+  max-width: 220px;
   max-width: 100px;
 }
 
@@ -38759,6 +38765,8 @@ div.prodTABs .tab-pane blockquote {
 div.prodTABs .tab-pane img {
   width: 100%;
   height: auto;
+  max-height: 220px;
+  max-width: 220px;
 }
 
 div#lefNav {
@@ -38846,6 +38854,8 @@ div.staticContent a:hover {
 div.staticContent img {
   width: 100%;
   height: auto;
+  max-height: 220px;
+  max-width: 220px;
 }
 
 div#freeSHIPPING {
@@ -39031,9 +39041,5 @@ div#bannerWrap img {
 
 .buyButton {
   font-size: x-small;
-}
-
-.buyButton:hover {
-  background-color: rgba(56, 145, 120, 0.8);
 }
 

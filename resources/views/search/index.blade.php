@@ -24,66 +24,19 @@
 
 		<div class="col-lg-9">
 			
-			<div class="mainTitle mt-3 mt-lg-0 pl-4 pl-lg-0 pr-4 pr-lg-0">
-				<h1>{{ $currentCAT->name }} {{-- @lang('shop.title_search') --}}</h1>
+{{-- 			<div class="mainTitle mt-3 mt-lg-0 pl-4 pl-lg-0 pr-4 pr-lg-0">
+				<h1>
+					{{ $currentCAT->name }}  --}}
+					{{-- @lang('shop.title_search') --}}
+				{{-- </h1>
 			</div>
-
+ --}}
 			<div class="row pl-4 pl-lg-0 pr-4 pr-lg-0">
 
 			@if (!$searchREZ->isEmpty())
 
 				@foreach ($searchREZ as $key => $prod)
-		        <div class="col-md-3 pl-2 pl-lg-0 pr-2 pr-lg-0 pb-4 d-flex wow animated fadeIn">
-			          <div class="prodOne white pl-0 pr-0 ml-3 mr-3">
-
-			            <div class="imgWrap">
-			            	<div class="row pr-3 pl-3">
-				            	<div class="col">
-				              		<div id="addTo_FAV" class="prod_{{ $prod->prod_id }}" onclick="FavEvent({{ $prod->prod_id }})">
-				                      <i class="far fa-heart fa-2x text-primary {{ (in_array($prod->prod_id,$favLIST))? 'd-none':'d-block' }}"></i>
-				                      <i class="fas fa-heart fa-2x text-primary {{ (in_array($prod->prod_id,$favLIST))? 'd-block':'d-none' }}"></i>
-				              		</div>
-				              	</div>
-				              	<div class="col">
-					            	@if ($prod->sop_count > 0)
-					            		<div class="akcijaNOTE">@lang('shop.title_action')</div>
-					            	@endif
-					            </div>
-			            	</div>
-			            	
-			              <a href="{{ ($prod->pcat_id != 3)? trans('shop.slug_url_products'):'' }}/{{ $prod->pcat_slug }}/{{ $prod->cat_slug }}/{{ $prod->prod_slug }}"><img src="/storage/products/{{ ($prod->prod_image != null)? $prod->prod_image:'no_image.jpg' }}" alt="{{ $prod->prod_title }}" class="img100"></a>
-			            </div>
-
-			            <h3><a href="{{ ($prod->pcat_id != 3)? trans('shop.slug_url_products'):'' }}/{{ $prod->pcat_slug }}/{{ $prod->cat_slug }}/{{ $prod->prod_slug }}">{{ $prod->prod_title }}</a></h3>
-
-			            <div class="container productCardBottom">
-			            		<div class="row justify-content-center">
-			            			<div class="priceWrap" style="color: {{ ($prod->cat_color == null)? '#389178':'$prod->cat_colo' }};">
-			            				@if ($prod->prod_price_with_discount != null)
-			            				<div class="row justify-content-center text-secondary">
-			            					Cena:<span class="fullPrice ">{{ number_format($prod->prod_price,0,"",".") }} {{ setting('site.valuta') }}</span>
-			            				</div>
-			            				<div class="row justify-content-center ">
-			            					<span class="discountPrice {{ ($prod->cat_color == null)? 'primary-color':'' }} " style="color: {{ ($prod->cat_color != null)? $prod->cat_color:'' }};">{{ number_format($prod->prod_price_with_discount,0,"",".") }} {{ setting('site.valuta') }}</span>
-			            				</div>
-						                @else
-											<label class="text-secondary m-0" style="display: block;" align="middle">Cena:</label><span class="singlePrice m-0 " style="color: {{ ($prod->cat_color != null)? $prod->cat_color:'' }};">{{ number_format($prod->prod_price,0,"",".") }} {{ setting('site.valuta') }}</span>
-						                @endif
-			            			</div>
-					            </div>
-			              		<div class="row justify-content-center mt-3">
-				              		<div id=""  class="rounded-pill buyButton {{ ($prod->cat_color == null)? 'primary-color':'' }} text-white  pl-3 pr-3 pt-1 pb-1" style="background-color: {{ ($prod->cat_color != null)? $prod->cat_color:'' }};"  onclick="CartEvent({{ $prod->prod_id }})">
-				              			 @lang('shop.btn_buy')
-				              		</div>
-			              		</div>
-								<div class="row justify-content-center mt-3 ">
-									<span class="border {{ ($prod->cat_color == null)? 'primary-color':'' }}  col-12 border-5" style="background-color: {{ ($prod->cat_color != null)? $prod->cat_color:'' }};"></span>
-								</div>
-			              		
-			            </div>
-
-			          </div>
-		        </div>
+		        	@include('layouts.product', ['prod' => $prod])
 				@endforeach
 
 			</div>
