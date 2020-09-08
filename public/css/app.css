@@ -41055,11 +41055,11 @@ ul.slick-dots li button {
 }
 
 ul.slick-dots li button:hover {
-  background-color: #FCBE0A;
+  background-color: #389178;
 }
 
 ul.slick-dots li.slick-active button {
-  background-color: #FCBE0A;
+  background-color: #389178;
 }
 
 div#paginateBlock {
@@ -41965,10 +41965,24 @@ div.specTABs a.nav-link {
 
 div.specTABs div.prodOne h3 {
   font-size: 16px !important;
+  color: #389178;
+}
+
+div.specTABs div.prodOne {
+  outline: 0;
+  border: none;
+  -moz-outline-style: none;
+}
+
+div.specTABs div.imgWrap {
+  outline: 0;
+  border: none;
+  -moz-outline-style: none;
 }
 
 div.specTABs i {
   font-size: 20px;
+  outline: none !important;
 }
 
 div.specTABs .tab-content {
@@ -41980,29 +41994,42 @@ div.specTABs .nav {
   letter-spacing: 1px;
 }
 
-div.specTABs .nav .active {
+div.specTABs .nav .nav .active {
   color: #389178;
+  outline: none !important;
 }
 
-div.specTABs .tab-content {
+div.specTABs .nav .tab-content {
   display: flex;
   flex-direction: column;
 }
 
-div.specTABs .tab-content > .tab-pane {
+div.specTABs .nav .tab-content > .tab-pane {
   display: block !important;
   height: 0;
 }
 
-div.specTABs .tab-content > .active {
+div.specTABs .nav .tab-content > .active {
   display: block !important;
   height: auto;
 }
 
-div.specTABs ul.slick-dots {
+div.specTABs .nav ul.slick-dots {
   display: block;
   width: 100%;
   margin: 20px 0 !important;
+}
+
+div.specTABs .nav a {
+  color: #389178;
+}
+
+div.specTABs a:active,
+div.specTABs a:focus {
+  outline: 0;
+  border: none;
+  -moz-outline-style: none;
+  color: #389178;
 }
 
 div#row_1 {
