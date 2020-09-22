@@ -42152,12 +42152,17 @@ div.imgWrap div.akcijaNOTE {
   display: block;
   position: absolute;
   z-index: 200;
-  right: 0;
+  right: -8px;
   padding: 2px 15px 3px;
   color: #fff;
-  text-transform: uppercase;
-  background-color: #dc3545;
-  font-size: 80%;
+  text-transform: lowercase;
+  background-color: #389178;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+  font-size: 12px;
+  transform: rotate(90deg);
+  transform-origin: bottom;
+  top: 8px;
 }
 
 div.imgWrap img {

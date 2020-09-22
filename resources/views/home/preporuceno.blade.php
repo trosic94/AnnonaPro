@@ -31,7 +31,10 @@
                   </div>
                 </div>
                 <div class="col">
-              </div>
+                  @if ($tab1Spec->sop_count > 0)
+                    <div class="akcijaNOTE" style="background-color: {{ ($tab1Spec->cat_color != null)? $tab1Spec->cat_color:'' }};">@lang('shop.title_action')</div>
+                  @endif
+                </div>
             </div>
                   
                   <a href="{{ ($tab1Spec->pcat_id != 3)? trans('shop.slug_url_products'):'' }}/{{ $tab1Spec->pcat_slug }}/{{ $tab1Spec->cat_slug }}/{{ $tab1Spec->p_slug }}"><img src="/storage/products/{{ ($tab1Spec->p_image != null)? $tab1Spec->p_image:'no_image.jpg' }}" alt="{{ $tab1Spec->p_title }}" class="img100"></a>
@@ -42,17 +45,19 @@
 
             <div class="container productCardBottom">
               <div class="row justify-content-center">
-                <div class="priceWrap" style="color: {{ ($tab1Spec->cat_color == null)? '#389178':'$tab1Spec->cat_color' }};">
+                <div class="priceWrap" style="color: {{ ($tab1Spec->cat_color != null)? $tab1Spec->cat_color:'' }};">
                   @if ($tab1Spec->p_product_price_with_discount != null)
-                  <div class="row justify-content-center text-secondary">
-                    <div class="col-12 small">Cena:</div><span class="fullPrice font-weight-bold text-lowercase">{{ number_format($tab1Spec->p_product_price,0,"",".") }} {{ setting('site.valuta') }}</span>
-                  </div>
-                  <div class="row justify-content-center text-secondary">
-                    <div class="col-12 small">Cena:</div><span class="discountPrice font-weight-bold text-lowercase {{ ($tab1Spec->cat_color == null)? 'primary-color':'' }} " style="color: {{ ($tab1Spec->cat_color != null)? $tab1Spec->cat_color:'' }};">{{ number_format($tab1Spec->p_product_price_with_discount,0,"",".") }} {{ setting('site.valuta') }}</span>
+                  <div class="row justify-content-center">
+                    <div class="col-12 small text-center text-secondary">Cena:</div>
+                    <span class="fullPrice font-weight-bold text-lowercase small col-12 text-right mt-n3">{{ number_format($tab1Spec->p_product_price,0,"",".") }} {{ setting('site.valuta') }}</span>
+                    <span class="discountPrice font-weight-bold text-lowercase col-12 text-center" style="color: {{ ($tab1Spec->cat_color != null)? $tab1Spec->cat_color:'' }};">{{ number_format($tab1Spec->p_product_price_with_discount,0,"",".") }} {{ setting('site.valuta') }}</span>
                   </div>
                     @else
-                      <div class="col-12 small text-secondary">Cena:</div><span class="singlePrice m-0 font-weight-bold text-lowercase " style="color: {{ ($tab1Spec->cat_color != null)? $tab1Spec->cat_color:'' }};">{{ number_format($tab1Spec->p_product_price,0,"",".") }} {{ setting('site.valuta') }}</span>
-                    @endif
+                    <div class="row justify-content-center">
+                      <div class="col-12 small text-center text-secondary">Cena:</div>
+                      <span class="singlePrice m-0 font-weight-bold text-lowercase " style="color: {{ ($tab1Spec->cat_color != null)? $tab1Spec->cat_color:'' }};">{{ number_format($tab1Spec->p_product_price,0,"",".") }} {{ setting('site.valuta') }}</span>
+										</div>
+										@endif
                 </div>
               </div>
                 <div class="row justify-content-center mt-3">

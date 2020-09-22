@@ -8,28 +8,24 @@
 
 				<div class="col-12 pl-0 pr-0">
 					<div class="row">
-						<div id="contactINFOhead" class="col-12 col-md-8 small pb-1 mb-n1 text-muted">
+						<div id="contactINFOhead" class="col-10 small pb-1 mb-n1 text-muted">
 							{!! setting('site.kontakt') !!}
 						</div>
-						<div id="contactINFOhead" class="col-6 col-md-2 small text-right pt-2 pb-0 mb-n1">
-							<div class="row">
-								<div class="col-6 text-right pr-2">
-									<a href="{!! setting('site.facebook') !!}" target="_blank"><i class="fab fa-facebook-f text-primary {{ (setting('site.facebook') == '')? 'd-none':'d-block' }}"></i></a>
-								</div>	
-								<div class="col-6 text-left pl-2">
-									<a href="{!! setting('site.instagram') !!}" target="_blank"><i class="fab fa-instagram text-primary {{ (setting('site.instagram') == '')? 'd-none':'d-block' }}"></i></a>
-								</div>
+						<div id="contactINFOhead" class="col-2 small  pt-2 pb-1">
+							<div class="row float-right pr-4">
+									<a href="{!! setting('site.facebook') !!}" target="_blank"><i class="fab fa-facebook-f text-primary pr-2 {{ (setting('site.facebook') == '')? 'd-none':'d-block' }}"></i></a>
+									<a href="{!! setting('site.instagram') !!}" target="_blank"><i class="fab fa-instagram text-primary pl-2 {{ (setting('site.instagram') == '')? 'd-none':'d-block' }}"></i></a>
 							</div>
 						</div>
-						<div id="langHead" class="col-6 col-md-2 small text-left pb-md-0 pb-2 pr-4 ">
-							{{-- {!! setting('site.jezik') !!} --}}
+						{{-- <div id="langHead" class="col-6 col-md-2 small text-left pb-md-0 pb-2 pr-4 ">
+						
 							<select class="mdb-select">
 								<option value="sr" data-icon="https://cdn.countryflags.com/thumbs/serbia/flag-round-250.png" class="rounded-circle">
 								  SRB</option>
 								<option value="en" data-icon="https://cdn.countryflags.com/thumbs/united-states-of-america/flag-round-250.png" class="rounded-circle">
 								  ENG</option>
 							  </select>
-						</div>	
+						</div>	 --}}
 					</div>
 					<div class="border-bottom mb-3 p-0"></div>
 				</div>

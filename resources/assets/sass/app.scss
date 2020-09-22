@@ -927,12 +927,21 @@
             display: block;
             position: absolute;
             z-index: 200;
-            right: 0;
+            right: -8px;
             padding: 2px 15px 3px;
             color: $white;
-            text-transform: uppercase;
-            background-color: $red;
-            font-size: 80%;
+            text-transform: lowercase;
+            background-color: $primary-color;
+            border-top-right-radius: 8px;
+            border-top-left-radius: 8px;
+            font-size: 12px;
+            -webkit-transform: rotate(90deg);
+            -moz-transform: rotate(90deg);
+            -o-transform: rotate(90deg);
+            -ms-transform: rotate(90deg);
+            transform: rotate(90deg);
+            transform-origin: bottom;
+            top: 8px;
         }
         img {
             display: block;
