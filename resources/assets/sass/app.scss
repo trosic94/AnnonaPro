@@ -42,7 +42,7 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
-            font-size: 180%;
+            font-size: 130%;
         }
     }
     
@@ -987,13 +987,21 @@
         .nav {
             text-transform: uppercase;
             letter-spacing: 1px;
+            background-color: transparent !important;
+        }
+        .nav .nav-link{
+            color: $secondary-color;
         }
         .nav .active {
-            background-color: $red !important;
+            background-color: transparent !important;
+            color: $primary-color !important;
+            border-bottom: 2px solid $primary-color;
         }
+
         .tab-pane {
-            padding: 30px;
-            color: $white;
+            //padding: 30px;
+            padding-top: 30px;
+            color: $secondary-color;
             p {
                 display: block;
                 margin: 0 0 10px;
@@ -1027,6 +1035,11 @@
             img {
                 @include img100;
             }
+        }
+    }
+    div.prodDetails{
+        .annonaOrange{
+            color: $annona-orange;
         }
     }
     

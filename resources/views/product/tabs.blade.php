@@ -1,13 +1,13 @@
 	
 	@if ($productDATA->prod_body != '' || $productDATA->prod_specification != '' || $productDATA->prod_video != '')
 
-	<div class="row mt-5">
+	<div class="row ">
 
-		<div class="col-xl-12">
+		<div class="col-xl-12 p-0">
 
 			<div class="prodTABs">
 
-				<ul class="nav nav-tabs nav-justified md-tabs blue ml-0 mr-0 p-0 rounded-0 z-depth-0" id="tabsProduct" role="tablist">
+				<ul class="nav nav-tabs  md-tabs blue ml-0 mr-0 p-0 rounded-0 z-depth-0" id="tabsProduct" role="tablist">
 
 					@if ($productDATA->prod_body != '')
 					<li class="nav-item">
@@ -59,6 +59,46 @@
 
 		</div>
 
+	</div>
+	<div class="row prodDetails mb-2">
+		<div class="d-inline">
+			<label class="text-secondary">Zapremina:</label><label class="annonaOrange">10ml</label>
+		</div>
+		<div class="d-inline ml-5">
+			<label class="text-secondary">Dodaj u listu želja:</label>
+			<div id="addTo_FAV" class="prod_{{ $productDATA->prod_id }}" onclick="FavEvent({{ $productDATA->prod_id }})">
+              <i class="far fa-heart text-primary {{ (in_array($productDATA->prod_id,$favLIST))? 'd-none':'d-block' }}"></i>
+              <i class="fas fa-heart text-primary {{ (in_array($productDATA->prod_id,$favLIST))? 'd-block':'d-none' }}"></i>
+      		</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xl-12 p-0">
+			<div class="col-md-4 col-xs-12">
+				<div class="row justify-content-start">
+					<div class="priceWrap" style="color: {{ ($productDATA->cat_color == null)? '#389178':'$prod->cat_color' }};">
+						@if ($productDATA->prod_price_with_discount != null)
+						<div class="row justify-content-center text-secondary">
+							<div class=" small">Cena:</div><span class="fullPrice font-weight-bold text-lowercase">{{ number_format($productDATA->prod_price,0,"",".") }} {{ setting('site.valuta') }}</span>
+						</div>
+						<div class="row justify-content-center text-secondary">
+							<div class=" small">Cena:</div><span class="discountPrice font-weight-bold text-lowercase {{ ($productDATA->cat_color == null)? 'primary-color':'' }} " style="color: {{ ($productDATA->cat_color != null)? $productDATA->cat_color:'' }};">{{ number_format($productDATA->prod_price_with_discount,0,"",".") }} {{ setting('site.valuta') }}</span>
+						</div>
+		                @else
+						<div class="d-inline small text-secondary">Cena:</div><span class="singlePrice m-0 font-weight-bold text-lowercase " style="color: {{ ($productDATA->cat_color != null)? $productDATA->cat_color:'' }};">{{ number_format($productDATA->prod_price,0,"",".") }} {{ setting('site.valuta') }}</span>
+		                @endif
+					</div>
+		        </div>
+		  		<div class="row justify-content-start mt-3">
+		      		<button id="addTo_CART"  class="btn btn-rounded btnBuy {{ ($productDATA->cat_color == null)? 'primary-color':'' }} m-0 text-white  pl-3 pr-3 pt-1 pb-1" style="background-color: {{ ($productDATA->cat_color != null)? $productDATA->cat_color:'' }};"  onclick="CartEvent({{ $productDATA->prod_id }})">
+		      			 @lang('shop.btn_buy')
+		      		</button>
+		  		</div>
+				{{-- <div class="row justify-content-center mt-3 ">
+					<span class="border {{ ($productDATA->cat_color == null)? 'primary-color':'' }}  col-12 border-5" style="background-color: {{ ($productDATA->cat_color != null)? $productDATA->cat_color:'' }};"></span>
+				</div> --}}
+			</div>
+		</div>
 	</div>
 
 	@endif

@@ -40917,7 +40917,7 @@ div.mainTitle h1 {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
-  font-size: 180%;
+  font-size: 130%;
 }
 
 .alignElementToBottom {
@@ -42255,15 +42255,22 @@ div.prodTABs .tab-content {
 div.prodTABs .nav {
   text-transform: uppercase;
   letter-spacing: 1px;
+  background-color: transparent !important;
+}
+
+div.prodTABs .nav .nav-link {
+  color: #707070;
 }
 
 div.prodTABs .nav .active {
-  background-color: #dc3545 !important;
+  background-color: transparent !important;
+  color: #389178 !important;
+  border-bottom: 2px solid #389178;
 }
 
 div.prodTABs .tab-pane {
-  padding: 30px;
-  color: #fff;
+  padding-top: 30px;
+  color: #707070;
 }
 
 div.prodTABs .tab-pane p {
@@ -42305,6 +42312,10 @@ div.prodTABs .tab-pane img {
   height: auto;
   max-height: 220px;
   max-width: 220px;
+}
+
+div.prodDetails .annonaOrange {
+  color: #F48473;
 }
 
 div#lefNav {

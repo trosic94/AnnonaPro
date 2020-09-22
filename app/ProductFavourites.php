@@ -55,6 +55,7 @@ class ProductFavourites extends Model
                                 'PCAT.id as pcat_id',
                                 'PCAT.name as pcat_name',
                                 'PCAT.slug as pcat_slug',
+                                'PCAT.cat_color as cat_color',
                                 'M.id as mnf_id',
                                 'M.name as mnf_name',
                                 'M.import_id as mnf_import_id',

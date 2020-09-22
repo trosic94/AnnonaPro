@@ -28,6 +28,10 @@ Auth::routes();
 	Route::get('search', 'SearchController@search');
 	Route::post('search', 'SearchController@search');
 
+
+	//edukacija
+	Route::get('edukacija', 'EdukacijaController@index');
+
 	//CART
 	Route::get('cart', 'ProductController@cart');
 	Route::post('add-to-cart', 'ProductController@addToCart');
