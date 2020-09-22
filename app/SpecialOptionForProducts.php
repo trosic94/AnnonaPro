@@ -18,7 +18,7 @@ class SpecialOptionForProducts extends Model
     								'SOP.special_options_id as special_options_id',
     								'SO.title as title',
     								'SO.description as description',
-    								'SO.image as image'
+                                    'SO.image as image'
     							)
     							->get();
 
@@ -60,9 +60,13 @@ class SpecialOptionForProducts extends Model
                                                 'PCAT.id as pcat_id',
                                                 'PCAT.name as pcat_name',
                                                 'PCAT.slug as pcat_slug',
-                                                'PCAT.cat_color as cat_color'
+                                                'PCAT.cat_color as cat_color',
+                                                DB::raw('count(SOP.product_id) as sop_count')
                                             )
                                             ->where('P.status',1)
+                                            ->groupBy('SOPM.special_options_id','SO.title','P.id','P.sku','P.title','P.slug','P.category_id','P.manufacturer_id','P.excerpt','P.image','P.status',
+                                            'P.product_price','P.product_price_with_discount','P.product_discount','P.product_retail_price','P.product_vat','CAT.id','CAT.name','CAT.slug',
+                                            'CAT.cat_color','PCAT.id','PCAT.name','PCAT.slug','PCAT.cat_color')
                                             ->get();
 
         return $SPECproductOptions_ByOPT_ID;

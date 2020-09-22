@@ -13,12 +13,12 @@
 
 Auth::routes();
 
-	Route::get('/', function () {
-	    return view('welcome');
-	});
+	// Route::get('/', function () {
+	//     return view('welcome');
+	// });
 
 	Route::get('/', 'HomeController@index');
-	//Route::get('/home', 'HomeController@index');
+	Route::get('/home', 'HomeController@index');
 
 	Route::get('products', 'CategoryController@index');
 	Route::get('products/{categories}', 'CategoryController@categories')->where('categories','^[a-zA-Z0-9-_\/]+$');
