@@ -5,12 +5,13 @@
 
 	<form id="prodSearch" method="POST">
 
-	@include ('includes.nav_category')
+	@include ('includes.edu_category')
 	{{-- @include ('includes.nav_manufacturer') --}}
 	{{-- @include ('includes.nav_available') --}}
-	@include ('includes.nav_price')
+{{-- 	@include ('includes.nav_price') --}}
 
-	<input type="hidden" name="CATCurrent" value="{{ $CATCurrent }}">
+
+	{{-- <input type="hidden" name="CATCurrent" value="{{ $CATCurrent }}"> --}}
 
 	</form>
 

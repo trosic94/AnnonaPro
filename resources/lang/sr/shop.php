@@ -206,6 +206,9 @@ return [
     'slug_url_products' => '/products',
     'slug_title_products' => 'Proizvodi',
 
+    'slug_url_edukacija' => '/edukacija',
+    'slug_title_edukacija' => 'Edukacija',
+
 
 
     /* PRINT (ŠTAMPA) ------------------------------------------------------------------*/
