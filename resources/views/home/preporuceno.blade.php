@@ -34,6 +34,12 @@
                   @if ($tab1Spec->sop_count > 0)
                     <div class="akcijaNOTE" style="background-color: {{ ($tab1Spec->cat_color != null)? $tab1Spec->cat_color:'' }};">@lang('shop.title_action')</div>
                   @endif
+                  @if ($tab1Spec->b_title != '')
+                    <div class="bedz" style="background-color: {{ ($tab1Spec->cat_color != null)? $tab1Spec->cat_color:'' }};">
+                      {{ $tab1Spec->b_title }} 
+                      <div class="text-center" style="font-size:12px;font-weight:normal;margin-top:-10px;">poena</div>
+                    </div>
+                  @endif
                 </div>
             </div>
                   
@@ -48,8 +54,8 @@
                 <div class="priceWrap" style="color: {{ ($tab1Spec->cat_color != null)? $tab1Spec->cat_color:'' }};">
                   @if ($tab1Spec->p_product_price_with_discount != null)
                   <div class="row justify-content-center">
-                    <div class="col-12 small text-center text-secondary">Cena:</div>
-                    <span class="fullPrice font-weight-bold text-lowercase small col-12 text-right mt-n3">{{ number_format($tab1Spec->p_product_price,0,"",".") }} {{ setting('site.valuta') }}</span>
+                    <div class="col-6 small text-right text-secondary pr-1">Cena:</div>
+                    <span class="fullPrice font-weight-bold text-lowercase small col-6 text-left pl-0">{{ number_format($tab1Spec->p_product_price,0,"",".") }} {{ setting('site.valuta') }}</span>
                     <span class="discountPrice font-weight-bold text-lowercase col-12 text-center" style="color: {{ ($tab1Spec->cat_color != null)? $tab1Spec->cat_color:'' }};">{{ number_format($tab1Spec->p_product_price_with_discount,0,"",".") }} {{ setting('site.valuta') }}</span>
                   </div>
                     @else

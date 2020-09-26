@@ -315,6 +315,32 @@
                         </div>
                     </div>
 
+                    <!-- ### PROUCT BADGES ### -->
+                    <div class="panel panel-bordered panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><i class="icon wb-image"></i> @lang('shop_admin.title_product_badges')</h3>
+                            <div class="panel-actions">
+                                <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+
+                            <p>@lang('shop_admin.title_product_badges_description')</p>
+
+                            <div class="form-group">
+
+                            <select class="form-control select2 select2-hidden-accessible" name="product_badge">
+                                <option value="">@lang('shop_admin.title_choose')</option>
+                                @foreach ($productBadges as $Bkey => $badge)
+                                    <option value="{{ $badge->b_id }}" {{ ($badgeForProduct && $badgeForProduct->bp_badge_id == $badge->b_id)? 'selected':'' }}>{{ $badge->b_title }} ({{ $badge->b_description }})</option>
+                                @endforeach
+                            </select>
+
+                            </div>
+
+                        </div>
+                    </div>
+
                     <!-- ### SPECIOAL OPTIONS ### -->
                     <div class="panel panel-bordered panel-info">
                         <div class="panel-heading">
@@ -373,9 +399,7 @@
 
                             @if(isset($dataTypeContent->video))
                                 <div class="ytEmbedContainter mar_b_10">
-                                    <iframe width="100%" height="auto"
-                                    src="https://www.youtube.com/embed/{{ $dataTypeContent->video }}">
-                                    </iframe>
+                                    <iframe width="100%" height="auto" src="https://www.youtube.com/embed/{{ $dataTypeContent->video }}"></iframe>
                                 </div>
                             @endif
 
@@ -421,7 +445,7 @@
 @php
 //if ($edit):
     // echo '<pre>';
-    // print($specialDisplayOptions);
+    // print($badgeForProduct);
     // echo '</pre>';
 //endif;
 @endphp

@@ -57,7 +57,7 @@
                                     <label for="password-confirm">@lang('shop.register_password_repeat')*</label>
                                 </div>
 
-                                <button type="submit" class="btn btn-info btn-block my-4">@lang('shop.btn_confirm')</button>
+                                <button type="submit" class="btn btn-primary btn-block my-4">@lang('shop.btn_confirm')</button>
 
                                 </form>
 

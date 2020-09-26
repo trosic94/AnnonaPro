@@ -1,12 +1,20 @@
-<div class="productNAV">
+    <div class="productNAV mt-n1">
 
-	<div class="container-fluid pr-0">
+        <div class="container-fluid pr-0 pl-2">
 
-		<div class="row text-right pt-3 d-flex justify-content-end">
+            <div class="row text-lg-right text-sm-center d-flex justify-content-lg-end justify-content-sm-center">
+                <nav class="navbar navbar-light navbar-expand-md shadow-none py-lg-0">
+                    <button class="navbar-toggler first-button" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+                    aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <div class="animated-icon1"><span></span><span></span><span></span></div>
+                  </button>
+                    {{-- 
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button> --}}
+                    <div class="col-12 collapse navbar-collapse pr-lg-0" id="navbarTogglerDemo02">
 
-				<div class="col-xl-8 col-lg-12">
-
-				<ul class="nav d-flex justify-content-end">
+                        <ul class="navbar-nav">
 
 @php
 
@@ -51,7 +59,7 @@
     @endphp
 
 				    <li class="{{ $isActive }} nav-item col-auto px-3 py-2">
-				        <a href="{{ url($item->link()) }}" target="{{ $item->target }}" class="" style="{{ $styles }}">
+				        <a href="{{ url($item->link()) }}" target="{{ $item->target }}" class="nav-link" style="{{ $styles }}; background-color: unset;">
 				            {!! $icon !!}
 				            <span class="ml-2">{{ $item->title }}</span>
 				        </a>
@@ -60,7 +68,8 @@
 
 				</ul>
 
-				</div>
+                </div>
+                </nav>
 
 
 		</div>

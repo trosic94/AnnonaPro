@@ -20,6 +20,8 @@ class Product extends Model
         $productDATA = DB::table('products as PROD')
                             ->join('categories as CAT','PROD.category_id','CAT.id')
                             ->join('manufacturer as M','PROD.manufacturer_id','M.id')
+                            ->leftJoin('badges_products as BP','BP.product_id','PROD.id')
+                            ->leftJoin('badges as B','B.id','BP.badge_id')
                             ->where('PROD.id',$productID)
                             ->select(
                                 'PROD.id as prod_id',
@@ -52,7 +54,10 @@ class Product extends Model
                                 'CAT.use_product_price as cat_use_product_price',
                                 'M.id as mnf_id',
                                 'M.name as mnf_name',
-                                'M.import_id as mnf_import_id'
+                                'M.import_id as mnf_import_id',
+                                'B.title as b_title',
+                                'B.color as b_color',
+                                'B.text_color as b_text_color'
                             )
                             ->first();
 
@@ -67,6 +72,8 @@ class Product extends Model
                             ->leftJoin('categories as PCAT','CAT.parent_id','PCAT.id')
                             ->join('manufacturer as M','PROD.manufacturer_id','M.id')
                             ->leftJoin('special_options_products as SOP','SOP.product_id','PROD.id')
+                            ->leftJoin('badges_products as BP','BP.product_id','PROD.id')
+                            ->leftJoin('badges as B','B.id','BP.badge_id')
                             ->where('PROD.slug',$productSLUG)
                             ->select(
                                 'PROD.id as prod_id',
@@ -95,7 +102,7 @@ class Product extends Model
                                 'CAT.slug as cat_slug',
                                 'CAT.cat_image as cat_image',
                                 'CAT.published as cat_published',
-                                'CAT.cat_color as cat_color',
+                                'PCAT.cat_color as cat_color',
                                 'CAT.use_product_price as cat_use_product_price',
                                 'PCAT.id as pcat_id',
                                 'PCAT.name as pcat_name',
@@ -103,6 +110,9 @@ class Product extends Model
                                 'M.id as mnf_id',
                                 'M.name as mnf_name',
                                 'M.import_id as mnf_import_id',
+                                'B.title as b_title',
+                                'B.color as b_color',
+                                'B.text_color as b_text_color',
                                 DB::raw('count(SOP.product_id) as sop_count')
                             )
                             ->groupBy('PROD.id')
@@ -118,6 +128,8 @@ class Product extends Model
                             ->leftJoin('categories as PCAT','CAT.parent_id','PCAT.id')
                             ->join('manufacturer as M','PROD.manufacturer_id','M.id')
                             ->leftJoin('special_options_products as SOP','SOP.product_id','PROD.id')
+                            ->leftJoin('badges_products as BP','BP.product_id','PROD.id')
+                            ->leftJoin('badges as B','B.id','BP.badge_id')
                             ->where('PROD.status',1)
                             ->where('PROD.product_price','!=',0)
                             ->select(
@@ -147,7 +159,7 @@ class Product extends Model
                                 'CAT.slug as cat_slug',
                                 'CAT.cat_image as cat_image',
                                 'CAT.published as cat_published',
-                                'CAT.cat_color as cat_color',
+                                'PCAT.cat_color as cat_color',
                                 'CAT.use_product_price as cat_use_product_price',
                                 'PCAT.id as pcat_id',
                                 'PCAT.name as pcat_name',
@@ -155,6 +167,9 @@ class Product extends Model
                                 'M.id as mnf_id',
                                 'M.name as mnf_name',
                                 'M.import_id as mnf_import_id',
+                                'B.title as b_title',
+                                'B.color as b_color',
+                                'B.text_color as b_text_color',
                                 DB::raw('count(SOP.product_id) as sop_count')
                             )
                             ->groupBy('PROD.id')
@@ -170,6 +185,8 @@ class Product extends Model
                             ->leftJoin('categories as PCAT','CAT.parent_id','PCAT.id')
                             ->join('manufacturer as M','PROD.manufacturer_id','M.id')
                             ->leftJoin('special_options_products as SOP','SOP.product_id','PROD.id')
+                            ->leftJoin('badges_products as BP','BP.product_id','PROD.id')
+                            ->leftJoin('badges as B','B.id','BP.badge_id')
                             ->where('PROD.status',1)
                             ->where('PROD.product_price','!=',0)
                             ->where('CAT.parent_id',$catID)
@@ -200,7 +217,7 @@ class Product extends Model
                                 'CAT.slug as cat_slug',
                                 'CAT.cat_image as cat_image',
                                 'CAT.published as cat_published',
-                                'CAT.cat_color as cat_color',
+                                'PCAT.cat_color as cat_color',
                                 'CAT.use_product_price as cat_use_product_price',
                                 'PCAT.id as pcat_id',
                                 'PCAT.name as pcat_name',
@@ -208,6 +225,9 @@ class Product extends Model
                                 'M.id as mnf_id',
                                 'M.name as mnf_name',
                                 'M.import_id as mnf_import_id',
+                                'B.title as b_title',
+                                'B.color as b_color',
+                                'B.text_color as b_text_color',
                                 DB::raw('count(SOP.product_id) as sop_count')
                             )
                             ->groupBy('PROD.id')
@@ -223,6 +243,8 @@ class Product extends Model
                             ->leftJoin('categories as PCAT','CAT.parent_id','PCAT.id')
                             ->join('manufacturer as M','PROD.manufacturer_id','M.id')
                             ->leftJoin('special_options_products as SOP','SOP.product_id','PROD.id')
+                            ->leftJoin('badges_products as BP','BP.product_id','PROD.id')
+                            ->leftJoin('badges as B','B.id','BP.badge_id')
                             ->where('PROD.status',1)
                             ->where('PROD.product_price','!=',0)
                             ->where('PROD.category_id',$catID)
@@ -253,7 +275,7 @@ class Product extends Model
                                 'CAT.slug as cat_slug',
                                 'CAT.cat_image as cat_image',
                                 'CAT.published as cat_published',
-                                'CAT.cat_color as cat_color',
+                                'PCAT.cat_color as cat_color',
                                 'CAT.use_product_price as cat_use_product_price',
                                 'PCAT.id as pcat_id',
                                 'PCAT.name as pcat_name',
@@ -261,6 +283,9 @@ class Product extends Model
                                 'M.id as mnf_id',
                                 'M.name as mnf_name',
                                 'M.import_id as mnf_import_id',
+                                'B.title as b_title',
+                                'B.color as b_color',
+                                'B.text_color as b_text_color',
                                 DB::raw('count(SOP.product_id) as sop_count')
                             )
                             ->groupBy('PROD.id')

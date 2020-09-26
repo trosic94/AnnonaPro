@@ -26,6 +26,8 @@ use App\AttributesCategory;
 use App\AttributesProduct;
 use App\SpecialOption;
 use App\SpecialOptionForProducts;
+use App\Badge;
+use App\BadgeProducts;
 
 
 class V_ProductController extends VoyagerBaseController
@@ -225,9 +227,13 @@ class V_ProductController extends VoyagerBaseController
         // Selected Special Display Options
         $specialDisplayOptionsForProduct = SpecialOptionForProducts::SelectedSpecialDisplayOptionsForProduct($id);
 
+        // Selected Product Badge
+        $badgeForProduct = BadgeProducts::badgeByProductID($id);
+
 
         return Voyager::view($view, compact('dataType', 'dataTypeContent', 'isModelTranslatable', 'isSoftDeleted',
-                                            'productDATA','productAttributes','specialDisplayOptionsForProduct'));
+                                            'productDATA','productAttributes','specialDisplayOptionsForProduct',
+                                            'badgeForProduct'));
     }
 
     //***************************************
@@ -305,9 +311,19 @@ class V_ProductController extends VoyagerBaseController
         // Selected Special Display Options
         $specialDisplayOptionsForProduct = SpecialOptionForProducts::where('product_id',$id)->pluck('special_options_id')->toArray();
 
+        // All Product Badges
+        $productBadges = Badge::allBadges();
+
+        // Selected Product Badge
+        $badgeForProduct = BadgeProducts::badgeByProductID($id);
+
 
         return Voyager::view($view, compact('dataType', 'dataTypeContent', 'isModelTranslatable',
-                                                'allAttributesForProduct','odabraneVrednostiAtributaZaProizvod','productCategories_SEL','allManufacturers','specialDisplayOptions','specialDisplayOptionsForProduct'));
+                                                'allAttributesForProduct','odabraneVrednostiAtributaZaProizvod',
+                                                'productCategories_SEL',
+                                                'allManufacturers',
+                                                'specialDisplayOptions','specialDisplayOptionsForProduct',
+                                                'productBadges','badgeForProduct'));
     }
 
     // POST BR(E)AD
@@ -402,11 +418,18 @@ class V_ProductController extends VoyagerBaseController
 
         // Selected Special Display Options
         $specialDisplayOptionsForProduct = array();
+
+        // All Product Badges
+        $productBadges = Badge::allBadges();
+
+        // Selected Product Badge
+        $badgeForProduct = array();
         
 
         return Voyager::view($view, compact('dataType', 'dataTypeContent', 'isModelTranslatable',
                                             'productCategories_SEL','allManufacturers',
-                                            'specialDisplayOptions','specialDisplayOptionsForProduct'));
+                                            'specialDisplayOptions','specialDisplayOptionsForProduct',
+                                            'productBadges','badgeForProduct'));
     }
 
     /**

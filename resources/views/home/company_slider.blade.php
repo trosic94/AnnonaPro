@@ -8,7 +8,7 @@
 			<div id="slideWrap">
 
                 @foreach($banners_homeRow_3 as $bKey => $banner)
-                {{$banner->ban_image}}
+                {{-- {{$banner->ban_image}} --}}
                 <div>
                     <a href="{{ $banner->ban_url }}" target="{{ $banner->ban_target }}" title="{{ $banner->ban_name }}" onclick="clickCount(event,{{ $banner->ban_id }},{{ $banner->ban_position_id }},'{{ $banner->ban_url }}','{{ $banner->ban_target }}')">
                         <img src="/storage/banners/{{ $banner->ban_image }}" alt="{{ $banner->ban_name }}" class="img-fluid">
