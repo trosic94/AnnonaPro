@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Category;
+use App\Post;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
@@ -19,6 +20,11 @@ class Category extends Model
     	$kategorije = Category::all();
         
         return $kategorije;
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
     }
 
     public static function productCategories_SEL()
@@ -344,6 +350,11 @@ class Category extends Model
         return $allCAT;
     }
 
+    public static function edu_MainCategories($parent_id){
+        $catsWithPosts = Category::where('parent_id',$parent_id)->with('posts')->get()->toArray();
+        return $catsWithPosts;
+    }
+
 
     public static function slugify($text)
     {
@@ -379,4 +390,7 @@ class Category extends Model
     {
         return $this->hasMany('App\Product','category_id','id');
     }
+
+
+
 }

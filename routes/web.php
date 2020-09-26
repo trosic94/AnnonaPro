@@ -31,6 +31,7 @@ Auth::routes();
 
 	//edukacija
 	Route::get('edukacija', 'EdukacijaController@index');
+	Route::get('edukacija/{post}', 'EdukacijaController@post')->where('post','^[a-zA-Z0-9-_\/]+$');
 
 	//CART
 	Route::get('cart', 'ProductController@cart');

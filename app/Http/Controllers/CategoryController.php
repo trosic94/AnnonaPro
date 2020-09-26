@@ -62,6 +62,7 @@ class CategoryController extends Controller
         // LEFT
         $navCategory = Category::nav_catForParent(3);
 
+
         // MANUFACTURERS
         $manufacturers = Manufacturer::manufacturersByCAT(3);
 
@@ -70,6 +71,7 @@ class CategoryController extends Controller
 
         // Home Wide
         $banners_homeWide = Banner::allBannersByPosition(7);
+
 
 
     	return view('category.index', compact('intro','title','slug','searchREQ','favLIST','category','CATCurrent','metaTitle','metaDescription','metaKeywords',
