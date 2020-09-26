@@ -1253,5 +1253,15 @@
     .buyButton {
         font-size: x-small;
     }
+
     
     // Products bottom end
+.modified-accordion .card-header{ position: relative;}
+.modified-accordion .card-header:after{ content: ''; position: absolute; width: 100%; 
+ height: 100%; left: 0; top: 0;}
+.modified-accordion .collapse:not(.show){ display: block;}
+    
+@media (max-width: 767px) {
+.modified-accordion .collapse:not(.show){ display: none;}
+.modified-accordion .card-header:after{ display: none;}
+}
