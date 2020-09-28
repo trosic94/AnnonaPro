@@ -1,10 +1,10 @@
-<div class="col-auto pl-1 pl-sm-2 pr-1 pr-sm-2">
+<div class="col-auto pl-0 pl-sm-2 pr-0 pr-sm-2">
 	<a id="myProfile" class="rounded-pill profileLNK justify-content-md-center" href="/profil" @auth data-toggle="modal" data-target="#myProfileModal" @endauth>
-		<div class="row">
+		<div class="row justify-content-center">
 		<div class="col-auto px-0">
 			<img class="align-top pt-2" src="/images/header/profil - icon - header.svg" alt="Moj profil">
 		</div>
-		<div class="col-auto pl-3 pr-3 small">
+		<div class="col-auto pl-3 pr-3 small d-none d-sm-block">
 			{{ $userDATA['msg'] }}
 		</div>
 		</div>

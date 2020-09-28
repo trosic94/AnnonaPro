@@ -45,13 +45,13 @@
             margin: 0 0 10px;
             span.fullPrice {
                 display: block;
-                color: $primary-color;
+                color: $white;
                 text-decoration: line-through;
                 font-size: 100%;
             }
             div#finalAmount {
                 display: block;
-                color: $grey;
+                color: $white;
                 font-size: 120%;
                 font-weight: 600;
                 span.qty {
@@ -59,6 +59,8 @@
                 }
                 span.discountPrice {
                     display: inline-block;
+                    color: $white !important;
+                    font-weight: 500;
                 }
                 span.singlePrice {
                     display: inline-block;
@@ -70,7 +72,7 @@
             span.finalPrice {
                 display: block;
                 margin-top: 20px;
-                color: $grey;
+                color: $white;
                 font-size: 120%;
                 font-weight: 600;
             }
@@ -161,6 +163,20 @@
         @include trans_1;
         &:hover {
             background-color: $red !important;
+            color: $white !important;
+        }
+    }
+    
+    @mixin btn_Primary {
+        color: $white !important;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 100%;
+        font-weight: 600;
+        background-color: $primary-color;
+        @include trans_1;
+        &:hover {
+            background-color: $annona-green-light !important;
             color: $white !important;
         }
     }
@@ -325,12 +341,22 @@
         font-weight: 600;
     }
     
+    @mixin primaryTitle {
+        display: block;
+        width: 100%;
+        padding-top: 1.1rem;
+        color: $primary-color;
+        font-size: 100%;
+        letter-spacing: 1px;
+        font-weight: 600;
+    }
+    
     @mixin productSKU {
         display: block;
         margin-top: 10px;
         font-size: 110%;
         label {
-            color: $blue;
+            //    color: $blue;
             font-weight: 500;
         }
     }

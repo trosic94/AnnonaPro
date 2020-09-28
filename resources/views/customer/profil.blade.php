@@ -250,7 +250,7 @@
 
                             <div class="col-xl-6">
                                 
-                                <button type="submit" class="btn btn-info btn-block my-4">@lang('shop.btn_confirm')</button>
+                                <button type="submit" class="btn btn-primary btn-block my-4">@lang('shop.btn_confirm')</button>
 
                             </div>
                         </div>

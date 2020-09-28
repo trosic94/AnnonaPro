@@ -150,7 +150,9 @@ class SearchController extends Controller
         $builder->join('categories as CAT','PROD.category_id','CAT.id')
                 ->leftJoin('categories as PCAT','CAT.parent_id','PCAT.id')
                 ->join('manufacturer as M','PROD.manufacturer_id','M.id')
-                ->leftJoin('special_options_products as SOP','SOP.product_id','PROD.id');
+                ->leftJoin('special_options_products as SOP','SOP.product_id','PROD.id')
+                ->leftJoin('badges_products as BP','BP.product_id','PROD.id')
+                ->leftJoin('badges as B','B.id','BP.badge_id');
 
         
         if ($currentCAT->id == 3):
@@ -371,6 +373,9 @@ class SearchController extends Controller
                                 'M.id as mnf_id',
                                 'M.name as mnf_name',
                                 'M.import_id as mnf_import_id',
+                                'B.title as b_title',
+                                'B.color as b_color',
+                                'B.text_color as b_text_color',
                                 DB::raw('count(SOP.product_id) as sop_count')
                             )
                             ->groupBy('PROD.id')

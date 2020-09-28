@@ -185,6 +185,20 @@
                 <div class="panel panel-bordered" style="padding-bottom:5px;">
 
                     <div class="panel-heading" style="border-bottom:0;">
+                        <h3 class="panel-title">@lang('shop_admin.title_product_badges'):</h3>
+                    </div>
+                    
+                    <div class="panel-body" style="padding-top:0;">
+                        
+                        @if($badgeForProduct)
+                        <div>
+                            <label class="text-bold">@lang('shop_admin.title_product_badges'):</label> {{ $badgeForProduct->b_title }} (<span class="small">{{ $badgeForProduct->b_description }}</span>)
+                        </div>
+                        @endif
+                        
+                    </div>
+
+                    <div class="panel-heading" style="border-bottom:0;">
                         <h3 class="panel-title">@lang('shop_admin.title_special_display_options'):</h3>
                     </div>
 

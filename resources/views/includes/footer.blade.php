@@ -19,22 +19,22 @@
 						<div class="border-annona w-25"></div>
 						<div class="pt-3">{{ menu('Glavni meni') }}</div>
 					</div>
-					<div id="shopNAV" class="col-xl-2 col-md-4 text-center text-md-left">
+					<div id="shopNAV" class="col-xl-2 col-md-4 text-center text-md-left pt-3 pt-md-0">
 						<h5>@lang('shop.title_prodavnica')</h5>
 						<div class="border-annona w-25"></div>
 						<div class="pt-3">{{ menu('Product Menu') }}</div>
 					</div>
-					<div id="shopNAV" class="col-xl-2 col-md-4 text-center text-md-left">
+					<div id="shopNAV" class="col-xl-2 col-md-4 text-center text-md-left pt-3 pt-md-0">
 						<h5>@lang('shop.title_online_kupovina')</h5>
 						<div class="border-annona w-25"></div>
 						<div class="pt-3">{{ menu('Online kupovina') }}</div>
 					</div>
-					<div id="shopNAV" class="col-xl-2 col-md-4 text-center text-md-left">
+					<div id="shopNAV" class="col-xl-2 col-md-4 text-center text-md-left pt-3 pt-xl-0">
 						<h5>@lang('shop.title_radno_vreme')</h5>
 						<div class="border-annona w-25"></div>
 						<div class="pt-3">{{ menu('Radno vreme') }}</div>
 					</div>
-					<div id="shopNAV" class="col-xl-4 col-md-8 text-center text-md-left">
+					<div id="shopNAV" class="col-xl-4 col-md-8 text-center text-md-left pt-3 pt-xl-0">
 						<h5>@lang('shop.title_newsletter')</h5>
 						<div class="border-annona w-25"></div>
 						<div class="pt-3 text-justify small">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>

@@ -12,7 +12,13 @@
 				              	<div class="col">
 					            	@if ($prod->sop_count > 0)
 					            		<div class="akcijaNOTE" style="background-color: {{ ($prod->cat_color != null)? $prod->cat_color:'' }};">@lang('shop.title_action')</div>
-					            	@endif
+									@endif
+									@if ($prod->b_title != '')
+										<div class="bedz" style="background-color: {{ ($prod->cat_color != null)? $prod->cat_color:'' }};">
+											{{ $prod->b_title }} 
+											<div class="text-center" style="font-size:12px;font-weight:normal;margin-top:-10px;">poena</div>
+										</div>
+									@endif
 					            </div>
 			            	</div>
 			            	
@@ -26,8 +32,8 @@
 			            			<div class="priceWrap" style="color: {{ ($prod->cat_color != null)? $prod->cat_color:'' }};">
 			            				@if ($prod->prod_price_with_discount != null)
 			            				<div class="row justify-content-center">
-											<div class="col-12 small text-center text-secondary">Cena:</div>
-											<span class="fullPrice font-weight-bold text-lowercase small col-12 text-right mt-n3">{{ number_format($prod->prod_price,0,"",".") }} {{ setting('site.valuta') }}</span>
+											<div class="col-6 small text-right text-secondary pr-1">Cena:</div>
+											<span class="fullPrice text-lowercase small col-6 text-left pl-0">{{ number_format($prod->prod_price,0,"",".") }} {{ setting('site.valuta') }}</span>
 											<span class="discountPrice font-weight-bold text-lowercase col-12 text-center" style="color: {{ ($prod->cat_color != null)? $prod->cat_color:'' }};">{{ number_format($prod->prod_price_with_discount,0,"",".") }} {{ setting('site.valuta') }}</span>
 			            				</div>
 										@else

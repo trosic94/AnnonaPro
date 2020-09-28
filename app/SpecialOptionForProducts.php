@@ -35,6 +35,8 @@ class SpecialOptionForProducts extends Model
                                                 $j->on('SOPM.product_id','P.id');
                                             })
                                             ->join('special_options as SO','SO.id','SOPM.special_options_id')
+                                            ->leftJoin('badges_products as BP','BP.product_id','P.id')
+                                            ->leftJoin('badges as B','B.id','BP.badge_id')
                                             ->whereIn('SOP.special_options_id',$optIDs)
                                             ->select(
                                                 'SOPM.special_options_id as sop_id',
@@ -61,12 +63,15 @@ class SpecialOptionForProducts extends Model
                                                 'PCAT.name as pcat_name',
                                                 'PCAT.slug as pcat_slug',
                                                 'PCAT.cat_color as cat_color',
+                                                'B.title as b_title',
+                                                'B.color as b_color',
+                                                'B.text_color as b_text_color',
                                                 DB::raw('count(SOP.product_id) as sop_count')
                                             )
                                             ->where('P.status',1)
                                             ->groupBy('SOPM.special_options_id','SO.title','P.id','P.sku','P.title','P.slug','P.category_id','P.manufacturer_id','P.excerpt','P.image','P.status',
                                             'P.product_price','P.product_price_with_discount','P.product_discount','P.product_retail_price','P.product_vat','CAT.id','CAT.name','CAT.slug',
-                                            'CAT.cat_color','PCAT.id','PCAT.name','PCAT.slug','PCAT.cat_color')
+                                            'CAT.cat_color','PCAT.id','PCAT.name','PCAT.slug','PCAT.cat_color','B.title','B.color','B.text_color')
                                             ->get();
 
         return $SPECproductOptions_ByOPT_ID;

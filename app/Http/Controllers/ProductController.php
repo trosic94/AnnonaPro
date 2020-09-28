@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use App\Category;
+use App\Badge;
+use App\BadgeProducts;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -365,6 +367,7 @@ class ProductController extends Controller
         $product->meta_keywords = request('meta_keywords');
 
         $productDisplayOptions = request('specal_options');
+        $productBadge = request('product_badge');
     	
     	$product->price = request('price');
         $product->product_price_with_discount = request('product_price_with_discount');
@@ -513,6 +516,18 @@ class ProductController extends Controller
 
         // SPECIAL DISPLAY OPTIONS ---------------------------------------------------------------------- //
 
+        // PRODUCT BADGES ------------------------------------------------------------------------------- //
+
+        if($productBadge != ''):
+
+            $insertBadge = BadgeProducts::insert([
+                'product_id' => $product_id,
+                'badge_id' => $productBadge
+            ]); 
+
+        endif;
+
+        // PRODUCT BADGES ------------------------------------------------------------------------------- //
 
     	return  redirect('/SDFSDf345345--DFgghjtyut-6/products')
                 ->with([
@@ -546,6 +561,7 @@ class ProductController extends Controller
         $product->video = request('video');
 
         $productDisplayOptions = request('specal_options');
+        $productBadge = request('product_badge');
 
    	
     	if (request('status') == 'on'):
@@ -716,6 +732,32 @@ class ProductController extends Controller
         $insert_SpecialOptions = SpecialOptionForProducts::where('product_id',$product->product_id)->insert($displayOptions);
 
         // SPECIAL DISPLAY OPTIONS ---------------------------------------------------------------------- //
+
+        // PRODUCT BADGES ------------------------------------------------------------------------------- //
+
+        if($productBadge != ''):
+
+            // ako je poslata vrednost za BADGE ide UPDATE ili INSERT
+            $badge_UPDATEorCREATE = BadgeProducts::updateOrCreate(
+
+                ['product_id' => $product->product_id],
+                [
+                    'badge_id' => $productBadge
+                ]
+
+            );
+            else:
+                // ako je poslata vrednost za BADGE prvo proveravam da li postoji dodeljen badge
+                // ako postoji ide DELETE
+                $chkIfBadgeExist = BadgeProducts::where('product_id',$product->product_id)->first();
+    
+                if($chkIfBadgeExist):
+                    $deleteBadge = BadgeProducts::where('product_id',$product->product_id)->delete();                
+                endif;
+    
+            endif;
+    
+        // PRODUCT BADGES ------------------------------------------------------------------------------- //
 
 
         return  redirect('/SDFSDf345345--DFgghjtyut-6/products')

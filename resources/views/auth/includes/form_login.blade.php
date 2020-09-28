@@ -1,4 +1,4 @@
-                                <form class="needs-validation" method="POST" action="{{ route('login') }}" novalidate>
+                                <form class="needs-validation pb-5" method="POST" action="{{ route('login') }}" novalidate>
 
                                 {{ csrf_field() }}
 
@@ -23,8 +23,8 @@
                                         <label class="form-check-label" for="formREMEMBER">@lang('shop.login_remember')</label>
                                     </div>
 
-                                    <button type="submit" class="btn btn-info btn-block my-4">@lang('shop.btn_user_login')</button>
+                                    <button type="submit" class="btn btn-primary btn-block my-4">@lang('shop.btn_user_login')</button>
                                     
-                                    <a class="formLNK" href="{{ route('password.request') }}">@lang('shop.login_forgot_password')</a>
+                                    <a class="formLN text-primary" href="{{ route('password.request') }}">@lang('shop.login_forgot_password')</a>
 
                                 </form>
