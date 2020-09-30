@@ -1290,18 +1290,17 @@
     }
 
     
-    // Products bottom end
-.modified-accordion .card-header{ position: relative;}
-.modified-accordion .card-header:after{ content: ''; position: absolute; width: 100%; 
+      // Products bottom end
+.modified-accordion .cardHead{ position: relative;}
+.modified-accordion .cardHead:after{ content: ''; position: absolute; width: 100%; 
  height: 100%; left: 0; top: 0;}
 .modified-accordion .collapse:not(.show){ display: block;}
     
-<<<<<<< HEAD
+
 @media (max-width: 767px) {
 .modified-accordion .collapse:not(.show){ display: none;}
-.modified-accordion .card-header:after{ display: none;}
+.modified-accordion .cardHead:after{ display: none;}
 }
-=======
     // Products bottom end
     // mobile nav - mdbootstrap animations
     /* Icon 1 */
@@ -1476,4 +1475,3 @@
         top: 21px;
         left: 8px;
     }
->>>>>>> a0efdef4157a7a39b321417610f8f3c389c33faf
