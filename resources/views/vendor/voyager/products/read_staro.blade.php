@@ -67,17 +67,6 @@
                             </span>
                         </div>
 
-                        {{-- <div>
-                            <label class="text-bold">@lang('shop_admin.title_on_stock'):</label> 
-                            <span>
-                                @if($productDATA->prod_on_stock == 1)
-                                    <span class="label label-info">@lang('shop_admin.title_yes')</span>
-                                @else
-                                    <span class="label label-warning">@lang('shop_admin.title_no')</span>
-                                @endif
-                            </span>
-                        </div> --}}
-
                         <div>
                             <label class="text-bold">@lang('shop_admin.title_feautred'):</label> 
                             <span>
@@ -128,6 +117,11 @@
 
                 </div>
 
+
+            </div>
+
+            <div class="col-md-6">
+
                 <div class="panel panel-bordered" style="padding-bottom:5px;">
 
                     <div class="panel-heading" style="border-bottom:0;">
@@ -168,25 +162,19 @@
 
                                 @php
                                     $values = '';
-
                                     foreach ($attributeDATA as $attrKey => $attr):
 
                                         if ($attr->attr_type == 7):
-                                            $values .= '<span class="btn mar_l_10 mar_r_10" style="background-color: '.$attr->attr_value.'"></span>';
+                                            $values .= '<div class="btn mar_l_10 mar_r_10" style="background-color: '.$attr->attr_value.'"></div>';
                                         else:
                                             $values .= $attr->attr_label.', ';
                                         endif;
 
                                     endforeach;
-
-                                    if ($attr->attr_type != 7):
-                                        $values = substr($values, 0, -2);
-                                    endif;
-
+                                    $values = substr($values, 0, -2);
                                 @endphp
 
-                                {!! $values !!}
-
+                                <span>{!! $values !!}</span>
                             </div>
                         @endforeach
                         
@@ -224,14 +212,6 @@
                         
                     </div>
 
-                </div>
-
-
-            </div>
-
-            <div class="col-md-6">
-
-                <div class="panel panel-bordered" style="padding-bottom:5px;">
 
                     <div class="panel-heading" style="border-bottom:0;">
                         <h3 class="panel-title">@lang('shop_admin.title_image'):</h3>
@@ -270,27 +250,16 @@
 
                 </div>
 
-                <div class="panel panel-bordered" style="padding-bottom:5px;">
-
-                    <div class="panel-heading" style="border-bottom:0;">
-                        <h3 class="panel-title">@lang('shop_admin.title_product_gallery'):</h3>
-                    </div>
-
-                    <div class="panel-body" style="padding-top:0;">
-
-                        @if ($productGallery)
-                            @foreach ($productGallery as $image)
-                                <img src="/storage/{{ $image->pi_image }}" class="img25">
-                            @endforeach
-                        @endif;
-
-                    </div>
-
-                </div>
-
             </div>
 
         </div>
+
+
+@php
+// echo '<pre>';
+// print_r($productDATA);
+// echo '</pre>';
+@endphp
 
     </div>
 

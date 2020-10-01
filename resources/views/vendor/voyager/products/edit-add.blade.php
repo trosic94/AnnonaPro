@@ -9,13 +9,12 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 @stop
 
-@section('page_title', __('voyager::generic.'.($edit ? 'edit' : 'add')).' '.$dataType->display_name_singular)
+@section('page_title', __('voyager::generic.'.($edit ? 'edit' : 'add')).' '.$dataType->getTranslatedAttribute('display_name_singular'))
 
 @section('page_header')
-
     <h1 class="page-title">
         <i class="{{ $dataType->icon }}"></i>
-        {{ __('voyager::generic.'.($edit ? 'edit' : 'add')).' '.$dataType->display_name_singular }}
+        {{ __('voyager::generic.'.($edit ? 'edit' : 'add')).' '.$dataType->getTranslatedAttribute('display_name_singular') }}
     </h1>
     @include('voyager::multilingual.language-selector')
 @stop
@@ -32,7 +31,7 @@
 
 
             <!-- LEFT start --------------------------------------------------->
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <div class="panel panel-bordered">
                     <div class="panel-body">
 
@@ -96,36 +95,49 @@
             <!-- LEFT end --------------------------------------------------->
 
             <!-- RIGHT start --------------------------------------------------->
-            <div class="col-md-4">
+            <div class="col-md-6">
 
-                    <!-- ### DETAILS ### -->
-                    <div class="panel panel panel-bordered panel-warning">
-                        <div class="panel-heading">
-                            <h3 class="panel-title"><i class="icon wb-clipboard"></i> @lang('shop_admin.title_product_details')</h3>
-                            <div class="panel-actions">
-                                <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
-                            </div>
-                        </div>
-                        <div class="panel-body">
-                            <div class="form-group">
-                                <label class="control-label" for="name">@lang('shop_admin.title_product_price')</label>
-                                <input type="text" class="form-control" name="product_price" required step="any" placeholder="@lang('shop_admin.title_product_price')" value="{{ ($dataTypeContent->product_price == 0)? '': $dataTypeContent->product_price }}">
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label" for="name">@lang('shop_admin.title_product_price_with_discount')</label>
-                                <input type="text" class="form-control" name="product_price_with_discount" step="any" placeholder="@lang('shop_admin.title_product_price_with_discount')" value="{{ ($dataTypeContent->product_price_with_discount == null)? '': $dataTypeContent->product_price_with_discount }}">
-                            </div>
-                            <hr>
-                            <div class="form-group">
-                                <label class="control-label" for="name">@lang('shop_admin.title_sku')</label>
-                                <input type="text" class="form-control" name="sku" required step="any" placeholder="SKU" value="{{ $dataTypeContent->sku }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="category_id">@lang('shop_admin.title_category')</label>
+                <div class="row">
 
-                                <select class="form-control select2" name="category_id" required onchange="findeAttributesForCat()">
+                    <div class="col-md-6">
 
-                                    @foreach($productCategories_SEL as $catSEL)
+                        <!-- ### DETAILS ### -->
+                        <div class="panel panel panel-bordered panel-warning">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="icon wb-clipboard"></i> @lang('shop_admin.title_product_details')</h3>
+                                <div class="panel-actions">
+                                    <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label class="control-label" for="name">@lang('shop_admin.title_product_price')</label>
+                                    <input type="text" class="form-control" name="product_price" required step="any" placeholder="@lang('shop_admin.title_product_price')" value="{{ ($dataTypeContent->product_price == 0)? '': $dataTypeContent->product_price }}">
+                                </div>
+
+                                <hr>
+
+                                <div class="form-group">
+                                    <label class="control-label" for="name">@lang('shop_admin.title_product_discount')</label>
+                                    <input type="text" class="form-control" name="product_discount" step="any" placeholder="@lang('shop_admin.title_product_discount')" value="{{ ($dataTypeContent->product_discount == null)? '': $dataTypeContent->product_discount }}">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="name">@lang('shop_admin.title_product_price_with_discount')</label>
+                                    <input type="text" class="form-control" name="product_price_with_discount" step="any" placeholder="@lang('shop_admin.title_product_price_with_discount')" value="{{ ($dataTypeContent->product_price_with_discount == null)? '': $dataTypeContent->product_price_with_discount }}">
+                                </div>
+
+                                <hr>
+                                
+                                <div class="form-group">
+                                    <label class="control-label" for="name">@lang('shop_admin.title_sku')</label>
+                                    <input type="text" class="form-control" name="sku" required step="any" placeholder="SKU" value="{{ $dataTypeContent->sku }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="category_id">@lang('shop_admin.title_category')</label>
+
+                                    <select class="form-control select2" name="category_id" required onchange="findeAttributesForCat()">
+
+                                        @foreach($productCategories_SEL as $catSEL)
 
 
                                         <option value="{{ $catSEL['cat_id'] }}" {{ ($catSEL['cat_published'] == '0')? 'disabled':'' }} {{ ($edit && $dataTypeContent->category_id == $catSEL['cat_id'])? 'selected':'' }}>{{ $catSEL['cat_name'] }}</option>
@@ -154,287 +166,277 @@
 
                                     @endforeach
 
-                                </select>
+                                    </select>
 
-
-                            </div>
-
-                            <div class="form-group">
-                                <label for="manufacturer_id">@lang('shop_admin.title_manufacturer')</label>
-
-                                <select class="form-control select2" name="manufacturer_id" required>
-
-                                        <option value="">@lang('shop_admin.title_choose')</option>
-
-                                    @foreach($allManufacturers as $mnf)
-
-                                        <option value="{{ $mnf->id }}" {{ ($edit && $dataTypeContent->manufacturer_id == $mnf->id)? 'selected':'' }}>{{ $mnf->name }}</option>
-
-                                    @endforeach
-
-                                </select>
-
-
-                            </div>
-
-                            <div class="form-group  col-md-12 " >                                    
-                                <label class="control-label" for="name">@lang('shop_admin.title_status')</label>
-                                <br>
-                                <input type="checkbox" name="status" class="toggleswitch" {{ ($dataTypeContent->status == 1) ? 'checked' : '' }}>
-                            </div>
-
-                            <div class="form-group  col-md-12 " >
-                                <label class="control-label" for="name">@lang('shop_admin.title_featured')</label>
-                                <br>
-                                <input type="checkbox" name="featured" class="toggleswitch" {{ ($dataTypeContent->featured == 1) ? 'checked' : '' }}>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <!-- ### ATTRIBUTES ### -->
-                    <div class="panel panel-bordered panel-info">
-                        <div class="panel-heading">
-                            <h3 class="panel-title"><i class="icon wb-image"></i> @lang('shop_admin.title_attributes')</h3>
-                            <div class="panel-actions">
-                                <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
-                            </div>
-                        </div>
-                        <div class="panel-body">
-
-                        @if ($edit)
-
-                                @php
-                                    $listOfAttributes = array();
-                                @endphp
-
-                                @foreach ($allAttributesForProduct as $ATTRkey => $atribut)
+                                </div>
 
                                 <div class="form-group">
-                                    <label class="control-label mar_b_0 text-bold">{{ $atribut['attr_name'] }}</label>
-                                    <div class="small mar_b_5">{{ $atribut['attr_description'] }}</div>
+                                    <label for="manufacturer_id">@lang('shop_admin.title_manufacturer')</label>
 
-                                    @php
-                                        if (!in_array($atribut['attr_id'], $listOfAttributes)):
-                                            array_push($listOfAttributes, $atribut['attr_id']);
-                                        endif;
-                                    @endphp
+                                    <select class="form-control select2" name="manufacturer_id" required>
 
-
-                                    @if ($atribut['attr_type_id'] == 1)
-                                        {{-- Ako je TEXT --}}
-
-
-                                    @elseif ($atribut['attr_type_id'] == 2)
-                                        {{-- Ako je SELECT --}}
-
-                                        <select class="form-control select2 select2-hidden-accessible" name="attr_{{ $atribut['attr_id'] }}">
                                             <option value="">@lang('shop_admin.title_choose')</option>
-                                        @foreach ($atribut['attr_values'] as $ATTRkey => $ATTRoptions)
-                                            <option value="{{ $ATTRoptions['id'] }}|{{ $ATTRoptions['value'] }}" {{ (array_key_exists($atribut['attr_id'], $odabraneVrednostiAtributaZaProizvod) && in_array($ATTRoptions['id'], $odabraneVrednostiAtributaZaProizvod[$atribut['attr_id']]))? 'selected':'' }}>{{ $ATTRoptions['label'] }}  {{ $atribut['attr_unit'] }}</option>
-                                        @endforeach
-                                        </select>
 
-                                    @elseif ($atribut['attr_type_id'] == 3)
-                                        {{-- Ako je MULTISELECT --}}
+                                        @foreach($allManufacturers as $mnf)
 
-                                        <select class="form-control select2 select2-hidden-accessible" name="attr_{{ $atribut['attr_id'] }}[]" multiple="">
-                                            <option value="">@lang('shop_admin.title_choose')</option>
-                                        @foreach ($atribut['attr_values'] as $ATTRkey => $ATTRoptions)
-                                            <option value="{{ $ATTRoptions['id'] }}|{{ $ATTRoptions['value'] }}" {{ (array_key_exists($atribut['attr_id'], $odabraneVrednostiAtributaZaProizvod) && in_array($ATTRoptions['id'], $odabraneVrednostiAtributaZaProizvod[$atribut['attr_id']]))? 'selected':'' }}>{{ $ATTRoptions['label'] }}  {{ $atribut['attr_unit'] }}</option>
-                                        @endforeach
-                                        </select>
+                                            <option value="{{ $mnf->id }}" {{ ($edit && $dataTypeContent->manufacturer_id == $mnf->id)? 'selected':'' }}>{{ $mnf->name }}</option>
 
-                                    @elseif ($atribut['attr_type_id'] == 4)
-                                        {{-- Ako je CHECKBOX --}}
-
-                                        @foreach ($atribut['attr_values'] as $ATTRkey => $ATTRoptions)
-                                        <input type="checkbox" name="attr_{{ $atribut['attr_id'] }}[]" value="{{ $ATTRoptions['id'] }}|{{ $ATTRoptions['value'] }}" {{ (array_key_exists($atribut['attr_id'], $odabraneVrednostiAtributaZaProizvod) && in_array($ATTRoptions['id'], $odabraneVrednostiAtributaZaProizvod[$atribut['attr_id']]))? 'checked':'' }}> {{ $ATTRoptions['label'] }} {{ $atribut['attr_unit'] }}<br>
                                         @endforeach
 
-                                    @elseif ($atribut['attr_type_id'] == 5)
-                                        {{-- Ako je RADIO BUTTON --}}
+                                    </select>
 
-                                        @foreach ($atribut['attr_values'] as $ATTRkey => $ATTRoptions)
-                                        <input type="radio" name="attr_{{ $atribut['attr_id'] }}" value="{{ $ATTRoptions['id'] }}|{{ $ATTRoptions['value'] }}"{{ (array_key_exists($atribut['attr_id'], $odabraneVrednostiAtributaZaProizvod) && in_array($ATTRoptions['id'], $odabraneVrednostiAtributaZaProizvod[$atribut['attr_id']]))? 'checked':'' }}> {{ $ATTRoptions['label'] }}  {{ $atribut['attr_unit'] }}<br>
-                                        @endforeach
-
-                                    @elseif ($atribut['attr_type_id'] == 7)
-                                        {{-- Ako je COLOR --}}
-
-                                        @foreach ($atribut['attr_values'] as $ATTRkey => $ATTRoptions)
-                                        <input type="checkbox" name="attr_{{ $atribut['attr_id'] }}[]" value="{{ $ATTRoptions['id'] }}|{{ $ATTRoptions['value'] }}" {{ (array_key_exists($atribut['attr_id'], $odabraneVrednostiAtributaZaProizvod) && in_array($ATTRoptions['id'], $odabraneVrednostiAtributaZaProizvod[$atribut['attr_id']]))? 'checked':'' }}> <div class="btn mar_l_10 mar_r_10" style="background-color: {{ $ATTRoptions['value'] }}"></div>  {{ $ATTRoptions['label'] }}  {{ $atribut['attr_unit'] }}<br>
-                                        @endforeach
-
-                                    @else
-                                        {{-- Ako je OSTALO --}}
-
-                                    @endif
 
                                 </div>
 
-                                <hr>
+                                <div class="form-group col-md-6">
+                                    <label class="control-label" for="name">@lang('shop_admin.title_status')</label>
+                                    <br>
+                                    <input type="checkbox" name="status" class="toggleswitch" {{ ($dataTypeContent->status == 1) ? 'checked' : '' }}>
+                                </div>
 
-                                @endforeach
+                                <div class="form-group  col-md-6">
+                                    <label class="control-label" for="name">@lang('shop_admin.title_on_stock')</label>
+                                    <br>
+                                    <input type="checkbox" name="on_stock" class="toggleswitch" {{ ($dataTypeContent->on_stock == 1) ? 'checked' : '' }}>
+                                </div>
 
-                                <input type="hidden" name="attr_all" value="{{ json_encode($listOfAttributes) }}">
+                                <div class="form-group  col-md-6">
+                                    <label class="control-label" for="name">@lang('shop_admin.title_featured')</label>
+                                    <br>
+                                    <input type="checkbox" name="featured" class="toggleswitch" {{ ($dataTypeContent->featured == 1) ? 'checked' : '' }}>
+                                </div>
 
-                        @else
-
-                            <div id="productOptions"></div>
-
-                            <input type="hidden" name="attr_all" value="">
-
-                        @endif
-
-                            <script type="text/javascript">
-                                function findeAttributesForCat() {
-
-                                    var CAT = $('select[name=category_id] :selected').val();
-
-                                    var _token = $('[name=_token]').val();
-                                    var host = '{{ URL::to("/") }}/{{ setting('admin.adm_url') }}';
-
-                                    $.ajax({
-                                        url: host+'/products/attributes',
-                                        type: 'POST',
-                                        data: { CAT: CAT,
-                                                _token: _token },
-                                        success: function (data) {
-
-                                            $('div#productOptions').html('');
-                                            $('div#productOptions').html(data);
-
-                                            $('select#sel2').select2();
-                                        }
-                                    });
-                                    
-                                }
-                            </script>
-
-                        </div>
-                    </div>
-
-                    <!-- ### PROUCT BADGES ### -->
-                    <div class="panel panel-bordered panel-info">
-                        <div class="panel-heading">
-                            <h3 class="panel-title"><i class="icon wb-image"></i> @lang('shop_admin.title_product_badges')</h3>
-                            <div class="panel-actions">
-                                <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
-                            </div>
-                        </div>
-                        <div class="panel-body">
-
-                            <p>@lang('shop_admin.title_product_badges_description')</p>
-
-                            <div class="form-group">
-
-                            <select class="form-control select2 select2-hidden-accessible" name="product_badge">
-                                <option value="">@lang('shop_admin.title_choose')</option>
-                                @foreach ($productBadges as $Bkey => $badge)
-                                    <option value="{{ $badge->b_id }}" {{ ($badgeForProduct && $badgeForProduct->bp_badge_id == $badge->b_id)? 'selected':'' }}>{{ $badge->b_title }} ({{ $badge->b_description }})</option>
-                                @endforeach
-                            </select>
-
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <!-- ### SPECIOAL OPTIONS ### -->
-                    <div class="panel panel-bordered panel-info">
-                        <div class="panel-heading">
-                            <h3 class="panel-title"><i class="icon wb-image"></i> @lang('shop_admin.title_special_display_options')</h3>
-                            <div class="panel-actions">
-                                <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
-                            </div>
-                        </div>
-                        <div class="panel-body">
-
-                            <p>@lang('shop_admin.title_special_display_options_description')</p>
-
-                            <div class="form-group">
-
-                            @foreach ($specialDisplayOptions as $key => $displayOption)
-
-                                <input type="checkbox" name="specal_options[]" value="{{ $displayOption->id }}" {{ (in_array($displayOption->id, $specialDisplayOptionsForProduct))? 'checked':'' }}> {{ $displayOption->title }}
-
-                                @if ($displayOption->description != null)
-                                    <div class="small mar_b_10">{{ $displayOption->description }}</div>
+                                @if ($edit)
+                                <div class="form-group  col-md-6">
+                                    <label class="control-label" for="name">@lang('shop_admin.title_update_on_import')</label>
+                                    <br>
+                                    <input type="checkbox" name="update_on_import" class="toggleswitch" {{ ($dataTypeContent->update_on_import == 1) ? 'checked' : '' }}>
+                                </div>
                                 @endif
 
-                            @endforeach
-
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <!-- ### IMAGE ### -->
-                    <div class="panel panel-bordered panel-primary">
-                        <div class="panel-heading">
-                            <h3 class="panel-title"><i class="icon wb-image"></i> @lang('shop_admin.title_product_image')</h3>
-                            <div class="panel-actions">
-                                <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
                             </div>
                         </div>
-                        <div class="panel-body">
-                            @if(isset($dataTypeContent->image))
-                                <img src="/storage/products/{{ $dataTypeContent->image }}" style="width:100%" />
-                            @endif
-                                <input type="file" name="image">
-                            
-                        </div>
-                    </div>
 
-                    <!-- ### VIDEO ### -->
-                    <div class="panel panel-bordered panel-primary">
-                        <div class="panel-heading">
-                            <h3 class="panel-title"><i class="icon wb-image"></i> @lang('shop_admin.title_video')</h3>
-                            <div class="panel-actions">
-                                <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
-                            </div>
-                        </div>
-                        <div class="panel-body">
-
-                            @if(isset($dataTypeContent->video))
-                                <div class="ytEmbedContainter mar_b_10">
-                                    <iframe width="100%" height="auto" src="https://www.youtube.com/embed/{{ $dataTypeContent->video }}"></iframe>
+                        <!-- ### ATTRIBUTES ### -->
+                        <div class="panel panel-bordered panel-info">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="icon wb-image"></i> @lang('shop_admin.title_attributes')</h3>
+                                <div class="panel-actions">
+                                    <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
                                 </div>
+                            </div>
+                            <div class="panel-body">
+
+                            @if ($edit)
+
+                                    @php
+                                        $listOfAttributes = array();
+                                    @endphp
+
+                                    @foreach ($allAttributesForProduct as $ATTRkey => $atribut)
+
+                                    <div class="form-group">
+                                        <label class="control-label mar_b_0 text-bold">{{ $atribut['attr_name'] }}</label>
+                                        <div class="small mar_b_5">{{ $atribut['attr_description'] }}</div>
+
+                                        @php
+                                            if (!in_array($atribut['attr_id'], $listOfAttributes)):
+                                                array_push($listOfAttributes, $atribut['attr_id']);
+                                            endif;
+                                        @endphp
+
+                                        @if ($atribut['attr_type_id'] != 7)
+                                            {{-- Ako je CHECKBOX --}}
+
+                                            @foreach ($atribut['attr_values'] as $ATTRkey => $ATTRoptions)
+                                            <input type="checkbox" name="attr_{{ $atribut['attr_id'] }}[]" value="{{ $ATTRoptions['id'] }}|{{ $ATTRoptions['value'] }}" {{ (array_key_exists($atribut['attr_id'], $odabraneVrednostiAtributaZaProizvod) && in_array($ATTRoptions['id'], $odabraneVrednostiAtributaZaProizvod[$atribut['attr_id']]))? 'checked':'' }}> {{ $ATTRoptions['label'] }} {{ $atribut['attr_unit'] }}<br>
+                                            @endforeach
+                                        @else
+                                            {{-- Ako je COLOR --}}
+
+                                            @foreach ($atribut['attr_values'] as $ATTRkey => $ATTRoptions)
+                                            <input type="checkbox" name="attr_{{ $atribut['attr_id'] }}[]" value="{{ $ATTRoptions['id'] }}|{{ $ATTRoptions['value'] }}" {{ (array_key_exists($atribut['attr_id'], $odabraneVrednostiAtributaZaProizvod) && in_array($ATTRoptions['id'], $odabraneVrednostiAtributaZaProizvod[$atribut['attr_id']]))? 'checked':'' }}> <div class="btn mar_l_10 mar_r_10" style="background-color: {{ $ATTRoptions['value'] }}"></div>  {{ $ATTRoptions['label'] }}  {{ $atribut['attr_unit'] }}<br>
+                                            @endforeach
+                                        @endif
+
+
+                                    </div>
+
+                                    <hr>
+
+                                    @endforeach
+    {{-- @php
+    echo '<pre>';
+    print_r($allAttributesForProduct);
+    echo '</pre>';
+    @endphp --}}
+
+                                    <input type="hidden" name="attr_all" value="{{ json_encode($listOfAttributes) }}">
+
+                            @else
+
+                                <div id="productOptions"></div>
+
+                                <input type="hidden" name="attr_all" value="">
+
                             @endif
 
-                            <div class="small mar_b_10">@lang('shop_admin.title_video_note')</div>
-                            <input type="text" name="video" class="form-control" value="{{ $dataTypeContent->video }}">
-                            
+                                <script type="text/javascript">
+                                    function findeAttributesForCat() {
+
+                                        var CAT = $('select[name=category_id] :selected').val();
+
+                                        var _token = $('[name=_token]').val();
+                                        var host = '{{ URL::to("/") }}/{{ setting('admin.adm_url') }}';
+
+                                        $.ajax({
+                                            url: host+'/products/attributes',
+                                            type: 'POST',
+                                            data: { CAT: CAT,
+                                                    _token: _token },
+                                            success: function (data) {
+
+                                                $('div#productOptions').html('');
+                                                $('div#productOptions').html(data);
+
+                                                $('select#sel2').select2();
+                                            }
+                                        });
+                                        
+                                    }
+                                </script>
+
+                            </div>
                         </div>
+
+                        <!-- ### PROUCT BADGES ### -->
+                        <div class="panel panel-bordered panel-info">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="icon wb-image"></i> @lang('shop_admin.title_product_badges')</h3>
+                                <div class="panel-actions">
+                                    <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+
+                                <p>@lang('shop_admin.title_product_badges_description')</p>
+
+                                <div class="form-group">
+
+                                <select class="form-control select2 select2-hidden-accessible" name="product_badge">
+                                    <option value="">@lang('shop_admin.title_choose')</option>
+                                    @foreach ($productBadges as $Bkey => $badge)
+                                        <option value="{{ $badge->b_id }}" {{ ($badgeForProduct && $badgeForProduct->bp_badge_id == $badge->b_id)? 'selected':'' }}>{{ $badge->b_title }} ({{ $badge->b_description }})</option>
+                                    @endforeach
+                                </select>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- ### SPECIOAL OPTIONS ### -->
+                        <div class="panel panel-bordered panel-info">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="icon wb-image"></i> @lang('shop_admin.title_special_display_options')</h3>
+                                <div class="panel-actions">
+                                    <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+
+                                <p>@lang('shop_admin.title_special_display_options_description')</p>
+
+                                <div class="form-group">
+
+                                @foreach ($specialDisplayOptions as $key => $displayOption)
+
+                                    <input type="checkbox" name="specal_options[]" value="{{ $displayOption->id }}" {{ (in_array($displayOption->id, $specialDisplayOptionsForProduct))? 'checked':'' }}> {{ $displayOption->title }}
+
+                                    @if ($displayOption->description != null)
+                                        <div class="small mar_b_10">{{ $displayOption->description }}</div>
+                                    @endif
+
+                                @endforeach
+
+                                </div>
+
+                            </div>
+                        </div>
+
                     </div>
 
-                    <!-- ### SEO CONTENT ### -->
-                    <div class="panel panel-bordered">
-                        <div class="panel-heading">
-                            <h3 class="panel-title"><i class="icon wb-search"></i> @lang('shop_admin.title_product_seo')</h3>
-                            <div class="panel-actions">
-                                <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
+                    <div class="col-md-6">
+
+                        <!-- ### IMAGE ### -->
+                        <div class="panel panel-bordered panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="icon wb-image"></i> @lang('shop_admin.title_product_image')</h3>
+                                <div class="panel-actions">
+                                    <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                @if(isset($dataTypeContent->image))
+                                    <img src="/storage/products/{{ $dataTypeContent->image }}" style="width:100%" />
+                                @endif
+                                    <input type="file" name="image">
+                                
                             </div>
                         </div>
-                        <div class="panel-body">
-                            <div class="form-group">
-                                <label for="slug">@lang('shop_admin.title_slug')</label>
-                                <input type="text" class="form-control" id="slug" name="slug"
-                                    placeholder="slug"
-                                    {!! isFieldSlugAutoGenerator($dataType, $dataTypeContent, "slug") !!}
-                                    value="{{ $dataTypeContent->slug ?? '' }}">
+
+                        <!-- ### VIDEO ### -->
+                        <div class="panel panel-bordered panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="icon wb-image"></i> @lang('shop_admin.title_video')</h3>
+                                <div class="panel-actions">
+                                    <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="meta_description">{{ __('voyager::post.meta_description') }}</label>
-                                <textarea class="form-control" name="meta_description" required="">{{ $dataTypeContent->meta_description ?? '' }}</textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="meta_keywords">{{ __('voyager::post.meta_keywords') }}</label>
-                                <textarea class="form-control" name="meta_keywords" required="">{{ $dataTypeContent->meta_keywords ?? '' }}</textarea>
+                            <div class="panel-body">
+
+                                @if(isset($dataTypeContent->video))
+                                    <div class="ytEmbedContainter mar_b_10">
+                                        <iframe width="100%" height="auto" src="https://www.youtube.com/embed/{{ $dataTypeContent->video }}"></iframe>
+                                    </div>
+                                @endif
+
+                                <div class="small mar_b_10">@lang('shop_admin.title_video_note')</div>
+                                <input type="text" name="video" class="form-control" value="{{ $dataTypeContent->video }}">
+                                
                             </div>
                         </div>
+
+                        <!-- ### SEO CONTENT ### -->
+                        <div class="panel panel-bordered">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="icon wb-search"></i> @lang('shop_admin.title_product_seo')</h3>
+                                <div class="panel-actions">
+                                    <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label for="slug">@lang('shop_admin.title_slug')</label>
+                                    <input type="text" class="form-control" id="slug" name="slug"
+                                        placeholder="slug"
+                                        {!! isFieldSlugAutoGenerator($dataType, $dataTypeContent, "slug") !!}
+                                        value="{{ $dataTypeContent->slug ?? '' }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="meta_description">{{ __('voyager::post.meta_description') }}</label>
+                                    <textarea class="form-control" name="meta_description" required="">{{ $dataTypeContent->meta_description ?? '' }}</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="meta_keywords">{{ __('voyager::post.meta_keywords') }}</label>
+                                    <textarea class="form-control" name="meta_keywords" required="">{{ $dataTypeContent->meta_keywords ?? '' }}</textarea>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
+
+                </div>
 
             </div>
             <!-- RIGHT end --------------------------------------------------->
@@ -443,9 +445,10 @@
         </form>
 
 @php
+
 //if ($edit):
     // echo '<pre>';
-    // print($badgeForProduct);
+    // print($productCategories_SEL);
     // echo '</pre>';
 //endif;
 @endphp

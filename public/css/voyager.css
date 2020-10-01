@@ -107,6 +107,11 @@ hr {
   height: auto;
 }
 
+.img25 {
+  width: 25%;
+  height: auto;
+}
+
 .blockFormat img {
   width: 100%;
   height: auto;
@@ -124,6 +129,11 @@ hr {
 
 .bgWhite {
   background-color: #ffffff;
+}
+
+.flexWrap {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .ORD_subTotal {

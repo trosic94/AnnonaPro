@@ -78,6 +78,9 @@ hr {
 .img100 {
 	width: 100%; height: auto;
 }
+.img25 {
+	width: 25%; height: auto;
+}
 
 .blockFormat {
 	@include blockFormat_wDATA;
@@ -94,6 +97,11 @@ hr {
 
 .bgWhite {
 	background-color: $white;
+}
+
+.flexWrap {
+	display: flex;
+	flex-wrap: wrap;
 }
 
 // ORDER --------------------------------------------------------------------------------------------------------- //

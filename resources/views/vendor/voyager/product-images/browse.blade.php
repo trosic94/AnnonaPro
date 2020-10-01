@@ -78,11 +78,11 @@
                             <table id="dataTable" class="table table-hover">
                                 <thead>
                                     <tr>
-                                        @can('delete',app($dataType->model_name))
+                                        @if($showCheckboxColumn)
                                             <th>
                                                 <input type="checkbox" class="select_all">
                                             </th>
-                                        @endcan
+                                        @endif
                                         @foreach($dataType->browseRows as $row)
                                         <th>
                                             @if ($isServerSide)
@@ -100,19 +100,21 @@
                                                 </a>
                                             @endif
                                         </th>
+                                        @if ($row->display_name == 'Product Id')
+                                            <th>@lang('shop_admin.title_product')</th>
+                                        @endif
                                         @endforeach
-                                        <th>@lang('shop_admin.title_product_gallery')</th>
                                         <th class="actions text-right">{{ __('voyager::generic.actions') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($dataTypeContent as $data)
                                     <tr>
-                                        @can('delete',app($dataType->model_name))
+                                        @if($showCheckboxColumn)
                                             <td>
                                                 <input type="checkbox" name="row_id" id="checkbox_{{ $data->getKey() }}" value="{{ $data->getKey() }}">
                                             </td>
-                                        @endcan
+                                        @endif
                                         @foreach($dataType->browseRows as $row)
                                             @php
                                             if ($data->{$row->field.'_browse'}) {
@@ -121,14 +123,9 @@
                                             @endphp
                                             <td>
                                                 @if (isset($row->details->view))
-                                                    @include($row->details->view, ['row' => $row, 'dataType' => $dataType, 'dataTypeContent' => $dataTypeContent, 'content' => $data->{$row->field}, 'action' => 'browse'])
+                                                    @include($row->details->view, ['row' => $row, 'dataType' => $dataType, 'dataTypeContent' => $dataTypeContent, 'content' => $data->{$row->field}, 'action' => 'browse', 'view' => 'browse', 'options' => $row->details])
                                                 @elseif($row->type == 'image')
-                                                    {{-- <img src="@if( !filter_var($data->{$row->field}, FILTER_VALIDATE_URL)){{ Voyager::image( $data->{$row->field} ) }}@else{{ $data->{$row->field} }}@endif" style="width:100px"> --}}
-                                                    
-                                                    @if ($data->{$row->field} != '')
-                                                        <img src="/storage/products/{{ $data->{$row->field} }}" style="width:100px">
-                                                    @endif
-
+                                                    <img src="@if( !filter_var($data->{$row->field}, FILTER_VALIDATE_URL)){{ Voyager::image( $data->{$row->field} ) }}@else{{ $data->{$row->field} }}@endif" style="width:100px">
                                                 @elseif($row->type == 'relationship')
                                                     @include('voyager::formfields.relationship', ['view' => 'browse','options' => $row->details])
                                                 @elseif($row->type == 'select_multiple')
@@ -166,48 +163,32 @@
                                                     {!! $row->details->options->{$data->{$row->field}} ?? '' !!}
 
                                                 @elseif($row->type == 'date' || $row->type == 'timestamp')
-                                                    {{ property_exists($row->details, 'format') ? \Carbon\Carbon::parse($data->{$row->field})->formatLocalized($row->details->format) : $data->{$row->field} }}
+                                                    @if ( property_exists($row->details, 'format') && !is_null($data->{$row->field}) )
+                                                        {{ \Carbon\Carbon::parse($data->{$row->field})->formatLocalized($row->details->format) }}
+                                                    @else
+                                                        {{ $data->{$row->field} }}
+                                                    @endif
                                                 @elseif($row->type == 'checkbox')
 
-                                                        @if($data->{$row->field} == 1)
-                                                            <span class="label label-info">@lang('shop_admin.title_yes')</span>
-                                                        @else
-                                                            <span class="label label-warning">@lang('shop_admin.title_no')</span>
-                                                        @endif
+                                                    @if($data->{$row->field} == 1)
+                                                        <span class="label label-info">@lang('shop_admin.title_on')</span>
+                                                    @else
+                                                        <span class="label label-warning">@lang('shop_admin.title_off')</span>
+                                                    @endif
 
                                                 @elseif($row->type == 'color')
                                                     <span class="badge badge-lg" style="background-color: {{ $data->{$row->field} }}">{{ $data->{$row->field} }}</span>
                                                 @elseif($row->type == 'text')
+
                                                     @include('voyager::multilingual.input-hidden-bread-browse')
-
-                                                        @if ($row->field == 'manufacturer_id')
-
-                                                            @php
-
-                                                                $mnfc = App\Manufacturer::where('id',$data->{$row->field})->first();
-
-                                                                $mfcNAME = '';
-
-                                                                if ($mnfc):
-                                                                    $mfcNAME = $mnfc->name;
-                                                                endif;
-
-                                                            @endphp
-
-                                                            <div>{{ $mfcNAME }} ({{ $data->{$row->field} }})</div>
-
-                                                        @else
-
-                                                            <div>{{ mb_strlen( $data->{$row->field} ) > 200 ? mb_substr($data->{$row->field}, 0, 200) . ' ...' : $data->{$row->field} }}</div>
-
-                                                        @endif
+                                                    <div>{{ mb_strlen( $data->{$row->field} ) > 200 ? mb_substr($data->{$row->field}, 0, 200) . ' ...' : $data->{$row->field} }}</div>
 
                                                 @elseif($row->type == 'text_area')
                                                     @include('voyager::multilingual.input-hidden-bread-browse')
                                                     <div>{{ mb_strlen( $data->{$row->field} ) > 200 ? mb_substr($data->{$row->field}, 0, 200) . ' ...' : $data->{$row->field} }}</div>
                                                 @elseif($row->type == 'file' && !empty($data->{$row->field}) )
                                                     @include('voyager::multilingual.input-hidden-bread-browse')
-                                                    @if(json_decode($data->{$row->field}))
+                                                    @if(json_decode($data->{$row->field}) !== null)
                                                         @foreach(json_decode($data->{$row->field}) as $file)
                                                             <a href="{{ Storage::disk(config('voyager.storage.disk'))->url($file->download_link) ?: '' }}" target="_blank">
                                                                 {{ $file->original_name ?: '' }}
@@ -271,17 +252,19 @@
                                                     <span>{{ $data->{$row->field} }}</span>
                                                 @endif
                                             </td>
-                                        @endforeach
-                                        <td>
-                                            @php
-                                                $galleryExist = $product = App\ProductImages::where('product_id',$data->id)->first();
-                                            @endphp
-                                            @if ($galleryExist)
-                                                <a class="btn btn-sm btn-success" href="./product-images?key=product_id&filter=contains&s={{$data->id}}"><i class="voyager-images"></i> @lang('shop_admin.title_gallery')</a>
+                                            @if ($row->field == 'product_id')
+                                                <td>
+                                                    @php
+                                                        $product = App\Product::where('id',$data->{$row->field})->first();
+                                                    @endphp
+
+                                                        {{ $product->title }}
+
+                                                </td>
                                             @endif
-                                        </td>
-                                        <td class="no-sort no-click" id="bread-actions">
-                                            @foreach(Voyager::actions() as $action)
+                                        @endforeach
+                                        <td class="no-sort no-click bread-actions">
+                                            @foreach($actions as $action)
                                                 @if (!method_exists($action, 'massAction'))
                                                     @include('voyager::bread.partials.actions', ['action' => $action])
                                                 @endif
@@ -324,7 +307,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="{{ __('voyager::generic.close') }}"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title"><i class="voyager-trash"></i> {{ __('voyager::generic.delete_question') }} {{ strtolower($dataType->display_name_singular) }}?</h4>
+                    <h4 class="modal-title"><i class="voyager-trash"></i> {{ __('voyager::generic.delete_question') }} {{ strtolower($dataType->getTranslatedAttribute('display_name_singular')) }}?</h4>
                 </div>
                 <div class="modal-footer">
                     <form action="#" id="delete_form" method="POST">
@@ -375,14 +358,14 @@
                 })
             @endif
             $('.select_all').on('click', function(e) {
-                $('input[name="row_id"]').prop('checked', $(this).prop('checked'));
+                $('input[name="row_id"]').prop('checked', $(this).prop('checked')).trigger('change');
             });
         });
 
 
         var deleteFormAction;
         $('td').on('click', '.delete', function (e) {
-            $('#delete_form')[0].action = '{{ route('voyager.'.$dataType->slug.'.destroy', ['id' => '__id']) }}'.replace('__id', $(this).data('id'));
+            $('#delete_form')[0].action = '{{ route('voyager.'.$dataType->slug.'.destroy', '__id') }}'.replace('__id', $(this).data('id'));
             $('#delete_modal').modal('show');
         });
 

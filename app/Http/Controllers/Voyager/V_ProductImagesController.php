@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Voyager;
 
-use App\URL;
-
+use Exception;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use TCG\Voyager\Database\Schema\SchemaManager;
 use TCG\Voyager\Events\BreadDataAdded;
@@ -19,19 +19,9 @@ use TCG\Voyager\Http\Controllers\Traits\BreadRelationshipParser;
 use TCG\Voyager\Http\Controllers\VoyagerBaseController;
 
 use App\Product;
-use App\Category;
-use App\Manufacturer;
-use App\Attributes;
-use App\AttributesCategory;
-use App\AttributesProduct;
-use App\SpecialOption;
-use App\SpecialOptionForProducts;
-use App\Badge;
-use App\BadgeProducts;
-use App\ProductImages;
 
 
-class V_ProductController extends VoyagerBaseController
+class V_ProductImagesController extends VoyagerBaseController
 {
     use BreadRelationshipParser;
 
@@ -61,22 +51,25 @@ class V_ProductController extends VoyagerBaseController
         $getter = $dataType->server_side ? 'paginate' : 'get';
 
         $search = (object) ['value' => $request->get('s'), 'key' => $request->get('key'), 'filter' => $request->get('filter')];
-        $searchable = $dataType->server_side ? array_keys(SchemaManager::describeTable(app($dataType->model_name)->getTable())->toArray()) : '';
-        $orderBy = $request->get('order_by', $dataType->order_column);
-        $sortOrder = $request->get('sort_order', null);
-        $usesSoftDeletes = false;
-        $showSoftDeleted = false;
-        $orderColumn = [];
-        if ($orderBy) {
-            $index = $dataType->browseRows->where('field', $orderBy)->keys()->first() + 1;
-            $orderColumn = [[$index, 'desc']];
-            if (!$sortOrder && isset($dataType->order_direction)) {
-                $sortOrder = $dataType->order_direction;
-                $orderColumn = [[$index, $dataType->order_direction]];
-            } else {
-                $orderColumn = [[$index, 'desc']];
+
+        $searchNames = [];
+        if ($dataType->server_side) {
+            $searchable = SchemaManager::describeTable(app($dataType->model_name)->getTable())->pluck('name')->toArray();
+            $dataRow = Voyager::model('DataRow')->whereDataTypeId($dataType->id)->get();
+            foreach ($searchable as $key => $value) {
+                $field = $dataRow->where('field', $value)->first();
+                $displayName = ucwords(str_replace('_', ' ', $value));
+                if ($field !== null) {
+                    $displayName = $field->getTranslatedAttribute('display_name');
+                }
+                $searchNames[$value] = $displayName;
             }
         }
+
+        $orderBy = $request->get('order_by', $dataType->order_column);
+        $sortOrder = $request->get('sort_order', $dataType->order_direction);
+        $usesSoftDeletes = false;
+        $showSoftDeleted = false;
 
         // Next Get or Paginate the actual content from the MODEL that corresponds to the slug DataType
         if (strlen($dataType->model_name) != 0) {
@@ -89,7 +82,7 @@ class V_ProductController extends VoyagerBaseController
             }
 
             // Use withTrashed() if model uses SoftDeletes and if toggle is selected
-            if ($model && in_array(SoftDeletes::class, class_uses($model)) && app('VoyagerAuth')->user()->can('delete', app($dataType->model_name))) {
+            if ($model && in_array(SoftDeletes::class, class_uses_recursive($model)) && Auth::user()->can('delete', app($dataType->model_name))) {
                 $usesSoftDeletes = true;
 
                 if ($request->get('showSoftDeleted')) {
@@ -128,15 +121,46 @@ class V_ProductController extends VoyagerBaseController
         }
 
         // Check if BREAD is Translatable
-        if (($isModelTranslatable = is_bread_translatable($model))) {
-            $dataTypeContent->load('translations');
-        }
+        $isModelTranslatable = is_bread_translatable($model);
+
+        // Eagerload Relations
 
         // Check if server side pagination is enabled
         $isServerSide = isset($dataType->server_side) && $dataType->server_side;
 
         // Check if a default search key is set
         $defaultSearchKey = $dataType->default_search_key ?? null;
+
+        // Actions
+        $actions = [];
+        if (!empty($dataTypeContent->first())) {
+            foreach (Voyager::actions() as $action) {
+                $action = new $action($dataType, $dataTypeContent->first());
+
+                if ($action->shouldActionDisplayOnDataType()) {
+                    $actions[] = $action;
+                }
+            }
+        }
+
+        // Define showCheckboxColumn
+        $showCheckboxColumn = false;
+        if (Auth::user()->can('delete', app($dataType->model_name))) {
+            $showCheckboxColumn = true;
+        } else {
+            foreach ($actions as $action) {
+                if (method_exists($action, 'massAction')) {
+                    $showCheckboxColumn = true;
+                }
+            }
+        }
+
+        // Define orderColumn
+        $orderColumn = [];
+        if ($orderBy) {
+            $index = $dataType->browseRows->where('field', $orderBy)->keys()->first() + ($showCheckboxColumn ? 1 : 0);
+            $orderColumn = [[$index, $sortOrder ?? 'desc']];
+        }
 
         $view = 'voyager::bread.browse';
 
@@ -145,6 +169,7 @@ class V_ProductController extends VoyagerBaseController
         }
 
         return Voyager::view($view, compact(
+            'actions',
             'dataType',
             'dataTypeContent',
             'isModelTranslatable',
@@ -152,11 +177,12 @@ class V_ProductController extends VoyagerBaseController
             'orderBy',
             'orderColumn',
             'sortOrder',
-            'searchable',
+            'searchNames',
             'isServerSide',
             'defaultSearchKey',
             'usesSoftDeletes',
-            'showSoftDeleted'
+            'showSoftDeleted',
+            'showCheckboxColumn'
         ));
     }
 
@@ -174,7 +200,6 @@ class V_ProductController extends VoyagerBaseController
 
     public function show(Request $request, $id)
     {
-
         $slug = $this->getSlug($request);
 
         $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
@@ -185,7 +210,7 @@ class V_ProductController extends VoyagerBaseController
             $model = app($dataType->model_name);
 
             // Use withTrashed() if model uses SoftDeletes and if toggle is selected
-            if ($model && in_array(SoftDeletes::class, class_uses($model))) {
+            if ($model && in_array(SoftDeletes::class, class_uses_recursive($model))) {
                 $model = $model->withTrashed();
             }
             if ($dataType->scope && $dataType->scope != '' && method_exists($model, 'scope'.ucfirst($dataType->scope))) {
@@ -212,32 +237,15 @@ class V_ProductController extends VoyagerBaseController
         // Check if BREAD is Translatable
         $isModelTranslatable = is_bread_translatable($dataTypeContent);
 
+        // Eagerload Relations
+
         $view = 'voyager::bread.read';
 
         if (view()->exists("voyager::$slug.read")) {
             $view = "voyager::$slug.read";
         }
 
-
-        //PRODUCT data
-        $productDATA = Product::productDATA($id);
-
-        // ATRIBUTI ZA PROIZVOD
-        $productAttributes = AttributesProduct::selectedAttributes_ForProduct($id);
-
-        // Selected Special Display Options
-        $specialDisplayOptionsForProduct = SpecialOptionForProducts::SelectedSpecialDisplayOptionsForProduct($id);
-
-        // Selected Product Badge
-        $badgeForProduct = BadgeProducts::badgeByProductID($id);
-
-        // Selected Product Images for gallery
-        $productGallery = ProductImages::productGalleryByProdID($id);
-
-
-        return Voyager::view($view, compact('dataType', 'dataTypeContent', 'isModelTranslatable', 'isSoftDeleted',
-                                            'productDATA','productAttributes','specialDisplayOptionsForProduct',
-                                            'badgeForProduct','productGallery'));
+        return Voyager::view($view, compact('dataType', 'dataTypeContent', 'isModelTranslatable', 'isSoftDeleted'));
     }
 
     //***************************************
@@ -262,7 +270,7 @@ class V_ProductController extends VoyagerBaseController
             $model = app($dataType->model_name);
 
             // Use withTrashed() if model uses SoftDeletes and if toggle is selected
-            if ($model && in_array(SoftDeletes::class, class_uses($model))) {
+            if ($model && in_array(SoftDeletes::class, class_uses_recursive($model))) {
                 $model = $model->withTrashed();
             }
             if ($dataType->scope && $dataType->scope != '' && method_exists($model, 'scope'.ucfirst($dataType->scope))) {
@@ -287,70 +295,39 @@ class V_ProductController extends VoyagerBaseController
         // Check if BREAD is Translatable
         $isModelTranslatable = is_bread_translatable($dataTypeContent);
 
+        // Eagerload Relations
+
         $view = 'voyager::bread.edit-add';
 
         if (view()->exists("voyager::$slug.edit-add")) {
             $view = "voyager::$slug.edit-add";
         }
 
-        // podaci o proizvodu
-        $productDATA = Product::where('id',$id)->first();
-        $categoryID = $productDATA->category_id;
-
-        // kategorij proizvoda
-        $productCategories_SEL = Category::productCategories_SEL();
-
-        // ATRIBUTi za PROIZVOD
-        $allAttributesForProduct = AttributesCategory::attributesDATA_for_Category($categoryID);
-
-        $categoriesForAttribute = array();
-
-        // odabrane VREDNOSTI ATRIBUTA za PROIZVOD
-        $odabraneVrednostiAtributaZaProizvod = AttributesProduct::selectedAttributesValue_ForProduct($id);
-
-        // MANUFACTURERS
-        $allManufacturers = Manufacturer::manufacturerALL();
-
-        // Special Display Options
-        $specialDisplayOptions = SpecialOption::SpecialDisplayOptions();
-
-        // Selected Special Display Options
-        $specialDisplayOptionsForProduct = SpecialOptionForProducts::where('product_id',$id)->pluck('special_options_id')->toArray();
-
-        // All Product Badges
-        $productBadges = Badge::allBadges();
-
-        // Selected Product Badge
-        $badgeForProduct = BadgeProducts::badgeByProductID($id);
-
+        //Products
+        $products = Product::select('id','title')->get();
 
         return Voyager::view($view, compact('dataType', 'dataTypeContent', 'isModelTranslatable',
-                                                'allAttributesForProduct','odabraneVrednostiAtributaZaProizvod','categoriesForAttribute',
-                                                'productCategories_SEL',
-                                                'allManufacturers',
-                                                'specialDisplayOptions','specialDisplayOptionsForProduct',
-                                                'productBadges','badgeForProduct'));
+                                            'products'));
     }
 
     // POST BR(E)AD
     public function update(Request $request, $id)
     {
-
         $slug = $this->getSlug($request);
 
         $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
 
         // Compatibility with Model binding.
-        $id = $id instanceof Model ? $id->{$id->getKeyName()} : $id;
+        $id = $id instanceof \Illuminate\Database\Eloquent\Model ? $id->{$id->getKeyName()} : $id;
 
         $model = app($dataType->model_name);
         if ($dataType->scope && $dataType->scope != '' && method_exists($model, 'scope'.ucfirst($dataType->scope))) {
             $model = $model->{$dataType->scope}();
         }
-        if ($model && in_array(SoftDeletes::class, class_uses($model))) {
+        if ($model && in_array(SoftDeletes::class, class_uses_recursive($model))) {
             $data = $model->withTrashed()->findOrFail($id);
         } else {
-            $data = call_user_func([$dataType->model_name, 'findOrFail'], $id);
+            $data = $model->findOrFail($id);
         }
 
         // Check permission
@@ -362,10 +339,14 @@ class V_ProductController extends VoyagerBaseController
 
         event(new BreadDataUpdated($dataType, $data));
 
-        return redirect()
-        ->route("voyager.{$dataType->slug}.index")
-        ->with([
-            'message'    => __('voyager::generic.successfully_updated')." {$dataType->display_name_singular}",
+        if (auth()->user()->can('browse', app($dataType->model_name))) {
+            $redirect = redirect()->route("voyager.{$dataType->slug}.index");
+        } else {
+            $redirect = redirect()->back();
+        }
+
+        return $redirect->with([
+            'message'    => __('voyager::generic.successfully_updated')." {$dataType->getTranslatedAttribute('display_name_singular')}",
             'alert-type' => 'success',
         ]);
     }
@@ -385,7 +366,6 @@ class V_ProductController extends VoyagerBaseController
 
     public function create(Request $request)
     {
-
         $slug = $this->getSlug($request);
 
         $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
@@ -407,39 +387,19 @@ class V_ProductController extends VoyagerBaseController
         // Check if BREAD is Translatable
         $isModelTranslatable = is_bread_translatable($dataTypeContent);
 
+        // Eagerload Relations
+
         $view = 'voyager::bread.edit-add';
 
         if (view()->exists("voyager::$slug.edit-add")) {
             $view = "voyager::$slug.edit-add";
         }
 
-        // kategorij proizvoda
-        $productCategories_SEL = Category::productCategories_SEL();
-
-        // MANUFACTURERS
-        $allManufacturers = Manufacturer::manufacturerALL();
-
-        // CAtegoriesForAttributes
-        $categoriesForAttribute = array();
-
-        // Special Display Options
-        $specialDisplayOptions = SpecialOption::SpecialDisplayOptions();
-
-        // Selected Special Display Options
-        $specialDisplayOptionsForProduct = array();
-
-        // All Product Badges
-        $productBadges = Badge::allBadges();
-
-        // Selected Product Badge
-        $badgeForProduct = array();
-        
+        //Products
+        $products = Product::select('id','title')->get();
 
         return Voyager::view($view, compact('dataType', 'dataTypeContent', 'isModelTranslatable',
-                                            'productCategories_SEL','allManufacturers',
-                                            'specialDisplayOptions','specialDisplayOptionsForProduct',
-                                            'productBadges','badgeForProduct',
-                                            'categoriesForAttribute'));
+                                            'products'));
     }
 
     /**
@@ -451,6 +411,8 @@ class V_ProductController extends VoyagerBaseController
      */
     public function store(Request $request)
     {
+
+        //return $request->all();
 
         $slug = $this->getSlug($request);
 
@@ -465,12 +427,20 @@ class V_ProductController extends VoyagerBaseController
 
         event(new BreadDataAdded($dataType, $data));
 
-        return redirect()
-        ->route("voyager.{$dataType->slug}.index")
-        ->with([
-                'message'    => __('voyager::generic.successfully_added_new')." {$dataType->display_name_singular}",
+        if (!$request->has('_tagging')) {
+            if (auth()->user()->can('browse', $data)) {
+                $redirect = redirect()->route("voyager.{$dataType->slug}.index");
+            } else {
+                $redirect = redirect()->back();
+            }
+
+            return $redirect->with([
+                'message'    => __('voyager::generic.successfully_added_new')." {$dataType->getTranslatedAttribute('display_name_singular')}",
                 'alert-type' => 'success',
             ]);
+        } else {
+            return response()->json(['success' => true, 'data' => $data]);
+        }
     }
 
     //***************************************
@@ -491,9 +461,6 @@ class V_ProductController extends VoyagerBaseController
 
         $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
 
-        // Check permission
-        $this->authorize('delete', app($dataType->model_name));
-
         // Init array of IDs
         $ids = [];
         if (empty($id)) {
@@ -506,13 +473,16 @@ class V_ProductController extends VoyagerBaseController
         foreach ($ids as $id) {
             $data = call_user_func([$dataType->model_name, 'findOrFail'], $id);
 
+            // Check permission
+            $this->authorize('delete', $data);
+
             $model = app($dataType->model_name);
-            if (!($model && in_array(SoftDeletes::class, class_uses($model)))) {
+            if (!($model && in_array(SoftDeletes::class, class_uses_recursive($model)))) {
                 $this->cleanup($dataType, $data);
             }
         }
 
-        $displayName = count($ids) > 1 ? $dataType->display_name_plural : $dataType->display_name_singular;
+        $displayName = count($ids) > 1 ? $dataType->getTranslatedAttribute('display_name_plural') : $dataType->getTranslatedAttribute('display_name_singular');
 
         $res = $data->destroy($ids);
         $data = $res
@@ -548,7 +518,7 @@ class V_ProductController extends VoyagerBaseController
         }
         $data = $model->findOrFail($id);
 
-        $displayName = $dataType->display_name_singular;
+        $displayName = $dataType->getTranslatedAttribute('display_name_singular');
 
         $res = $data->restore($id);
         $data = $res
@@ -567,6 +537,7 @@ class V_ProductController extends VoyagerBaseController
 
         return redirect()->route("voyager.{$dataType->slug}.index")->with($data);
     }
+
     //***************************************
     //
     //  Delete uploaded file
@@ -695,6 +666,7 @@ class V_ProductController extends VoyagerBaseController
             ], $code);
         }
     }
+
     /**
      * Remove translations, images and files related to a BREAD item.
      *
@@ -812,7 +784,7 @@ class V_ProductController extends VoyagerBaseController
         }
 
         $model = app($dataType->model_name);
-        if ($model && in_array(SoftDeletes::class, class_uses($model))) {
+        if ($model && in_array(SoftDeletes::class, class_uses_recursive($model))) {
             $model = $model->withTrashed();
         }
         $results = $model->orderBy($dataType->order_column, $dataType->order_direction)->get();
@@ -849,7 +821,7 @@ class V_ProductController extends VoyagerBaseController
         $order = json_decode($request->input('order'));
         $column = $dataType->order_column;
         foreach ($order as $key => $item) {
-            if ($model && in_array(SoftDeletes::class, class_uses($model))) {
+            if ($model && in_array(SoftDeletes::class, class_uses_recursive($model))) {
                 $i = $model->withTrashed()->findOrFail($item->id);
             } else {
                 $i = $model->findOrFail($item->id);
