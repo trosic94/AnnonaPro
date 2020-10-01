@@ -1154,9 +1154,24 @@
                 color: $primary-color;
             }
         }
-        img {
-            @include img100;
+        .nav-tabs {
+            border-bottom: 1px solid #dee2e6;
+            background: #F9F9F9 0% 0% no-repeat padding-box;
         }
+        .nav-tabs .nav-link.active,
+        .nav-tabs .nav-item.show .nav-link {
+            color: #fff;
+            background-color: $primary-color;
+            border-color: #dee2e6 #dee2e6 #fff;
+            text-transform: uppercase;
+        }
+        .nav-justified .nav-item {
+            text-transform: uppercase;
+            color: $primary-color;
+        }
+        // img {
+        //     @include img100;
+        // }
     }
     
     // FOOTER --------------------------------------------------------------------------------------------------------- //

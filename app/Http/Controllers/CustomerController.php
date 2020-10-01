@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Customer;
 use App\Order;
+use App\NewsletterSubscriber;
 
 use Illuminate\Http\Request;
 
@@ -75,6 +76,35 @@ class CustomerController extends Controller
         endif;
 
         $update = DB::table('users')->where('id',$ulogovan->id)->where('role_id',2)->update($customer);
+
+       
+        // PRIJAVA/ODJAVA za NL -------------------------------------------------------------------------------- //
+        $daLiPostojiPrijavaZaNL = NewsletterSubscriber::where('user_id',$ulogovan->id)->first();
+
+        // proveravam da li je User prijavljen na NL, ako nije prijavljujem
+        if ($daLiPostojiPrijavaZaNL):
+
+            // ako postoji prijava, updejtujem status
+            if (request('newsletter_subscriber') == 'on'):
+                $updejtujemSTATUS = NewsletterSubscriber::where('user_id',$ulogovan->id)->update(['status'=>1]);
+            else:
+                $updejtujemSTATUS = NewsletterSubscriber::where('user_id',$ulogovan->id)->update(['status'=>0]);
+            endif;
+
+        else:
+
+            // ako nema prijave, dodajem novu
+            if (request('newsletter_subscriber') == 'on'):
+                $prijavljujemNaListu = NewsletterSubscriber::insert([
+                    'user_id' => $ulogovan->id,
+                    'email' => $customer['email'],
+                    'status' => 1
+                ]);
+            endif;
+
+        endif;
+        // PRIJAVA/ODJAVA za NL -------------------------------------------------------------------------------- //
+
 
 		return redirect(url()->previous());
     }

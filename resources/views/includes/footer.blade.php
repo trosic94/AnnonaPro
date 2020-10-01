@@ -37,7 +37,7 @@
 					<div id="shopNAV" class="col-xl-4 col-md-8 text-center text-md-left pt-3 pt-xl-0">
 						<h5>@lang('shop.title_newsletter')</h5>
 						<div class="border-annona w-25"></div>
-						<div class="pt-3 text-justify small">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+						<div class="pt-3 text-justify small text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
 						<div class="pt-2">
 							<div class="md-form white md-bg input-with-post-icon rounded-pill">
 								<i class="far fa-envelope input-prefix rounded-circle text-white primary-color p-2 mr-n3"></i>

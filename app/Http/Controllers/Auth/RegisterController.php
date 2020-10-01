@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
+use App\Providers\RouteServiceProvider;
+use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
+
+use App\NewsletterSubscriber;
 
 class RegisterController extends Controller
 {
@@ -27,6 +32,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
+    //protected $redirectTo = RouteServiceProvider::HOME;
     protected $redirectTo = '/';
 
     /**
@@ -48,9 +54,9 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
 
@@ -62,7 +68,9 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+
+        // Kreiram novog usera
+        $NEWuser = User::create([
             'name' => $data['name'],
             'last_name' => $data['last_name'],
             'email' => $data['email'],
@@ -82,5 +90,20 @@ class RegisterController extends Controller
             'company_vat' => $data['company_vat'],
             'password' => bcrypt($data['password']),
         ]);
+
+
+        // ako je pristao da dobija obavestenja, prijavljujem na listu
+        if ($data['newsletter_subscriber'] == 'on'):
+
+            $addSubscriber = NewsletterSubscriber::create([
+                'user_id' => $NEWuser->id,
+                'email' => $data['email'],
+                'status' => 1,
+            ]);
+
+        endif;
+
+        return $NEWuser;
+
     }
 }

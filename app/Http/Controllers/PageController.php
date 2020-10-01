@@ -18,7 +18,7 @@ class PageController extends Controller
             $metaDescription = $page->meta_description;
             $metaKeywords = $page->meta_keywords;
 
-            return view('page.static', compact('intro','page','metaTitle','metaDescription','metaKeywords'));
+            return view('page.static', compact('page','metaTitle','metaDescription','metaKeywords'));
         else:
             return abort(404);
         endif;

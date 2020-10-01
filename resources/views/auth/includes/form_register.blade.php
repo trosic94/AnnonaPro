@@ -6,7 +6,7 @@
 
                             <div class="col-xl-6 col-lg-6">
 
-                                <h3>@lang('shop.register_pesonal_details')</h3>
+                                <h3 class="subTitle">@lang('shop.register_pesonal_details')</h3>
 
                                 <div class="row">
 
@@ -143,7 +143,7 @@
 
                             <div class="col-xl-6 col-lg-6">
 
-                                <h3>@lang('shop.register_company_details')</h3>
+                                <h3 class="subTitle">@lang('shop.register_company_details')</h3>
 
                                 <div class="md-form mt-3">
                                     <input type="text" name="company_name" id="formCOMPANYNAME" class="form-control" value="{{ old('company_name') }}" autocomplete="off">
@@ -229,6 +229,21 @@
 
                                 </div>
 
+                                <hr>
+
+                                <div class="row mt-4">
+
+                                    <div class="col-xl-12">
+
+                                        <div class="form-check">
+                                            <input type="checkbox" name="newsletter_subscriber" class="form-check-input" id="NLSubscriber" {{ old('newsletter_subscriber') ? 'checked' : '' }}>
+                                            <label class="form-check-label" for="NLSubscriber">@lang('shop.title_newsletter_want_to_subscribe')</label>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
                             </div>
 
                         </div>
@@ -238,7 +253,7 @@
 
                             <div class="col-xl-6">
                                 
-                                <button type="submit" class="btn btn-primary btn-block my-4">@lang('shop.btn_register')</button>
+                                <button type="submit" class="btn btn-block rounded-pill btnPink my-4">@lang('shop.btn_register')</button>
 
                             </div>
                         </div>

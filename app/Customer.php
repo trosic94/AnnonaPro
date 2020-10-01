@@ -14,6 +14,7 @@ class Customer extends Model
     {
     	$customerDATA = DB::table('users as U')
                             ->leftJoin('roles as R','R.id','U.role_id')
+                            ->leftJoin('newsletter_subscribers as NLS','NLS.user_id','U.id')
                             ->where('U.id',$userID)
                             ->select(
                                 'U.name as name',
@@ -36,7 +37,8 @@ class Customer extends Model
                                 'U.company_email as company_email',
                                 'U.company_vat as company_vat',
                                 'R.name as role_name',
-                                'R.display_name as role_display_name'
+                                'R.display_name as role_display_name',
+                                'NLS.status as nls_status'
                             )
                             ->first();
 

@@ -2,10 +2,9 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-
-use Illuminate\Contracts\Auth\CanResetPassword;
+use Illuminate\Notifications\Notifiable;
 
 class User extends \TCG\Voyager\Models\User
 {
@@ -17,7 +16,10 @@ class User extends \TCG\Voyager\Models\User
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','last_name','phone','address','zip','city','country','avatar','loy_barcode','company_name','company_address','company_zip','company_city','company_country','company_phone','company_email','company_vat'
+        'name', 'email', 'password',
+        'last_name', 'phone', 'address', 'zip', 'city', 'loy_barcode',
+        'company_name', 'company_address', 'company_zip', 'company_city', 'company_phone', 'company_email', 'company_vat',
+        'newsletter_subscriber'
     ];
 
     /**
@@ -29,11 +31,12 @@ class User extends \TCG\Voyager\Models\User
         'password', 'remember_token',
     ];
 
-
-
-    // relacije
-    public function order()
-    {
-        return $this->hasMany('App\Order','user_id','id');
-    }
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
 }

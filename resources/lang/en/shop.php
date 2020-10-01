@@ -17,7 +17,15 @@ return [
     'btn_confirm' => 'Confirm',
     'btn_cancel' => 'Cancel',
     'btn_confirm_correction' => 'Confirm correction!',
+    'btn_confirm_ordering' => 'Confirm order',
+    'btn_buy' => 'Buy',
+    'btn_user_login' => 'Login',
+    'btn_register' => 'Register',
+    'btn_logout' => 'Logout',
     'btn_confirm_order' => 'Confirm order',
+    'btn_agree' => 'Confirm',
+    'btn_order' => 'Order',
+    'btn_search' => 'Search',
 
     'title_edit' => 'Edit',
     'title_index' => 'View',
@@ -86,6 +94,7 @@ return [
     'title_amount_spent' => 'Amount spent',
     'title_row_number' => 'No.',
     'title_discount' => 'Discount',
+    'title_price_with_discount' => 'Price with discount',
     'title_consumption' => 'Consumtion',
     'title_total' => 'T O T A L',
     'title_setup' => 'Setup',
@@ -108,6 +117,11 @@ return [
     'title_user' => 'User',
     'title_added' => 'Added',
     'title_updated' => 'Updated',
+    'title_navigation' => 'Navigation',
+    'title_purchase_instructions' => 'Purchase instructions',
+    'title_select_design' => 'Odaberi design',
+    'title_gallery' => 'Gallery',
+    'title_choose_category' => 'Choose category',
 
     'title_input_select' => 'Select',
     'title_input_check_list' => 'Check List',
@@ -188,9 +202,17 @@ return [
     'forgot_password_email' => 'Your email address',
 
 
+    /* HOME ------------------------------------------------------*/
+    'title_decorative_ribbons' => 'Decorative ribbons',
+    'title_create_ribbon' => 'Create ribbon',
+    'title_protective_masks' => 'Protective masks',
+    'title_create_mask' => 'Create mask',
 
-    /* SOPY ------------------------------------------------------*/
-    'footer_copy_1' => 'M Games.rs 2020. All rights reserved 1111',
+    /* NEWSLETTER  --------------------------------------------------------------------*/
+    'title_newsletter_want_to_subscribe' => 'I want to receive notifications by e-mail',
+
+    /* COPY ------------------------------------------------------*/
+    'footer_copy_1' => 'Kupi Poklon 2020. All rights reserved 1111',
 
     
 ];
