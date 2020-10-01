@@ -42600,7 +42600,6 @@ div#bannerWrap img {
   font-size: x-small;
 }
 
-<<<<<<< HEAD
 .modified-accordion .card-header {
   position: relative;
 }
@@ -42626,7 +42625,8 @@ div#bannerWrap img {
   .modified-accordion .card-header:after {
     display: none;
   }
-=======
+}
+
 /* Icon 1 */
 
 .animated-icon1,
@@ -42761,6 +42761,5 @@ div#bannerWrap img {
   transform: rotate(-45deg);
   top: 21px;
   left: 8px;
->>>>>>> a0efdef4157a7a39b321417610f8f3c389c33faf
 }
 
