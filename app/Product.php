@@ -190,6 +190,7 @@ class Product extends Model
                             ->where('PROD.status',1)
                             ->where('PROD.product_price','!=',0)
                             ->where('CAT.parent_id',$catID)
+                            //->where('PROD.category_id',$catID)
                             ->select(
                                 'PROD.id as prod_id',
                                 'PROD.sku as prod_sku',
@@ -293,6 +294,7 @@ class Product extends Model
 
         return $allProducts;
     }
+
 
 
     //relacije

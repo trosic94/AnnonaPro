@@ -1,6 +1,7 @@
 	
-	@if ($productDATA->prod_body != '' || $productDATA->prod_specification != '' || $productDATA->prod_video != '')
+	
 <div class="col-12">
+	@if ($productDATA->prod_body != '' || $productDATA->prod_specification != '' || $productDATA->prod_video != '')
 	<div class="row">
 
 		<div class="col-xl-12 p-0">
@@ -60,11 +61,12 @@
 		</div>
 
 	</div>
+	@endif
 	<div class="row prodDetails mb-2">
-		<div class="d-inline">
+		<div class="d-inline mr-5">
 			<label class="text-secondary">Zapremina:</label><label class="annonaOrange">10ml</label>
 		</div>
-		<div class="d-inline ml-5">
+		<div class="d-inline ">
 			<label class="text-secondary">Dodaj u listu želja:</label>
 			<div id="addTo_FAV" class="prod_{{ $productDATA->prod_id }}" onclick="FavEvent({{ $productDATA->prod_id }})">
               <i class="far fa-heart text-primary {{ (in_array($productDATA->prod_id,$favLIST))? 'd-none':'d-block' }}"></i>
@@ -86,7 +88,10 @@
 						<div class="  ">Cena:</div><span class="discountPrice font-weight-bold text-lowercase {{ ($productDATA->cat_color == null)? 'primary-color':'' }} " style="color: {{ ($productDATA->cat_color != null)? $productDATA->cat_color:'' }};">{{ number_format($productDATA->prod_price_with_discount,0,"",".") }} {{ setting('site.valuta') }}</span>
 					</div>
 	                @else
-					<div class="d-inline small text-secondary align-bottom">Cena:</div><span class="singlePrice m-0 font-weight-bold text-lowercase " style="color: {{ ($productDATA->cat_color != null)? $productDATA->cat_color:'' }};">{{ number_format($productDATA->prod_price,0,"",".") }} {{ setting('site.valuta') }}</span>
+	                <div class="row">
+	                	<div class="d-inline m-0 text-secondary align-bottom">Cena:</div><span class="singlePrice m-0 font-weight-bold text-lowercase " style="color: {{ ($productDATA->cat_color != null)? $productDATA->cat_color:'' }};">{{ number_format($productDATA->prod_price,0,"",".") }} {{ setting('site.valuta') }}</span>
+	                </div>
+					
 	                @endif
 				</div>
 	        </div>
@@ -109,4 +114,4 @@
 
 	</div>
 
-	@endif
+	

@@ -18,27 +18,32 @@
 		
 			{{-- IMAGE --}}
 			<div class="col-md-6">
-
 				
 				  <div class="row m-0">
 				  	<div class="row col-7">
+				  		@isset ($productImages[0]['image'])
 				  		<div class="row align-items-center">
-				  			<a href="https://unsplash.it/1200/768.jpg?image=251" data-toggle="lightbox" data-gallery="gallery" class="col-md-12">
-						      <img src="https://unsplash.it/600.jpg?image=251" class="img-fluid rounded">
+				  			<a href="/storage/{{$productImages[0]['image']}}" data-toggle="lightbox" data-gallery="gallery" class="col-md-12">
+						      <img src="/storage/{{$productImages[0]['image']}}" class="img-fluid rounded">
 						    </a>
 				  		</div>
+				  		@endisset
 				  	</div>
 				  	<div class="row col-5">
+				  		@isset ($productImages[1]['image'])
 				  		<div class="row align-items-start m-1">
-				  			<a href="https://unsplash.it/1200/768.jpg?image=252" data-toggle="lightbox" data-gallery="gallery" class="col-md-12">
-					          <img src="https://unsplash.it/600.jpg?image=252" class="img-fluid rounded">
+				  			<a href="/storage/{{$productImages[1]['image']}}" data-toggle="lightbox" data-gallery="gallery" class="col-md-12">
+					          <img src="/storage/{{$productImages[1]['image']}}" class="img-fluid rounded">
 						    </a>
 				  		</div>
+				  		@endisset
+				  		@isset ($productImages[2]['image'])
 				  		<div class="row align-items-end m-1">
-				  			<a href="https://unsplash.it/1200/768.jpg?image=253" data-toggle="lightbox" data-gallery="gallery" class="col-md-12">
-						      <img src="https://unsplash.it/600.jpg?image=253" class="img-fluid rounded">
+				  			<a href="/storage/{{$productImages[2]['image']}}" data-toggle="lightbox" data-gallery="gallery" class="col-md-12">
+						      <img src="/storage/{{$productImages[2]['image']}}" class="img-fluid rounded">
 						    </a>
 				  		</div>
+				  		@endisset
 				  	</div>
 				  </div>
 				  {{-- <div class="row">
