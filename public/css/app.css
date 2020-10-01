@@ -42600,12 +42600,11 @@ div#bannerWrap img {
   font-size: x-small;
 }
 
-<<<<<<< HEAD
-.modified-accordion .card-header {
+.modified-accordion .cardHead {
   position: relative;
 }
 
-.modified-accordion .card-header:after {
+.modified-accordion .cardHead:after {
   content: "";
   position: absolute;
   width: 100%;
@@ -42623,10 +42622,11 @@ div#bannerWrap img {
     display: none;
   }
 
-  .modified-accordion .card-header:after {
+  .modified-accordion .cardHead:after {
     display: none;
   }
-=======
+}
+
 /* Icon 1 */
 
 .animated-icon1,
@@ -42761,6 +42761,5 @@ div#bannerWrap img {
   transform: rotate(-45deg);
   top: 21px;
   left: 8px;
->>>>>>> a0efdef4157a7a39b321417610f8f3c389c33faf
 }
 
