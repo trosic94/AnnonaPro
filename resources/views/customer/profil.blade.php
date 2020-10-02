@@ -251,7 +251,7 @@
 
                         <div class="col-xl-6">
                             
-                            <button type="submit" class="btn btn-block rounded-pill btnPink my-4">@lang('shop.btn_confirm')</button>
+                            <button type="submit" class="btn btn-block rounded-pill my-4 btn-primary">@lang('shop.btn_confirm')</button>
 
                         </div>
                     </div>
