@@ -416,17 +416,20 @@ function CartEvent(prodID) {
             
                 $('div#cartCount span.badge').removeClass('d-block').addClass('d-none').html('');
                 $('div#myCart div#cartCountTXT').removeClass('d-none').addClass('d-block');
+                $('div#myCart div#cartPrice').removeClass('d-block').addClass('d-none');
 
             } else {
 
-                var newCartCOUNT = Number(cartCOUNT) + 1;
+                var newCartCOUNT = Number(cartCOUNT) + Number(prodQTTY);
 
                 $('div#cartCount span.badge').removeClass('d-none').addClass('d-block').html(newCartCOUNT);
                 $('div#myCart div#cartCountTXT').removeClass('d-block').addClass('d-none');
+                $('div#myCart div#cartPrice').removeClass('d-none').addClass('d-block');
+                $('span#head_price').html(currencyFormat(rsp.header_price));
 
             }
 
-            $('header div#cartDATA').html(rsp);
+            $('header div#cartDATA').html(rsp.cart);
             $('#myCartModal').modal('show');
 
             new WOW().init();

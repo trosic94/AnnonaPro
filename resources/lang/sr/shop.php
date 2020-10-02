@@ -409,7 +409,7 @@ return [
 
 
     /* SOPY ------------------------------------------------------*/
-    'footer_copy_1' => 'M Games.rs 2020. Sva prava zadržana',
+    'footer_copy_1' => 'AnnonaPro 2020. Sva prava zadržana',
 
     
 ];
