@@ -161,13 +161,17 @@ class SearchController extends Controller
 
         elseif ($currentCAT->parent_id == 3):
 
+            $numberOfChildCATs = Category::where('parent_id',$currentCAT->id)->count();
+            if ($numberOfChildCATs > 0):
             // ako je parent cat
-            $childCATs = DB::table('categories as CAT')
-                                ->where('parent_id',$currentCAT->id)
-                                ->pluck('id')->toArray();
+                $childCATs = DB::table('categories as CAT')
+                                    ->where('parent_id',$currentCAT->id)
+                                    ->pluck('id')->toArray();
 
-            $builder->whereIn('PROD.category_id',$childCATs);
-
+                $builder->whereIn('PROD.category_id',$childCATs);
+            else:
+                $builder->where('PROD.category_id',$currentCAT->id);
+            endif;
         else:
 
             $builder->where('PROD.category_id',$currentCAT->id);
