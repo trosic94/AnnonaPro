@@ -121,9 +121,16 @@
                                     <label class="control-label" for="name">@lang('shop_admin.title_product_discount')</label>
                                     <input type="text" class="form-control" name="product_discount" step="any" placeholder="@lang('shop_admin.title_product_discount')" value="{{ ($dataTypeContent->product_discount == null)? '': $dataTypeContent->product_discount }}">
                                 </div>
+                                
+
                                 <div class="form-group">
                                     <label class="control-label" for="name">@lang('shop_admin.title_product_price_with_discount')</label>
                                     <input type="text" class="form-control" name="product_price_with_discount" step="any" placeholder="@lang('shop_admin.title_product_price_with_discount')" value="{{ ($dataTypeContent->product_price_with_discount == null)? '': $dataTypeContent->product_price_with_discount }}">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label" for="name">@lang('shop_admin.title_product_volume')</label>
+                                    <input type="text" class="form-control" name="zapremina" step="any" placeholder="@lang('shop_admin.title_product_volume')" value="{{ ($dataTypeContent->zapremina == null)? '': $dataTypeContent->zapremina }}">
                                 </div>
 
                                 <hr>

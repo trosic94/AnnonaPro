@@ -7,6 +7,7 @@ use App\Category;
 use App\AttributesProduct;
 use App\AttributesCategory;
 use App\Manufacturer;
+use App\ProductImages;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -169,8 +170,11 @@ class CategoryController extends Controller
             // MANUFACTURERS
             $manufacturers = Manufacturer::manufacturersByCAT($currentCAT->id);
 
+            //Da li postoje podredjene kategoriej
+            $numberOfChildCATs = Category::where('parent_id',$currentCAT->id)->count();
+
             // PRODUCTS
-            if ($currentCAT->parent_id == 3):
+            if ($currentCAT->parent_id == 3 && $numberOfChildCATs != 0):
                 $productsFor_CAT = Product::productsFor_MainCAT($currentCAT->id);
             else:
                 $productsFor_CAT = Product::productsFor_CAT($currentCAT->id);
@@ -241,6 +245,10 @@ class CategoryController extends Controller
             // PRODUCT options
             $selectedAttributes = AttributesProduct::selectedAttributes_ForProduct($productDATA->prod_id);
 
+            // Product images
+            $productImages = ProductImages::where('product_id',$productDATA->prod_id)->orderBy('image_order', 'ASC')->get()->toArray();
+
+
             // ATRIBUTi za PROIZVOD
             $allAttributesForProduct = AttributesCategory::attributesDATA_for_Category($productDATA->prod_cat_id);
 
@@ -248,7 +256,7 @@ class CategoryController extends Controller
             $odabraneVrednostiAtributaZaProizvod = AttributesProduct::selectedAttributesValue_ForProduct($productDATA->prod_id);
 
             return view('product.index', compact('intro','slug','favLIST','metaTitle','metaDescription','metaKeywords',
-                                                    'productDATA','selectedAttributes','allAttributesForProduct','odabraneVrednostiAtributaZaProizvod'));
+                                                    'productDATA','selectedAttributes','allAttributesForProduct','odabraneVrednostiAtributaZaProizvod','productImages'));
 
 
         endif;

@@ -142,6 +142,7 @@ return [
     'title_product_price' => 'Product price',
     'title_product_discount' => 'Product discount (%)',
     'title_product_price_with_discount' => 'Product price with discount',
+    'title_product_volume' => 'Product volume',
     'title_product_details' => 'Product details',
     'title_product_description' => 'Product description',
     'title_product_intro' => 'Product intro',

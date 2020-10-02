@@ -126,9 +126,9 @@ eval("// removed by extract-text-webpack-plugin//# sourceURL=[module]\n//# sourc
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\wamp64\www\annonapro-git\AnnonaPro\resources\assets\js\shp.js */"./resources/assets/js/shp.js");
-__webpack_require__(/*! C:\wamp64\www\annonapro-git\AnnonaPro\resources\assets\sass\app.scss */"./resources/assets/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\wamp64\www\annonapro-git\AnnonaPro\resources\assets\sass\voyager.scss */"./resources/assets/sass/voyager.scss");
+__webpack_require__(/*! C:\wamp64\www\AnnonaPro\resources\assets\js\shp.js */"./resources/assets/js/shp.js");
+__webpack_require__(/*! C:\wamp64\www\AnnonaPro\resources\assets\sass\app.scss */"./resources/assets/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\wamp64\www\AnnonaPro\resources\assets\sass\voyager.scss */"./resources/assets/sass/voyager.scss");
 
 
 /***/ })
