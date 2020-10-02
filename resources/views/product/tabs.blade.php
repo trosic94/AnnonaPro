@@ -63,10 +63,20 @@
 	</div>
 	@endif
 	<div class="row prodDetails mb-2">
-		<div class="d-inline mr-5">
+		<div class="col mr-2 px-0">
 			<label class="text-secondary">Zapremina:</label><label class="annonaOrange">{{$productDATA->zapremina}}</label>
 		</div>
-		<div class="d-inline ">
+		<div class="col mr-2 px-0">
+			<div class="row">
+			<label class="text-secondary pr-2">Količina:</label>
+			<div id="qtyWrap">
+				<div id="btnMinus" class="btnMINUS" onclick="qtyMINUS_Item()"><i class="fas fa-minus"></i></div>
+				<input id="prodQuantity" class="prod_quantity" name="prod_quantity" class="" value="1" readonly="">
+				<div id="btnPlus" class="btnPLUS" onclick="qtyPLUS_Item()"><i class="fas fa-plus"></i></div>
+			</div>
+			</div>
+		</div>
+		<div class="col px-0">
 			<label class="text-secondary">Dodaj u listu želja:</label>
 			<div id="addTo_FAV" class="prod_{{ $productDATA->prod_id }}" onclick="FavEvent({{ $productDATA->prod_id }})">
               <i class="far fa-heart text-primary {{ (in_array($productDATA->prod_id,$favLIST))? 'd-none':'d-block' }}"></i>

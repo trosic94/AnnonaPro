@@ -1562,7 +1562,6 @@
         content: '\f274';
         position: absolute;
         right: 6px;
-
     }
     
     div#contactNav {
@@ -1598,5 +1597,67 @@
         label {
             font-size: 80%;
             color: $secondary-color;
+        }
+    }
+    
+    // Product Quantity -------------------------------------------------------------------- //
+    div#qtyWrap {
+        display: table;
+        //min-width: 100px;
+        div.btnMINUS {
+            display: table-cell;
+            //   height: 30px;
+            width: 20px;
+            cursor: pointer;
+            color: $secondary-color;
+            //   line-height: 30px;
+            text-align: center;
+            background-color: $annona-gray-light;
+            -webkit-border-top-left-radius: 16px;
+            -webkit-border-bottom-left-radius: 16px;
+            -moz-border-radius-topleft: 16px;
+            -moz-border-radius-bottomleft: 16px;
+            border-top-left-radius: 16px;
+            border-bottom-left-radius: 16px;
+            font-size: 12px;
+            @include trans_05;
+            &:hover {
+                color: $white;
+                background-color: $primary-color;
+            }
+        }
+        input.prod_quantity {
+            display: table-cell;
+            width: 30px;
+            height: 25px;
+            color: $secondary-color;
+            font-weight: 600;
+            text-align: center !important;
+            background-color: $annona-gray-light;
+            border: none;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+        div.btnPLUS {
+            display: table-cell;
+            //height: 30px;
+            width: 20px;
+            cursor: pointer;
+            color: $secondary-color;
+            // line-height: 30px;
+            text-align: center;
+            background-color: $annona-gray-light;
+            -webkit-border-top-right-radius: 16px;
+            -webkit-border-bottom-right-radius: 16px;
+            -moz-border-radius-topright: 16px;
+            -moz-border-radius-bottomright: 16px;
+            border-top-right-radius: 16px;
+            border-bottom-right-radius: 16px;
+            font-size: 12px;
+            @include trans_05;
+            &:hover {
+                color: $white;
+                background-color: $primary-color;
+            }
         }
     }
