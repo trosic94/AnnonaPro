@@ -61,7 +61,7 @@ class OrderController extends Controller
     public function confirmOrder(Request $request)
     {
 
-        return $request->all();
+       // return $request->all();
 
         $ulogovan = Auth::user();
 
