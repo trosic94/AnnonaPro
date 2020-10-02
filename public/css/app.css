@@ -42812,3 +42812,38 @@ div#bannerWrap img {
   left: 8px;
 }
 
+div#contactNav h5 {
+  color: #389178;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+div#contactNav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+div#contactNav ul li a {
+  color: #707070;
+}
+
+div#contactNav ul li a:hover {
+  color: #389178;
+}
+
+#btnToSend input {
+  background-color: #F9F9F9;
+  border-radius: 20px;
+}
+
+#btnToSend textarea {
+  background-color: #F9F9F9;
+  border-radius: 20px;
+}
+
+#btnToSend label {
+  font-size: 80%;
+  color: #707070;
+}
+
