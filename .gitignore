@@ -3,7 +3,9 @@
 /public/hot
 /public/storage
 /storage/*.key
-/vendor
+/vendor/*
+!/vendor/dompdf/
+!/vendor/egulias/
 /.idea
 /.vagrant
 Homestead.json
