@@ -719,7 +719,7 @@
     div.productNAV {
         display: block;
         // width: 100%;
-        font-size: 18px;
+        font-size: 16px;
         // background-color: $blue;
         .navbar.navbar-light .breadcrumb .nav-item .nav-link,
         .navbar.navbar-light .navbar-nav .nav-item .nav-link {
@@ -1541,27 +1541,33 @@
         top: 21px;
         left: 8px;
     }
-
+    
     .btn-circle {
-    width: 30px;
-    height: 30px;
-    padding: 6px 0px;
-    border-radius: 15px;
-    text-align: center;
-    font-size: 12px;
-    line-height: 1.42857;
-}
-
-   .input-wrapper {
-        display:inline-block;
+        width: 30px;
+        height: 30px;
+        padding: 6px 0px;
+        border-radius: 15px;
+        text-align: center;
+        font-size: 12px;
+        line-height: 1.42857;
+    }
+    
+    .input-wrapper {
+        display: inline-block;
         position: relative
     }
+    
     .input-wrapper:after {
         font-family: 'FontAwesome';
         content: '\f274';
         position: absolute;
         right: 6px;
+<<<<<<< HEAD
 }
+=======
+    }
+    
+>>>>>>> 252a9dfac902f6b0a2c9d7813667ec795bbb920f
     div#contactNav {
         h5 {
             color: $primary-color;
