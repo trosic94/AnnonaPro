@@ -214,13 +214,13 @@
 // echo '</pre>';
 @endphp
 
-<script type="text/javascript">
+{{-- <script type="text/javascript">
     $('document').ready(function () {
 
         $('.mdb-select').materialSelect();
 
     });
-</script>
+</script> --}}
 
 </content>
 
