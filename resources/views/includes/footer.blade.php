@@ -42,8 +42,8 @@
 							<form class="needs-validation" method="POST" action="/subscribe-newsletter" novalidate>
                 			{{ csrf_field() }}
                 			<div class="col-12">
-                				@if (\Session::has('mailSent'))
-		                            <div class="alert alert-success" role="alert">{!! \Session::get('mailSent') !!}</div>
+                				@if (\Session::has('mailSentFooter'))
+		                            <div class="alert alert-success" role="alert">{!! \Session::get('mailSentFooter') !!}</div>
 		                        @endif
 		                        @if (\Session::has('emailDuplicate'))
 		                            <div class="alert alert-warning" role="alert">{!! \Session::get('emailDuplicate') !!}</div>

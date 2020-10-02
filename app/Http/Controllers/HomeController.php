@@ -130,7 +130,7 @@ class HomeController extends Controller
            
 
 
-        return  redirect()->to('/')->with('mailSent', 'Uspesno ste se prijavili.');
+        return  redirect()->to('/')->with('mailSentFooter', 'Uspesno ste se prijavili.');
 
     }
     public function validateContact($request)
