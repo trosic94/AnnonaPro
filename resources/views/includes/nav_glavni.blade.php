@@ -59,7 +59,7 @@
     @endphp
 
 				    <li class="{{ $isActive }} nav-item col-auto px-3 py-2">
-				        <a href="{{ url($item->link()) }}" target="{{ $item->target }}" class="nav-link" style="{{ $styles }}; background-color: unset;">
+				        <a href="{{ url($item->link()) }}" target="{{ $item->target }}" class="nav-link" style="background-color: unset;">
 				            {!! $icon !!}
 				            <span class="ml-2">{{ $item->title }}</span>
 				        </a>

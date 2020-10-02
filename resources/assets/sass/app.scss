@@ -721,6 +721,10 @@
         // width: 100%;
         font-size: 18px;
         // background-color: $blue;
+        .navbar.navbar-light .breadcrumb .nav-item .nav-link,
+        .navbar.navbar-light .navbar-nav .nav-item .nav-link {
+            color: unset;
+        }
         ul {
             width: 100%;
             margin: 0;
@@ -740,6 +744,10 @@
             }
              :last-of-type {
                 padding-right: 0 !important;
+            }
+            .active {
+                color: $primary-color;
+                font-weight: 500;
             }
         }
     }
@@ -1166,6 +1174,7 @@
             text-transform: uppercase;
         }
         .nav-justified .nav-item {
+            flex-basis: unset;
             text-transform: uppercase;
             color: $primary-color;
         }

@@ -41870,6 +41870,11 @@ div.productNAV {
   font-size: 18px;
 }
 
+div.productNAV .navbar.navbar-light .breadcrumb .nav-item .nav-link,
+div.productNAV .navbar.navbar-light .navbar-nav .nav-item .nav-link {
+  color: unset;
+}
+
 div.productNAV ul {
   width: 100%;
   margin: 0;
@@ -41889,6 +41894,11 @@ div.productNAV ul li :hover {
 
 div.productNAV ul :last-of-type {
   padding-right: 0 !important;
+}
+
+div.productNAV ul .active {
+  color: #389178;
+  font-weight: 500;
 }
 
 @media (min-width: 992px) and (max-width: 1100px) {
@@ -42421,6 +42431,7 @@ div.staticContent .nav-tabs .nav-item.show .nav-link {
 }
 
 div.staticContent .nav-justified .nav-item {
+  flex-basis: unset;
   text-transform: uppercase;
   color: #389178;
 }

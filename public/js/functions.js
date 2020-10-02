@@ -513,3 +513,10 @@ $(document).ready(function() {
         $('.animated-icon3').toggleClass('open');
     });
 });
+// nav active
+// $(document).ready(function() {
+//     $('div.productNAV .navbar-nav .nav-item').click(function() {
+//         $('div.productNAV .navbar-nav .nav-item').removeClass('active');
+//         $(this).addClass('active');
+//     })
+// });

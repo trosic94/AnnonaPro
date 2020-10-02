@@ -13,6 +13,8 @@ class EdukacijaController extends Controller
 {
     public function index()
 	{
+        $title = 'Edukacija';
+        $metaTitle = 'Edukacija';
 		$IdKategorijeEdukacija = 83;
 		$slug = array(
             '0' => array(
@@ -37,17 +39,22 @@ class EdukacijaController extends Controller
 
         $navCategory = Category::edu_MainCategories($IdKategorijeEdukacija);
         
-    	return view('edukacija.index',compact('slug','navCategory','CATCurrent','Post'));
+    	return view('edukacija.index',compact('slug','navCategory','CATCurrent','Post','title','metaTitle'));
     }
 
     public function post($post)
     {
+
     	$IdKategorijeEdukacija = 83;
     	// fetch current CAT from url
         $postFromURL = explode('/', $post);
         $postSlug = end($postFromURL);
         $Post = Post::getPostBySlug($postSlug);
         $navCategory = Category::edu_MainCategories($IdKategorijeEdukacija);
+
+        $title = 'Edukacija - '.$Post['title'];
+        $metaTitle = 'Edukacija - '.$Post['title'];
+
     	$slug = array(
             '0' => array(
                 'slug' => '/',
@@ -68,6 +75,6 @@ class EdukacijaController extends Controller
 
 
 
-        return view('edukacija.index',compact('slug','navCategory','Post'));
+        return view('edukacija.index',compact('slug','navCategory','Post','title','metaTitle'));
     }
 }
