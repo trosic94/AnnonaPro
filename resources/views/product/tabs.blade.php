@@ -64,7 +64,7 @@
 	@endif
 	<div class="row prodDetails mb-2">
 		<div class="d-inline mr-5">
-			<label class="text-secondary">Zapremina:</label><label class="annonaOrange">10ml</label>
+			<label class="text-secondary">Zapremina:</label><label class="annonaOrange">{{$productDATA->zapremina}}</label>
 		</div>
 		<div class="d-inline ">
 			<label class="text-secondary">Dodaj u listu želja:</label>

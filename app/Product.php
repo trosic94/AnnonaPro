@@ -97,6 +97,7 @@ class Product extends Model
                                 'PROD.meta_keywords as prod_meta_keywords',
                                 'PROD.created_at as prod_created_at',
                                 'PROD.updated_at as prod_updated_at',
+                                'PROD.zapremina as zapremina',
                                 'CAT.parent_id as cat_parent_id',
                                 'CAT.name as cat_name',
                                 'CAT.slug as cat_slug',
