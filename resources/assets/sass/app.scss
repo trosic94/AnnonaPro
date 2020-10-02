@@ -1542,7 +1542,6 @@
         left: 8px;
     }
 
-
     .btn-circle {
     width: 30px;
     height: 30px;
@@ -1562,4 +1561,39 @@
         content: '\f274';
         position: absolute;
         right: 6px;
+
+    div#contactNav {
+        h5 {
+            color: $primary-color;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            li {
+                a {
+                    color: $secondary-color;
+                    &:hover {
+                        color: $primary-color;
+                    }
+                }
+            }
+        }
+    }
+    
+    #btnToSend {
+        input {
+            background-color: $annona-gray-light;
+            border-radius: 20px;
+        }
+        textarea {
+            background-color: $annona-gray-light;
+            border-radius: 20px;
+        }
+        label {
+            font-size: 80%;
+            color: $secondary-color;
+        }
     }

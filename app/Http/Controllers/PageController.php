@@ -25,43 +25,43 @@ class PageController extends Controller
 
     }
 
-	public function contactForm(Request $request)
-    {
+	// public function contactForm(Request $request)
+    // {
 
-    	$this->validateContact($request);
+    // 	$this->validateContact($request);
 
-    	$contact = array();
+    // 	$contact = array();
 
-    	$mailData['ime'] = request('ime');
-    	$mailData['email'] = request('email');
-    	$mailData['poruka'] = request('poruka');
-    	$mailData['tst'] = request('hpASSdDGT3e5345345');
+    // 	$mailData['ime'] = request('ime');
+    // 	$mailData['email'] = request('email');
+    // 	$mailData['poruka'] = request('poruka');
+    // 	$mailData['tst'] = request('hpASSdDGT3e5345345');
 
-    	if ($mailData['tst'] == null):
+    // 	if ($mailData['tst'] == null):
 
-            Mail::send('emails.contact', $mailData, function($message) use ($mailData)
-            {
-                $message->to('nenad.stankov@gomex.rs','AnnonaPro')
-                        ->from('noreply@annonapro.rs', 'AnnonaPro')
-                        //->cc('petar.medarevic@onestopmarketing.rs', 'OSM')
-                        // ->bcc('webmaster@onestpmarketing.rs', 'OSM')
-                        ->sender($mailData['email'], $mailData['ime'])
-                        ->replyTo($mailData['email'], $mailData['ime'])
-                        ->subject('Kontakt sa sajta - '. $mailData['ime']);
-            });
+    //         Mail::send('emails.contact', $mailData, function($message) use ($mailData)
+    //         {
+    //             $message->to('nenad.stankov@gomex.rs','AnnonaPro')
+    //                     ->from('noreply@annonapro.rs', 'AnnonaPro')
+    //                     //->cc('petar.medarevic@onestopmarketing.rs', 'OSM')
+    //                     // ->bcc('webmaster@onestpmarketing.rs', 'OSM')
+    //                     ->sender($mailData['email'], $mailData['ime'])
+    //                     ->replyTo($mailData['email'], $mailData['ime'])
+    //                     ->subject('Kontakt sa sajta - '. $mailData['ime']);
+    //         });
 
-    	endif;
+    // 	endif;
 
-        return  redirect()->back()->with('mailSent', 'Vaša poruka je poslata. Hvala.');
+    //     return  redirect()->back()->with('mailSent', 'Vaša poruka je poslata. Hvala.');
 
-    }
+    // }
 
-	public function validateContact($request)
-    {
-    	return $this->validate($request, [
-    		'ime' => 'required',
-    		'email' => 'required|email',
-    		'poruka' => 'required'
-    	]);
-    }
+	// public function validateContact($request)
+    // {
+    // 	return $this->validate($request, [
+    // 		'ime' => 'required',
+    // 		'email' => 'required|email',
+    // 		'poruka' => 'required'
+    // 	]);
+    // }
 }

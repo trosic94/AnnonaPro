@@ -31,6 +31,8 @@ Auth::routes();
 
 	//o nama
 	Route::get('o-nama', 'OnamaController@index');
+	//kontakt
+	Route::get('kontakt', 'KontaktController@index');
 	// Route::get('o-nama', function(){
 	// 	return View('onama'); // Your Blade template name
 	// });
@@ -139,6 +141,6 @@ Route::get('/set-all', function() {
 //clear ALL --------------------------------------------- //
 
 
-	Route::post('/posalji-kontakt', 'PageController@contactForm');
+	Route::post('/posalji-kontakt', 'KontaktController@contactForm');
 	
 	Route::get('/{pageSlug}', 'PageController@page');

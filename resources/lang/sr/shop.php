@@ -212,6 +212,9 @@ return [
     'slug_url_onama' => '/o-nama',
     'slug_title_onama' => 'O nama',
 
+    'slug_url_kontakt' => '/kontakt',
+    'slug_title_kontakt' => 'Kontakt',
+
 
 
     /* PRINT (ŠTAMPA) ------------------------------------------------------------------*/

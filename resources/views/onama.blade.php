@@ -4,13 +4,13 @@
 
 <div id="pageWrap">
     @include('includes.breadcrumb')
-    <div class="row mt-5">
+    <div class="row mt-4">
 
         <div class="col-xl-12">
 
-            <div class="mainTitle">
-
-            </div>
+            <h4 class="text-uppercase text-secondary">
+                O nama
+            </h4>
 
         </div>
 
@@ -20,7 +20,7 @@
 
     <div class="staticContent">
 
-        <div class="container-fluid">
+        <div class="container-fluid mt-5">
             <div class="row">
                 <div class="col-md-12">
                     <div class="row">
