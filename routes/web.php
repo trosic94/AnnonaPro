@@ -29,9 +29,10 @@ Auth::routes();
 	Route::post('search', 'SearchController@search');
 
 	//o nama
-	Route::get('o-nama', function(){
-		return View('onama'); // Your Blade template name
-	});
+	Route::get('o-nama', 'OnamaController@index');
+	// Route::get('o-nama', function(){
+	// 	return View('onama'); // Your Blade template name
+	// });
 	//edukacija
 	Route::get('edukacija', 'EdukacijaController@index');
 	Route::get('edukacija/{post}', 'EdukacijaController@post')->where('post','^[a-zA-Z0-9-_\/]+$');

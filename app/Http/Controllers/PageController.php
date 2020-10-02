@@ -41,12 +41,12 @@ class PageController extends Controller
 
             Mail::send('emails.contact', $mailData, function($message) use ($mailData)
             {
-                $message->to('prodaja@oznake.rs','Oznake')
-                        ->from('noreply@oznake.rs', 'Oznake')
+                $message->to('nenad.stankov@gomex.rs','AnnonaPro')
+                        ->from('noreply@annonapro.rs', 'AnnonaPro')
                         //->cc('petar.medarevic@onestopmarketing.rs', 'OSM')
-                        ->bcc('webmaster@onestpmarketing.rs', 'OSM')
-                        ->sender('noreply@oznake.rs', 'Oznake')
-                        ->replyTo('noreply@oznake.rs', 'Oznake')
+                        // ->bcc('webmaster@onestpmarketing.rs', 'OSM')
+                        ->sender($mailData['email'], $mailData['ime'])
+                        ->replyTo($mailData['email'], $mailData['ime'])
                         ->subject('Kontakt sa sajta - '. $mailData['ime']);
             });
 

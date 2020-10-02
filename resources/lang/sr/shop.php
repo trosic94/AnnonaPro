@@ -209,6 +209,9 @@ return [
     'slug_url_edukacija' => '/edukacija',
     'slug_title_edukacija' => 'Edukacija',
 
+    'slug_url_onama' => '/o-nama',
+    'slug_title_onama' => 'O nama',
+
 
 
     /* PRINT (ŠTAMPA) ------------------------------------------------------------------*/
