@@ -52,8 +52,8 @@ class KontaktController extends Controller
 
             Mail::send('emails.contact', $mailData, function($message) use ($mailData)
             {
-                $message->to('nenad.stankov@gomex.rs','AnnonaPro')
-                        ->from('noreply@annonapro.rs', 'AnnonaPro')
+                $message->to(setting('shop.shop_notification_email'),'AnnonaPro')
+                        ->from($mailData['email'], 'AnnonaPro')
                         //->cc('petar.medarevic@onestopmarketing.rs', 'OSM')
                         // ->bcc('webmaster@onestpmarketing.rs', 'OSM')
                         ->sender($mailData['email'], $mailData['ime'])
