@@ -135,7 +135,7 @@ class Order extends Model
             {
                 $message->to($orderDATA['customer']['email'],$orderDATA['customer']['name'])
                         ->from(setting('shop.shop_notification_email'), setting('company.company_name'))
-                        ->bcc('webmaster@onestopmarketing.rs', 'OSM')
+                        //->bcc('webmaster@onestopmarketing.rs', 'OSM')
                         ->sender(setting('shop.shop_notification_email'), setting('company.company_name'))
                         ->replyTo(setting('shop.shop_notification_email'), setting('company.company_name'))
                         ->subject(trans('shop.email_subject_order_confirmation').' '.$orderDATA['order']['order_number']);
@@ -148,7 +148,7 @@ class Order extends Model
             {
                 $message->to(setting('shop.shop_admin_mail'),setting('company.company_name'))
                         ->from(setting('shop.shop_notification_email'), setting('company.company_name'))
-                        ->bcc('webmaster@onestopmarketing.rs', 'OSM')
+                        //->bcc('webmaster@onestopmarketing.rs', 'OSM')
                         ->sender(setting('shop.shop_notification_email'), setting('company.company_name'))
                         ->replyTo(setting('shop.shop_notification_email'), setting('company.company_name'))
                         ->subject(trans('shop.email_subject_order_confirmation').' '.$orderDATA['order']['order_number']);
@@ -161,7 +161,7 @@ class Order extends Model
             {
                 $message->to($mailData['orders']['customer_mail'],$mailData['orders']['customer_name'])
                         ->from(setting('shop.shop_notification_email'), setting('company.company_name'))
-                        ->bcc('webmaster@onestopmarketing.rs', 'OSM')
+                        //->bcc('webmaster@onestopmarketing.rs', 'OSM')
                         ->sender(setting('shop.shop_notification_email'), setting('company.company_name'))
                         ->replyTo(setting('shop.shop_notification_email'), setting('company.company_name'))
                         ->subject(trans('shop.email_subject_payment_failure'));

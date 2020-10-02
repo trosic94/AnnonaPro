@@ -340,7 +340,7 @@ function cart_SumAllPrice() {
 }
 
 // CART add/remove
-function CartEvent(prodID) {
+function CartEvent_old(prodID) {
 
     $('#mdb-preloader').css({ 'display': 'flex' }).fadeIn();
 
@@ -378,6 +378,55 @@ function CartEvent(prodID) {
             }
 
             $('header div#cartDATA').html(rsp.cart);
+            $('#myCartModal').modal('show');
+
+            new WOW().init();
+        }
+    });
+
+}
+
+function CartEvent(prodID) {
+
+    $('#mdb-preloader').css({'display':'flex'}).fadeIn();
+    
+    $('header div#cartDATA').html('');
+
+    var prodQTTY = 1;
+    var qttyInput = document.getElementById('prodQuantity');
+    if(qttyInput){
+        var prodQTTY = qttyInput.value;
+    }
+
+    var cartCOUNT = $('div#cartCount span.badge').html();
+
+    var _token = $('input[name=_token]').val();
+
+    $.ajax({
+        type: 'POST',
+        url: '/add-to-cart',
+        data: { prodID: prodID,
+                prodQTTY: prodQTTY,
+                _token: _token },
+        success: function(rsp) {
+
+            $('#mdb-preloader').delay(500).fadeOut(300);
+
+            if (cartCOUNT == undefined) {
+            
+                $('div#cartCount span.badge').removeClass('d-block').addClass('d-none').html('');
+                $('div#myCart div#cartCountTXT').removeClass('d-none').addClass('d-block');
+
+            } else {
+
+                var newCartCOUNT = Number(cartCOUNT) + 1;
+
+                $('div#cartCount span.badge').removeClass('d-none').addClass('d-block').html(newCartCOUNT);
+                $('div#myCart div#cartCountTXT').removeClass('d-block').addClass('d-none');
+
+            }
+
+            $('header div#cartDATA').html(rsp);
             $('#myCartModal').modal('show');
 
             new WOW().init();
@@ -494,6 +543,30 @@ function FavEvent(prodID) {
     });
 
     //console.log(prodID);
+
+}
+
+// quantity PLUS
+function qtyPLUS_Item() {
+
+    var oldQTY = $('input#prodQuantity').val();
+    var newQTY = Number(oldQTY) + 1;
+
+    $('input#prodQuantity').val(newQTY);
+}
+
+// quantity MINUS
+function qtyMINUS_Item() {
+
+    var oldQTY = $('input#prodQuantity').val();
+
+    if (oldQTY > 1) {
+
+        var newQTY = Number(oldQTY) - 1;
+
+        $('input#prodQuantity').val(newQTY);
+
+    }
 
 }
 

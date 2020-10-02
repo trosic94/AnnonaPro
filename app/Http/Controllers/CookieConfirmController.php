@@ -15,7 +15,7 @@ class CookieConfirmController extends Controller
 {
     public function privacyConfirm()
     {
-    	$name = 'mgames_prvcy';
+    	$name = 'annona_prvcy';
     	$value = 'ok';
     	$minutes = 525600;
 

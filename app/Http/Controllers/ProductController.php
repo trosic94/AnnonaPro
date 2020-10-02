@@ -89,10 +89,18 @@ class ProductController extends Controller
 
 
         // postavljam 0 za TOTAL
-        $addToCart['total'] = 0;
+        //$addToCart['total'] = 0;
+        if ($crtOLD):
+            $addToCart['total'] = $crtOLD['total'];
+        else:
+            $addToCart['total'] = 0;
+        endif;
         $amountInProgres = 0;
 
         $daLiJeVecUKorpi = 0;
+
+        //kolicina
+        $prodQTTY = request('prodQTTY');
 
 
 
@@ -106,7 +114,7 @@ class ProductController extends Controller
                 
                 if ($crtOLD['products'][$o]['prod_id'] == request('prodID')):
 
-                    $crtOLD['products'][$o]['quantity'] = $crtOLD['products'][$o]['quantity'] + 1;
+                    $crtOLD['products'][$o]['quantity'] = $crtOLD['products'][$o]['quantity'] + + $prodQTTY;;
 
                     $daLiJeVecUKorpi = 1;
 
@@ -124,7 +132,7 @@ class ProductController extends Controller
         if ($daLiJeVecUKorpi != 1):
             // dodajem nov proizvod u KORPU
             $addToCart['products'][$cartCNT] = $newProduct;
-            $addToCart['products'][$cartCNT]['quantity'] = 1;
+            $addToCart['products'][$cartCNT]['quantity'] = $prodQTTY;
         endif;
     
 
