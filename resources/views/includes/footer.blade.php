@@ -42,18 +42,18 @@
 							<form class="needs-validation" method="POST" action="/subscribe-newsletter" novalidate>
                 			{{ csrf_field() }}
                 			<div class="col-12">
+                				@if (\Session::has('mailSent'))
+		                            <div class="alert alert-success" role="alert">{!! \Session::get('mailSent') !!}</div>
+		                        @endif
+		                        @if (\Session::has('emailDuplicate'))
+		                            <div class="alert alert-warning" role="alert">{!! \Session::get('emailDuplicate') !!}</div>
+		                        @endif
+								{!! $errors->first('email', '<div class="alert alert-danger" role="alert">:message</div>') !!}
                 				<div class="row bg-white rounded-pill">
-                					@isset($validator)
-	                					@if($validator->fails())
-		                					<div class="alert alert-danger" role="alert">
-											  {{$validator->messages()->first('newsletter_email')}}
-											</div>
-	                					@endif
-                					@endisset
-                				<input type="text" name="newsletter_email" placeholder="unesi e-mail adresu" class="col-10 ml-2 rounded-pill" style="border: 0">
-                				<button type="submit" class="btn btn-primary btn-circle col-1"><i class="far fa-envelope"></i>
-                            	</button>
-                			</div>
+	                				<input type="email" name="email" placeholder="unesi e-mail adresu" class="col-10 ml-2 rounded-pill form-control" style="border: 0">
+	                				<button type="submit" class="btn btn-primary btn-circle col-1"><i class="far fa-envelope"></i>
+	                            	</button>
+	                			</div>
                 			</div>
 							</form>
 						</div>

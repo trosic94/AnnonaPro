@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use PDO;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Validator;
+
+use Auth;
 
 use App\Home;
 use App\Sliders;
@@ -17,6 +18,9 @@ use App\SlidersItems;
 use App\Product;
 use App\SpecialOptionForProducts;
 use App\Banner;
+
+use App\NewsletterSubscriber;
+
 
 class HomeController extends Controller
 {
@@ -93,14 +97,46 @@ class HomeController extends Controller
 
 
     public function subscribeToNewsletter(Request $request){
-        //dd($request->newsletter_email);   
-            $validator = Validator::make($request->all(), [
-                'newsletter_email'=>'required|email'
-            ]);
-            $messages = $validator->messages()->first('newsletter_email');
-            dd($messages);
+        $this->validateContact($request);
+        $email = $request->email;
+        if (!Auth::guest()){
+            $ulogovan = Auth::user();
+            $ulogovan_ID = $ulogovan->id;
+            $daLiPostojiPrijavaZaNL = NewsletterSubscriber::where('user_id',$ulogovan->id)->first();
+
+            if (!$daLiPostojiPrijavaZaNL):
+                    $prijavljujemNaListu = NewsletterSubscriber::insert([
+                        'user_id' => $ulogovan->id,
+                        'email' => $email,
+                        'status' => 1
+                    ]);
+            else:
+              return  redirect()->to('/')->with('emailDuplicate', 'Korisnik je već prijaveljen');  
+            endif;
+        }else{
+
+            $daLiPostojiPrijavaZaNL = NewsletterSubscriber::where('email',$email)->first();
+            if ($daLiPostojiPrijavaZaNL){
+              return  redirect()->to('/')->with('emailDuplicate', 'Email je već prijaveljen');    
+            }else {
+                $prijavljujemNaListu = NewsletterSubscriber::insert([
+                        'user_id' => null,
+                        'email' => $email,
+                        'status' => 1
+                    ]);
+        } 
+            }
+
+           
 
 
-        return redirect()->to('/')->with('validator'); 
+        return  redirect()->to('/')->with('mailSent', 'Uspesno ste se prijavili.');
+
+    }
+    public function validateContact($request)
+    {
+        return $this->validate($request, [
+            'email' => 'required|email'
+        ]);
     }
 }
