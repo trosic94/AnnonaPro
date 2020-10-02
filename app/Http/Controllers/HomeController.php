@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use PDO;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Validator;
 
 use App\Home;
 use App\Sliders;
@@ -88,5 +89,18 @@ class HomeController extends Controller
                                             'productsFor_Row1','productsFor_Row2',
                                             'banners_homeWide','banners_homeRow_1','banners_homeRow_2','banners_homeRow_3',
                                             'nesto'));
+    }
+
+
+    public function subscribeToNewsletter(Request $request){
+        //dd($request->newsletter_email);   
+            $validator = Validator::make($request->all(), [
+                'newsletter_email'=>'required|email'
+            ]);
+            $messages = $validator->messages()->first('newsletter_email');
+            dd($messages);
+
+
+        return redirect()->to('/')->with('validator'); 
     }
 }

@@ -19,6 +19,7 @@ Auth::routes();
 
 	Route::get('/', 'HomeController@index');
 	Route::get('/home', 'HomeController@index');
+	Route::post('/subscribe-newsletter', 'HomeController@subscribeToNewsletter');
 
 	Route::get('products', 'CategoryController@index');
 	Route::get('products/{categories}', 'CategoryController@categories')->where('categories','^[a-zA-Z0-9-_\/]+$');

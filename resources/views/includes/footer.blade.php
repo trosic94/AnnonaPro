@@ -39,11 +39,23 @@
 						<div class="border-annona w-25"></div>
 						<div class="pt-3 text-justify small text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
 						<div class="pt-2">
-							<div class="md-form white md-bg input-with-post-icon rounded-pill">
-								<i class="far fa-envelope input-prefix rounded-circle text-white primary-color p-2 mr-n3"></i>
-								<input type="text" id="form2_0" class="form-control rounded-pill" style="padding:0.3rem 0.7rem 0.2rem !important">
-								<label for="form2_0" class="mt-n2">unesi e-mail adresu </label>
-							  </div>
+							<form class="needs-validation" method="POST" action="/subscribe-newsletter" novalidate>
+                			{{ csrf_field() }}
+                			<div class="col-12">
+                				<div class="row bg-white rounded-pill">
+                					@isset($validator)
+	                					@if($validator->fails())
+		                					<div class="alert alert-danger" role="alert">
+											  {{$validator->messages()->first('newsletter_email')}}
+											</div>
+	                					@endif
+                					@endisset
+                				<input type="text" name="newsletter_email" placeholder="unesi e-mail adresu" class="col-10 ml-2 rounded-pill" style="border: 0">
+                				<button type="submit" class="btn btn-primary btn-circle col-1"><i class="far fa-envelope"></i>
+                            	</button>
+                			</div>
+                			</div>
+							</form>
 						</div>
 						<div class="row pt-4">
 							<div class="col-auto text-left pr-2">

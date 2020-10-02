@@ -42812,3 +42812,25 @@ div#bannerWrap img {
   left: 8px;
 }
 
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  padding: 6px 0px;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.42857;
+}
+
+.input-wrapper {
+  display: inline-block;
+  position: relative;
+}
+
+.input-wrapper:after {
+  font-family: "FontAwesome";
+  content: "\F274";
+  position: absolute;
+  right: 6px;
+}
+
