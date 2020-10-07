@@ -1,4 +1,4 @@
-@if (Cookie::get('mgames_prvcy') == null)
+@if (Cookie::get('annona_prvcy') == null)
 <!--Modal: modalCookie-->
 <div class="modal fade bottom" id="modalCookie" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="true">
   <div class="modal-dialog modal-frame modal-bottom modal-notify modal-info" role="document">
