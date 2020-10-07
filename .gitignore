@@ -1,7 +1,9 @@
 /node_modules/*
 !/node_modules/mdbootstrap-pro/
+/config
 /public/hot
 /public/storage
+/public/images
 /storage/*.key
 /vendor
 /.idea
