@@ -243,60 +243,6 @@ class AppServiceProvider extends ServiceProvider
             $view->with('favouritesCNT', $favouritesCNT);
         });
 
-        // //moja korpa
-        // View::composer(array('product.cart','order.checkout'), function($view)
-        // {
-        //     //podaci iz sesije
-        //     $cartSES = Session::get('atc');
-
-        //     $cartData = array();
-        //     $cartCNT = 0;
-        //     if (count($cartSES) >0):
-        //         for ($s=0; $s<count($cartSES); $s++) {
-                    
-        //             //product INFO
-        //             $productData = Product::where('id',$cartSES[$s]['id'])->first();
-        //             $cartData[$cartCNT]['product']['id'] = $productData->id;
-        //             $cartData[$cartCNT]['product']['sku'] = $productData->sku;
-        //             $cartData[$cartCNT]['product']['title'] = $productData->title;
-        //             $cartData[$cartCNT]['product']['slug'] = $productData->slug;
-        //             $cartData[$cartCNT]['product']['image'] = $productData->image;
-        //             $cartData[$cartCNT]['product']['category_id'] = $productData->category_id;
-
-        //             //material INFO
-        //             if (isset($cartSES[$s]['materijal'])):
-        //             $materialEXPL = explode('|', $cartSES[$s]['materijal']);
-        //             $materialData = Material::where('id',$materialEXPL[0])->first();
-        //             $cartData[$cartCNT]['material']['id'] = $materialData->id;
-        //             $cartData[$cartCNT]['material']['name'] = $materialData->name;
-        //             $cartData[$cartCNT]['material']['price'] = $materialData->price;
-        //             endif;
-
-        //             //dimensions INFO
-        //             if (isset($cartSES[$s]['dimanzije'])):
-        //             $dimensionsEXPL = explode('|', $cartSES[$s]['dimanzije']);
-        //             $dimeinsionsData = Dimension::where('id',$dimensionsEXPL[0])->first();
-        //             $cartData[$cartCNT]['dimensions']['id'] = $dimeinsionsData->id;
-        //             $cartData[$cartCNT]['dimensions']['value'] = $dimeinsionsData->value;
-        //             $cartData[$cartCNT]['dimensions']['width'] = $dimeinsionsData->width;
-        //             $cartData[$cartCNT]['dimensions']['height'] = $dimeinsionsData->height;
-        //             endif;
-
-        //             //order INFO
-        //             $cartData[$cartCNT]['order']['kolicina'] = $cartSES[$s]['kolicina'];
-        //             if (isset($cartSES[$s]['materijal']) && isset($cartSES[$s]['dimanzije'])):
-        //                 $cartData[$cartCNT]['order']['total'] = ceil($cartData[$cartCNT]['material']['price'] * $cartData[$cartCNT]['dimensions']['width'] * $cartData[$cartCNT]['dimensions']['height'] * $cartSES[$s]['kolicina']);
-        //             else:
-        //                 $cartData[$cartCNT]['order']['total'] = ceil($cartSES[$s]['cena']);
-        //             endif;
-
-        //             $cartCNT++;
-        //         }
-        //     endif;
-
-        //     $view->with('myCart', $cartData);
-        // });
-
     }
 
     /**
