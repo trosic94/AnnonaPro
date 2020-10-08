@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Oct 08, 2020 at 08:08 AM
+-- Generation Time: Oct 08, 2020 at 08:29 AM
 -- Server version: 10.2.14-MariaDB
 -- PHP Version: 7.2.4
 
@@ -795,8 +795,7 @@ INSERT INTO `menus` (`id`, `name`, `created_at`, `updated_at`) VALUES
 (1, 'admin', '2019-04-16 10:11:47', '2019-04-16 10:11:47'),
 (3, 'Glavni Meni', '2019-05-23 11:42:34', '2019-05-23 11:42:45'),
 (4, 'Product Menu', '2020-07-08 09:20:52', '2020-07-08 09:20:52'),
-(5, 'Online kupovina', '2020-08-01 05:13:01', '2020-08-01 05:13:01'),
-(6, 'Radno vreme', '2020-10-01 05:31:09', '2020-10-01 05:31:09');
+(5, 'Online kupovina', '2020-08-01 05:13:01', '2020-08-01 05:13:01');
 
 -- --------------------------------------------------------
 
@@ -830,14 +829,14 @@ CREATE TABLE IF NOT EXISTS `menu_items` (
 INSERT INTO `menu_items` (`id`, `menu_id`, `title`, `url`, `target`, `icon_class`, `color`, `parent_id`, `order`, `created_at`, `updated_at`, `route`, `parameters`) VALUES
 (1, 1, 'Dashboard', '', '_self', 'voyager-boat', NULL, NULL, 1, '2019-04-16 10:11:47', '2019-04-16 10:11:47', 'voyager.dashboard', NULL),
 (2, 1, 'Media', '', '_self', 'voyager-images', NULL, 38, 4, '2019-04-16 10:11:47', '2020-06-16 06:25:20', 'voyager.media.index', NULL),
-(3, 1, 'Users', '', '_self', 'voyager-person', NULL, NULL, 6, '2019-04-16 10:11:47', '2020-07-31 06:14:17', 'voyager.users.index', NULL),
-(4, 1, 'Roles', '', '_self', 'voyager-lock', NULL, NULL, 5, '2019-04-16 10:11:47', '2020-07-31 06:14:17', 'voyager.roles.index', NULL),
-(5, 1, 'Tools', '', '_self', 'voyager-tools', NULL, NULL, 7, '2019-04-16 10:11:47', '2020-07-31 06:14:17', NULL, NULL),
+(3, 1, 'Users', '', '_self', 'voyager-person', NULL, NULL, 7, '2019-04-16 10:11:47', '2020-10-08 08:28:31', 'voyager.users.index', NULL),
+(4, 1, 'Roles', '', '_self', 'voyager-lock', NULL, NULL, 6, '2019-04-16 10:11:47', '2020-10-08 08:28:31', 'voyager.roles.index', NULL),
+(5, 1, 'Tools', '', '_self', 'voyager-tools', NULL, NULL, 8, '2019-04-16 10:11:47', '2020-10-08 08:28:31', NULL, NULL),
 (6, 1, 'Menu Builder', '', '_self', 'voyager-list', NULL, 5, 1, '2019-04-16 10:11:47', '2019-05-22 11:23:07', 'voyager.menus.index', NULL),
 (7, 1, 'Database', '', '_self', 'voyager-data', NULL, 5, 2, '2019-04-16 10:11:47', '2019-05-22 11:23:07', 'voyager.database.index', NULL),
 (8, 1, 'Compass', '', '_self', 'voyager-compass', NULL, 5, 3, '2019-04-16 10:11:48', '2019-05-22 11:23:07', 'voyager.compass.index', NULL),
 (9, 1, 'BREAD', '', '_self', 'voyager-bread', NULL, 5, 4, '2019-04-16 10:11:48', '2019-05-22 11:23:07', 'voyager.bread.index', NULL),
-(10, 1, 'Settings', '', '_self', 'voyager-settings', NULL, NULL, 8, '2019-04-16 10:11:48', '2020-07-31 06:14:17', 'voyager.settings.index', NULL),
+(10, 1, 'Settings', '', '_self', 'voyager-settings', NULL, NULL, 9, '2019-04-16 10:11:48', '2020-10-08 08:28:31', 'voyager.settings.index', NULL),
 (11, 1, 'Categories', '', '_self', 'voyager-categories', NULL, 38, 2, '2019-04-16 10:11:52', '2019-06-10 10:44:30', 'voyager.categories.index', NULL),
 (12, 1, 'Posts', '', '_self', 'voyager-news', NULL, 38, 1, '2019-04-16 10:11:53', '2019-06-10 10:44:30', 'voyager.posts.index', NULL),
 (13, 1, 'Pages', '', '_self', 'voyager-file-text', NULL, 38, 3, '2019-04-16 10:11:54', '2020-06-16 06:25:20', 'voyager.pages.index', NULL),
@@ -848,15 +847,15 @@ INSERT INTO `menu_items` (`id`, `menu_id`, `title`, `url`, `target`, `icon_class
 (24, 3, 'O nama', '/o-nama', '_self', NULL, '#000000', NULL, 2, '2019-05-23 11:43:31', '2020-09-04 14:42:22', NULL, ''),
 (25, 3, 'Edukacija', '/edukacija', '_self', NULL, '#000000', NULL, 4, '2019-05-23 11:43:42', '2020-09-22 05:40:27', NULL, ''),
 (26, 3, 'Kontakt', '/kontakt', '_self', NULL, '#000000', NULL, 5, '2019-05-23 11:43:54', '2019-05-23 11:44:47', NULL, ''),
-(34, 1, 'Dimensions', '', '_self', 'voyager-code', NULL, 37, 4, '2019-05-25 09:15:49', '2020-07-10 07:14:07', 'voyager.dimensions.index', NULL),
-(35, 1, 'Materials', '', '_self', 'voyager-tag', '#000000', 37, 5, '2019-05-25 09:16:37', '2020-07-10 07:14:08', 'voyager.materials.index', 'null'),
+(34, 1, 'Dimensions', '', '_self', 'voyager-code', NULL, 37, 5, '2019-05-25 09:15:49', '2020-10-08 08:28:22', 'voyager.dimensions.index', NULL),
+(35, 1, 'Materials', '', '_self', 'voyager-tag', '#000000', 37, 6, '2019-05-25 09:16:37', '2020-10-08 08:28:22', 'voyager.materials.index', 'null'),
 (36, 1, 'Orders', '', '_self', 'voyager-dollar', '#dde21d', 37, 1, '2019-05-31 13:36:31', '2020-06-16 06:25:27', 'voyager.orders.index', 'null'),
 (37, 1, 'Shop', '', '_self', 'voyager-shop', '#5ce036', NULL, 2, '2019-06-10 09:27:23', '2019-06-10 09:28:13', NULL, ''),
 (38, 1, 'Content', '', '_self', 'voyager-documentation', '#000000', NULL, 3, '2019-06-10 10:44:03', '2019-06-10 10:44:13', NULL, ''),
-(41, 1, 'Payment Methods', '', '_self', 'voyager-credit-cards', NULL, 37, 7, '2019-06-19 12:57:45', '2020-07-10 07:14:08', 'voyager.payment-methods.index', NULL),
-(42, 1, 'Order Statuses', '', '_self', 'voyager-truck', '#000000', 37, 8, '2019-06-19 13:23:18', '2020-07-10 07:14:08', 'voyager.order-status.index', 'null'),
-(43, 1, 'Attributes', '', '_self', 'voyager-plus', NULL, 37, 3, '2020-06-16 06:24:45', '2020-06-16 06:25:46', 'voyager.attributes.index', NULL),
-(45, 1, 'Manufacturers', '', '_self', 'voyager-hammer', NULL, 37, 6, '2020-06-24 13:10:35', '2020-07-10 07:14:08', 'voyager.manufacturer.index', NULL),
+(41, 1, 'Payment Methods', '', '_self', 'voyager-credit-cards', NULL, 37, 8, '2019-06-19 12:57:45', '2020-10-08 08:28:22', 'voyager.payment-methods.index', NULL),
+(42, 1, 'Order Statuses', '', '_self', 'voyager-truck', '#000000', 37, 9, '2019-06-19 13:23:18', '2020-10-08 08:28:22', 'voyager.order-status.index', 'null'),
+(43, 1, 'Attributes', '', '_self', 'voyager-plus', NULL, 37, 4, '2020-06-16 06:24:45', '2020-10-08 08:28:22', 'voyager.attributes.index', NULL),
+(45, 1, 'Manufacturers', '', '_self', 'voyager-hammer', NULL, 37, 7, '2020-06-24 13:10:35', '2020-10-08 08:28:22', 'voyager.manufacturer.index', NULL),
 (46, 4, 'Anti aging', '/products/anti-aging', '_self', NULL, '#000000', NULL, 18, '2020-07-08 09:21:42', '2020-10-02 10:13:07', NULL, ''),
 (47, 4, 'Dehidratacija', '/products/dehidratacija', '_self', NULL, '#000000', NULL, 19, '2020-07-08 09:23:39', '2020-10-02 10:13:42', NULL, ''),
 (48, 4, 'Akne i seborea', '/products/akne-i-seborea', '_self', NULL, '#000000', NULL, 20, '2020-07-08 09:24:53', '2020-10-02 10:14:03', NULL, ''),
@@ -864,7 +863,7 @@ INSERT INTO `menu_items` (`id`, `menu_id`, `title`, `url`, `target`, `icon_class
 (50, 4, 'Rozacea', '/products/rozacea', '_self', NULL, '#000000', NULL, 22, '2020-07-08 09:26:03', '2020-10-02 10:14:59', NULL, ''),
 (51, 4, 'Zona oko očiju', '/products/zona-oko-ociju', '_self', NULL, '#000000', NULL, 23, '2020-07-08 09:27:00', '2020-10-02 10:15:21', NULL, ''),
 (52, 1, 'Sliders', '', '_self', 'voyager-photos', NULL, 38, 5, '2020-07-08 12:00:15', '2020-07-08 12:19:45', 'voyager.sliders.index', NULL),
-(54, 1, 'Special Options', '', '_self', 'voyager-tag', NULL, 37, 9, '2020-07-10 07:13:31', '2020-07-10 07:14:08', 'voyager.special-options.index', NULL),
+(54, 1, 'Special Options', '', '_self', 'voyager-tag', NULL, 37, 10, '2020-07-10 07:13:31', '2020-10-08 08:28:22', 'voyager.special-options.index', NULL),
 (55, 1, 'Banners Positions', '', '_self', 'voyager-dot', NULL, 58, 2, '2020-07-31 05:55:19', '2020-07-31 06:13:17', 'voyager.banners-positions.index', NULL),
 (56, 1, 'Banners Clients', '', '_self', NULL, NULL, 58, 3, '2020-07-31 06:03:21', '2020-07-31 06:13:22', 'voyager.banners-clients.index', NULL),
 (57, 1, 'Banners', '', '_self', 'voyager-megaphone', NULL, 58, 1, '2020-07-31 06:10:15', '2020-07-31 06:13:08', 'voyager.banners.index', NULL),
@@ -873,19 +872,12 @@ INSERT INTO `menu_items` (`id`, `menu_id`, `title`, `url`, `target`, `icon_class
 (60, 5, 'Pravila i uslovi korišćenja', '/pravila-i-uslovi-koriscenja', '_self', NULL, '#000000', NULL, 25, '2020-08-01 05:13:41', '2020-08-01 05:13:41', NULL, ''),
 (61, 5, 'Povraćaj novca i reklamacije', '/povracaj-novca-i-reklamacije', '_self', NULL, '#000000', NULL, 26, '2020-08-01 05:13:55', '2020-08-01 05:13:55', NULL, ''),
 (62, 5, 'Informacije o isporuci', '/informacije-o-isporuci', '_self', NULL, '#000000', NULL, 27, '2020-08-01 06:40:56', '2020-08-01 06:40:56', NULL, ''),
-(63, 1, 'Badges', '', '_self', 'voyager-paperclip', NULL, 37, 10, '2020-08-14 11:15:05', '2020-08-14 11:18:14', 'voyager.badges.index', NULL),
-(64, 1, 'Product Images', '', '_self', 'voyager-images', NULL, NULL, 9, '2020-09-30 17:39:18', '2020-10-02 07:08:40', 'voyager.product-images.index', NULL),
-(65, 6, 'Pon. 9:00 — 16:00', '#', '_self', NULL, '#000000', NULL, 28, '2020-09-04 17:28:18', '2020-10-02 10:16:24', NULL, ''),
-(66, 6, 'Uto. 9:00 — 16:00', '#', '_self', NULL, '#000000', NULL, 29, '2020-09-04 17:28:52', '2020-10-02 10:16:29', NULL, ''),
-(67, 6, 'Sre. 9:00 — 16:00', '#', '_self', NULL, '#000000', NULL, 30, '2020-09-04 17:29:10', '2020-10-02 10:16:37', NULL, ''),
-(68, 6, 'Čet. 9:00 — 16:00', '#', '_self', NULL, '#000000', NULL, 31, '2020-09-04 17:29:22', '2020-10-02 10:16:42', NULL, ''),
-(69, 6, 'Pet. 9:00 — 16:00', '#', '_self', NULL, '#000000', NULL, 32, '2020-09-04 17:29:31', '2020-10-02 10:16:47', NULL, ''),
-(70, 6, 'Sub. 9:00 — 14:00', '#', '_self', NULL, '#000000', NULL, 33, '2020-09-04 17:29:39', '2020-10-02 10:16:51', NULL, ''),
+(63, 1, 'Badges', '', '_self', 'voyager-paperclip', NULL, 37, 11, '2020-08-14 11:15:05', '2020-10-08 08:28:22', 'voyager.badges.index', NULL),
+(64, 1, 'Product Images', '', '_self', 'voyager-images', NULL, 37, 3, '2020-09-30 17:39:18', '2020-10-08 08:28:22', 'voyager.product-images.index', NULL),
 (72, 1, 'Newsletter Subscribers', '', '_self', 'voyager-people', '#000000', 73, 1, '2020-10-02 07:05:44', '2020-10-02 07:11:00', 'voyager.newsletter-subscribers.index', 'null'),
-(73, 1, 'Newsletter', '', '_self', 'voyager-news', '#000000', NULL, 10, '2020-10-02 07:08:28', '2020-10-02 07:09:50', NULL, ''),
+(73, 1, 'Newsletter', '', '_self', 'voyager-news', '#000000', NULL, 5, '2020-10-02 07:08:28', '2020-10-08 08:28:31', NULL, ''),
 (74, 4, 'Trepavice', '/products/trepavice', '_self', NULL, '#000000', NULL, 34, '2020-10-02 10:15:39', '2020-10-02 10:15:39', NULL, ''),
-(75, 4, 'Trajna šminka i jednokratni proizvodi', '/products/trajna-sminka-i-jednokratni-proizvodi', '_self', NULL, '#000000', NULL, 35, '2020-10-02 10:15:54', '2020-10-02 10:15:54', NULL, ''),
-(76, 6, 'Ned. --Zatvoreno', '#', '_self', NULL, '#000000', NULL, 36, '2020-10-02 10:17:03', '2020-10-02 10:17:03', NULL, '');
+(75, 4, 'Trajna šminka i jednokratni proizvodi', '/products/trajna-sminka-i-jednokratni-proizvodi', '_self', NULL, '#000000', NULL, 35, '2020-10-02 10:15:54', '2020-10-02 10:15:54', NULL, '');
 
 -- --------------------------------------------------------
 
