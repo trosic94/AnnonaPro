@@ -7,9 +7,11 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+
 use App\Banner;
 use App\Category;
 use App\Post;
+use App\Page;
 
 class KontaktController extends Controller
 {
@@ -29,10 +31,12 @@ class KontaktController extends Controller
                 'active' => 'active',
             )
         );
-        // Current category
+        
+        // podaci za PAGE - Kontakt
+        $pageDATA = Page::getPageBySlug('kontakt');
     
         
-    	return view('kontakt',compact('title','slug','metaTitle'));
+    	return view('kontakt.kontakt',compact('title','slug','metaTitle','pageDATA'));
     }
     public function contactForm(Request $request)
     {
