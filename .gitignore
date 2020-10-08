@@ -1,7 +1,6 @@
 /node_modules/*
 !/node_modules/mdbootstrap-pro/
-/config
-/public/hot
+/public/hotgi
 /public/storage
 /public/images
 /storage/*.key

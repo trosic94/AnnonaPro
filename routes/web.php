@@ -97,35 +97,6 @@ Auth::routes();
 	});
 
 
-//IMPORT ------------------------------------------------ //
-//KATEGORIJE
-Route::get('/compLand-CATMNF', function() {
-
-    $exitCode = Artisan::call('import:CompLand_CATMNF');
-    return '<h1>All Done!!</h1>';
-});
-
-//PROIZVODI
-Route::get('/compLand-PROD', function() {
-
-    $exitCode = Artisan::call('import:CompLand_PROD',['range' => '17200|17500' ]);
-
-    return '<h1>All Done!!</h1>';
-});
-
-//SLIKE
-Route::get('/compLand-IMG', function() {
-
-    $exitCode = Artisan::call('import:CompLand_IMG');
-
-    return $exitCode;
-    return '<h1>All Done!!</h1>';
-});
-
-//IMPORT ------------------------------------------------ //
-
-
-
 //clear ALL --------------------------------------------- //
 //Set ALL
 Route::get('/set-all', function() {
