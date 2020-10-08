@@ -1,4 +1,4 @@
-<div class="col-md-3 pl-2 pl-lg-0 pr-2 pr-lg-0 mb-3 d-flex wow animated fadeIn">
+				<div class="col-md-3 pl-2 pl-lg-0 pr-2 pr-lg-0 mb-3 d-flex wow animated fadeIn">
 			         <div class="prodOne white pl-0 pr-0 ml-3 mr-3 shadow-sm">
 
 			            <div class="imgWrap">

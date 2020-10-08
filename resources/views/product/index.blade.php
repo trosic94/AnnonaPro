@@ -44,20 +44,6 @@
 				  		@endisset
 				  	</div>
 				  </div>
-				  {{-- <div class="row">
-				    <a href="https://unsplash.it/1200/768.jpg?image=254" data-toggle="lightbox" data-gallery="gallery" class="col-md-4">
-				      <img src="https://unsplash.it/600.jpg?image=254" class="img-fluid rounded">
-				    </a>
-				    <a href="https://unsplash.it/1200/768.jpg?image=255" data-toggle="lightbox" data-gallery="gallery" class="col-md-4">
-				      <img src="https://unsplash.it/600.jpg?image=255" class="img-fluid rounded">
-				    </a>
-				    <a href="https://unsplash.it/1200/768.jpg?image=256" data-toggle="lightbox" data-gallery="gallery" class="col-md-4">
-				      <img src="https://unsplash.it/600.jpg?image=256" class="img-fluid rounded">
-				    </a>
-				  </div> --}}
-				
-				{{-- <img src="/storage/products/{{ $productDATA->prod_image }}" class="img100" alt="{{ $productDATA->prod_title }}"> --}}
-
 			</div>
 			{{-- IMAGE --}}
 
@@ -78,7 +64,7 @@
 
 
 @php
-     // echo '<pre style="color: white;">';
+     // echo '<pre>';
      // print_r($productDATA);
      // echo '</pre>';
 @endphp
