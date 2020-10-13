@@ -122,6 +122,9 @@ return [
     'title_select_design' => 'Odaberi design',
     'title_gallery' => 'Gallery',
     'title_choose_category' => 'Choose category',
+    'title_volume' => 'Volume',
+    'title_quantity' => 'Quantitz',
+    'title_add_to_favourites' => 'Add to favourites',
 
     'title_input_select' => 'Select',
     'title_input_check_list' => 'Check List',

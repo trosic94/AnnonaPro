@@ -73,12 +73,12 @@
 	<div class="row prodDetails mb-2">
 		<div class="col mr-2 px-0">
 			@if ($productDATA->zapremina)
-				<label class="text-secondary">Zapremina:</label><label  style="color: {{$productDATA->cat_color}}">{{$productDATA->zapremina}}</label>
+				<label class="text-secondary">@lang('shop.title_volume'):</label><label  style="color: {{$productDATA->cat_color}}">{{$productDATA->zapremina}}</label>
 			@endif
 		</div>
 		<div class="col mr-2 px-0">
 			<div class="row">
-			<label class="text-secondary pr-2">Količina:</label>
+			<label class="text-secondary pr-2">@lang('shop.title_quantity'):</label>
 			<div id="qtyWrap">
 				<div id="btnMinus" class="btnMINUS" onclick="qtyMINUS_Item()"><i class="fas fa-minus"></i></div>
 				<input id="prodQuantity" class="prod_quantity" name="prod_quantity" class="" value="1" readonly="">
@@ -87,7 +87,7 @@
 			</div>
 		</div>
 		<div class="col px-0">
-			<label class="text-secondary">Dodaj u listu želja:</label>
+			<label class="text-secondary">@lang('shop.title_add_to_favourites'):</label>
 			<div id="addTo_FAV" class="prod_{{ $productDATA->prod_id }}" onclick="FavEvent({{ $productDATA->prod_id }})">
               <i class="far fa-heart text-primary {{ (in_array($productDATA->prod_id,$favLIST))? 'd-none':'d-block' }}"></i>
               <i class="fas fa-heart text-primary {{ (in_array($productDATA->prod_id,$favLIST))? 'd-block':'d-none' }}"></i>
@@ -105,11 +105,11 @@
 						<span class="fullPrice font-weight-bold text-lowercase">{{ number_format($productDATA->prod_price,0,"",".") }} {{ setting('site.valuta') }}</span>
 					</div>
 					<div class="row justify-content-center text-secondary">
-						<div class="  ">Cena:</div><span class="discountPrice font-weight-bold text-lowercase {{ ($productDATA->cat_color == null)? 'primary-color':'' }} " style="color: {{ ($productDATA->cat_color != null)? $productDATA->cat_color:'' }};">{{ number_format($productDATA->prod_price_with_discount,0,"",".") }} {{ setting('site.valuta') }}</span>
+						<div>@lang('shop.title_price'):</div><span class="discountPrice font-weight-bold text-lowercase {{ ($productDATA->cat_color == null)? 'primary-color':'' }} " style="color: {{ ($productDATA->cat_color != null)? $productDATA->cat_color:'' }};">{{ number_format($productDATA->prod_price_with_discount,0,"",".") }} {{ setting('site.valuta') }}</span>
 					</div>
 	                @else
 	                <div class="row">
-	                	<div class="d-inline m-0 text-secondary align-bottom">Cena:</div><span class="singlePrice m-0 font-weight-bold text-lowercase " style="color: {{ ($productDATA->cat_color != null)? $productDATA->cat_color:'' }};">{{ number_format($productDATA->prod_price,0,"",".") }} {{ setting('site.valuta') }}</span>
+	                	<div class="d-inline m-0 text-secondary align-bottom">@lang('shop.title_price'):</div><span class="singlePrice m-0 font-weight-bold text-lowercase " style="color: {{ ($productDATA->cat_color != null)? $productDATA->cat_color:'' }};">{{ number_format($productDATA->prod_price,0,"",".") }} {{ setting('site.valuta') }}</span>
 	                </div>
 					
 	                @endif
