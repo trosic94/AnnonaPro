@@ -388,6 +388,12 @@ class ProductController extends Controller
             $product->status = 0;
         endif;
 
+        if (request('on_stock') == 'on'):
+            $product->on_stock = 1;
+        else:
+            $product->on_stock = 0;
+        endif;
+
         if (request('featured') == 'on'):
             $product->featured = 1;
         else:
@@ -433,6 +439,7 @@ class ProductController extends Controller
             'meta_description' => $product->meta_description,
             'meta_keywords' => $product->meta_keywords,
             'status' => $product->status,
+            'on_stock' => $product->on_stock,
             'featured' => $product->featured,
             'product_price' => $product->product_price,
             'product_price_with_discount' => $product->product_price_with_discount,
@@ -583,6 +590,12 @@ class ProductController extends Controller
     		$product->status = 0;
     	endif;
 
+        if (request('on_stock') == 'on'):
+            $product->on_stock = 1;
+        else:
+            $product->on_stock = 0;
+        endif;
+
     	if (request('featured') == 'on'):
     		$product->featured = 1;
     	else:
@@ -636,6 +649,7 @@ class ProductController extends Controller
             'meta_description' => $product->meta_description,
             'meta_keywords' => $product->meta_keywords,
             'status' => $product->status,
+            'on_stock' => $product->on_stock,
             'product_price' => $product->product_price,
             'product_price_with_discount' => $product->product_price_with_discount,
             'featured' => $product->featured,
