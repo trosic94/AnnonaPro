@@ -75,6 +75,13 @@
 			@if ($productDATA->zapremina)
 				<label class="text-secondary">@lang('shop.title_volume'):</label><label  style="color: {{$productDATA->cat_color}}">{{$productDATA->zapremina}}</label>
 			@endif
+			@if ($productDATA->prod_attr_weight)
+				<label class="text-secondary">@lang('shop.title_weight'):</label><label  style="color: {{$productDATA->cat_color}}">{{$productDATA->prod_attr_weight}}</label>
+			@endif
+			@if ($productDATA->prod_attr_quantity)
+				<label class="text-secondary">@lang('shop.title_package_quantity'):</label><label  style="color: {{$productDATA->cat_color}}">{{$productDATA->prod_attr_quantity}}</label>
+			@endif
+
 		</div>
 		<div class="col mr-2 px-0">
 			<div class="row">

@@ -381,6 +381,8 @@ class ProductController extends Controller
         $product->product_price_with_discount = request('product_price_with_discount');
 
         $product->volume = request('zapremina');
+        $product->attr_weight = request('attr_weight');
+        $product->attr_quantity = request('attr_quantity');
     	
         if (request('status') == 'on'):
             $product->status = 1;
@@ -445,7 +447,9 @@ class ProductController extends Controller
             'product_price_with_discount' => $product->product_price_with_discount,
             'created_at' => $product->created_at,
             'updated_at' => $product->updated_at,
-            'zapremina' => $product->volume
+            'zapremina' => $product->volume,
+            'attr_weight' => $product->attr_weight,
+            'attr_quantity' => $product->attr_quantity
         ]);
 
         // ID unetog PROIZVODA
@@ -582,6 +586,8 @@ class ProductController extends Controller
         $productBadge = request('product_badge');
 
         $productVolume = request('zapremina');
+        $product->attr_weight = request('attr_weight');
+        $product->attr_quantity = request('attr_quantity');
 
    	
     	if (request('status') == 'on'):
@@ -654,7 +660,9 @@ class ProductController extends Controller
             'product_price_with_discount' => $product->product_price_with_discount,
             'featured' => $product->featured,
             'updated_at' => $product->updated_at,
-            'zapremina' => $productVolume
+            'zapremina' => $productVolume,
+            'attr_weight' => $product->attr_weight,
+            'attr_quantity' => $product->attr_quantity
         ]);
 
         // INSERT TRIBUTA za PROIZVOD ------------------------------------------------------------------------ //

@@ -128,11 +128,6 @@
                                     <input type="text" class="form-control" name="product_price_with_discount" step="any" placeholder="@lang('shop_admin.title_product_price_with_discount')" value="{{ ($dataTypeContent->product_price_with_discount == null)? '': $dataTypeContent->product_price_with_discount }}">
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="control-label" for="name">@lang('shop_admin.title_product_volume')</label>
-                                    <input type="text" class="form-control" name="zapremina" step="any" placeholder="@lang('shop_admin.title_product_volume')" value="{{ ($dataTypeContent->zapremina == null)? '': $dataTypeContent->zapremina }}">
-                                </div>
-
                                 <hr>
                                 
                                 <div class="form-group">
@@ -312,6 +307,23 @@
                                         
                                     }
                                 </script>
+
+                                <h4>@lang('shop_admin.title_static_attributes')</h4>
+
+                                <div class="form-group">
+                                    <label class="control-label" for="name">@lang('shop_admin.title_product_volume')</label>
+                                    <input type="text" class="form-control" name="zapremina" step="any" value="{{ ($dataTypeContent->zapremina == null)? '': $dataTypeContent->zapremina }}">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label" for="name">@lang('shop_admin.title_product_weight')</label>
+                                    <input type="text" class="form-control" name="attr_weight" step="any" value="{{ ($dataTypeContent->attr_weight == null)? '': $dataTypeContent->attr_weight }}">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label" for="name">@lang('shop_admin.title_product_package_quantity')</label>
+                                    <input type="text" class="form-control" name="attr_quantity" step="any" value="{{ ($dataTypeContent->attr_quantity == null)? '': $dataTypeContent->attr_quantity }}">
+                                </div>
 
                             </div>
                         </div>

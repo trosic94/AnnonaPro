@@ -146,6 +146,8 @@ return [
     'title_link' => 'link',
     'title_volume' => 'Zapremina',
     'title_quantity' => 'Količina',
+    'title_package_quantity' => 'Pakovanje',
+    'title_weight' => 'Težina',
 
     'title_input_select' => 'Lista',
     'title_input_check_list' => 'Ček lista',

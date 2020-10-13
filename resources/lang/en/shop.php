@@ -123,7 +123,9 @@ return [
     'title_gallery' => 'Gallery',
     'title_choose_category' => 'Choose category',
     'title_volume' => 'Volume',
-    'title_quantity' => 'Quantitz',
+    'title_quantity' => 'Quantity',
+    'title_package_quantity' => 'Package quantity',
+    'title_weight' => 'Weight',
     'title_add_to_favourites' => 'Add to favourites',
 
     'title_input_select' => 'Select',
