@@ -143,7 +143,7 @@
 </div>
 
 @php
-// echo '<pre style="color: white;">';
-// print_r($favLIST);
+// echo '<pre>';
+// print_r($productWithSelectedOptions_groupped);
 // echo '</pre>';
 @endphp
