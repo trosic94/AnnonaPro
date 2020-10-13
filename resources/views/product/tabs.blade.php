@@ -64,7 +64,9 @@
 	@endif
 	<div class="row prodDetails mb-3">
 		<div class="col-12 mr-2 px-0">
-			<label class="text-secondary">@lang('shop.title_manufacturer'):</label><label style="color: {{$productDATA->cat_color}}"> {{$productDATA->mnf_name}}</label>
+			@if ($productDATA->mnf_name != 'default')
+			<label class="text-secondary">@lang('shop.title_manufacturer'):</label><label style="color: {{$productDATA->cat_color}}"> {{$productDATA->mnf_name }}</label>
+			@endif
 		</div>
 		<div class="col-12 mr-2 px-0">
 			<label class="text-secondary">@lang('shop.title_on_stock'):</label><label style="color: {{$productDATA->cat_color}}"> {{ ($productDATA->prod_on_stock == 1)? trans('shop.title_on_stock'):trans('shop.title_not_on_stock') }}</label>
