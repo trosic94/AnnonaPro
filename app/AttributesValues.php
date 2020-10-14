@@ -12,6 +12,8 @@ class AttributesValues extends Model
 	protected $primaryKey = 'id';
     protected $table = 'attributes_values';
 
+    protected $fillable = ['attribute_id','attribute_value_id','product_id','created_at','updated_at'];
+
     public static function attributeVALUES($id)
     {
     	$attributeVALUES = DB::table('attributes_values as ATTRVAL')

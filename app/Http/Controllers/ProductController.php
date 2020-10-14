@@ -11,8 +11,10 @@ use App\BadgeProducts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
+use App\Attributes;
 use App\AttributesCategory;
 use App\AttributesProduct;
+use App\AttributesValues;
 use App\SpecialOption;
 use App\SpecialOptionForProducts;
 use App\PaymentMethod;
@@ -667,35 +669,27 @@ class ProductController extends Controller
 
         // INSERT TRIBUTA za PROIZVOD ------------------------------------------------------------------------ //
 
-        // proveravam da li vec postoje dodeljene vrednosti za atribute za odabrani proizvod
-        $chkIf_SelectedAttributeValues = AttributesProduct::where('product_id',$product->product_id)->first();
+        // koje vrednosti su poslate
+        $attrALL = json_decode(request('attr_all'));
 
-        // ako postoje, brisem sve i upisujem nove
-        if ($chkIf_SelectedAttributeValues):
-            $delete_SelectedAttributeValues = AttributesProduct::where('product_id',$product->product_id)->delete();
-        endif;
-
-
-        // ako se stara kategorija razlikuje od nove // ako je doslo do PROEMENE kategorije
-        if ($productDATA->category_id == $product->category_id):
+        // proveravam da li postoje dinamicki atributi za proizvod
+        // da li je ista poslato sa forme za uzmenu proizvoda
+        if ($attrALL):
 
             // proveravam da li vec postoje dodeljene vrednosti za atribute za odabrani proizvod
             $chkIf_SelectedAttributeValues = AttributesProduct::where('product_id',$product->product_id)->first();
 
-            // ako postoje, brisem sve i upisujem nove
+            // ako postoje, brisem sve
             if ($chkIf_SelectedAttributeValues):
                 $delete_SelectedAttributeValues = AttributesProduct::where('product_id',$product->product_id)->delete();
             endif;
 
-            // upisujem nove vrednosti za atribute
-            $attrALL = json_decode(request('attr_all'));
-
+            // upis novih atributa za proizvod
             $listOfSelectedAttr = array();
             $attrCNT = 0;
 
             foreach ($attrALL as $key => $attrID) {
 
-                //proveravam da li psotoji request za ID atributa
                 if (null !== request('attr_'.$attrID)):
 
                     //proveravam da li je po postata vrednost NIZ (CHECKBOX, MULTISELECT, COLOR)
@@ -737,10 +731,32 @@ class ProductController extends Controller
 
                     endif;
 
+                else:
+
+                    // uzimam sve vrednosti za atribut i dodeljujem proizvodu
+                    $sveVrednostiZaAtribut = AttributesValues::attributeVALUES($attrID);
+
+                    // kreiram podatke za upis u DB
+                    foreach ($sveVrednostiZaAtribut as $attrValKey => $attrVal) {
+
+                        $listOfSelectedAttr[$attrCNT]['attribute_id'] = $attrID; // ATRIBUT ID
+                        $listOfSelectedAttr[$attrCNT]['attribute_value_id'] = $attrVal->attrval_id; // ATTRIBUTE VALUE ID
+
+                        $listOfSelectedAttr[$attrCNT]['product_id'] = $product->product_id; // PRODUCT ID
+                        $listOfSelectedAttr[$attrCNT]['created_at'] = $sada;
+                        $listOfSelectedAttr[$attrCNT]['updated_at'] = $sada;
+
+                        $attrCNT++;
+                        
+                    }
+
                 endif;
+
                 
+
             }
 
+            // upisaujem atribute u DB
             $insertATTR = AttributesProduct::insert($listOfSelectedAttr);
 
         endif;
@@ -823,59 +839,19 @@ class ProductController extends Controller
             array_push($listOfAttributes, $atribut['attr_id']);
 
 
-            if ($atribut['attr_type_id'] == 1) {
-                //TXT nije ufunkciji
-
-            } else if ($atribut['attr_type_id'] == 2) {
-                // SELECT
-
-                $htmlRSP .= '<select class="form-control select2" id="sel2" name="attr_'.$atribut['attr_id'].'">';
-                $htmlRSP .= '<option value="">'.trans('shop_admin.title_choose').'</option>';
-
-                foreach ($atribut['attr_values'] as $ATTRkey => $ATTRoptions) {
-                    $htmlRSP .= '<option value="'.$ATTRoptions['id'].'|'.$ATTRoptions['value'].'">'.$ATTRoptions['label'].'  '.$atribut['attr_unit'].'</option>';
-                }
-
-                $htmlRSP .= '</select>';
-
-            } else if ($atribut['attr_type_id'] == 3) {
-                // MULTISELECT
-
-                $htmlRSP .= '<select class="form-control select2" id="sel2" name="attr_'.$atribut['attr_id'].'[]" multiple="">';
-                $htmlRSP .= '<option value="">'.trans('shop_admin.title_choose').'</option>';
-
-                foreach ($atribut['attr_values'] as $ATTRkey => $ATTRoptions) {
-                    $htmlRSP .= '<option value="'.$ATTRoptions['id'].'|'.$ATTRoptions['value'].'">'.$ATTRoptions['label'].' '.$atribut['attr_unit'].'</option>';
-                }
-
-                $htmlRSP .= '</select>';
-
-            } else if ($atribut['attr_type_id'] == 4) {
+            if ($atribut['attr_type_id'] != 7):
                 // CHECKBOX
-
                 foreach ($atribut['attr_values'] as $ATTRkey => $ATTRoptions) {
                     $htmlRSP .= '<input type="checkbox" name="attr_'.$atribut['attr_id'].'[]" value="'.$ATTRoptions['id'].'|'.$ATTRoptions['value'].'"> '.$ATTRoptions['label'].' '.$atribut['attr_unit'].'<br>';
                 }
 
-            } else if ($atribut['attr_type_id'] == 5) {
-                // RADIO BUTTON
-
-                foreach ($atribut['attr_values'] as $ATTRkey => $ATTRoptions) {
-                    $htmlRSP .= '<input type="radio" name="attr_'.$atribut['attr_id'].'" value="'.$ATTRoptions['id'].'|'.$ATTRoptions['value'].'"> '.$ATTRoptions['label'].' '.$atribut['attr_unit'].'<br>';
-                }
-
-            } else if ($atribut['attr_type_id'] == 7) {
+            else:
                 // COLOR
-
                 foreach ($atribut['attr_values'] as $ATTRkey => $ATTRoptions) {
                     $htmlRSP .= '<input type="checkbox" name="attr_'.$atribut['attr_id'].'[]" value="'.$ATTRoptions['id'].'|'.$ATTRoptions['value'].'"> <div class="btn mar_l_10 mar_r_10" style="background-color: '.$ATTRoptions['value'].'"></div> '.$ATTRoptions['label'].' '.$atribut['attr_unit'].'<br>';
                 }
 
-            } else {
-                // NESTO DRUGO
-
-            }
-
+            endif;
 
             $htmlRSP .= '</div>';
             $htmlRSP .= '<hr>';
