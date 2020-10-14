@@ -243,7 +243,7 @@ class CategoryController extends Controller
             $metaKeywords = $productDATA->prod_meta_keywords;
 
             // PRODUCT options
-            $selectedAttributes = AttributesProduct::selectedAttributes_ForProduct($productDATA->prod_id);
+            //$selectedAttributes = AttributesProduct::selectedAttributes_ForProduct($productDATA->prod_id);
 
             // Product images
             $productImages = ProductImages::where('product_id',$productDATA->prod_id)->orderBy('image_order', 'ASC')->get()->toArray();

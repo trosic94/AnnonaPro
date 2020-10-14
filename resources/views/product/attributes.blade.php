@@ -1,8 +1,8 @@
-					<div class="row mt-5">
+					<div class="row">
 
-						<div class="col-xl-12">
+						<div class="col p-0">
 
-							<h3>@lang('shop.title_available_options'):</h3>
+							<h4 style="color: {{$productDATA->cat_color}}">@lang('shop.title_available_options'):</h4>
 
                             @php
                                 $listOfAttributes = array();
@@ -11,7 +11,7 @@
                             @foreach ($allAttributesForProduct as $ATTRkey => $atribut)
 
                             <div class="form-group">
-                                <label class="control-label mar_b_0 text-bold">{{ $atribut['attr_name'] }}:</label>
+                                <label class="control-label mar_b_0 mb-0 font-weight-bold">{{ $atribut['attr_name'] }}:</label>
                                 <div class="small mar_b_5">{{ $atribut['attr_description'] }}</div>
 
                                 @php
@@ -28,7 +28,7 @@
                                 @elseif ($atribut['attr_type_id'] == 2)
                                     {{-- Ako je SELECT --}}
 
-                                    <select class="mdb-select md-form col-xl-6 pl-0 pr-0 mt-2 mb-0" name="attr_{{ $atribut['attr_id'] }}">
+                                    <select id="mbdSEL" class="mdb-select md-form pl-0 pr-0 mt-2 mb-0" name="attr_{{ $atribut['attr_id'] }}">
                                         <option value="" disabled>@lang('shop.title_choose')</option>
 
                                         @if (array_key_exists($atribut['attr_id'], $odabraneVrednostiAtributaZaProizvod))
@@ -53,7 +53,7 @@
                                 @elseif ($atribut['attr_type_id'] == 3)
                                     {{-- Ako je MULTISELECT --}}
 
-                                    <select class="mdb-select md-form col-xl-6 pl-0 pr-0 mt-2 mb-0" name="attr_{{ $atribut['attr_id'] }}[]" data-label-select-all="@lang('shop.title_select_all')" data-label-options-selected="@lang('shop.title_selected_options')" multiple="">
+                                    <select id="mbdSELMulti" class="mdb-select md-form pl-0 pr-0 mt-2 mb-0" name="attr_{{ $atribut['attr_id'] }}[]" data-label-select-all="@lang('shop.title_select_all')" data-label-options-selected="@lang('shop.title_selected_options')" multiple="">
                                         <option value="" disabled>@lang('shop.title_choose')</option>
 
                                         @if (array_key_exists($atribut['attr_id'], $odabraneVrednostiAtributaZaProizvod))
@@ -81,7 +81,7 @@
 
 	                                    @foreach ($atribut['attr_values'] as $ATTRkey => $ATTRoptions)
 		                                    @if (in_array($ATTRoptions['id'], $odabraneVrednostiAtributaZaProizvod[$atribut['attr_id']]))
-												<div class="form-check pl-0 pr-0 mt-2 mb-0 mt-1">
+												<div class="form-check pl-0 pr-0 mt-0 mb-0">
 													<input type="checkbox" name="attr_{{ $atribut['attr_id'] }}[]" class="form-check-input" id="attr_{{ $ATTRoptions['id'] }}" value="{{ $ATTRoptions['id'] }}|{{ $ATTRoptions['value'] }}">
 													<label class="form-check-label" for="attr_{{ $ATTRoptions['id'] }}">{{ $ATTRoptions['label'] }} {{ $atribut['attr_unit'] }}</label>
 												</div>
@@ -91,7 +91,7 @@
                                     @else
 
 	                                    @foreach ($atribut['attr_values'] as $ATTRkey => $ATTRoptions)
-											<div class="form-check pl-0 pr-0 mt-2 mb-0 mt-1">
+											<div class="form-check pl-0 pr-0 mt-0 mb-0">
 												<input type="checkbox" name="attr_{{ $atribut['attr_id'] }}[]" class="form-check-input" id="attr_{{ $ATTRoptions['id'] }}" value="{{ $ATTRoptions['id'] }}|{{ $ATTRoptions['value'] }}">
 												<label class="form-check-label" for="attr_{{ $ATTRoptions['id'] }}">{{ $ATTRoptions['label'] }} {{ $atribut['attr_unit'] }}</label>
 											</div>
@@ -106,7 +106,7 @@
 
 	                                    @foreach ($atribut['attr_values'] as $ATTRkey => $ATTRoptions)
 		                                    @if (in_array($ATTRoptions['id'], $odabraneVrednostiAtributaZaProizvod[$atribut['attr_id']]))
-											<div class="form-check pl-0 pr-0 mt-2 mb-0" mt-1>
+											<div class="form-check pl-0 pr-0 mt-0 mb-0">
 												<input type="radio" name="attr_{{ $atribut['attr_id'] }}" class="form-check-input" id="attr_{{ $ATTRoptions['id'] }}" name="materialExampleRadios" value="{{ $ATTRoptions['id'] }}|{{ $ATTRoptions['value'] }}">
 												<label class="form-check-label" for="attr_{{ $ATTRoptions['id'] }}">{{ $ATTRoptions['label'] }}  {{ $atribut['attr_unit'] }}</label>
 											</div>
@@ -116,7 +116,7 @@
                                     @else
 
 	                                    @foreach ($atribut['attr_values'] as $ATTRkey => $ATTRoptions)
-										<div class="form-check pl-0 pr-0 mt-2 mb-0" mt-1>
+										<div class="form-check pl-0 pr-0 mt-0 mb-0">
 											<input type="radio" name="attr_{{ $atribut['attr_id'] }}" class="form-check-input" id="attr_{{ $ATTRoptions['id'] }}" name="materialExampleRadios" value="{{ $ATTRoptions['id'] }}|{{ $ATTRoptions['value'] }}">
 											<label class="form-check-label" for="attr_{{ $ATTRoptions['id'] }}">{{ $ATTRoptions['label'] }}  {{ $atribut['attr_unit'] }}</label>
 										</div>
@@ -156,18 +156,25 @@
 
                             </div>
 
-                            <hr>
-
                             @endforeach
 
                             <input type="hidden" name="attr_all" value="{{ json_encode($listOfAttributes) }}">
+
+                            <hr>
 
 						</div>
 
 					</div>
 
+@php
+// echo '<pre>';
+// print_r($allAttributesForProduct);
+// echo '</pre>';
+@endphp
+
 <script type="text/javascript">
 	$('document').ready(function () {
-		$('.mdb-select').materialSelect();
+		$('#mbdSEL').materialSelect();
+		$('#mbdSELMulti').materialSelect();
 	});
 </script>
