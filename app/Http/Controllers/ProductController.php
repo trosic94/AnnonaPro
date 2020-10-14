@@ -458,63 +458,98 @@ class ProductController extends Controller
         $product_id = $insert_wID;
 
         // INSERT TRIBUTA za PROIZVOD ------------------------------------------------------------------------ //
-        $attrALL = array();
-        if (request('attr_all') != ''):
-            $attrALL = json_decode(request('attr_all'));
-        endif;
 
-        $listOfSelectedAttr = array();
-        $attrCNT = 0;
+        // koje vrednosti su poslate
+        $attrALL = json_decode(request('attr_all'));
 
-        foreach ($attrALL as $key => $attrID) {
+        // proveravam da li postoje dinamicki atributi za proizvod
+        // da li je ista poslato sa forme za uzmenu proizvoda
+        if ($attrALL):
 
-            //proveravam da li psotoji request za ID atributa
-            if (null !== request('attr_'.$attrID)):
+            // proveravam da li vec postoje dodeljene vrednosti za atribute za odabrani proizvod
+            $chkIf_SelectedAttributeValues = AttributesProduct::where('product_id',$product->product_id)->first();
 
-                //proveravam da li je po postata vrednost NIZ (CHECKBOX, MULTISELECT, COLOR)
-                if (is_array(request('attr_'.$attrID))):
+            // ako postoje, brisem sve
+            if ($chkIf_SelectedAttributeValues):
+                $delete_SelectedAttributeValues = AttributesProduct::where('product_id',$product->product_id)->delete();
+            endif;
 
-                    // ako je poslat NIZ
-                    $poslateVrednostiZaAttribut = request('attr_'.$attrID);
+            // upis novih atributa za proizvod
+            $listOfSelectedAttr = array();
+            $attrCNT = 0;
 
-                    foreach ($poslateVrednostiZaAttribut as $key => $vrednostiZaAtribut) {
+            foreach ($attrALL as $key => $attrID) {
+
+                if (null !== request('attr_'.$attrID)):
+
+                    //proveravam da li je po postata vrednost NIZ (CHECKBOX, MULTISELECT, COLOR)
+                    if (is_array(request('attr_'.$attrID))):
+
+                        // ako je poslat NIZ
+                        $poslateVrednostiZaAttribut = request('attr_'.$attrID);
+
+                        foreach ($poslateVrednostiZaAttribut as $key => $vrednostiZaAtribut) {
+
+                            $listOfSelectedAttr[$attrCNT]['attribute_id'] = $attrID; // ATRIBUT ID
+                            
+                            $attrVAL = explode('|', $vrednostiZaAtribut);
+
+                            $listOfSelectedAttr[$attrCNT]['attribute_value_id'] = $attrVAL[0]; // ATTRIBUTE VALUE ID
+
+                            $listOfSelectedAttr[$attrCNT]['product_id'] = $product->product_id; // PRODUCT ID
+                            $listOfSelectedAttr[$attrCNT]['created_at'] = $sada;
+                            $listOfSelectedAttr[$attrCNT]['updated_at'] = $sada;
+
+                            $attrCNT++;
+
+                        }                  
+
+                    else:
+
+                        // ako je posla jedna vrednost
+                        $attrVAL = explode('|', request('attr_'.$attrID));
 
                         $listOfSelectedAttr[$attrCNT]['attribute_id'] = $attrID; // ATRIBUT ID
-                        
-                        $attrVAL = explode('|', $vrednostiZaAtribut);
 
                         $listOfSelectedAttr[$attrCNT]['attribute_value_id'] = $attrVAL[0]; // ATTRIBUTE VALUE ID
 
-                        $listOfSelectedAttr[$attrCNT]['product_id'] = $product_id; // PRODUCT ID
+                        $listOfSelectedAttr[$attrCNT]['product_id'] = $product->product_id; // PRODUCT ID
                         $listOfSelectedAttr[$attrCNT]['created_at'] = $sada;
                         $listOfSelectedAttr[$attrCNT]['updated_at'] = $sada;
 
                         $attrCNT++;
 
-                    }                  
+                    endif;
 
                 else:
 
-                    // ako je posla jedna vrednost
-                    $attrVAL = explode('|', request('attr_'.$attrID));
+                    // uzimam sve vrednosti za atribut i dodeljujem proizvodu
+                    $sveVrednostiZaAtribut = AttributesValues::attributeVALUES($attrID);
 
-                    $listOfSelectedAttr[$attrCNT]['attribute_id'] = $attrID; // ATRIBUT ID
+                    // kreiram podatke za upis u DB
+                    foreach ($sveVrednostiZaAtribut as $attrValKey => $attrVal) {
 
-                    $listOfSelectedAttr[$attrCNT]['attribute_value_id'] = $attrVAL[0]; // ATTRIBUTE VALUE ID
+                        $listOfSelectedAttr[$attrCNT]['attribute_id'] = $attrID; // ATRIBUT ID
+                        $listOfSelectedAttr[$attrCNT]['attribute_value_id'] = $attrVal->attrval_id; // ATTRIBUTE VALUE ID
 
-                    $listOfSelectedAttr[$attrCNT]['product_id'] = $product_id; // PRODUCT ID
-                    $listOfSelectedAttr[$attrCNT]['created_at'] = $sada;
-                    $listOfSelectedAttr[$attrCNT]['updated_at'] = $sada;
+                        $listOfSelectedAttr[$attrCNT]['product_id'] = $product->product_id; // PRODUCT ID
+                        $listOfSelectedAttr[$attrCNT]['created_at'] = $sada;
+                        $listOfSelectedAttr[$attrCNT]['updated_at'] = $sada;
 
-                    $attrCNT++;
+                        $attrCNT++;
+                        
+                    }
 
                 endif;
 
-            endif;
-            
-        }
+                
 
-        $insertATTR = AttributesProduct::insert($listOfSelectedAttr);
+            }
+
+            // upisaujem atribute u DB
+            $insertATTR = AttributesProduct::insert($listOfSelectedAttr);
+
+        endif;
         // INSERT TRIBUTA za PROIZVOD ------------------------------------------------------------------------ //
 
 
