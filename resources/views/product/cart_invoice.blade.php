@@ -9,7 +9,13 @@
 
                                             <div id="cartDiscount" class="row">
                                                 <div id="cartDiscount_label" class="col-xl-6"><label>@lang('shop.my_cart_discount'):</label></div>
-                                                <div id="cartDiscount_txt" class="col-xl-6 text-right"><span>{{ $discount }}</span>%</div>
+                                                <div id="cartDiscount_txt" class="col-xl-6 text-right">
+                                                    @if ($discount != 0 || $discount != null)
+                                                    <span>{{ $discount }}</span>%
+                                                    @else
+                                                    -
+                                                    @endif
+                                                </div>
                                                 <input type="hidden" name="discount" value="{{ $discount }}">
                                             </div>
 

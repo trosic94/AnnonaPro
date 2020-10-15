@@ -488,6 +488,8 @@ class ProductController extends Controller
     	$product->price = request('price');
         $product->product_price_with_discount = request('product_price_with_discount');
 
+        $product->product_discount = request('product_discount');
+
         $product->volume = request('zapremina');
         $product->attr_weight = request('attr_weight');
         $product->attr_quantity = request('attr_quantity');
@@ -552,6 +554,7 @@ class ProductController extends Controller
             'on_stock' => $product->on_stock,
             'featured' => $product->featured,
             'product_price' => $product->product_price,
+            'product_discount' => $product->product_discount,
             'product_price_with_discount' => $product->product_price_with_discount,
             'created_at' => $product->created_at,
             'updated_at' => $product->updated_at,
@@ -718,6 +721,7 @@ class ProductController extends Controller
         $product->specification = request('specification');
         $product->sku = request('sku');
         $product->product_price = request('product_price');
+        $product->product_discount = request('product_discount');
         $product->product_price_with_discount = request('product_price_with_discount');
         $product->price = request('price');
         $product->slug = request('slug');
@@ -800,6 +804,7 @@ class ProductController extends Controller
             'status' => $product->status,
             'on_stock' => $product->on_stock,
             'product_price' => $product->product_price,
+            'product_discount' => $product->product_discount,
             'product_price_with_discount' => $product->product_price_with_discount,
             'featured' => $product->featured,
             'updated_at' => $product->updated_at,

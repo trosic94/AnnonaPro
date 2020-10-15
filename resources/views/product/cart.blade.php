@@ -151,7 +151,6 @@
 
                                                             @if ($prod['prod_price_with_discount'] != null)
 
-                                                                {{-- <span class="fullPrice">{{ number_format($prod_price,0,"",".") }}</span> --}}
                                                                 <span class="finalPrice">{{ number_format($prod_price_with_discount,0,"",".") }}</span>
 
                                                                 <input type="hidden" name="start_discount_price_{{ $prod['prod_id'] }}" value="{{ $prod['prod_price'] }}">
