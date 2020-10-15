@@ -7,6 +7,7 @@ use App\OrderItems;
 use App\OrdersLog;
 use App\PaymentMethod;
 use App\OrderStatus;
+use App\Product;
 
 use Illuminate\Http\Request;
 
@@ -78,6 +79,12 @@ class OrderController extends Controller
         // PAYMENT METHOD
         $paymentMethod = request('payment');
 
+        // Discount
+        $discount = 0;
+        if ($ulogovan->discount != null):
+            $discount = $ulogovan->discount;
+        endif;
+
 
         // CUSTOME ------------------------------------------------------------------------------------ //
         $customer = array();
@@ -99,7 +106,7 @@ class OrderController extends Controller
         $order['user_id'] = $ulogovan->id;
         $order['order_number'] = null;
         $order['order_invoice'] = null; // unosi se kasnije, kada se kreira ID ordera
-        $order['rabat'] = $ulogovan->discount;
+        $order['rabat'] = $discount;
         $order['total'] = $crt['total'];
         $order['order_status'] = 1; // uplata na cekanju
         $order['payment_method'] = $paymentMethod;
@@ -144,6 +151,10 @@ class OrderController extends Controller
             
             $orderItems[$oi]['order_id'] = $orderID;
             $orderItems[$oi]['product_id'] = $crt['products'][$oi]['prod_id'];
+
+            $orderItems[$oi]['price'] = $crt['products'][$oi]['prod_price'];
+            $orderItems[$oi]['discount'] = $crt['products'][$oi]['prod_discount'];
+
             $orderItems[$oi]['kolicina'] = $crt['products'][$oi]['quantity'];
             $orderItems[$oi]['description'] = null;
 
@@ -154,6 +165,14 @@ class OrderController extends Controller
 
                 //cena koja se prikazuje u mailu
                 $displayPrice = $crt['products'][$oi]['prod_price_with_discount'];
+            elseif ($crt['products'][$oi]['prod_discount'] != null):
+
+                $discountPrice = $crt['products'][$oi]['prod_price']-(($crt['products'][$oi]['prod_price']/100)*$crt['products'][$oi]['prod_discount']);
+
+                $displayPrice = $discountPrice;
+
+                $total = $discountPrice * $crt['products'][$oi]['quantity'];
+
             else:
                 $total = $crt['products'][$oi]['prod_price'] * $crt['products'][$oi]['quantity'];
 
@@ -168,6 +187,8 @@ class OrderController extends Controller
             $products[$oi]['product_id'] = $crt['products'][$oi]['prod_id'];
             $products[$oi]['prod_title'] = $crt['products'][$oi]['prod_title'];
             $products[$oi]['prod_sku'] = $crt['products'][$oi]['prod_sku'];
+            $products[$oi]['prod_price'] = $crt['products'][$oi]['prod_price'];
+            $products[$oi]['prod_discount'] = $crt['products'][$oi]['prod_discount'];
             $products[$oi]['quantity'] = $crt['products'][$oi]['quantity'];
             $products[$oi]['display_price'] = $displayPrice;
             $products[$oi]['total'] = $total;
@@ -184,6 +205,40 @@ class OrderController extends Controller
         }
 
         $insert_orderItems = DB::table('order_items')->insert($orderItems);
+
+
+        // ORDER ITEM ATTRIBUTES --------------------------------------------------------------------- //
+        $orderItemAttributes = array();
+        $Acnt = 0;
+        // INSERT ako su odabrani atributi za proizvod
+        for ($oia=0; $oia < count($crt['products']); $oia++) {
+
+            if ($crt['products'][$oia]['attr_data']):
+
+                foreach ($crt['products'][$oia]['attr_data'] as $attKey => $attributeDATA) {
+
+                    for ($av=0; $av < count($attributeDATA['val']); $av++) {
+
+                        $orderItemAttributes[$Acnt]['order_id'] = $orderID;
+                        $orderItemAttributes[$Acnt]['product_id'] = $crt['products'][$oia]['prod_id'];
+                        $orderItemAttributes[$Acnt]['user_id'] = $ulogovan->id;
+                        $orderItemAttributes[$Acnt]['attribute_id'] = $attributeDATA['id'];
+
+
+                        $orderItemAttributes[$Acnt]['attribute_value_id'] = $attributeDATA['val'][$av]['id'];
+
+                        $Acnt++;
+
+                    }
+
+                }
+
+            endif;
+
+        }
+
+        $orderItemAttributes_INSERT = DB::table('order_item_attributes')->insert($orderItemAttributes);
+
 
         // SHIPPING ---------------------------------------------------------------------------------- //
 
@@ -286,11 +341,110 @@ class OrderController extends Controller
         $intro = 'Informacije o odabranoj porudzbini';
         $ulogovan = Auth::user();
 
-        $orderDATA = Order::with('orderItems','orderItems.product','orderStatus','orderShipping','user')
-                                ->where('id',$id)
-                                ->first();
 
-        return view('order.view', compact('intro','ulogovan','orderDATA'));
+        $orderDetails = DB::table('orders as O')
+                        ->leftJoin('order_status as OS','OS.id','O.order_status')
+                        ->leftJoin('payment_methods as PM','PM.id','O.payment_method')
+                        ->leftJoin('order_shipping as OSHP','OSHP.order_id','O.id')
+                        ->leftJoin('users as U','U.id','O.user_id')
+                        ->where('O.id',$id)
+                        ->select(
+                            'O.id as ord_id',
+                            'O.order_number as ord_order_number',
+                            'O.order_invoice as ord_order_invoice',
+                            'O.proforma_invoice as ord_proforma_invoice',
+                            'O.rabat as ord_rabat',
+                            'O.total as ord_total',
+                            'O.order_status as ord_order_status',
+                            'OS.title as ord_stat_title',
+                            'O.comment as ord_comment',
+                            'O.payment_method as ord_payment_method',
+                            'O.created_at as ord_created_at',
+                            'O.updated_at as ord_updated_at',
+                            'PM.title as ord_paymtd_title',
+                            'OSHP.shp_name as ord_shp_name',
+                            'OSHP.shp_last_name as ord_shp_last_name',
+                            'OSHP.shp_email as ord_shp_email',
+                            'OSHP.shp_phone as ord_shp_phone',
+                            'OSHP.shp_address as ord_shp_address',
+                            'OSHP.shp_zip as ord_shp_zip',
+                            'OSHP.shp_city as ord_shp_city',
+                            'U.name as u_name',
+                            'U.last_name as u_last_name',
+                            'U.phone as u_phone',
+                            'U.email as u_email',
+                            'U.address as u_address',
+                            'U.zip as u_zip',
+                            'U.city as u_city',
+                            'U.country as u_country',
+                            'U.discount as u_discount',
+                            'U.loy_barcode as u_loy_barcode',
+                            'U.company_name as u_company_name',
+                            'U.company_phone as u_company_phone',
+                            'U.company_email as u_company_email',
+                            'U.company_address as u_company_address',
+                            'U.company_zip as u_company_zip',
+                            'U.company_city as u_company_city',
+                            'U.company_country as u_company_country',
+                            'U.company_vat as u_company_vat'                        
+                        )
+                        ->first();
+
+
+        $orderProducts = DB::table('order_items as OI')
+                            ->leftJoin('products as P','P.id','OI.product_id')
+                            ->leftJoin('manufacturer as M','M.id','P.manufacturer_id')
+                            ->where('OI.order_id',$id)
+                            ->select(
+                                'OI.id as oi_id',
+                                'OI.price as oi_price',
+                                'OI.discount as oi_discount',
+                                'OI.kolicina as oi_kolicina',
+                                'OI.total as oi_total',
+                                'P.id as p_id',
+                                'P.sku as p_sku',
+                                'P.import_id as p_import_id',
+                                'P.title as p_title',
+                                'P.slug as p_slug',
+                                'P.category_id as p_category_id',
+                                'P.manufacturer_id as p_manufacturer_id',
+                                'M.name as m_name',
+                                'P.excerpt as p_excerpt',
+                                'P.body as p_body',
+                                'P.specification as p_specification',
+                                'P.video as p_video',
+                                'P.image as p_image',
+                                'P.image_import as p_image_import',
+                                'P.status as p_status',
+                                'P.on_stock as p_on_stock',
+                                'P.product_price as p_product_price',
+                                'P.product_price_with_discount as p_product_price_with_discount',
+                                'P.product_discount as p_product_discount',
+                                'P.product_vat as p_product_vat',
+                                'P.warranty as p_warranty'
+                            )
+                            ->get();
+
+        foreach ($orderProducts as $key => $product) {
+            $product->attr = DB::table('order_item_attributes as OAI')
+                                    ->leftJoin('attributes as A','A.id','OAI.attribute_id')
+                                    ->leftJoin('attributes_values as AV','AV.id','OAI.attribute_value_id')
+                                    ->where('OAI.product_id',$product->p_id)
+                                    ->where('OAI.order_id',$id)
+                                    ->select(
+                                        'OAI.attribute_id as attr_id',
+                                        'OAI.attribute_value_id as attr_attribute_value_id',
+                                        'A.name as attr_name',
+                                        'A.description as attr_description',
+                                        'AV.label as attr_val_label',
+                                        'AV.value as attr_val_value'
+                                    )
+                                    ->get();
+        }
+
+
+
+        return view('order.view', compact('intro','ulogovan','orderDetails','orderProducts'));
     }
 
     public function procesPayment(Request $request)

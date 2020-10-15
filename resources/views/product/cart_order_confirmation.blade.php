@@ -1,6 +1,6 @@
                                     <div class="col-xl-12">
 
-                                        <div class="card">
+                                        <div class="card mb-4">
 
                                             <div class="card-header">
                                                 <h4 class="card-title font-weight-bold">@lang('shop.my_cart_order_confirmation')</h4>

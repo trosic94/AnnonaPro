@@ -104,7 +104,7 @@ class AppServiceProvider extends ServiceProvider
             if ($ulogovan):
                 $cartDATA['discount'] = $ulogovan->discount;
             else:
-                $cartDATA['discount'] = 1;
+                $cartDATA['discount'] = 0;
             endif;  
 
             if (Session::has('crt')):
@@ -127,12 +127,55 @@ class AppServiceProvider extends ServiceProvider
                     $cartVIEW .= '  <div id="cartTXT" class="col-sm-8">';
                     $cartVIEW .= '      <h3>'.$addToCart['products'][$c]['prod_title'].'</h3>';
 
+                    // ispis atributa
+                    if ($addToCart['products'][$c]['attr_data']):
+
+                        $cartVIEW .= '      <div class="small">';
+
+                        foreach ($addToCart['products'][$c]['attr_data'] as $atKey => $attr):
+                            $cartVIEW .= '      <div class="attrONE">';
+
+                            // ispis naziva za atribute
+                            $cartVIEW .= '          <span class="font-weight-bold mr-1">'.$attr['title'].':</span>';
+
+                            // ispis vrednosti za odabrane atribute
+                            $i = 0; 
+                            $attrLABELs = '';
+                            $cartVIEW .= '          <span>';
+                            foreach ($attr['val'] as $valKey => $val) {
+                                $attrLABELs .= $val['label'].', ';
+                                $i++;
+                            }
+                            // sklanjam zarez sa iza poslednje ispisane vrednosti
+                            if ($valKey == 0 || $valKey == ($i-1)):
+                                $attrLABELs = substr($attrLABELs, 0, -2);
+                            endif;
+                            $cartVIEW .= $attrLABELs;
+                            $cartVIEW .= '          </span>';
+
+                            $cartVIEW .= '      </div>';
+                        endforeach;
+
+                        $cartVIEW .= '      </div>';
+
+                    endif;
+
                     $cartVIEW .= '      <div class="priceWrap">';
                     if ($addToCart['products'][$c]['prod_price_with_discount'] != null):
-                        $cartVIEW .= '  <span class="fullPrice">'.number_format($addToCart['products'][$c]['prod_price'],0,"",".").' '.setting('site.valuta').'</span>';
+                        $cartVIEW .= '  <span class="fullPrice">'.number_format($addToCart['products'][$c]['prod_price'],0,"",".").' '.setting('shop.valuta').'</span>';
 
                         $fullAmount = $addToCart['products'][$c]['quantity'] * $addToCart['products'][$c]['prod_price_with_discount'];
                         $cartVIEW .= '  <div id="finalAmount"><span class="qty">'.$addToCart['products'][$c]['quantity'].'</span> x <span class="discountPrice">'.number_format($addToCart['products'][$c]['prod_price_with_discount'],0,"",".").' '.setting('site.valuta').'</span></div>';
+
+                    elseif ($addToCart['products'][$c]['prod_discount'] != null):
+                        // ako proizvod ima definisan popust na cenu kao procenat
+
+                        $discountPrice = $addToCart['products'][$c]['prod_price']-(($addToCart['products'][$c]['prod_price']/100)*$addToCart['products'][$c]['prod_discount']);
+                        
+                        $cartVIEW .= '  <span class="fullPrice">'.number_format($discountPrice,0,"",".").' '.setting('shop.valuta').'</span>';
+
+                        $fullAmount = $addToCart['products'][$c]['quantity'] * $discountPrice;
+                        $cartVIEW .= '  <div id="finalAmount"><span class="qty">'.$addToCart['products'][$c]['quantity'].'</span> x <span class="discountPrice">'.number_format($fullAmount,0,"",".").' '.setting('shop.valuta').'</span></div>';
 
                     else:
 

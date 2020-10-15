@@ -93,6 +93,7 @@ return [
     'title_amount_spent' => 'Potrošeno',
     'title_row_number' => 'RB.',
     'title_discount' => 'Popust',
+    'title_price_with_discount' => 'Cena sa popustom',
     'title_consumption' => 'Potrošnja',
     'title_total' => 'U K U P N O',
     'title_setup' => 'Podešavanja',

@@ -186,4 +186,8 @@ class Order extends Model
     {
         return $this->hasOne('App\OrderShipping','order_id','id');
     }
+    public function orderItemAttributes()
+    {
+        return $this->hasMany('App\OrderItemAttributes','order_id','id');
+    }
 }

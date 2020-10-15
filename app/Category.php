@@ -15,6 +15,26 @@ class Category extends Model
 
     protected $fillable = ['parent_id','import_id','order','name','slug','cat_image','published','created_at','use_product_price','updated_at','meta_description','meta_keywords'];
 
+    // SHOP category --------------------------------------------------------- !!
+    public static function shopCAT()
+    {
+        $shopCAT = 3;
+        
+        return $shopCAT;
+    }
+
+
+    public static function shopCAT_Slug()
+    {
+        $shopCAT = Category::shopCAT();
+
+        $chopCATdata = Category::where('id',$shopCAT)->first();
+
+        $shopCAT_Slug = $chopCATdata->slug;
+        
+        return $shopCAT_Slug;
+    }
+
     public static function allCAT()
     {
     	$kategorije = Category::all();
@@ -353,6 +373,21 @@ class Category extends Model
     public static function edu_MainCategories($parent_id){
         $catsWithPosts = Category::where('parent_id',$parent_id)->with('posts')->get()->toArray();
         return $catsWithPosts;
+    }
+
+
+    public function getParentsAttribute()
+    {
+        $parents = collect([]);
+
+        $parent = $this->parentReverse;
+
+        while(!is_null($parent)) {
+            $parents->push($parent);
+            $parent = $parent->parentReverse;
+        }
+
+        return $parents;
     }
 
 

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
 use Carbon\Carbon;
+use URL;
 
 class Product extends Model
 {
@@ -317,6 +318,45 @@ class Product extends Model
     }
 
 
+    public static function productsSLUG_By_catID($catID)
+    {
+
+        $categoryW_Parents = Category::where('id',$catID)->first();
+        //$categoryW_Parents = Category::where('slug',$categorySLUG)->first();
+
+        // pakujem sve parent kategorije u niz $allCATdata
+        $allCATdata = array();
+
+        // dodajem AKTIVNU kategoriju u niz
+        array_push($allCATdata, $categoryW_Parents->slug);
+
+        // dodajem sve parent kategorije u niz
+        foreach ($categoryW_Parents->getParentsAttribute() as $pCAT):
+            if (!in_array($pCAT['slug'], $allCATdata) && $pCAT['parent_id'] != ''):
+                array_push($allCATdata, $pCAT['slug']);
+            endif;
+        endforeach;
+
+        $shopCATslug = Category::shopCAT_Slug();
+        array_push($allCATdata, $shopCATslug);
+
+        $siteURL = URL::to('/');
+        array_push($allCATdata, $siteURL);
+
+        $final = array_reverse($allCATdata);
+
+        $url = '';
+        foreach ($final as $key => $value) {
+            if ($key == 0):
+                $url .= $value;
+            else:
+                $url .= '/'.$value;
+            endif;
+        }
+
+        return $url;
+    }
+
 
     //relacije
     public function category()
@@ -330,5 +370,17 @@ class Product extends Model
     public function SpecialOptionForProducts()
     {
         return $this->hasMany('App\SpecialOptionForProducts','product_id','id');
+    }
+    public function productBadges()
+    {
+        return $this->hasOne('App\BadgeProducts','product_id','id');
+    }
+    public function productImages()
+    {
+        return $this->hasMany('App\ProductImages','product_id','id');
+    }
+    public function orderItemAttributes()
+    {
+        return $this->hasMany('App\OrderItemAttributes','product_id','id');
     }
 }

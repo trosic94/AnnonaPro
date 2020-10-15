@@ -652,25 +652,58 @@
                 // color: $blue;
                 font-weight: 500;
             }
-            div#cartAmount {
+            div#cartAmount,
+            div#cartDiscount,
+            div#cartShipping { padding: 0.2rem 0;
                 font-size: 110%;
-            }
-            div#cartTotal {
-                margin-top: 10px;
-                padding-top: 10px;
-                border-top: 1px solid $white-border;
-                label {
-                    // color: $blue;
-                    margin-bottom: 0;
-                    text-transform: uppercase;
+
+                background-color: $grey-light;
+                border-bottom: 2px solid $white;
+
+                label { margin: 0;
+
                 }
+            }
+            div#cartTotal { padding: 0.3rem 0;
+
+                background-color: $grey-light-dark;
+
+
                 font-size: 120%;
                 font-weight: 600;
                 letter-spacing: 1px;
-                span {
-                    display: block;
-                    font-size: 60%;
-                    //     color: $blue;
+
+
+                div#cartTotal_label {
+
+                    font-weight: 900;
+
+                    label {
+                        color: $annona-orange;
+                        margin-bottom: 0;
+                        text-transform: uppercase;
+                        font-weight: 900;
+                    }
+
+                    span { display: block;
+
+                        font-size: 60%;
+                        color: $grey;
+                    }
+                }
+
+                div#cartTotal_txt {
+
+                    font-size: 170%;
+                    font-weight: 700;
+                    color: $white;
+
+                    label {
+                        color: $annona-orange;
+                        margin-bottom: 0;
+                        text-transform: uppercase;
+                        font-weight: 900;
+                    }
                 }
             }
         }
@@ -680,9 +713,9 @@
                     //    color: $blue;
                 }
                 a {
-                    color: $white;
+                    color: $red;
                     &:hover {
-                        color: $red;
+                        color: $grey;
                     }
                 }
             }

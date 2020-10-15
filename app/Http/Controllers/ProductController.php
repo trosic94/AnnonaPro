@@ -109,6 +109,57 @@ class ProductController extends Controller
         $findPRoduct = Product::productDATA(request('prodID'));
         $newProduct = (array) $findPRoduct;
 
+        // Atributi za proizvod ------------------------------------------------------------ //
+
+        // svi podaci o odabranim atributima
+        $input_attr_DATA = array();      
+
+        // ako postoje dodeljeni atributi za proizvod
+        if (request('attr_exist') == 1):
+            
+            $formDATA = request('formDATA');
+
+            // odvajam sve podatke sa forme u poseban niz
+            $input = array();
+            foreach ($formDATA as $key => $form) {
+                $input[$form['name']][] = $form['value'];
+            }
+
+            // odvajam samo odabrane atribute
+            $input__attr_all = json_decode($input['attr_all'][0]);
+
+            foreach ($input__attr_all as $key => $attributeID):
+
+                if (array_key_exists('attr_'.$attributeID,$input)):
+
+                    // uzimam podatke iz DB za atribut
+                    $attributeDATA = Attributes::attributeDATA($attributeID);
+
+                    $input_attr_DATA['attr_'.$attributeID]['id'] = $attributeDATA->attr_id; // ID atributa
+                    $input_attr_DATA['attr_'.$attributeID]['name'] = 'attr_'.$attributeID;  // NAME atributa
+
+                    foreach ($input['attr_'.$attributeID] as $key => $attrVAL) {
+
+                        $attrVAL_expl = explode('|', $attrVAL);
+
+                        $attrItem = AttributesValues::attributeVALUESbyID($attrVAL_expl[0]);
+
+                        $input_attr_DATA['attr_'.$attributeID]['val'][$key]['id'] = $attrItem->attrval_id; // ID za value atributa
+                        $input_attr_DATA['attr_'.$attributeID]['val'][$key]['label'] = $attrItem->attrval_label; // LABEL za value atributa
+                        $input_attr_DATA['attr_'.$attributeID]['val'][$key]['value'] = $attrItem->attrval_value; // VALUE za value atributa
+
+                    }
+
+                    $input_attr_DATA['attr_'.$attributeID]['value'] = $input['attr_'.$attributeID]; // SVE poslate vrednosti za atribut
+                    $input_attr_DATA['attr_'.$attributeID]['title'] = $attributeDATA->attr_title; // TITLE atributa
+                    $input_attr_DATA['attr_'.$attributeID]['type'] = $attributeDATA->attr_type; // TYPE atributa
+                endif;
+            endforeach;
+            
+        endif;
+
+        // Atributi za proizvod ------------------------------------------------------------ //
+
         // proveravam da li postoji SESIJA sa KORPOM
         if ($crtOLD):
 
@@ -116,7 +167,9 @@ class ProductController extends Controller
                 
                 if ($crtOLD['products'][$o]['prod_id'] == request('prodID')):
 
-                    $crtOLD['products'][$o]['quantity'] = $crtOLD['products'][$o]['quantity'] + + $prodQTTY;;
+                    $crtOLD['products'][$o]['quantity'] = $crtOLD['products'][$o]['quantity'] + $prodQTTY;
+
+                    $crtOLD['products'][$o]['attr_data'] = $input_attr_DATA;
 
                     $daLiJeVecUKorpi = 1;
 
@@ -135,6 +188,7 @@ class ProductController extends Controller
             // dodajem nov proizvod u KORPU
             $addToCart['products'][$cartCNT] = $newProduct;
             $addToCart['products'][$cartCNT]['quantity'] = $prodQTTY;
+            $addToCart['products'][$cartCNT]['attr_data'] = $input_attr_DATA;
         endif;
     
 
@@ -148,17 +202,62 @@ class ProductController extends Controller
                 $cartVIEW .= '  <div id="cartTXT" class="col-sm-8">';
                 $cartVIEW .= '      <h3>'.$addToCart['products'][$c]['prod_title'].'</h3>';
 
+                // ispis atributa
+                if ($addToCart['products'][$c]['attr_data']):
+
+                    $cartVIEW .= '      <div class="small">';
+
+                    foreach ($addToCart['products'][$c]['attr_data'] as $atKey => $attr):
+                        $cartVIEW .= '      <div class="attrONE">';
+
+                        // ispis naziva za atribute
+                        $cartVIEW .= '          <span class="font-weight-bold mr-1">'.$attr['title'].':</span>';
+
+                        // ispis vrednosti za odabrane atribute
+                        $i = 0; 
+                        $attrLABELs = '';
+                        $cartVIEW .= '          <span>';
+                        foreach ($attr['val'] as $valKey => $val) {
+                            $attrLABELs .= $val['label'].', ';
+                            $i++;
+                        }
+                        // sklanjam zarez sa iza poslednje ispisane vrednosti
+                        if ($valKey == 0 || $valKey == ($i-1)):
+                            $attrLABELs = substr($attrLABELs, 0, -2);
+                        endif;
+                        $cartVIEW .= $attrLABELs;
+                        $cartVIEW .= '          </span>';
+
+                        $cartVIEW .= '      </div>';
+                    endforeach;
+
+                    $cartVIEW .= '      </div>';
+
+                endif;
+
                 $cartVIEW .= '      <div class="priceWrap">';
+                
                 if ($addToCart['products'][$c]['prod_price_with_discount'] != null):
+                    // ako proizvod ima definisanu cenu sa uracunatim discountom npr. 8999
                     $cartVIEW .= '  <span class="fullPrice">'.number_format($addToCart['products'][$c]['prod_price'],0,"",".").' '.setting('site.valuta').'</span>';
 
                     $fullAmount = $addToCart['products'][$c]['quantity'] * $addToCart['products'][$c]['prod_price_with_discount'];
-                    $cartVIEW .= '  <div id="finalAmount"><span class="qty">'.$addToCart['products'][$c]['quantity'].'</span> x <span class="discountPrice">'.number_format($addToCart['products'][$c]['prod_price_with_discount'],0,"",".").'</span><span> '.setting('site.valuta').'</span></div>';
+                    $cartVIEW .= '  <div id="finalAmount"><span class="qty">'.$addToCart['products'][$c]['quantity'].'</span> x <span class="discountPrice">'.number_format($fullAmount,0,"",".").' '.setting('site.valuta').'</span></div>';
+
+                elseif ($addToCart['products'][$c]['prod_discount'] != null):
+                    // ako proizvod ima definisan popust na cenu kao procenat
+
+                    $discountPrice = $addToCart['products'][$c]['prod_price']-(($addToCart['products'][$c]['prod_price']/100)*$addToCart['products'][$c]['prod_discount']);
+
+                    $cartVIEW .= '  <span class="fullPrice">'.number_format($discountPrice,0,"",".").' '.setting('site.valuta').'</span>';
+
+                    $fullAmount = $addToCart['products'][$c]['quantity'] * $discountPrice;
+                    $cartVIEW .= '  <div id="finalAmount"><span class="qty">'.$addToCart['products'][$c]['quantity'].'</span> x <span class="discountPrice">'.number_format($fullAmount,0,"",".").' '.setting('site.valuta').'</span></div>';
 
                 else:
-
+                    // ako ide puna cena bez discounta
                     $fullAmount = $addToCart['products'][$c]['quantity'] * $addToCart['products'][$c]['prod_price'];
-                    $cartVIEW .= '  <div id="finalAmount"><span class="qty">'.$addToCart['products'][$c]['quantity'].'</span> x <span class="singlePrice">'.number_format($addToCart['products'][$c]['prod_price'],0,"",".").'</span><span> '.setting('site.valuta').'</span></div>';
+                    $cartVIEW .= '  <div id="finalAmount"><span class="qty">'.$addToCart['products'][$c]['quantity'].'</span> x <span class="singlePrice">'.number_format($fullAmount,0,"",".").' '.setting('site.valuta').'</span></div>';
 
                 endif;
                 $cartVIEW .= '      </div>';
@@ -234,9 +333,9 @@ class ProductController extends Controller
         $unsetID = request('prodID');
 
         // default values
+        $addToCart['discount'] = $crt['discount'];
         $addToCart['total'] = 0;
         $cartDATA['count'] = 0;
-        $cartDATA['price'] = 0;
         $fullAmount = 0;
 
         // uklanjam odabrani proizvod iz sesije
@@ -249,6 +348,8 @@ class ProductController extends Controller
         // reindex product
         $reorderCRT = array_values($crt['products']);
 
+        //return $reorderCRT;
+
         // spremam proizvode iz sesije
         $addToCart['products'] = $reorderCRT;
 
@@ -260,6 +361,11 @@ class ProductController extends Controller
 
                 $fullAmount = $reorderCRT[$a]['quantity'] * $reorderCRT[$a]['prod_price_with_discount'];
 
+            elseif ($crt['products'][$a]['prod_discount'] != null):
+
+                $discountPrice = $crt['products'][$a]['prod_price'] - (($crt['products'][$a]['prod_price'] / 100) * $crt['products'][$a]['prod_discount']);
+                $fullAmount = $crt['products'][$a]['quantity'] * $discountPrice;
+
             else:
 
                 $fullAmount = $reorderCRT[$a]['quantity'] * $reorderCRT[$a]['prod_price'];
@@ -268,7 +374,7 @@ class ProductController extends Controller
 
             // kreiram COUNT za cart
             $cartDATA['count'] = $cartDATA['count'] + $reorderCRT[$a]['quantity'];
-            $cartDATA['price'] = $fullAmount;
+
         }
 
         // Kreiram TOTAL za KORPU

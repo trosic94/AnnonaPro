@@ -2,7 +2,7 @@
 
                                 @if (Auth::guest())
 
-                                    <div class="card">
+                                    <div class="card mb-4">
 
                                         <div class="card-header">
                                             <h4 class="card-title font-weight-bold">@lang('shop.my_cart_shipping_location')</h4>
@@ -54,7 +54,7 @@
 
                                 @else
 
-                                    <div class="card">
+                                    <div class="card mb-4">
 
                                         <div class="card-header">
                                             <h4 class="card-title font-weight-bold">@lang('shop.my_cart_shipping_location')</h4>

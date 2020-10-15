@@ -6,7 +6,7 @@
 	//Session::forget('ordTEST');
 @endphp
 
-<div id="cartWrap">
+<div id="cartWrap" class="mb-5">
 
 
 	@if ($orderTotal)
