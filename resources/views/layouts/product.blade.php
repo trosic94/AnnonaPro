@@ -36,6 +36,17 @@
 											<span class="fullPrice text-lowercase small col-6 text-left pl-0">{{ number_format($prod->prod_price,0,"",".") }} {{ setting('site.valuta') }}</span>
 											<span class="discountPrice font-weight-bold text-lowercase col-12 text-center" style="color: {{ ($prod->cat_color != null)? $prod->cat_color:'' }};">{{ number_format($prod->prod_price_with_discount,0,"",".") }} {{ setting('site.valuta') }}</span>
 			            				</div>
+							            @elseif ($prod->prod_discount != null)
+							            <div class="row justify-content-center">
+							            	<div class="col-6 small text-right text-secondary pr-1">Cena:</div>
+							            	<span class="fullPrice text-lowercase small col-6 text-left pl-0">{{ number_format($prod->prod_price,0,"",".") }} {{ setting('site.valuta') }}</span>
+
+							            	@php
+							            		$discountPrice = $prod->prod_price-(($prod->prod_price/100)*$prod->prod_discount);
+							            	@endphp
+
+							            	<span class="discountPrice font-weight-bold text-lowercase col-12 text-center" style="color: {{ ($prod->cat_color != null)? $prod->cat_color:'' }};">{{ number_format($discountPrice,0,"",".") }} {{ setting('site.valuta') }}</span>
+							            </div>
 										@else
 										<div class="row justify-content-center">
 											<div class="col-12 small text-center text-secondary">Cena:</div>

@@ -126,17 +126,27 @@
 				<div class="row justify-content-start">
 					<div class="priceWrap" style="color: {{ ($productDATA->cat_color == null)? '#389178':'$prod->cat_color' }};">
 						@if ($productDATA->prod_price_with_discount != null)
-						<div class="row justify-content-start text-secondary">
-							<span class="fullPrice font-weight-bold text-lowercase">{{ number_format($productDATA->prod_price,0,"",".") }} {{ setting('site.valuta') }}</span>
-						</div>
-						<div class="row justify-content-center text-secondary">
-							<div>@lang('shop.title_price'):</div><span class="discountPrice font-weight-bold text-lowercase {{ ($productDATA->cat_color == null)? 'primary-color':'' }} " style="color: {{ ($productDATA->cat_color != null)? $productDATA->cat_color:'' }};">{{ number_format($productDATA->prod_price_with_discount,0,"",".") }} {{ setting('site.valuta') }}</span>
-						</div>
+							<div class="row justify-content-start text-secondary">
+								<span class="fullPrice font-weight-bold text-lowercase">{{ number_format($productDATA->prod_price,0,"",".") }} {{ setting('site.valuta') }}</span>
+							</div>
+							<div class="row justify-content-center text-secondary">
+								<div>@lang('shop.title_price'):</div><span class="discountPrice font-weight-bold text-lowercase {{ ($productDATA->cat_color == null)? 'primary-color':'' }} " style="color: {{ ($productDATA->cat_color != null)? $productDATA->cat_color:'' }};">{{ number_format($productDATA->prod_price_with_discount,0,"",".") }} {{ setting('site.valuta') }}</span>
+							</div>
+			            @elseif ($productDATA->prod_discount != null)
+				            <div class="row justify-content-start text-secondary">
+				            	<span class="fullPrice font-weight-bold text-lowercase">@lang('shop.title_price'): {{ number_format($productDATA->prod_price,0,"",".") }} {{ setting('shop.valuta') }}</span>
+				            </div>
+
+				            	@php
+				            		$discountPrice = $productDATA->prod_price-(($productDATA->prod_price/100)*$productDATA->prod_discount);
+				            	@endphp
+				            <div class="row justify-content-center text-secondary">
+				            	<div>@lang('shop.title_price'):</div><span class="discountPrice font-weight-bold text-lowercase {{ ($productDATA->cat_color == null)? 'primary-color':'' }} " style="color: {{ ($productDATA->cat_color != null)? $productDATA->cat_color:'' }};">{{ number_format($discountPrice,0,"",".") }} {{ setting('shop.valuta') }}</span>
+				            </div>
 		                @else
-		                <div class="row">
-		                	<div class="d-inline m-0 text-secondary align-bottom">@lang('shop.title_price'):</div><span class="singlePrice m-0 font-weight-bold text-lowercase " style="color: {{ ($productDATA->cat_color != null)? $productDATA->cat_color:'' }};">{{ number_format($productDATA->prod_price,0,"",".") }} {{ setting('site.valuta') }}</span>
-		                </div>
-						
+			                <div class="row">
+			                	<div class="d-inline m-0 text-secondary align-bottom">@lang('shop.title_price'):</div><span class="singlePrice m-0 font-weight-bold text-lowercase " style="color: {{ ($productDATA->cat_color != null)? $productDATA->cat_color:'' }};">{{ number_format($productDATA->prod_price,0,"",".") }} {{ setting('site.valuta') }}</span>
+			                </div>
 		                @endif
 					</div>
 		        </div>
