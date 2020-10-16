@@ -249,7 +249,7 @@ class ProductController extends Controller
 
                     $discountPrice = $addToCart['products'][$c]['prod_price']-(($addToCart['products'][$c]['prod_price']/100)*$addToCart['products'][$c]['prod_discount']);
 
-                    $cartVIEW .= '  <span class="fullPrice">'.number_format($discountPrice,0,"",".").' '.setting('site.valuta').'</span>';
+                    $cartVIEW .= '  <span class="fullPrice">'.number_format($addToCart['products'][$c]['prod_price'],0,"",".").' '.setting('site.valuta').'</span>';
 
                     $fullAmount = $addToCart['products'][$c]['quantity'] * $discountPrice;
                     $cartVIEW .= '  <div id="finalAmount"><span class="qty">'.$addToCart['products'][$c]['quantity'].'</span> x <span class="discountPrice">'.number_format($fullAmount,0,"",".").' '.setting('site.valuta').'</span></div>';
@@ -405,43 +405,61 @@ class ProductController extends Controller
         // podaci sa POSTa
         $prodID = request('prodID');
         $newQTY = request('newQTY');
+        $mathOPR = request('mathOPR');
 
         // default values
-        $addToCart['total'] = 0;
+        $addToCart['discount'] = $crt['discount'];
+
+        if ($crt):
+            $addToCart['total'] = $crt['total'];
+        else:
+            $addToCart['total'] = 0;
+        endif;
+
         $cartDATA['count'] = 0;
         $fullAmount = 0;
 
         // uklanjam odabrani proizvod iz sesije
-        for ($a=0; $a<count($crt['products']); $a++) { 
-
-            // Kreiram TOTAL za CART
-            if ($crt['products'][$a]['prod_price_with_discount'] != null):
-
-                $fullAmount = $crt['products'][$a]['quantity'] * $crt['products'][$a]['prod_price_with_discount'];
-
-            else:
-
-                $fullAmount = $crt['products'][$a]['quantity'] * $crt['products'][$a]['prod_price'];
-
-            endif;
-
+        for ($a=0; $a<count($crt['products']); $a++) {
 
             if ($crt['products'][$a]['prod_id'] == $prodID):
 
+                // Kreiram TOTAL za CART
+                if ($crt['products'][$a]['prod_price_with_discount'] != null):
+
+                    $fullAmount = $crt['products'][$a]['quantity'] * $crt['products'][$a]['prod_price_with_discount'];
+                    $singlePrice = $crt['products'][$a]['prod_price_with_discount'];
+
+                elseif ($crt['products'][$a]['prod_discount'] != null):
+
+                    $discountPrice = $crt['products'][$a]['prod_price'] - (($crt['products'][$a]['prod_price'] / 100) * $crt['products'][$a]['prod_discount']);
+                    $fullAmount = $crt['products'][$a]['quantity'] * $discountPrice;
+                    $singlePrice = $discountPrice;
+
+                else:
+
+                    $fullAmount = $crt['products'][$a]['quantity'] * $crt['products'][$a]['prod_price'];
+                    $singlePrice = $crt['products'][$a]['prod_price'];
+
+                endif;
+
                 $crt['products'][$a]['quantity'] = $newQTY;
-                
+
             endif;
 
             // kreiram COUNT za cart
             $cartDATA['count'] = $cartDATA['count'] + $crt['products'][$a]['quantity'];
-            $cartDATA['price'] = $fullAmount;
         }
 
         $addToCart['products'] = $crt['products'];
 
         // Kreiram TOTAL za KORPU
-        $addToCart['total'] = $fullAmount;
-        
+        if ($mathOPR == 'plus'):
+            $addToCart['total'] = $addToCart['total'] + $singlePrice;
+        else:
+            $addToCart['total'] = $addToCart['total'] - $singlePrice;
+        endif;
+
         Session::forget('crt');
         Session::put('crt', $addToCart);
 

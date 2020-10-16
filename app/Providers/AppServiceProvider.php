@@ -105,7 +105,7 @@ class AppServiceProvider extends ServiceProvider
                 $cartDATA['discount'] = $ulogovan->discount;
             else:
                 $cartDATA['discount'] = 0;
-            endif;  
+            endif; 
 
             if (Session::has('crt')):
 
@@ -172,10 +172,10 @@ class AppServiceProvider extends ServiceProvider
 
                         $discountPrice = $addToCart['products'][$c]['prod_price']-(($addToCart['products'][$c]['prod_price']/100)*$addToCart['products'][$c]['prod_discount']);
                         
-                        $cartVIEW .= '  <span class="fullPrice">'.number_format($discountPrice,0,"",".").' '.setting('shop.valuta').'</span>';
+                        $cartVIEW .= '  <span class="fullPrice">'.number_format($addToCart['products'][$c]['prod_price'],0,"",".").' '.setting('shop.valuta').'</span>';
 
                         $fullAmount = $addToCart['products'][$c]['quantity'] * $discountPrice;
-                        $cartVIEW .= '  <div id="finalAmount"><span class="qty">'.$addToCart['products'][$c]['quantity'].'</span> x <span class="discountPrice">'.number_format($fullAmount,0,"",".").' '.setting('shop.valuta').'</span></div>';
+                        $cartVIEW .= '  <div id="finalAmount"><span class="qty">'.$addToCart['products'][$c]['quantity'].'</span> x <span class="discountPrice">'.number_format($discountPrice,0,"",".").' '.setting('shop.valuta').'</span></div>';
 
                     else:
 

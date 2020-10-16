@@ -171,7 +171,7 @@
 
 	                            <div id="cartAmount" class="row">
 	                                <div id="cartAmount_label" class="col-xl-6"><label>@lang('shop.order_amount'):</label></div>
-	                                <div id="cartAmount_txt" class="col-xl-6 text-right"><span>{{ number_format($amount,0,"",".") }}</span> {{ setting('shop.valuta') }}</div>
+	                                <div id="cartAmount_txt" class="col-xl-6 text-right"><span>{{ number_format($amount,0,"",".") }}</span> {{ setting('site.valuta') }}</div>
 	                            </div>
 
 	                            <div id="cartAmount" class="row">
@@ -194,7 +194,7 @@
 	                                    <label>@lang('shop.order_total'):</label>
 	                                    <span>(@lang('shop.order_amount_total_vat'))</span>
 	                                </div>
-	                                <div id="cartTotal_txt" class="col-xl-6 text-right"><label>{{ number_format($total,0,"",".") }}</label> {{ setting('shop.valuta') }}</div>
+	                                <div id="cartTotal_txt" class="col-xl-6 text-right"><label>{{ number_format($total,0,"",".") }}</label> {{ setting('site.valuta') }}</div>
 	                            </div>
 
 	                        </div>

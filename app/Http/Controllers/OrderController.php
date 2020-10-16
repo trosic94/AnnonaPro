@@ -85,7 +85,6 @@ class OrderController extends Controller
             $discount = $ulogovan->discount;
         endif;
 
-
         // CUSTOME ------------------------------------------------------------------------------------ //
         $customer = array();
 
@@ -239,7 +238,6 @@ class OrderController extends Controller
 
         $orderItemAttributes_INSERT = DB::table('order_item_attributes')->insert($orderItemAttributes);
 
-
         // SHIPPING ---------------------------------------------------------------------------------- //
 
         // na koju adresu se salje?
@@ -306,10 +304,25 @@ class OrderController extends Controller
         $order['payment_method_name'] = $paymentMethodDATA->title;
         $order['payment_method_description'] = $paymentMethodDATA->description;
 
-
+//return $crt;
 
         // FINAL ORDER data ******************************************************************** ////
         $orderDATA = array();
+
+        // dodajem atribute uz proizvode zbog prikaza na ThankYou, za mail i pdf
+        for ($p=0; $p < count($products); $p++) {
+
+            for ($cp=0; $cp < count($crt['products']); $cp++) {
+             
+                if ($products[$p]['product_id'] == $crt['products'][$cp]['prod_id']):
+
+                    $products[$p]['attr'] = $crt['products'][$cp]['attr_data'];
+
+                endif;
+
+            }
+            
+        }
 
         $orderDATA['url'] = $url;
         $orderDATA['dateTime'] = $order_DATETIME;
