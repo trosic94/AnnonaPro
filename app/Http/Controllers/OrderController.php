@@ -342,8 +342,6 @@ class OrderController extends Controller
         $sendOrderInfoCustomer = Order::sendOrderInfoCustomer($orderDATA);
         $sendOrderInfoAdmin = Order::sendOrderInfoAdmin($orderDATA);
 
-        return $orderDATA;
-
         //brisem podatke o ORDERu iz sesije
         Session::forget('crt');
 
