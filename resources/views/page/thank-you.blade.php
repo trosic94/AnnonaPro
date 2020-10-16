@@ -69,7 +69,6 @@
 
 		                        	@php
 
-		                        		$sviAtributi = array();
 		                        		foreach ($prod['attr'] as $attrKey => $attr):
 
                         					$i = 0;

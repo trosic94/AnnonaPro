@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,9 +58,11 @@
 		<tr>
 			<th style="text-align: center; padding: 5px; font-size: 11px;">@lang('shop.print_label_row_no')</th>
 			<th style="padding: 5px;">@lang('shop.print_label_product_service')</th>
+			<th style="text-align: center; padding: 5px; font-size: 11px;">@lang('shop.print_label_price')</th>
+			<th style="text-align: center; padding: 5px; font-size: 11px;">@lang('shop.print_label_discount')</th>
+			<th style="text-align: center; padding: 5px; font-size: 11px;">@lang('shop.print_label_base_price')</th>
 			<th style="text-align: center; padding: 5px; font-size: 11px;">@lang('shop.print_label_units')</th>
 			<th style="text-align: center; padding: 5px; font-size: 11px;">@lang('shop.print_label_quantity')</th>
-			<th style="text-align: center; padding: 5px; font-size: 11px;">@lang('shop.print_label_base_price')</th>
 			<th style="text-align: center; padding: 5px; font-size: 11px;">@lang('shop.print_label_price_with_vat')</th>
 		</tr>
 		</thead>
@@ -77,21 +81,112 @@
 
 			<tr>
 				<td valign="top" style="text-align: center; padding: 5px;">{{ $i+1 }}</td>
-				<td valign="top" style="padding: 5px;">{{ $order_items[$i]['prod_title'] }}</td>
+				<td valign="top" style="padding: 5px;">
+					{{ $order_items[$i]['prod_title'] }}<br>
+					@lang('shop.my_cart_sku'): {{ $order_items[$i]['prod_sku'] }}<br><br>
+
+
+					@php
+						//echo 'ispis: ';
+						//print_r($order_items[$i]['attr']);
+					@endphp
+
+					@if ($order_items[$i]['attr'])
+
+						@php
+
+						foreach ($order_items[$i]['attr'] as $attrKey => $attr):
+
+								$a = 0;
+	        					$iMAX = 0;
+	        					$attrLABELs = '';
+
+	        					echo '<div style="font-size: 10px;">';
+								// ispis Labele
+								echo '<span class="mr-1" style="font-weight: bold;">'.$attr['title'].'</span>: ';
+
+								//ispis odabranih dinamickih atributa
+	        					foreach ($order_items[$i]['attr'] as $attrLBLKey => $attrLBL) {
+
+	        						if ($attr['id'] == $attrLBL['id']):
+
+	        							foreach ($attrLBL['val'] as $vKey => $attrData) {
+
+	            							$attrLABELs .= $attrData['label'].', ';
+	            							$a++;
+	            							$iMAX++;
+	        								
+	        							}
+
+	        						endif;
+
+	        					}
+	                            // sklanjam zarez sa iza poslednje ispisane vrednosti
+	                            if ($a == 1 || $a == $iMAX):
+	                                $attrLABELs = substr($attrLABELs, 0, -2);
+	                            endif;
+
+	                            echo '<span>'.$attrLABELs.'</span>';
+	        					echo '</div>';
+
+
+						endforeach;
+
+						@endphp 
+
+					@endif
+
+
+				</td>
+
+				<td valign="top" style="text-align: right; padding: 5px;">{{ number_format($order_items[$i]['prod_price'],2,".","") }}</td>
+				<td valign="top" style="text-align: center; padding: 5px;">
+					@if ($order_items[$i]['prod_discount'] != null)
+						{{ $order_items[$i]['prod_discount'] }}%
+					@else
+						-
+					@endif
+				</td>
+				<td valign="top" style="text-align: right; padding: 5px;">
+					@if ($order_items[$i]['prod_discount'] != null)
+						@php
+							$discountPrice = $order_items[$i]['prod_price']-(($order_items[$i]['prod_price']/100)*$order_items[$i]['prod_discount']);
+						@endphp
+						{{ number_format($discountPrice,2,".","") }}
+					@else
+						-
+					@endif
+				</td>
+
 				<td valign="top" style="text-align: center; padding: 5px;">@lang('shop.print_label_units_type')</td>
 				<td valign="top" style="text-align: center; padding: 5px;">{{ $order_items[$i]['quantity'] }}</td>
-				<td valign="top" style="text-align: right; padding: 5px;">{{ number_format($order_items[$i]['display_price'],2,".","") }}</td>
-				<td valign="top" style="text-align: right; padding: 5px;">{{ number_format($iznos,2,".","") }}</td>
+
+				<td valign="top" style="text-align: right; padding: 5px;">
+
+					@php
+						if ($order_items[$i]['prod_discount'] != null):
+							$iznos = $discountPrice*$order_items[$i]['quantity'];
+						else:
+							$iznos = $order_items[$i]['display_price']*$order_items[$i]['quantity'];
+						endif;
+					@endphp
+
+					{{ number_format($iznos,2,".","") }}
+				</td>
 			</tr>
-			
+
+				@php
+					$osnovicaTOTAL = $osnovicaTOTAL + $iznos;
+				@endphp
+
+			@endfor
+
 			@php
-				$osnovicaTOTAL = $osnovicaTOTAL + $iznos;
 				$ukupnoTOTAL = $ukupnoTOTAL + $osnovicaTOTAL;
 			@endphp
 
-			@endfor
 			<tr>
-				<td colspan="3"></td>
+				<td colspan="5"></td>
 				<td style="text-align: center; padding: 5px; font-weight: bold; font-size: 11px;">@lang('shop.print_label_base_amount')</td>
 				<td style="text-align: center; padding: 5px; font-weight: bold; font-size: 11px;">@lang('shop.print_label_discount')</td>
 				<td style="text-align: center; padding: 5px; font-weight: bold; font-size: 11px;">@lang('shop.print_label_total_amount')</td>
@@ -102,7 +197,7 @@
 			@endphp
 
 			<tr>
-				<td colspan="3"></td>
+				<td colspan="5"></td>
 				<td style="text-align: right; padding: 5px;">{{ number_format($osnovicaTOTAL,2,".","") }}</td>
 				<td style="text-align: right; padding: 5px;">{{ $order['rabat'] }}</td>
 				<td style="text-align: right; padding: 5px; background-color: #000000; color: #ffffff;">{{ number_format($ukupnoTOTALsaRabatom,2,".","") }}</td>
