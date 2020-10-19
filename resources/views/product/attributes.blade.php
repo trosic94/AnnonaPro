@@ -30,7 +30,7 @@
                                 @elseif ($atribut['attr_type_id'] == 2)
                                     {{-- Ako je SELECT --}}
 
-                                    <select id="mbdSEL" class="mdb-select md-form pl-0 pr-0 mt-2 mb-0" name="attr_{{ $atribut['attr_id'] }}">
+                                    <select id="mbdSEL_{{ $atribut['attr_id'] }}" class="mdb-select md-form pl-0 pr-0 mt-2 mb-0" name="attr_{{ $atribut['attr_id'] }}">
                                         <option value="">@lang('shop.title_choose')</option>
 
                                         @if (array_key_exists($atribut['attr_id'], $odabraneVrednostiAtributaZaProizvod))
@@ -52,10 +52,14 @@
 
                                     </select>
 
+									<script type="text/javascript">
+										$('#mbdSEL_{{ $atribut['attr_id'] }}').materialSelect();
+									</script>
+
                                 @elseif ($atribut['attr_type_id'] == 3)
                                     {{-- Ako je MULTISELECT --}}
 
-                                    <select id="mbdSELMulti" class="mdb-select md-form pl-0 pr-0 mt-2 mb-0" name="attr_{{ $atribut['attr_id'] }}" data-label-select-all="@lang('shop.title_select_all')" data-label-options-selected="@lang('shop.title_selected_options')" multiple="">
+                                    <select id="mbdSELMulti_{{ $atribut['attr_id'] }}" class="mdb-select md-form pl-0 pr-0 mt-2 mb-0" name="attr_{{ $atribut['attr_id'] }}" data-label-select-all="@lang('shop.title_select_all')" data-label-options-selected="@lang('shop.title_selected_options')" multiple="">
                                         <option value="" disabled>@lang('shop.title_choose')</option>
 
                                         @if (array_key_exists($atribut['attr_id'], $odabraneVrednostiAtributaZaProizvod))
@@ -75,6 +79,10 @@
                                         @endif
 
                                     </select>
+
+									<script type="text/javascript">
+										$('#mbdSEL_{{ $atribut['attr_id'] }}').materialSelect();
+									</script>
 
                                 @elseif ($atribut['attr_type_id'] == 4)
                                     {{-- Ako je CHECKBOX --}}
@@ -174,10 +182,3 @@
 // print_r($allAttributesForProduct);
 // echo '</pre>';
 @endphp
-
-<script type="text/javascript">
-	$('document').ready(function () {
-		$('#mbdSEL').materialSelect();
-		$('#mbdSELMulti').materialSelect();
-	});
-</script>
