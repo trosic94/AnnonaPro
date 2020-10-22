@@ -7,6 +7,7 @@
 @include('home.slider')
 {{-- @include('home.special_tabs') --}}
 @include('home.preporuceno')
+@include('home.novo')
 @include('home.banner_1')
 
 @include('home.row_1')

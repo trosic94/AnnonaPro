@@ -168,6 +168,12 @@
 
 	</form>
 
+  	{{-- RATING --}}
+  	@if (setting('shop.rating') != 0 || setting('shop.rating_comments') != 0)
+  	@include ('product.rating')
+  	@endif
+  	{{-- RATING --}}
+
 </div>
 
 	

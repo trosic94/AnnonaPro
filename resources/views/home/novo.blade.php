@@ -1,10 +1,10 @@
-<div id="homeBlockSlider" class="preporucenoBlock mt-4">
+<div id="homeBlockSlider" class="badgeBlock mt-4 mb-3">
 
-  <h2>{{ $specialOptionBlockTitle_Preporuceno }}</h2>
+	<h2>{{ $specialOptionBlockTitle_Novo }}</h2>
 
-<div id="preporucenoSlider" class="pt-3 pb-3">
+<div id="badge_slider" class="pt-3 pb-3">
 
-    @foreach($productFor_Preporuceno as $tab1Spec)
+    @foreach($productFor_Novo as $tab1Spec)
         <div class="prodOne white pl-0 pr-0 ml-3 mr-3 wow animated fadeIn shadow-sm">
 
           <div class="imgWrap">
@@ -17,9 +17,8 @@
                 </div>
                 <div class="col">
                   @if ($tab1Spec->so_title != '')
-                    <div class="akcijaNOTE" style="background-color: {{ ($tab1Spec->cat_color != null)? $tab1Spec->cat_color:'' }};">Akcija</div>
+                    <div class="akcijaNOTE" style="background-color: {{ ($tab1Spec->cat_color != null)? $tab1Spec->cat_color:'' }};">Novo</div>
                   @endif
-                  
                   @if ($tab1Spec->b_title != '')
                     <div class="bedz" style="background-color: {{ ($tab1Spec->cat_color != null)? $tab1Spec->cat_color:'' }};">
                       {{ $tab1Spec->b_title }} 
@@ -78,7 +77,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
 
-  $('#preporucenoSlider').slick({
+  $('#badge_slider').slick({
     arrows: false,
     dots: true,
     draggable: true,

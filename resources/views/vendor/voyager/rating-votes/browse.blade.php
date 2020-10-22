@@ -7,11 +7,11 @@
         <h1 class="page-title">
             <i class="{{ $dataType->icon }}"></i> {{ $dataType->display_name_plural }}
         </h1>
-        @can('add', app($dataType->model_name))
+{{--         @can('add', app($dataType->model_name))
             <a href="{{ route('voyager.'.$dataType->slug.'.create') }}" class="btn btn-success btn-add-new">
                 <i class="voyager-plus"></i> <span>{{ __('voyager::generic.add_new') }}</span>
             </a>
-        @endcan
+        @endcan --}}
         @can('delete', app($dataType->model_name))
             @include('voyager::partials.bulk-delete')
         @endcan
@@ -118,12 +118,7 @@
                                                 @if (isset($row->details->view))
                                                     @include($row->details->view, ['row' => $row, 'dataType' => $dataType, 'dataTypeContent' => $dataTypeContent, 'content' => $data->{$row->field}, 'action' => 'browse'])
                                                 @elseif($row->type == 'image')
-                                                    {{-- <img src="@if( !filter_var($data->{$row->field}, FILTER_VALIDATE_URL)){{ Voyager::image( $data->{$row->field} ) }}@else{{ $data->{$row->field} }}@endif" style="width:100px"> --}}
-                                                    
-                                                    @if ($data->{$row->field} != '')
-                                                        <img src="/storage/products/{{ $data->{$row->field} }}" style="width:100px">
-                                                    @endif
-
+                                                    <img src="@if( !filter_var($data->{$row->field}, FILTER_VALIDATE_URL)){{ Voyager::image( $data->{$row->field} ) }}@else{{ $data->{$row->field} }}@endif" style="width:100px">
                                                 @elseif($row->type == 'relationship')
                                                     @include('voyager::formfields.relationship', ['view' => 'browse','options' => $row->details])
                                                 @elseif($row->type == 'select_multiple')
@@ -163,40 +158,16 @@
                                                 @elseif($row->type == 'date' || $row->type == 'timestamp')
                                                     {{ property_exists($row->details, 'format') ? \Carbon\Carbon::parse($data->{$row->field})->formatLocalized($row->details->format) : $data->{$row->field} }}
                                                 @elseif($row->type == 'checkbox')
-
                                                         @if($data->{$row->field} == 1)
-                                                            <span class="label label-info">@lang('shop_admin.title_yes')</span>
+                                                            <span class="label label-info">@lang('shop_admin.title_on')</span>
                                                         @else
-                                                            <span class="label label-warning">@lang('shop_admin.title_no')</span>
+                                                            <span class="label label-warning">@lang('shop_admin.title_off')</span>
                                                         @endif
-
                                                 @elseif($row->type == 'color')
                                                     <span class="badge badge-lg" style="background-color: {{ $data->{$row->field} }}">{{ $data->{$row->field} }}</span>
                                                 @elseif($row->type == 'text')
                                                     @include('voyager::multilingual.input-hidden-bread-browse')
-
-                                                        @if ($row->field == 'manufacturer_id')
-
-                                                            @php
-
-                                                                $mnfc = App\Manufacturer::where('id',$data->{$row->field})->first();
-
-                                                                $mfcNAME = '';
-
-                                                                if ($mnfc):
-                                                                    $mfcNAME = $mnfc->name;
-                                                                endif;
-
-                                                            @endphp
-
-                                                            <div>{{ $mfcNAME }} ({{ $data->{$row->field} }})</div>
-
-                                                        @else
-
-                                                            <div>{{ mb_strlen( $data->{$row->field} ) > 200 ? mb_substr($data->{$row->field}, 0, 200) . ' ...' : $data->{$row->field} }}</div>
-
-                                                        @endif
-
+                                                    <div>{{ mb_strlen( $data->{$row->field} ) > 200 ? mb_substr($data->{$row->field}, 0, 200) . ' ...' : $data->{$row->field} }}</div>
                                                 @elseif($row->type == 'text_area')
                                                     @include('voyager::multilingual.input-hidden-bread-browse')
                                                     <div>{{ mb_strlen( $data->{$row->field} ) > 200 ? mb_substr($data->{$row->field}, 0, 200) . ' ...' : $data->{$row->field} }}</div>

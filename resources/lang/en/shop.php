@@ -14,6 +14,7 @@ return [
     /* GENERAL */
     'btn_login' => 'Login',
     'btn_send_link' => 'Send link',
+    'btn_send' => 'Send',
     'btn_confirm' => 'Confirm',
     'btn_cancel' => 'Cancel',
     'btn_confirm_correction' => 'Confirm correction!',
@@ -127,6 +128,8 @@ return [
     'title_package_quantity' => 'Package quantity',
     'title_weight' => 'Weight',
     'title_add_to_favourites' => 'Add to favourites',
+    'title_rate_product' => 'Rate product',
+    'title_rate' => 'Rate',
 
     'title_input_select' => 'Select',
     'title_input_check_list' => 'Check List',
@@ -207,6 +210,57 @@ return [
     'forgot_password_email' => 'Your email address',
 
 
+    /* EMAIL */
+    'email_order_confirmation' => 'Potvrda porudžbine',
+    'email_order_title' => 'Porudžbina',
+    'email_hello' => 'Zdravo',
+    'email_cc_payment_intro_note' => 'Plaćanje je uspešno izvršeno. Račun vaše platne kartice je zadužen.',
+    'email_other_payment_intro_note_1' => 'Vaša porudžbina broj ',
+    'email_other_payment_intro_note_2' => 'je uspešno evidentirana.',
+    'email_other_payment_intro_note_3' => 'Predračun možete da preuzmete sa sledećeg ',
+    'email_other_payment_intro_note_admin_1' => 'Porudžbina broj ',
+    'email_other_payment_intro_note_admin_2' => 'je uspešno evidentirana.',
+    'email_other_payment_intro_note_admin_3' => 'Predračun možete da preuzmete sa sledećeg ',
+
+
+    'email_other_payment_intro_link' => 'linka',
+    'email_pib' => 'PIB',
+    'email_address_f' => 'A.',
+    'email_phone_f' => 'T.',
+    'email_fax_f' => 'F.',
+    'email_email_f' => 'E.',
+    'email_web_f' => 'W.',
+    'email_subject_order_confirmation' => 'Potvrda porudžbine br.',
+    'email_subject_payment_failure' => 'Neuspešno plaćanje',
+    'email_product_tbl_no' => 'Rb.',
+    'email_product_tbl_image' => 'Slika',
+    'email_product_tbl_product' => 'Proizvod',
+    'email_product_tbl_sku' => 'Šifra',
+    'email_product_tbl_quantity' => 'Količina',
+    'email_product_tbl_price' => 'Cena',
+    'email_product_tbl_base_price' => 'Cena po komadu',
+    'email_product_tbl_discount' => 'Popust',
+    'email_product_tbl_total' => 'Ukupno',
+    'email_product_tbl_delivery' => 'Isporuka',
+    'email_product_tbl_order_total' => 'T O T A L',
+    'email_customer' => 'Kupac',
+    'email_name' => 'Ime',
+    'email_address' => 'Adresa',
+    'email_shipping_data' => 'Podaci o isporuci',
+    'email_order_more_info' => 'Informacije o vašim porudžbinama i nalogu možete pronaći na sledećem',
+    'email_order_more_info_link' => 'linku',
+    'email_thank_you' => 'Hvala na poverenju',
+    'email_yours' => 'Vaš',
+
+    'email_rate_comment_title' => 'Product comment',
+    'email_rate_comment_confirmation' => 'Product review',
+    'email_rate_comment_confirmation_txt1' => 'Customer',
+    'email_rate_comment_confirmation_txt2' => 'has left comment for the following item',
+    'email_rate_comment_confirmation_comment_content' => 'Comment content',
+    'email_rate_comment_confirmation_approve' => 'Comment can be approved from the following',
+    'email_rate_comment_confirmation_approve_link' => 'link',
+
+
     /* HOME ------------------------------------------------------*/
     'title_decorative_ribbons' => 'Decorative ribbons',
     'title_create_ribbon' => 'Create ribbon',
@@ -218,6 +272,16 @@ return [
 
     /* COPY ------------------------------------------------------*/
     'footer_copy_1' => 'Kupi Poklon 2020. All rights reserved 1111',
+
+    /* RATING  -----------------------------------------------------------------------------*/
+    'rate_voting_msg_ok' => 'Your rating has been recorded. Thanks!',
+    'rate_voting_msg_err' => 'You have already rated this product!',
+    'rate_comment_title' => 'Customer reviews',
+    'rate_comment_first' => 'Be the first to leave a comment with your product rating.',
+    'rate_no_comments' => 'No comments',
+    'rate_comment_add' => 'Add your review',
+    'rate_comment_msg_ok' => 'Your comment has been sent successfully. It will be published after verification.',
+    'rate_comment_msg_err' => 'You have already sent a comment for this product!',
 
     
 ];

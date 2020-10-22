@@ -53,7 +53,9 @@
                                     </select>
 
 									<script type="text/javascript">
-										$('#mbdSEL_{{ $atribut['attr_id'] }}').materialSelect();
+										$('document').ready(function () {
+											$('#mbdSEL_{{ $atribut['attr_id'] }}').materialSelect();
+										});
 									</script>
 
                                 @elseif ($atribut['attr_type_id'] == 3)
@@ -81,7 +83,9 @@
                                     </select>
 
 									<script type="text/javascript">
-										$('#mbdSEL_{{ $atribut['attr_id'] }}').materialSelect();
+										$('document').ready(function () {
+											$('#mbdSEL_{{ $atribut['attr_id'] }}').materialSelect();
+										});
 									</script>
 
                                 @elseif ($atribut['attr_type_id'] == 4)

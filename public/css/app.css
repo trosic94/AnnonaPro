@@ -40993,6 +40993,14 @@ hr {
   opacity: 0.8;
 }
 
+#preloaderSmall {
+  position: absolute;
+  width: 100%;
+  z-index: 999;
+  display: none;
+  opacity: 0.8;
+}
+
 ol.breadcrumb {
   background-color: #fff;
   padding: 0px;
@@ -42072,6 +42080,14 @@ div#row_2 {
   margin: 0 0 5%;
 }
 
+div#homeBlockSlider h2 {
+  color: #389178;
+  text-transform: uppercase;
+  font-size: 180%;
+  letter-spacing: 0.3rem;
+  text-align: center;
+}
+
 div.prodOne {
   display: block;
   width: 100%;
@@ -42182,7 +42198,7 @@ div.imgWrap {
 div.imgWrap div.akcijaNOTE {
   display: block;
   position: absolute;
-  z-index: 200;
+  z-index: 300;
   right: -8px;
   padding: 2px 15px 3px;
   color: #fff;
@@ -42193,7 +42209,7 @@ div.imgWrap div.akcijaNOTE {
   font-size: 12px;
   transform: rotate(90deg);
   transform-origin: bottom;
-  top: 8px;
+  top: 12px;
 }
 
 div.imgWrap div.bedz {
@@ -42490,6 +42506,13 @@ footer.annona-footer-bg {
 
 footer .border-annona {
   border-bottom: 1px solid #7C7C7C;
+  width: 25%;
+}
+
+@media (max-width: 768px) {
+  footer .border-annona {
+    width: 100%;
+  }
 }
 
 div#shopNAV h5 {
@@ -42965,5 +42988,78 @@ div#contactNav p {
 
 div#shopNAV p {
   margin-bottom: 0;
+}
+
+div#ratingWrap {
+  margin: 3rem 0;
+}
+
+div#ratingWrap span i {
+  font-size: 130%;
+  transition: all 0.1s ease-in;
+}
+
+div#ratingWrap span i:hover {
+  cursor: pointer;
+  color: #36947C;
+}
+
+div#ratingWrap span.blank i {
+  pointer-events: none;
+}
+
+div#ratingWrap .starOFF {
+  color: #767676;
+}
+
+div#ratingWrap .starON {
+  color: #36947C;
+}
+
+div#ratingWrap div#rateMSG {
+  height: 40px;
+  line-height: 30px;
+}
+
+div#ratingWrap div#rateMSG div.formOK {
+  margin: 0;
+  padding: 0;
+}
+
+div#ratingWrap div#rateMSG div.formERR {
+  margin: 0;
+  padding: 0;
+}
+
+div#salonWrap h3 {
+  color: #389178;
+  font-size: 130%;
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+}
+
+div#salonWrap div.serviceTitle {
+  cursor: pointer;
+  padding: 0.2rem 0;
+  font-size: 90%;
+  color: #767676;
+  line-height: normal;
+  border-bottom: 1px solid #F0F0F0;
+}
+
+div#salonWrap div.serviceTitle:hover {
+  color: #389178;
+}
+
+.form-control {
+  transition: none;
+}
+
+.form-control:focus {
+  color: #495057;
+  background-color: #fff;
+  border-color: transparent;
+  outline: 0;
+  box-shadow: none;
 }
 

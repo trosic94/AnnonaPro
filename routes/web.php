@@ -33,12 +33,11 @@ Auth::routes();
 	Route::get('o-nama', 'OnamaController@index');
 	//kontakt
 	Route::get('kontakt', 'KontaktController@index');
-	// Route::get('o-nama', function(){
-	// 	return View('onama'); // Your Blade template name
-	// });
 	//edukacija
 	Route::get('edukacija', 'EdukacijaController@index');
 	Route::get('edukacija/{post}', 'EdukacijaController@post')->where('post','^[a-zA-Z0-9-_\/]+$');
+	//salon
+	Route::post('salon/usluga', 'ContentController@usluga');
 
 	//CART
 	Route::get('cart', 'ProductController@cart');
@@ -52,6 +51,10 @@ Auth::routes();
 
 	// Banners
 	Route::post('banner-click', 'BannerController@clickCount');
+
+	// Rating
+	Route::post('rating', 'RatingOptionController@rateEvent');
+	Route::post('rating/comment', 'RatingOptionController@rateComment');
 
 	//checkOut
 	Route::get('checkout', 'OrderController@checkOut');
@@ -114,4 +117,5 @@ Route::get('/set-all', function() {
 
 	Route::post('/posalji-kontakt', 'KontaktController@contactForm');
 	
-	Route::get('/{pageSlug}', 'PageController@page');
+	Route::get('/{pageSlug}', 'ContentController@procesContent');
+	//Route::get('/{pageSlug}', 'PageController@page');

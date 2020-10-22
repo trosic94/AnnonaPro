@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Voyager;
 
-use App\URL;
-
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -18,21 +16,9 @@ use TCG\Voyager\Http\Controllers\Traits\BreadRelationshipParser;
 
 use TCG\Voyager\Http\Controllers\VoyagerBaseController;
 
-use App\Product;
-use App\Category;
-use App\Manufacturer;
-use App\Attributes;
-use App\AttributesCategory;
-use App\AttributesProduct;
-use App\SpecialOption;
-use App\SpecialOptionForProducts;
-use App\Badge;
-use App\BadgeProducts;
-use App\ProductImages;
 use App\RatingVote;
 
-
-class V_ProductController extends VoyagerBaseController
+class V_RatingVoteController extends VoyagerBaseController
 {
     use BreadRelationshipParser;
 
@@ -175,7 +161,6 @@ class V_ProductController extends VoyagerBaseController
 
     public function show(Request $request, $id)
     {
-
         $slug = $this->getSlug($request);
 
         $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
@@ -219,32 +204,11 @@ class V_ProductController extends VoyagerBaseController
             $view = "voyager::$slug.read";
         }
 
-
-        //PRODUCT data
-        $productDATA = Product::productDATA($id);
-
-        // ATRIBUTI ZA PROIZVOD
-        $productAttributes = AttributesProduct::selectedAttributes_ForProduct($id);
-
-        // Selected Special Display Options
-        $specialDisplayOptionsForProduct = SpecialOptionForProducts::SelectedSpecialDisplayOptionsForProduct($id);
-
-        // Selected Product Badge
-        $badgeForProduct = BadgeProducts::badgeByProductID($id);
-
-        // Selected Product Images for gallery
-        $productGallery = ProductImages::productGalleryByProdID($id);
-
-        // Rating for the product
-        $productRate = RatingVote::productRate($id);
-
-        // Comments for the product
-        $ratingComments = RatingVote::allRatingCommentsForProduct($id);
-
+        // All VoteData
+        $productRatingsAndComments = RatingVote::allRatingData($id);
 
         return Voyager::view($view, compact('dataType', 'dataTypeContent', 'isModelTranslatable', 'isSoftDeleted',
-                                            'productDATA','productAttributes','specialDisplayOptionsForProduct',
-                                            'badgeForProduct','productGallery','productRate','ratingComments'));
+                                            'productRatingsAndComments'));
     }
 
     //***************************************
@@ -300,49 +264,16 @@ class V_ProductController extends VoyagerBaseController
             $view = "voyager::$slug.edit-add";
         }
 
-        // podaci o proizvodu
-        $productDATA = Product::where('id',$id)->first();
-        $categoryID = $productDATA->category_id;
-
-        // kategorij proizvoda
-        $productCategories_SEL = Category::productCategories_SEL();
-
-        // ATRIBUTi za PROIZVOD
-        $allAttributesForProduct = AttributesCategory::attributesDATA_for_Category($categoryID);
-
-        $categoriesForAttribute = array();
-
-        // odabrane VREDNOSTI ATRIBUTA za PROIZVOD
-        $odabraneVrednostiAtributaZaProizvod = AttributesProduct::selectedAttributesValue_ForProduct($id);
-
-        // MANUFACTURERS
-        $allManufacturers = Manufacturer::manufacturerALL();
-
-        // Special Display Options
-        $specialDisplayOptions = SpecialOption::SpecialDisplayOptions();
-
-        // Selected Special Display Options
-        $specialDisplayOptionsForProduct = SpecialOptionForProducts::where('product_id',$id)->pluck('special_options_id')->toArray();
-
-        // All Product Badges
-        $productBadges = Badge::allBadges();
-
-        // Selected Product Badge
-        $badgeForProduct = BadgeProducts::badgeByProductID($id);
-
+        // All VoteData
+        $productRatingsAndComments = RatingVote::allRatingData($id);
 
         return Voyager::view($view, compact('dataType', 'dataTypeContent', 'isModelTranslatable',
-                                                'allAttributesForProduct','odabraneVrednostiAtributaZaProizvod','categoriesForAttribute',
-                                                'productCategories_SEL',
-                                                'allManufacturers',
-                                                'specialDisplayOptions','specialDisplayOptionsForProduct',
-                                                'productBadges','badgeForProduct'));
+                                                'productRatingsAndComments'));
     }
 
     // POST BR(E)AD
     public function update(Request $request, $id)
     {
-
         $slug = $this->getSlug($request);
 
         $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
@@ -392,7 +323,6 @@ class V_ProductController extends VoyagerBaseController
 
     public function create(Request $request)
     {
-
         $slug = $this->getSlug($request);
 
         $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
@@ -420,33 +350,7 @@ class V_ProductController extends VoyagerBaseController
             $view = "voyager::$slug.edit-add";
         }
 
-        // kategorij proizvoda
-        $productCategories_SEL = Category::productCategories_SEL();
-
-        // MANUFACTURERS
-        $allManufacturers = Manufacturer::manufacturerALL();
-
-        // CAtegoriesForAttributes
-        $categoriesForAttribute = array();
-
-        // Special Display Options
-        $specialDisplayOptions = SpecialOption::SpecialDisplayOptions();
-
-        // Selected Special Display Options
-        $specialDisplayOptionsForProduct = array();
-
-        // All Product Badges
-        $productBadges = Badge::allBadges();
-
-        // Selected Product Badge
-        $badgeForProduct = array();
-        
-
-        return Voyager::view($view, compact('dataType', 'dataTypeContent', 'isModelTranslatable',
-                                            'productCategories_SEL','allManufacturers',
-                                            'specialDisplayOptions','specialDisplayOptionsForProduct',
-                                            'productBadges','badgeForProduct',
-                                            'categoriesForAttribute'));
+        return Voyager::view($view, compact('dataType', 'dataTypeContent', 'isModelTranslatable'));
     }
 
     /**
@@ -458,7 +362,6 @@ class V_ProductController extends VoyagerBaseController
      */
     public function store(Request $request)
     {
-
         $slug = $this->getSlug($request);
 
         $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
@@ -574,134 +477,7 @@ class V_ProductController extends VoyagerBaseController
 
         return redirect()->route("voyager.{$dataType->slug}.index")->with($data);
     }
-    //***************************************
-    //
-    //  Delete uploaded file
-    //
-    //****************************************
 
-    public function remove_media(Request $request)
-    {
-        try {
-            // GET THE SLUG, ex. 'posts', 'pages', etc.
-            $slug = $request->get('slug');
-
-            // GET file name
-            $filename = $request->get('filename');
-
-            // GET record id
-            $id = $request->get('id');
-
-            // GET field name
-            $field = $request->get('field');
-
-            // GET multi value
-            $multi = $request->get('multi');
-
-            $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
-
-            // Load model and find record
-            $model = app($dataType->model_name);
-            $data = $model::find([$id])->first();
-
-            // Check if field exists
-            if (!isset($data->{$field})) {
-                throw new Exception(__('voyager::generic.field_does_not_exist'), 400);
-            }
-
-            // Check permission
-            $this->authorize('edit', $data);
-
-            if (@json_decode($multi)) {
-                // Check if valid json
-                if (is_null(@json_decode($data->{$field}))) {
-                    throw new Exception(__('voyager::json.invalid'), 500);
-                }
-
-                // Decode field value
-                $fieldData = @json_decode($data->{$field}, true);
-                $key = null;
-
-                // Check if we're dealing with a nested array for the case of multiple files
-                if (is_array($fieldData[0])) {
-                    foreach ($fieldData as $index=>$file) {
-                        // file type has a different structure than images
-                        if (!empty($file['original_name'])) {
-                            if ($file['original_name'] == $filename) {
-                                $key = $index;
-                                break;
-                            }
-                        } else {
-                            $file = array_flip($file);
-                            if (array_key_exists($filename, $file)) {
-                                $key = $index;
-                                break;
-                            }
-                        }
-                    }
-                } else {
-                    $key = array_search($filename, $fieldData);
-                }
-
-                // Check if file was found in array
-                if (is_null($key) || $key === false) {
-                    throw new Exception(__('voyager::media.file_does_not_exist'), 400);
-                }
-
-                $fileToRemove = $fieldData[$key]['download_link'] ?? $fieldData[$key];
-
-                // Remove file from array
-                unset($fieldData[$key]);
-
-                // Generate json and update field
-                $data->{$field} = empty($fieldData) ? null : json_encode(array_values($fieldData));
-            } else {
-                if ($filename == $data->{$field}) {
-                    $fileToRemove = $data->{$field};
-
-                    $data->{$field} = null;
-                } else {
-                    throw new Exception(__('voyager::media.file_does_not_exist'), 400);
-                }
-            }
-
-            $row = $dataType->rows->where('field', $field)->first();
-
-            // Remove file from filesystem
-            if (in_array($row->type, ['image', 'multiple_images'])) {
-                $this->deleteBreadImages($data, [$row], $fileToRemove);
-            } else {
-                $this->deleteFileIfExists($fileToRemove);
-            }
-
-            $data->save();
-
-            return response()->json([
-                'data' => [
-                    'status'  => 200,
-                    'message' => __('voyager::media.file_removed'),
-                ],
-            ]);
-        } catch (Exception $e) {
-            $code = 500;
-            $message = __('voyager::generic.internal_error');
-
-            if ($e->getCode()) {
-                $code = $e->getCode();
-            }
-
-            if ($e->getMessage()) {
-                $message = $e->getMessage();
-            }
-
-            return response()->json([
-                'data' => [
-                    'status'  => $code,
-                    'message' => $message,
-                ],
-            ], $code);
-        }
-    }
     /**
      * Remove translations, images and files related to a BREAD item.
      *
@@ -718,7 +494,7 @@ class V_ProductController extends VoyagerBaseController
         }
 
         // Delete Images
-        $this->deleteBreadImages($data, $dataType->deleteRows->whereIn('type', ['image', 'multiple_images']));
+        $this->deleteBreadImages($data, $dataType->deleteRows->where('type', 'image'));
 
         // Delete Files
         foreach ($dataType->deleteRows->where('type', 'file') as $row) {
@@ -755,40 +531,28 @@ class V_ProductController extends VoyagerBaseController
      *
      * @return void
      */
-    public function deleteBreadImages($data, $rows, $single_image = null)
+    public function deleteBreadImages($data, $rows)
     {
-        $imagesDeleted = false;
-
         foreach ($rows as $row) {
-            if ($row->type == 'multiple_images') {
-                $images_to_remove = json_decode($data->getOriginal($row->field), true) ?? [];
-            } else {
-                $images_to_remove = [$data->getOriginal($row->field)];
+            if ($data->{$row->field} != config('voyager.user.default_avatar')) {
+                $this->deleteFileIfExists($data->{$row->field});
             }
 
-            foreach ($images_to_remove as $image) {
-                // Remove only $single_image if we are removing from bread edit
-                if ($image != config('voyager.user.default_avatar') && (is_null($single_image) || $single_image == $image)) {
-                    $this->deleteFileIfExists($image);
-                    $imagesDeleted = true;
+            if (isset($row->details->thumbnails)) {
+                foreach ($row->details->thumbnails as $thumbnail) {
+                    $ext = explode('.', $data->{$row->field});
+                    $extension = '.'.$ext[count($ext) - 1];
 
-                    if (isset($row->details->thumbnails)) {
-                        foreach ($row->details->thumbnails as $thumbnail) {
-                            $ext = explode('.', $image);
-                            $extension = '.'.$ext[count($ext) - 1];
+                    $path = str_replace($extension, '', $data->{$row->field});
 
-                            $path = str_replace($extension, '', $image);
+                    $thumb_name = $thumbnail->name;
 
-                            $thumb_name = $thumbnail->name;
-
-                            $this->deleteFileIfExists($path.'-'.$thumb_name.$extension);
-                        }
-                    }
+                    $this->deleteFileIfExists($path.'-'.$thumb_name.$extension);
                 }
             }
         }
 
-        if ($imagesDeleted) {
+        if ($rows->count() > 0) {
             event(new BreadImagesDeleted($data, $rows));
         }
     }

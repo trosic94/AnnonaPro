@@ -14,6 +14,7 @@ return [
     /* GENERAL */
     'btn_login' => 'Prijava',
     'btn_send_link' => 'Pošalji link',
+    'btn_send' => 'Pošalji',
     'btn_confirm' => 'Potvrdi',
     'btn_cancel' => 'Odustani',
     'btn_confirm_correction' => 'Izvrši korekciju!',
@@ -149,6 +150,9 @@ return [
     'title_quantity' => 'Količina',
     'title_package_quantity' => 'Pakovanje',
     'title_weight' => 'Težina',
+    'title_enter_email' => 'unesite e-mail adresu',
+    'title_rate_product' => 'Oceni proizvod',
+    'title_rate' => 'Ocena',
 
     'title_input_select' => 'Lista',
     'title_input_check_list' => 'Ček lista',
@@ -405,6 +409,15 @@ return [
     'email_thank_you' => 'Hvala na poverenju',
     'email_yours' => 'Vaš',
 
+    'email_rate_comment_title' => 'Komentar za proizvod',
+    'email_rate_comment_confirmation' => 'Komentar za proizvod',
+    'email_rate_comment_confirmation_txt1' => 'Korisnik',
+    'email_rate_comment_confirmation_txt2' => 'je ostavio komentar za proizvod',
+    'email_rate_comment_confirmation_comment_content' => 'Sadržaj poruke',
+    'email_rate_comment_confirmation_approve' => 'Komentar možete odobriti sa sledećeg',
+    'email_rate_comment_confirmation_approve_link' => 'linka',
+
+
     /* EMAIL reset  --------------------------------------------------------------------*/
     'email_reset_pass_title' => 'Promena šifre',
     'email_reset_pass_1' => 'Dobili ste ovaj e-mail zato što smo dobili zahtev za izmenu šifre na vašem nalogu.',
@@ -420,6 +433,17 @@ return [
 
     /* SOPY ------------------------------------------------------*/
     'footer_copy_1' => 'AnnonaPro 2020. Sva prava zadržana',
+
+  
+    /* RATING  -----------------------------------------------------------------------------*/
+    'rate_voting_msg_ok' => 'Vaša ocena je evidentirana. Hvala!',
+    'rate_voting_msg_err' => 'Već ste ocenili ovaj proizvod!',
+    'rate_comment_title' => 'Komentari kupaca',
+    'rate_no_comments' => 'Nema komantara',
+    'rate_comment_first' => 'Budite prvi i ostavite komentar uz vašu ocenu proizvoda.',
+    'rate_comment_add' => 'Napiši svoj komentar',
+    'rate_comment_msg_ok' => 'Vaš komentar je uspešno poslat. Biće objavljen nakon provere.',
+    'rate_comment_msg_err' => 'Već ste poslali komentar za ovaj proizvod!'
 
     
 ];

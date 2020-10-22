@@ -25,21 +25,21 @@ class SpecialOptionForProducts extends Model
     	return $displayOptions;
     }
 
+
     public static function SPECproductOptions_ByOPT_ID($optIDs)
     {
+
         $SPECproductOptions_ByOPT_ID = DB::table('special_options_products as SOP')
                                             ->join('products as P','P.id','SOP.product_id')
                                             ->join('categories as CAT','P.category_id','CAT.id')
                                             ->leftJoin('categories as PCAT','CAT.parent_id','PCAT.id')
-                                            ->leftJoin('special_options_products as SOPM', function($j) {
-                                                $j->on('SOPM.product_id','P.id');
-                                            })
-                                            ->join('special_options as SO','SO.id','SOPM.special_options_id')
+                                            ->leftJoin('special_options as SO','SO.id','SOP.special_options_id')
                                             ->leftJoin('badges_products as BP','BP.product_id','P.id')
                                             ->leftJoin('badges as B','B.id','BP.badge_id')
+
                                             ->whereIn('SOP.special_options_id',$optIDs)
                                             ->select(
-                                                'SOPM.special_options_id as sop_id',
+                                                'SOP.special_options_id as sop_id',
                                                 'SO.title as so_title',
                                                 'P.id as p_id',
                                                 'P.sku as p_sku',
@@ -65,13 +65,10 @@ class SpecialOptionForProducts extends Model
                                                 'PCAT.slug as pcat_slug',
                                                 'B.title as b_title',
                                                 'B.color as b_color',
-                                                'B.text_color as b_text_color',
-                                                DB::raw('count(SOP.product_id) as sop_count')
+                                                'B.text_color as b_text_color'
+                                                //DB::raw('count(SOP.product_id) as sop_count')
                                             )
                                             ->where('P.status',1)
-                                            ->groupBy('SOPM.special_options_id','SO.title','P.id','P.sku','P.title','P.slug','P.category_id','P.manufacturer_id','P.excerpt','P.image','P.status',
-                                            'P.product_price','P.product_price_with_discount','P.product_discount','P.product_retail_price','P.product_vat','CAT.id','CAT.name','CAT.slug',
-                                            'CAT.cat_color','PCAT.id','PCAT.name','PCAT.slug','PCAT.cat_color','B.title','B.color','B.text_color')
                                             ->get();
 
         return $SPECproductOptions_ByOPT_ID;

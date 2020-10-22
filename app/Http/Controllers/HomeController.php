@@ -51,27 +51,19 @@ class HomeController extends Controller
     					->get();
 
 
-        // 4 tabs - Special PRoduct Options --------------------------- //
 
-        $optIDs = array(8); // opcije za 4xTAB 
+        // PREPORUCENO ------------------------------------------------------- //
+        $specialOptionBlockTitle_Preporuceno = 'Preporučeno'; // Novo
+        $optIDs = array(8); // Preporuceno
 
-        $specialOptions_tabs = DB::table('special_options as SO')
-                                ->whereIn('id',$optIDs)
-                                ->get();
+        $productFor_Preporuceno = SpecialOptionForProducts::SPECproductOptions_ByOPT_ID($optIDs);
 
-        $productWithSelectedOptions_all = SpecialOptionForProducts::SPECproductOptions_ByOPT_ID($optIDs);
 
-        $productWithSelectedOptions_groupped = $productWithSelectedOptions_all->groupBy('sop_id')->toArray();
+        // NOVO ------------------------------------------------------- //
+        $specialOptionBlockTitle_Novo = 'Novo'; // Novo
+        $optIDs = array(7); // Novo
 
-        // row 1 - Special PRoduct Options --------------------------- //
-        $optIDs = array(5); // opcije za ROW 1 
-
-        $productsFor_Row1 = SpecialOptionForProducts::SPECproductOptions_ByOPT_ID($optIDs);
-
-        // row 2 - Special PRoduct Options --------------------------- //
-        $optIDs = array(6); // opcije za ROW 1 
-
-        $productsFor_Row2 = SpecialOptionForProducts::SPECproductOptions_ByOPT_ID($optIDs);
+        $productFor_Novo = SpecialOptionForProducts::SPECproductOptions_ByOPT_ID($optIDs);
 
 
         // BANNERS -------------------------------------------------------------- //
@@ -92,7 +84,8 @@ class HomeController extends Controller
                                             'specialOptions_tabs','productWithSelectedOptions_groupped',
                                             'productsFor_Row1','productsFor_Row2',
                                             'banners_homeWide','banners_homeRow_1','banners_homeRow_2','banners_homeRow_3',
-                                            'nesto'));
+                                            'specialOptionBlockTitle_Novo','productFor_Novo',
+                                            'specialOptionBlockTitle_Preporuceno','productFor_Preporuceno'));
     }
 
 

@@ -565,10 +565,148 @@ $(document).ready(function() {
         $('.animated-icon3').toggleClass('open');
     });
 });
-// nav active
-// $(document).ready(function() {
-//     $('div.productNAV .navbar-nav .nav-item').click(function() {
-//         $('div.productNAV .navbar-nav .nav-item').removeClass('active');
-//         $(this).addClass('active');
-//     })
-// });
+
+
+// Salon - Usluge
+function getContent(contentID,catID) {
+
+    var scrW = $(window).width();
+
+
+
+    var preloaderHeight = $('div.serviceOne_'+catID+'').height();
+
+    if (scrW > 991) {
+        $('#col_'+catID+'').css({ 'height': preloaderHeight });
+    }
+
+    $('#col_'+catID+' #preloaderSmall').css({ 'display':'flex','height': preloaderHeight }).fadeIn();
+
+    $('div.serviceOne_'+catID+'').html('');
+
+    var _token = $('input[name=_token]').val();
+
+    $.ajax({
+        type: 'POST',
+        url: '/salon/usluga',
+        data: { contentID: contentID,
+                _token: _token },
+        success: function(rsp) {
+
+            $('div.serviceOne_'+catID+'').html(rsp);
+            $('#col_'+catID+' #preloaderSmall').delay(500).fadeOut(300);
+
+        }
+
+    });
+}
+
+
+// RATING ------------------------------------------------------------------------ //
+function rateMe(rateID,rateVAL,productID,ratePosition) {
+
+    $('div#rateMSG').html('');
+
+    var clickedRate = ratePosition + 1;
+
+    var x = document.getElementById('rateOptions');
+    x.removeAttribute('onmouseout');
+
+    var _token = $('input[name=_token]').val();
+
+    $.ajax({
+        type: 'POST',
+        url: '/rating',
+        data: { productID: productID,
+                rateID: rateID,
+                rateVAL: rateVAL,
+                _token: _token },
+        success: function(rsp) {
+
+            $('div#rateMSG').fadeIn().html(rsp);
+
+            rateON(rateID,clickedRate);
+        }
+
+    });
+
+}
+
+function rateON(rateID,rateCNT) {
+
+    for (var i = 0; i < rateID; i++) {
+
+        var ima = $('span#rate'+i+' i').hasClass('starOFF');
+        if (ima == true) {
+            $('span#rate'+i+' i').removeClass('starOFF').addClass('starON');
+        }
+    }
+
+    for (var i = rateID; i < rateCNT; i++) {
+
+        var ima = $('span#rate'+i+' i').hasClass('starON');
+        if (ima == true) {
+            $('span#rate'+i+' i').removeClass('starON').addClass('starOFF');
+        }
+    }
+
+}
+
+function rateOF(rateCNT,productRate) {
+
+    if (productRate > 0) {
+
+        for (var i = 0; i < rateCNT; i++) {
+
+            if (i < productRate) {
+                $('span#rate'+i+' i').removeClass('starOFF').addClass('starON');
+            } else {
+                $('span#rate'+i+' i').removeClass('starON').addClass('starOFF');
+            }
+
+        }
+        
+    } else {
+
+        for (var i = 0; i < rateCNT; i++) {
+
+            var ima = $('span#rate'+i+' i').hasClass('starON');
+            if (ima == true) {
+                $('span#rate'+i+' i').removeClass('starON').addClass('starOFF');
+            }
+
+        }
+
+    }
+
+}
+
+function addRateComment(productID) {
+
+    var rateCommentTXT = $('textarea#rateCommentTXT').val();
+    var _token = $('input[name=_token]').val();
+
+    if (rateCommentTXT != '') {
+
+        $.ajax({
+            type: 'POST',
+            url: '/rating/comment',
+            data: { productID: productID,
+                    rateCommentTXT: rateCommentTXT,
+                    _token: _token },
+            success: function(rsp) {
+
+                $('div#rateCommentMSG').fadeIn().html(rsp);
+
+            }
+
+        });
+
+    }
+
+}
+
+// TOOLTIPS ------------------------------------------------------------------------ //
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})

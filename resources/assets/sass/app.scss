@@ -103,6 +103,11 @@
         display: none;
         opacity: 0.8;
     }
+
+    #preloaderSmall { position: absolute; width: 100%; z-index: 999;
+        display: none;
+        opacity: 0.8;
+    }
     
     // BREADCRUMB ----------------------------------------------------------------------------------------------------- //
     ol.breadcrumb {
@@ -945,6 +950,17 @@
         margin: 0 0 5%;
     }
     
+    // SLIDER ------------------------------------------------------------------------------------------------- //
+    div#homeBlockSlider {
+        h2 {
+            color: $primary-color;
+            text-transform: uppercase;
+            font-size: 180%;
+            letter-spacing: 0.3rem;
+            text-align: center;
+        }
+    }
+
     // PRODUCT ONE ************************************************************************************************* //
     div.prodOne {
         display: block;
@@ -986,7 +1002,7 @@
         div.akcijaNOTE {
             display: block;
             position: absolute;
-            z-index: 200;
+            z-index: 300;
             right: -8px;
             padding: 2px 15px 3px;
             color: $white;
@@ -1001,7 +1017,7 @@
             -ms-transform: rotate(90deg);
             transform: rotate(90deg);
             transform-origin: bottom;
-            top: 8px;
+            top: 12px;
         }
         div.bedz {
             display: block;
@@ -1243,6 +1259,11 @@
     
     footer .border-annona {
         border-bottom: 1px solid $annona-gray-dark;
+        width: 25%;
+
+        @media (max-width: 768px) {
+            width: 100%;
+        }
     }
     
     div#shopNAV {
@@ -1709,3 +1730,84 @@
             margin-bottom: 0;
         }
     }
+
+// RATING -------------------------------------------------------------------------------------------------------- //
+div#ratingWrap {
+
+    margin: 3rem 0;
+
+    span {
+
+        i {
+            font-size: 130%;
+
+            @include trans_1;
+
+            &:hover {
+                cursor: pointer;
+                color: $annona-green-light;
+            }
+
+        }
+
+    }
+
+    span.blank {
+            i {
+                pointer-events: none;
+            }
+        }
+
+    .starOFF {
+        color: $grey-light_1;
+    }
+
+    .starON {
+        color: $annona-green-light;
+    }
+
+    div#rateMSG { height: 40px;
+        line-height: 30px;
+
+        div.formOK { margin: 0; padding: 0; }
+        div.formERR { margin: 0; padding: 0; }
+    }
+
+}
+
+
+// Salon ----------------------------------------------------------------
+div#salonWrap {
+
+    h3 {
+        color: $primary-color;
+        font-size: 130%;
+        text-transform: uppercase;
+        letter-spacing: 0.2rem;
+    }
+
+    div.serviceTitle { cursor: pointer; padding: 0.2rem 0;
+
+        font-size: 90%;
+        color: $grey-light_1;
+        line-height: normal;
+        border-bottom: 1px solid $grey-light_2;
+
+        &:hover {
+            color: $primary-color;
+        }
+    }
+}
+
+
+.form-control {
+    transition: none;
+}
+
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: transparent;
+    outline: 0;
+    box-shadow: none;
+}
