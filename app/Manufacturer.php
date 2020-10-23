@@ -39,10 +39,24 @@ class Manufacturer extends Model
     								->where('parent_id',$catID)
     								->pluck('id')->toArray();
 
-		    	$builder->join('products as P', function($p) use ($childCATs) {
-		    					$p->on('MNF.id','P.manufacturer_id')
-		    					->whereIn('P.category_id',$childCATs);
-		    				});
+                if ($childCATs):
+
+                    $builder->join('products as P', function($p) use ($childCATs) {
+                                 $p->on('MNF.id','P.manufacturer_id')
+                                 ->whereIn('P.category_id',$childCATs)
+                                 ->where('P.status',1); // prikazuje samo MANUFACTURERS koji imaju dodeljenih proizvoda;
+                             });
+
+                else:
+
+                // ako je krajnja kategorija
+                $builder->join('products as P', function($p) use ($catID) {
+                                $p->on('MNF.id','P.manufacturer_id')
+                                ->where('P.category_id',$catID)
+                                ->where('P.status',1); // prikazuje samo MANUFACTURERS koji imaju dodeljenih proizvoda
+                            });
+
+                endif;
 
     		else:
 
@@ -79,6 +93,5 @@ class Manufacturer extends Model
         return $mnfcByCAT;
 
     }
-
 
 }

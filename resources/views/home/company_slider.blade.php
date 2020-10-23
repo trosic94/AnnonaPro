@@ -9,7 +9,7 @@
 
                 @foreach($manufacturers as $bKey => $manufacturer)
                 <div>
-                    <img src="/storage/{{ $manufacturer->image }}" alt="{{ $manufacturer->name }}" class="img-fluid">
+                    <img src="/storage/{{ $manufacturer->image }}" alt="{{ $manufacturer->name }}" class="img-fluid" onclick="serchByMNF({{ $manufacturer->id }},3)" border="0">
                 </div>
 				@endforeach
 

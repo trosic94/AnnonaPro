@@ -32,14 +32,14 @@
 	</div>
 
 <script type="text/javascript">
-	var myCustomScrollbar = document.querySelector('.mnfcScroll');
-	var ps = new PerfectScrollbar(myCustomScrollbar);
+//	var myCustomScrollbar = document.querySelector('.mnfcScroll');
+//	var ps = new PerfectScrollbar(myCustomScrollbar);
 
-	var scrollbarY = myCustomScrollbar.querySelector('.ps__rail-y');
+//	var scrollbarY = myCustomScrollbar.querySelector('.ps__rail-y');
 
-	myCustomScrollbar.onscroll = function () {
-	  scrollbarY.style.cssText = `top: ${this.scrollTop}px!important; right: ${-this.scrollLeft}px`;
-	}
+//	myCustomScrollbar.onscroll = function () {
+//	  scrollbarY.style.cssText = 'top: ${this.scrollTop}px!important; right: ${-this.scrollLeft}px';
+//	}
 </script>
 
 </div>

@@ -97,12 +97,6 @@ function getVal(id) {
     hiddenField_1.value = mfc;
     form.appendChild(hiddenField_1);
 
-    // const hiddenField_2 = document.createElement('input');
-    // hiddenField_2.type = 'hidden';
-    // hiddenField_2.name = 'available';
-    // hiddenField_2.value = available;
-    // form.appendChild(hiddenField_2);
-
     const hiddenField_3 = document.createElement('input');
     hiddenField_3.type = 'hidden';
     hiddenField_3.name = 'price';
@@ -123,10 +117,6 @@ function getVal(id) {
 
     document.body.appendChild(form);
     form.submit();
-
-    console.log(form);
-
-    console.log(mfc + ' // ' + available + ' // ' + price);
 
 }
 
@@ -710,3 +700,48 @@ function addRateComment(productID) {
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
+
+
+
+// Search By manufacturers
+function serchByMNF(mnfID,shopCatID) {
+
+    var mfc = mnfID;
+    var price = null;
+    var _token = $('input[name=_token]').val();
+    var CATCurrent = shopCatID;
+
+    console.log(mnfID);
+
+    const form = document.createElement('form');
+    form.method = 'post';
+    form.action = '/search';
+
+    const hiddenField_1 = document.createElement('input');
+    hiddenField_1.type = 'hidden';
+    hiddenField_1.name = 'mfc';
+    hiddenField_1.value = mfc;
+    form.appendChild(hiddenField_1);
+
+    const hiddenField_3 = document.createElement('input');
+    hiddenField_3.type = 'hidden';
+    hiddenField_3.name = 'price';
+    hiddenField_3.value = price;
+    form.appendChild(hiddenField_3);
+
+    const hiddenField_4 = document.createElement('input');
+    hiddenField_4.type = 'hidden';
+    hiddenField_4.name = '_token';
+    hiddenField_4.value = _token;
+    form.appendChild(hiddenField_4);
+
+    const hiddenField_5 = document.createElement('input');
+    hiddenField_5.type = 'hidden';
+    hiddenField_5.name = 'CATCurrent';
+    hiddenField_5.value = CATCurrent;
+    form.appendChild(hiddenField_5);
+
+    document.body.appendChild(form);
+    form.submit();
+
+}

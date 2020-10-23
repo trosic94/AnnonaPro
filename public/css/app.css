@@ -42097,11 +42097,18 @@ div#homeBlockSlider h2 {
 }
 
 div.slider_company img {
+  cursor: pointer;
   filter: grayscale(100%);
+  outline: none;
 }
 
 div.slider_company img:hover {
   filter: grayscale(0);
+  outline: none;
+}
+
+div.slider_company img:focus {
+  outline: none;
 }
 
 div.prodOne {

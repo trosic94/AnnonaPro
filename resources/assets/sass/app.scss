@@ -946,11 +946,7 @@
         margin: 0 0 5%;
         background-color: $annona-gray-light;
     }
-    
-    div.slider_company {
-        //     background-color: $annona-gray-light;
-    }
-    
+       
     // HOME ROW 2 ------------------------------------------------------------------------------------------------- //
     div#row_2 {
         display: block;
@@ -970,11 +966,17 @@
 
     // SLIDER MANUFACTURERS --------------------------------------------------------------------------------------- //
     div.slider_company {
-        img {
+        img { cursor: pointer;
             filter: grayscale(100%);
+            outline: none;
 
             &:hover {
                 filter: grayscale(0);
+                outline: none;
+            }
+
+            &:focus {
+                outline: none;
             }
         }
     }

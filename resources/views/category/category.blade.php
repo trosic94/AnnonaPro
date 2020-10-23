@@ -42,8 +42,8 @@
 
 	</div>
 @php
-    // echo '<pre class="white">';
-    // print_r($productsFor_CAT);
+    // echo '<pre>';
+    // print_r($manufacturers);
     // echo '</pre>';
 @endphp
 

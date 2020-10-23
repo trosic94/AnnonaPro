@@ -21,16 +21,6 @@ class SearchController extends Controller
 	public function search(Request $request)
     {
 
-        //return $request->all();
-
-        // // PRethodni URL kako bih izvukao kategoriju
-        // $url = URL::previous();
-
-        // // fetch current CAT from url
-        // $catFromURL = explode('/', $url);
-        // $category = end($catFromURL);
-        //$CATCurrent = 42;
-
         $CATCurrent = request('CATCurrent');
 
         // podaci za pretragu
