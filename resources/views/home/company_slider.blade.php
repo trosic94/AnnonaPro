@@ -4,15 +4,12 @@
 
 		<div class="col-lg-12">
 
-			@if (!$banners_homeRow_3->isEmpty())
+			@if ($manufacturers)
 			<div id="slideWrap">
 
-                @foreach($banners_homeRow_3 as $bKey => $banner)
-                {{-- {{$banner->ban_image}} --}}
+                @foreach($manufacturers as $bKey => $manufacturer)
                 <div>
-                    <a href="{{ $banner->ban_url }}" target="{{ $banner->ban_target }}" title="{{ $banner->ban_name }}" onclick="clickCount(event,{{ $banner->ban_id }},{{ $banner->ban_position_id }},'{{ $banner->ban_url }}','{{ $banner->ban_target }}')">
-                        <img src="/storage/banners/{{ $banner->ban_image }}" alt="{{ $banner->ban_name }}" class="img-fluid">
-                    </a>
+                    <img src="/storage/{{ $manufacturer->image }}" alt="{{ $manufacturer->name }}" class="img-fluid">
                 </div>
 				@endforeach
 
@@ -73,8 +70,8 @@
     </script>
 
 @php
-// echo '<pre class="text-white">';
-// print_r($productsFor_Row1);
+// echo '<pre>';
+// print_r($manufacturers);
 // echo '</pre>';
 @endphp
 

@@ -14,7 +14,7 @@ class Manufacturer extends Model
 
     public static function manufacturerALL()
     {
-    	$manufacturerALL = Manufacturer::all();
+    	$manufacturerALL = Manufacturer::where('name','!=','default')->get();
 
     	return $manufacturerALL;
     }

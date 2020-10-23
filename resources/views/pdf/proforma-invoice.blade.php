@@ -85,12 +85,6 @@
 					{{ $order_items[$i]['prod_title'] }}<br>
 					@lang('shop.my_cart_sku'): {{ $order_items[$i]['prod_sku'] }}<br><br>
 
-
-					@php
-						//echo 'ispis: ';
-						//print_r($order_items[$i]['attr']);
-					@endphp
-
 					@if ($order_items[$i]['attr'])
 
 						@php

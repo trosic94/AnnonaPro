@@ -25,6 +25,13 @@
         @include img100;
     }
     
+    .imgGrey {
+        filter: grayscale(100%);
+    }
+    .imgColor {
+        filter: grayscale(0);
+    }
+
     div#pageWrap {
         display: block;
         // margin: 0 0 0%;
@@ -960,6 +967,18 @@
             text-align: center;
         }
     }
+
+    // SLIDER MANUFACTURERS --------------------------------------------------------------------------------------- //
+    div.slider_company {
+        img {
+            filter: grayscale(100%);
+
+            &:hover {
+                filter: grayscale(0);
+            }
+        }
+    }
+
 
     // PRODUCT ONE ************************************************************************************************* //
     div.prodOne {

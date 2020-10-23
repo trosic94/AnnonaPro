@@ -304,7 +304,6 @@ class OrderController extends Controller
         $order['payment_method_name'] = $paymentMethodDATA->title;
         $order['payment_method_description'] = $paymentMethodDATA->description;
 
-//return $crt;
 
         // FINAL ORDER data ******************************************************************** ////
         $orderDATA = array();

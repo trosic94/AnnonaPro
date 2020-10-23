@@ -18,6 +18,7 @@ use App\SlidersItems;
 use App\Product;
 use App\SpecialOptionForProducts;
 use App\Banner;
+use App\Manufacturer;
 
 use App\NewsletterSubscriber;
 
@@ -77,6 +78,9 @@ class HomeController extends Controller
         // Row 2 - company
         $banners_homeRow_3 = Banner::allBannersByPosition(6);
 
+        // Manufacturers
+        $manufacturers = Manufacturer::manufacturerALL();
+
         $nesto = 'dasdasd';
 
 
@@ -85,7 +89,8 @@ class HomeController extends Controller
                                             'productsFor_Row1','productsFor_Row2',
                                             'banners_homeWide','banners_homeRow_1','banners_homeRow_2','banners_homeRow_3',
                                             'specialOptionBlockTitle_Novo','productFor_Novo',
-                                            'specialOptionBlockTitle_Preporuceno','productFor_Preporuceno'));
+                                            'specialOptionBlockTitle_Preporuceno','productFor_Preporuceno',
+                                            'manufacturers'));
     }
 
 

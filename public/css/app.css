@@ -40900,6 +40900,14 @@ body {
   max-width: 220px;
 }
 
+.imgGrey {
+  filter: grayscale(100%);
+}
+
+.imgColor {
+  filter: grayscale(0);
+}
+
 div#pageWrap {
   display: block;
 }
@@ -42086,6 +42094,14 @@ div#homeBlockSlider h2 {
   font-size: 180%;
   letter-spacing: 0.3rem;
   text-align: center;
+}
+
+div.slider_company img {
+  filter: grayscale(100%);
+}
+
+div.slider_company img:hover {
+  filter: grayscale(0);
 }
 
 div.prodOne {
