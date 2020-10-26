@@ -157,7 +157,7 @@
 		<div class="row mt-3">
 			<div class="col-12 p-0">
 				<div class="col-md-5 p-0">
-				<div id="addTo_CART"  class="btn btn-rounded btnBuy text-white {{ ($productDATA->cat_color == null)? 'primary-color':'' }} m-0  pl-5 pr-5 pt-3 pb-3" style="background-color: {{ ($productDATA->cat_color != null)? $productDATA->cat_color:'' }};"  onclick="CartEvent({{ $productDATA->prod_id }})">
+				<div id="addTo_CART"  class="btn btn-rounded btnBuy text-white {{ ($productDATA->cat_color == null)? 'primary-color':'' }} m-0  pl-5 pr-5 pt-3 pb-3" style="background-color: {{ ($productDATA->cat_color != null)? $productDATA->cat_color:'' }};"  onclick="CartEvent({{ $productDATA->prod_id }},{{ ($allAttributesForProduct)? 1:0 }})">
 					 @lang('shop.btn_buy')
 				</div>
 				</div>

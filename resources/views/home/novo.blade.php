@@ -52,7 +52,7 @@
                 </div>
               </div>
                 <div class="row justify-content-center mt-3">
-                  <button id="addTo_CART" class="btn btn-rounded btnBuy {{ ($tab1Spec->cat_color == null)? 'primary-color':'' }} text-white  pl-3 pr-3 pt-1 pb-1" style="background-color: {{ ($tab1Spec->cat_color != null)? $tab1Spec->cat_color:'' }};"  onclick="CartEvent({{ $tab1Spec->p_id }})">
+                  <button id="addTo_CART" class="btn btn-rounded btnBuy {{ ($tab1Spec->cat_color == null)? 'primary-color':'' }} text-white  pl-3 pr-3 pt-1 pb-1" style="background-color: {{ ($tab1Spec->cat_color != null)? $tab1Spec->cat_color:'' }};"  onclick="CartEvent({{ $tab1Spec->p_id }},0)">
                      @lang('shop.btn_buy')
                   </button>
                 </div>

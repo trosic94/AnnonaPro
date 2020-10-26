@@ -209,6 +209,8 @@ return [
     'title_comment' => 'Comment',
     'title_comments' => 'Comments',
     'title_comment_status' => 'Comment satus',
+    'title_tags' => 'Tags',
+    'title_product_tags' => 'Product Tags',
 
     'title_input_select' => 'Select',
     'title_input_check_list' => 'Check List',

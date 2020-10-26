@@ -27,6 +27,7 @@ return [
     'btn_agree' => 'Confirm',
     'btn_order' => 'Order',
     'btn_search' => 'Search',
+    'btn_download_pdf' => 'PDF download',
 
     'title_edit' => 'Edit',
     'title_index' => 'View',
@@ -130,6 +131,8 @@ return [
     'title_add_to_favourites' => 'Add to favourites',
     'title_rate_product' => 'Rate product',
     'title_rate' => 'Rate',
+    'title_related_products' => 'Related products',
+    'title_pricelist_overview' => 'Pricelist overview',
 
     'title_input_select' => 'Select',
     'title_input_check_list' => 'Check List',

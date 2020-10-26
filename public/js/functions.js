@@ -333,27 +333,38 @@ function cart_SumAllPrice() {
 }
 
 
-function CartEvent(prodID) {
+function CartEvent(prodID,attrEXT) {
 
     $('#mdb-preloader').css({'display':'flex'}).fadeIn();
     
     $('header div#cartDATA').html('');
 
     // Attributes
-    var attr_exist = $('input[name=attr_exist]').val();
 
-    if(attr_exist == 1) {
-        var attr_all = $('input[name=attr_all]').val();
-        var attr_cnt = $('input[name=attr_cnt]').val();
+    if (attrEXT == 1) {
+
+        var attr_exist = $('form#addToCart input[name=attr_exist]').val();
+
+        console.log(attr_exist);
+
+        if(attr_exist == 1) {
+            var attr_all = $('form#addToCart input[name=attr_all]').val();
+            var attr_cnt = $('form#addToCart input[name=attr_cnt]').val();
 
 
-        let $form = $('form#addToCart');
-        let $select = $form.find('#mbdSEL');
-        if($select.val() === ''){
-            $select.attr('disabled', 'disabled');
+            let $form = $('form#addToCart');
+            let $select = $form.find('#mbdSEL');
+            if($select.val() === ''){
+                $select.attr('disabled', 'disabled');
+            }
+
+            var formDATA = $('#addToCart').serializeArray();
         }
 
-        var formDATA = $('#addToCart').serializeArray();
+    } else {
+
+    var attr_exist = 0;
+
     }
 
     var prodQTTY = 1;

@@ -42552,6 +42552,11 @@ div#shopNAV ul {
   list-style: none;
 }
 
+div#shopNAV ul li {
+  margin-bottom: 0.6rem;
+  line-height: 100%;
+}
+
 div#shopNAV ul li a {
   color: #fff;
 }
@@ -43072,6 +43077,28 @@ div#salonWrap div.serviceTitle {
 
 div#salonWrap div.serviceTitle:hover {
   color: #389178;
+}
+
+div#priceListDownloadLink {
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  text-align: center;
+  font-size: 130%;
+  transition: all 0.1s ease-in;
+}
+
+div#priceListDownloadLink div.priceListTXT {
+  background-color: #77c5af;
+}
+
+div#priceListDownloadLink a.priceListLNK {
+  color: #fff;
+  background-color: #399179;
+}
+
+div#priceListDownloadLink a.priceListLNK:hover {
+  background-color: #77c5af;
 }
 
 .form-control {

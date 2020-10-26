@@ -7,6 +7,8 @@ use App\Product;
 use App\Category;
 use App\Badge;
 use App\BadgeProducts;
+use App\Tag;
+use App\ProductTag;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -511,6 +513,8 @@ class ProductController extends Controller
         $product->volume = request('zapremina');
         $product->attr_weight = request('attr_weight');
         $product->attr_quantity = request('attr_quantity');
+
+        $product->tags = request('tags');
     	
         if (request('status') == 'on'):
             $product->status = 1;
@@ -715,6 +719,19 @@ class ProductController extends Controller
 
         // PRODUCT BADGES ------------------------------------------------------------------------------- //
 
+        // TAGs ----------------------------------------------------------------------------------------- //
+        if ($product->tags):
+
+            foreach ($product->tags as $key => $tag) {
+                $tags[$key]['product_id'] = $product_id;
+                $tags[$key]['tag_id'] = $tag;
+            }
+
+            $insertTAGs = ProductTag::insert($tags);
+
+        endif;
+        // TAGs ----------------------------------------------------------------------------------------- //
+
     	return  redirect('/SDFSDf345345--DFgghjtyut-6/products')
                 ->with([
                     'message'    => __('voyager::generic.successfully_added_new').": {$product->title}",
@@ -754,7 +771,8 @@ class ProductController extends Controller
         $product->attr_weight = request('attr_weight');
         $product->attr_quantity = request('attr_quantity');
 
-   	
+        $product->tags = request('tags');
+  	
     	if (request('status') == 'on'):
     		$product->status = 1;
     	else:
@@ -974,6 +992,28 @@ class ProductController extends Controller
             endif;
     
         // PRODUCT BADGES ------------------------------------------------------------------------------- //
+
+
+        // TAGs ----------------------------------------------------------------------------------------- //
+        if ($product->tags):
+
+            $tags = array();
+
+            $deleteTags = ProductTag::where('product_id',$product->product_id)->delete();
+
+            foreach ($product->tags as $key => $tag) {
+                $tags[$key]['product_id'] = $product->product_id;
+                $tags[$key]['tag_id'] = $tag;
+            }
+
+            $insertTAGs = ProductTag::insert($tags);
+
+        else:
+
+            $deleteTags = ProductTag::where('product_id',$product->product_id)->delete();
+
+        endif;
+        // TAGs ----------------------------------------------------------------------------------------- //
 
 
         return  redirect('/SDFSDf345345--DFgghjtyut-6/products')

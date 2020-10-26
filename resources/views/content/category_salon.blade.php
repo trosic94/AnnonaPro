@@ -28,6 +28,11 @@
 
             </div>
 
+            <div id="priceListDownloadLink" class="row m-0">
+                <div class="col-lg-7 py-2 priceListTXT">@lang('shop.title_pricelist_overview')</div>
+                <a class="col-lg-5 py-2 priceListLNK" href="/storage/pdf/AnnonaPro-Cenovnik.pdf" target="_blank"><i class="fas fa-download"></i> @lang('shop.btn_download_pdf')</a>
+            </div>
+
             @foreach ($subCAT as $cKey => $cat)
             <div id="salonWrap" class="row mt-5 wow animated slideInUp mb-5 mb-lg-0">
                 <div id="col_{{ $cat->id }}" class="col-lg-6 mb-3 mb-lg-0" style="position: relative;">

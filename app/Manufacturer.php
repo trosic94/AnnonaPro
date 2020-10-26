@@ -86,6 +86,7 @@ class Manufacturer extends Model
 		                            'MNF.image as image',
                                     DB::raw('count(P.manufacturer_id) AS prod_count')
 		                        )
+                                ->where('MNF.name','!=','default')
 		                        ->groupBy('MNF.id')
 		                        ->orderBy('MNF.name','ASC')
 		                        ->get();

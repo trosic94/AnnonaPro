@@ -194,6 +194,32 @@
 
                 </div>
 
+                @if (!$tags->isEmpty())
+                <div class="panel panel-bordered" style="padding-bottom:5px;">
+
+                    <div class="panel-heading" style="border-bottom:0;">
+                        <h3 class="panel-title">@lang('shop_admin.title_tags'):</h3>
+                    </div>
+
+                    <div class="panel-body" style="padding-top:0;">
+                        @php
+                            $tagZ = '';
+
+                            foreach ($tags as $key => $tag) {
+                                $tagZ .= $tag->tag_name.', ';
+                            }
+
+                             $tagFinal = substr($tagZ, 0, -2);
+
+                        @endphp
+
+                        {{ $tagFinal }}
+                        
+                    </div>
+
+                </div>
+                @endif
+
                 @if($productRate)
                 <div class="panel panel-bordered" style="padding-bottom:5px;">
 
@@ -210,7 +236,7 @@
                 </div>
                 @endif
 
-                @if($ratingComments)
+                @if(!$ratingComments->isEmpty())
                 <div class="panel panel-bordered" style="padding-bottom:5px;">
 
                     <div class="panel-heading" style="border-bottom:0;">
@@ -219,7 +245,7 @@
                     
                     <div class="panel-body" style="padding-top:0;">
 
-                        <table class="table_v1" cellpadding="0" cellspacing="0">
+                        <table class="table_v1" cellpadding="0" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
                                     <th>@lang('shop_admin.title_customer')</th>

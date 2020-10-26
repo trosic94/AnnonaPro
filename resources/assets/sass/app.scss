@@ -1299,7 +1299,9 @@
             margin: 0;
             padding: 0;
             list-style: none;
-            li {
+            li { margin-bottom: 0.6rem;
+                line-height: 100%;
+
                 a {
                     color: $white;
                     &:hover {
@@ -1816,6 +1818,30 @@ div#salonWrap {
 
         &:hover {
             color: $primary-color;
+        }
+    }
+}
+
+div#priceListDownloadLink {
+
+    color: $white;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    text-align: center;
+    font-size: 130%;
+
+    @include trans_1;
+
+    div.priceListTXT {
+        background-color: $green-1;
+    }
+
+    a.priceListLNK {
+        color: $white;
+        background-color: $green-2;
+
+        &:hover {
+            background-color: $green-1;
         }
     }
 }

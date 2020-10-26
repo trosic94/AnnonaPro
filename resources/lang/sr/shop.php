@@ -25,6 +25,7 @@ return [
     'btn_logout' => 'Odjava',
     'btn_order' => 'Potvrdi porudžbinu',
     'btn_agree' => 'Slažem se',
+    'btn_download_pdf' => 'Preuzmi PDF',
 
     'title_edit' => 'Izmena',
     'title_index' => 'Pregled',
@@ -153,6 +154,8 @@ return [
     'title_enter_email' => 'unesite e-mail adresu',
     'title_rate_product' => 'Oceni proizvod',
     'title_rate' => 'Ocena',
+    'title_related_products' => 'Povezani proizvodi',
+    'title_pricelist_overview' => 'Pogledajte cenovnik salona',
 
     'title_input_select' => 'Lista',
     'title_input_check_list' => 'Ček lista',
@@ -431,7 +434,7 @@ return [
 
 
 
-    /* SOPY ------------------------------------------------------*/
+    /* COPY ------------------------------------------------------*/
     'footer_copy_1' => 'AnnonaPro 2020. Sva prava zadržana',
 
   

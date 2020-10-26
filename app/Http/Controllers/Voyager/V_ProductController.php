@@ -30,6 +30,8 @@ use App\Badge;
 use App\BadgeProducts;
 use App\ProductImages;
 use App\RatingVote;
+use App\Tag;
+use App\ProductTag;
 
 
 class V_ProductController extends VoyagerBaseController
@@ -241,10 +243,14 @@ class V_ProductController extends VoyagerBaseController
         // Comments for the product
         $ratingComments = RatingVote::allRatingCommentsForProduct($id);
 
+        //Tags
+        $tags = ProductTAg::tagsForProductDATA($id);
+
 
         return Voyager::view($view, compact('dataType', 'dataTypeContent', 'isModelTranslatable', 'isSoftDeleted',
                                             'productDATA','productAttributes','specialDisplayOptionsForProduct',
-                                            'badgeForProduct','productGallery','productRate','ratingComments'));
+                                            'badgeForProduct','productGallery','productRate','ratingComments',
+                                            'tags'));
     }
 
     //***************************************
@@ -330,13 +336,20 @@ class V_ProductController extends VoyagerBaseController
         // Selected Product Badge
         $badgeForProduct = BadgeProducts::badgeByProductID($id);
 
+        //Tags
+        $tags = Tag::tagsAll();
+
+        // Tags For Product
+        $productTags = ProductTag::tagsForProduct($id)->pluck('tag_id')->toArray();
+
 
         return Voyager::view($view, compact('dataType', 'dataTypeContent', 'isModelTranslatable',
                                                 'allAttributesForProduct','odabraneVrednostiAtributaZaProizvod','categoriesForAttribute',
                                                 'productCategories_SEL',
                                                 'allManufacturers',
                                                 'specialDisplayOptions','specialDisplayOptionsForProduct',
-                                                'productBadges','badgeForProduct'));
+                                                'productBadges','badgeForProduct',
+                                                'tags','productTags'));
     }
 
     // POST BR(E)AD
@@ -440,13 +453,20 @@ class V_ProductController extends VoyagerBaseController
 
         // Selected Product Badge
         $badgeForProduct = array();
+
+        //Tags
+        $tags = Tag::tagsAll();
+
+        // Tags For Product
+        $productTags = array();
         
 
         return Voyager::view($view, compact('dataType', 'dataTypeContent', 'isModelTranslatable',
                                             'productCategories_SEL','allManufacturers',
                                             'specialDisplayOptions','specialDisplayOptionsForProduct',
                                             'productBadges','badgeForProduct',
-                                            'categoriesForAttribute'));
+                                            'categoriesForAttribute',
+                                            'tags','productTags'));
     }
 
     /**

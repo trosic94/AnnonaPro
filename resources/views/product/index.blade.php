@@ -7,10 +7,10 @@
 	@include('includes.breadcrumb')
 	<div class="row">
 			<div class="col-10 mt-2">
-						<div class="mainTitle">
-							<h1>{{ $productDATA->prod_title }}</h1>
-						</div>
-					</div>
+				<div class="mainTitle">
+					<h1>{{ $productDATA->prod_title }}</h1>
+				</div>
+			</div>
 		</div>
 
 	<div class="row pl-4 pl-lg-0 pr-4 pr-lg-0  mb-5">
@@ -53,6 +53,16 @@
 				</div>
 				
 			</div>
+	</div>
+
+	<div class="row">
+
+		<div class="col-xl-12">
+		  	{{-- RELATED PRODUCTS --}}
+		  	@include ('product.related')
+		  	{{-- RELATED PRODUCTS --}}
+		</div>
+
 	</div>
 
 

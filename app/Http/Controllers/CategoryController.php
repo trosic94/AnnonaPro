@@ -11,6 +11,7 @@ use App\ProductImages;
 use App\RatingOption;
 use App\RatingVote;
 use App\Order;
+use App\ProductTag;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -282,9 +283,16 @@ class CategoryController extends Controller
 
             endif;
 
+
+            // Related products
+            $tagIDs = ProductTag::tagsForProduct($productDATA->prod_id)->pluck('tag_id')->toArray();
+            //$tagIDs = array(1,2);
+            $relatedProducts = Product::productsBy_Tags($tagIDs,$productDATA->prod_id);
+
             return view('product.index', compact('intro','slug','favLIST','metaTitle','metaDescription','metaKeywords',
                                                     'productDATA','selectedAttributes','allAttributesForProduct','odabraneVrednostiAtributaZaProizvod','productImages',
-                                                    'ratingOptions','productRate','ratingComments','daLiJeKupioProizvod','daLiMozeDaOcenjujeIKomentarise'));
+                                                    'ratingOptions','productRate','ratingComments','daLiJeKupioProizvod','daLiMozeDaOcenjujeIKomentarise',
+                                                    'relatedProducts'));
 
 
         endif;

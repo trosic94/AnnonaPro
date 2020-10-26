@@ -224,10 +224,10 @@
                             <div class="panel-heading">
                                 <h3 class="panel-title"><i class="icon wb-image"></i> @lang('shop_admin.title_attributes')</h3>
                                 <div class="panel-actions">
-                                    <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
+                                    <a class="panel-action panel-collapsed voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
                                 </div>
                             </div>
-                            <div class="panel-body">
+                            <div class="panel-body" style="display: none;">
 
                             @if ($edit)
 
@@ -333,10 +333,10 @@
                             <div class="panel-heading">
                                 <h3 class="panel-title"><i class="icon wb-image"></i> @lang('shop_admin.title_product_badges')</h3>
                                 <div class="panel-actions">
-                                    <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
+                                    <a class="panel-action panel-collapsed voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
                                 </div>
                             </div>
-                            <div class="panel-body">
+                            <div class="panel-body" style="display: none;">
 
                                 <p>@lang('shop_admin.title_product_badges_description')</p>
 
@@ -359,10 +359,10 @@
                             <div class="panel-heading">
                                 <h3 class="panel-title"><i class="icon wb-image"></i> @lang('shop_admin.title_special_display_options')</h3>
                                 <div class="panel-actions">
-                                    <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
+                                    <a class="panel-action panel-collapsed voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
                                 </div>
                             </div>
-                            <div class="panel-body">
+                            <div class="panel-body" style="display: none;">
 
                                 <p>@lang('shop_admin.title_special_display_options_description')</p>
 
@@ -377,6 +377,34 @@
                                     @endif
 
                                 @endforeach
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- ### TAGs ### -->
+                        <div class="panel panel-bordered panel-info">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="icon wb-image"></i> @lang('shop_admin.title_tags')</h3>
+                                <div class="panel-actions">
+                                    <a class="panel-action panel-collapsed voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
+                                </div>
+                            </div>
+                            <div class="panel-body" style="display: none;">
+
+                                <p>@lang('shop_admin.title_product_tags')</p>
+
+                                <div class="form-group">
+
+                                <select class="form-control select2 select2-hidden-accessible" name="tags[]" multiple>
+                                    <option value="">@lang('shop_admin.title_choose')</option> 
+                                    @foreach ($tags as $key => $tag)
+
+                                        <option value="{{ $tag->id }}" {{ ($edit && in_array($tag->id, $productTags))? 'selected':'' }}>{{ $tag->name }}</option>
+
+                                    @endforeach
+                                </select>
 
                                 </div>
 
