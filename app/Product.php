@@ -432,7 +432,7 @@ class Product extends Model
                                 DB::raw('count(SOP.product_id) as sop_count')
                             )
                             ->groupBy('PROD.id')
-                            ->orderBy('B.title','DESC')
+                            ->inRandomOrder()
                             ->get();
 
         return $allProducts;
