@@ -41063,7 +41063,7 @@ ul.slick-dots li button {
   height: 24px;
   margin: 0 3px;
   font-size: 0;
-  background-color: #fff;
+  background-color: #e0e0e0;
   border: none;
   border-collapse: collapse;
   border-radius: 12px;
@@ -43057,6 +43057,20 @@ div#ratingWrap div#rateMSG div.formOK {
 div#ratingWrap div#rateMSG div.formERR {
   margin: 0;
   padding: 0;
+}
+
+div#relatedProductsWrap h3#blockTitle {
+  margin-bottom: 3rem;
+  color: #36947C;
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+  font-size: 150%;
+  text-align: center;
+  font-weight: 600;
+}
+
+div#relatedProductsWrap div#relatedSlider {
+  width: 100%;
 }
 
 div#salonWrap h3 {

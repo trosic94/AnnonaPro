@@ -85,6 +85,8 @@ Auth::routes();
 	Route::group(['prefix' => 'SDFSDf345345--DFgghjtyut-6'], function () {
 		// App::setLocale('en');
 
+		Voyager::routes();
+
 		Route::post('products/insert', 'ProductController@storeProcessingInsert');
 		Route::post('products/edit', 'ProductController@storeProcessingEdit');
 		Route::post('products/attributes', 'ProductController@findeAttributes');
@@ -96,7 +98,6 @@ Auth::routes();
 		Route::post('banners/insert', 'BannerController@storeProcessingInsert');
 		Route::post('banners/edit', 'BannerController@storeProcessingEdit');
 
-	    Voyager::routes();
 	});
 
 

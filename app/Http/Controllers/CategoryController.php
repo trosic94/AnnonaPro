@@ -199,8 +199,11 @@ class CategoryController extends Controller
             // podaci o ulogovanom
             $ulogovan = Auth::user();
 
+            // Product category
+            $catSlugFromURL = array_slice($catFromURL, -2, 1);
+
             // PRODUCT data
-            $productDATA = Product::productDATA_bySLUG($category);
+            $productDATA = Product::productDATA_bySLUG($category,$catSlugFromURL);
 
             // SLUG for BreadCrumb
             $slug = array(
@@ -286,7 +289,6 @@ class CategoryController extends Controller
 
             // Related products
             $tagIDs = ProductTag::tagsForProduct($productDATA->prod_id)->pluck('tag_id')->toArray();
-            //$tagIDs = array(1,2);
             $relatedProducts = Product::productsBy_Tags($tagIDs,$productDATA->prod_id);
 
             return view('product.index', compact('intro','slug','favLIST','metaTitle','metaDescription','metaKeywords',

@@ -66,7 +66,7 @@ class Product extends Model
         return $productDATA;
     }
 
-    public static function productDATA_bySLUG($productSLUG)
+    public static function productDATA_bySLUG($productSLUG,$catSLUG)
     {
         //PRODUCT data
         $productDATA = DB::table('products as PROD')
@@ -77,6 +77,7 @@ class Product extends Model
                             ->leftJoin('badges_products as BP','BP.product_id','PROD.id')
                             ->leftJoin('badges as B','B.id','BP.badge_id')
                             ->where('PROD.slug',$productSLUG)
+                            ->where('CAT.slug',$catSLUG)
                             ->select(
                                 'PROD.id as prod_id',
                                 'PROD.sku as prod_sku',

@@ -340,7 +340,6 @@ function CartEvent(prodID,attrEXT) {
     $('header div#cartDATA').html('');
 
     // Attributes
-
     if (attrEXT == 1) {
 
         var attr_exist = $('form#addToCart input[name=attr_exist]').val();
