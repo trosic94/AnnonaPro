@@ -469,7 +469,9 @@
                                         placeholder="slug"
                                         {!! isFieldSlugAutoGenerator($dataType, $dataTypeContent, "slug") !!}
                                         value="{{ $dataTypeContent->slug ?? '' }}">
+                                    {!! $errors->first('slug', '<div class="alert-danger small col-md-12" style="padding: 2px 5px; margin: 3px 0 10px;">:message</div>') !!}
                                 </div>
+
                                 <div class="form-group">
                                     <label for="meta_description">{{ __('voyager::post.meta_description') }}</label>
                                     <textarea class="form-control" name="meta_description" required="">{{ $dataTypeContent->meta_description ?? '' }}</textarea>

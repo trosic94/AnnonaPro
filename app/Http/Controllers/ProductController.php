@@ -9,6 +9,7 @@ use App\Badge;
 use App\BadgeProducts;
 use App\Tag;
 use App\ProductTag;
+use App\Banner;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -27,7 +28,7 @@ use PDO;
 use Carbon\Carbon;
 use Intervention\Image\ImageManagerStatic as Image;
 use Input;
-use App\Banner;
+use Redirect;
 
 
 class ProductController extends Controller
@@ -515,6 +516,17 @@ class ProductController extends Controller
         $product->attr_quantity = request('attr_quantity');
 
         $product->tags = request('tags');
+
+        //proveravam da li postoji proizvod sa SLUGom za odabranu kategoriju
+        $daLiPostojiProizvodsaCATSLUGom = Product::where('slug',$product->slug)->where('category_id',$product->category_id)->first();
+
+        if ($daLiPostojiProizvodsaCATSLUGom):
+
+            $err['slug'] = trans('shop_admin.err_slug');
+
+            return Redirect::back()->withErrors($err)->withInput();
+
+        endif;
     	
         if (request('status') == 'on'):
             $product->status = 1;
@@ -773,6 +785,24 @@ class ProductController extends Controller
 
         $product->tags = request('tags');
   	
+        //proveravam da li postoji proizvod sa SLUGom za odabranu kategoriju
+        $podaciOProizvodu = Product::where('id',$product->product_id)->first();
+
+        if ($podaciOProizvodu->slug != $product->slug):
+
+            $daLiPostojiProizvodsaCATSLUGom = Product::where('slug',$product->slug)->where('category_id',$product->category_id)->first();
+
+            if ($daLiPostojiProizvodsaCATSLUGom):
+
+                $err['slug'] = trans('shop_admin.err_slug');
+
+                return Redirect::back()->withErrors($err);
+
+            endif;
+
+        endif;
+
+
     	if (request('status') == 'on'):
     		$product->status = 1;
     	else:

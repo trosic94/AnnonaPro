@@ -236,6 +236,8 @@ return [
 
     'err_try_again' => 'There us an error. Please try again!',
 
+    'err_slug' => 'SLUG name is taken!',
+
 
     /* SHOP admin  -----------------------------------------------------------------------------*/
 
