@@ -55,6 +55,14 @@
 			</div>
 	</div>
 
+  	{{-- RATING --}}
+  	@if (setting('shop.rating') != 0 || setting('shop.rating_comments') != 0)
+  	@include ('product.rating')
+  	@endif
+  	{{-- RATING --}}
+
+
+	@if (!$relatedProducts->isEmpty())
 	<div class="row">
 
 		<div class="col-xl-12">
@@ -64,6 +72,7 @@
 		</div>
 
 	</div>
+	@endif
 
 
 	{{-- TABs --}}

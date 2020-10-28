@@ -30,6 +30,7 @@ class RatingVote extends Model
         					->where('RV.comment_status',1)
         					->select(
         						'RV.comment as prod_comment',
+                                'RV.rating_value as rate',
                                 'U.name as u_name',
         						'U.last_name as u_last_name'
         					)

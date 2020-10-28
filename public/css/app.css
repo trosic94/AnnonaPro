@@ -43022,8 +43022,16 @@ div#ratingWrap {
   margin: 3rem 0;
 }
 
+div#ratingWrap h3 {
+  font-size: 100%;
+  color: #36947C;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  font-weight: 600;
+}
+
 div#ratingWrap span i {
-  font-size: 130%;
+  font-size: 150%;
   transition: all 0.1s ease-in;
 }
 
@@ -43044,6 +43052,12 @@ div#ratingWrap .starON {
   color: #36947C;
 }
 
+div#ratingWrap div.rate {
+  margin: 0.5rem 0 0;
+  color: #36947C;
+  font-size: 100%;
+}
+
 div#ratingWrap div#rateMSG {
   height: 40px;
   line-height: 30px;
@@ -43057,6 +43071,17 @@ div#ratingWrap div#rateMSG div.formOK {
 div#ratingWrap div#rateMSG div.formERR {
   margin: 0;
   padding: 0;
+}
+
+div#ratingWrap div.commentHead {
+  margin: 0 0 0.5rem;
+  color: #36947C;
+  font-size: 90%;
+}
+
+div#ratingWrap div.commentTXT {
+  font-size: 90%;
+  line-height: 130%;
 }
 
 div#relatedProductsWrap h3#blockTitle {

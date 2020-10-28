@@ -1760,10 +1760,18 @@ div#ratingWrap {
 
     margin: 3rem 0;
 
+    h3 {
+        font-size: 100%;
+        color: $annona-green-light;
+        text-transform: uppercase;
+        letter-spacing: 0.1rem;
+        font-weight: 600;
+    }
+
     span {
 
         i {
-            font-size: 130%;
+            font-size: 150%;
 
             @include trans_1;
 
@@ -1790,11 +1798,26 @@ div#ratingWrap {
         color: $annona-green-light;
     }
 
+    div.rate { margin: 0.5rem 0 0;
+        color: $annona-green-light;
+        font-size: 100%;
+    }
+
     div#rateMSG { height: 40px;
         line-height: 30px;
 
         div.formOK { margin: 0; padding: 0; }
         div.formERR { margin: 0; padding: 0; }
+    }
+
+    div.commentHead { margin: 0 0 0.5rem;
+        color: $annona-green-light;
+        font-size: 90%;
+    }
+
+    div.commentTXT {
+        font-size: 90%;
+        line-height: 130%;
     }
 
 }

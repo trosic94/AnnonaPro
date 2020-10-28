@@ -2,28 +2,6 @@
 
 									<div class="col-xl-12 pb-3">
 
-										<h3 class="mb-3">@lang('shop.rate_comment_title')</h3>
-
-										<div class="row">
-											@if ($ratingComments)
-												@foreach ($ratingComments as $rcKey => $comment)
-												<div class="col-md-12 mb-3">
-													<div class="font-weight-bolder">{{ $comment->prod_comment }}</div>
-													<div class="font-italic">{{ $comment->u_name }} {{ $comment->u_last_name }}</div>
-												</div>
-												@endforeach
-											@else
-												<div class="col-md-12">
-												@if ($daLiMozeDaOcenjujeIKomentarise == 1)
-													@lang('shop.rate_comment_first')
-												@else
-													@lang('shop.rate_no_comments')
-												@endif
-												</div>
-											@endif
-										</div>
-										<hr>
-
 										@if ($daLiMozeDaOcenjujeIKomentarise == 1)
 										<div class="row">
 
