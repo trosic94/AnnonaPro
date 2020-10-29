@@ -78,7 +78,7 @@
 		@endif
 
 		{{-- ATTRIBUTES --}}
-		@if ($allAttributesForProduct)
+		@if ($odabraneVrednostiAtributaZaProizvod)
 			@include ('product.attributes')
 
 			<input type="hidden" name="attr_exist" value="1">
