@@ -175,7 +175,7 @@
                                 <div class="form-group">
                                     <label for="manufacturer_id">@lang('shop_admin.title_manufacturer')</label>
 
-                                    <select class="form-control select2" name="manufacturer_id" required>
+                                    <select class="form-control select2" name="manufacturer_id">
 
                                             <option value="">@lang('shop_admin.title_choose')</option>
 

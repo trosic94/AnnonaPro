@@ -139,7 +139,7 @@ class SearchController extends Controller
 
         $builder->join('categories as CAT','PROD.category_id','CAT.id')
                 ->leftJoin('categories as PCAT','CAT.parent_id','PCAT.id')
-                ->join('manufacturer as M','PROD.manufacturer_id','M.id')
+                ->leftJoin('manufacturer as M','PROD.manufacturer_id','M.id')
                 ->leftJoin('special_options_products as SOP','SOP.product_id','PROD.id')
                 ->leftJoin('badges_products as BP','BP.product_id','PROD.id')
                 ->leftJoin('badges as B','B.id','BP.badge_id');

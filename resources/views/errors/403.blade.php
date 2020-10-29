@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{ setting('site.title') }} - 403 Forbidden</title>
+    <title>{{ setting('site.title') }} - 419 Page Expired</title>
 
 <style type="text/css">
 	body,html {
@@ -11,7 +11,7 @@
 		margin: 0;
 		padding: 0;
 		background-color: #ffffff;
-		background-image: url('/images/error/403.jpg');
+		background-image: url('/images/error/419.jpg');
 		background-repeat: no-repeat;
 		background-size: cover;
 		background-attachment: fixed;
