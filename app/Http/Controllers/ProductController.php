@@ -664,28 +664,7 @@ class ProductController extends Controller
 
                     endif;
 
-                else:
-
-                    // uzimam sve vrednosti za atribut i dodeljujem proizvodu
-                    $sveVrednostiZaAtribut = AttributesValues::attributeVALUES($attrID);
-
-                    // kreiram podatke za upis u DB
-                    foreach ($sveVrednostiZaAtribut as $attrValKey => $attrVal) {
-
-                        $listOfSelectedAttr[$attrCNT]['attribute_id'] = $attrID; // ATRIBUT ID
-                        $listOfSelectedAttr[$attrCNT]['attribute_value_id'] = $attrVal->attrval_id; // ATTRIBUTE VALUE ID
-
-                        $listOfSelectedAttr[$attrCNT]['product_id'] = $product->product_id; // PRODUCT ID
-                        $listOfSelectedAttr[$attrCNT]['created_at'] = $sada;
-                        $listOfSelectedAttr[$attrCNT]['updated_at'] = $sada;
-
-                        $attrCNT++;
-                        
-                    }
-
                 endif;
-
-                
 
             }
 
@@ -943,28 +922,7 @@ class ProductController extends Controller
 
                     endif;
 
-                else:
-
-                    // uzimam sve vrednosti za atribut i dodeljujem proizvodu
-                    $sveVrednostiZaAtribut = AttributesValues::attributeVALUES($attrID);
-
-                    // kreiram podatke za upis u DB
-                    foreach ($sveVrednostiZaAtribut as $attrValKey => $attrVal) {
-
-                        $listOfSelectedAttr[$attrCNT]['attribute_id'] = $attrID; // ATRIBUT ID
-                        $listOfSelectedAttr[$attrCNT]['attribute_value_id'] = $attrVal->attrval_id; // ATTRIBUTE VALUE ID
-
-                        $listOfSelectedAttr[$attrCNT]['product_id'] = $product->product_id; // PRODUCT ID
-                        $listOfSelectedAttr[$attrCNT]['created_at'] = $sada;
-                        $listOfSelectedAttr[$attrCNT]['updated_at'] = $sada;
-
-                        $attrCNT++;
-                        
-                    }
-
-                endif;
-
-                
+                endif;                
 
             }
 
