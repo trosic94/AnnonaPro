@@ -370,6 +370,88 @@ class Category extends Model
         return $allCAT;
     }
 
+    public static function categoriesByParentCAT($parentCatID)
+    {
+        $shopCAT = Category::shopCAT();
+
+        $productCategories = DB::table('categories as CAT')
+                                        ->where('CAT.parent_id',$parentCatID)
+                                        ->where('published',1) // uzimam samo aktivne kategorije
+                                        ->select(
+                                            'CAT.id as cat_id',
+                                            'CAT.name as cat_name',
+                                            'CAT.slug as cat_slug',
+                                            'CAT.published as cat_published',
+                                            'CAT.parent_id as cat_parent_id'
+                                        )
+                                        ->orderBy('order','ASC')
+                                        ->get();
+
+        return $productCategories;
+    }
+
+    // nadji ALL CHILD CATEGORIES ---------------------------------------------------------- //
+    // kreiram listu kategorija i podkategorija -------------------------------------------- //
+    public function categories()
+    {
+        return $this->hasMany(Category::class,'parent_id');
+    }
+
+    public function childrenCategories()
+    {
+        return $this->hasMany(Category::class,'parent_id')->with('categories');
+    }
+    // kreiram listu kategorija i podkategorija -------------------------------------------- //
+
+    public static function getAllChildCAT_IDs($categoryID)
+    {
+
+        $startCATegory = Category::where('id',$categoryID)
+                                ->with('childrenCategories')
+                                ->get();
+
+        $allCAT_w_Child = array();
+
+        foreach ($startCATegory as $cat) {
+
+            foreach ($cat->childrenCategories as $childCAT) {
+                array_push($allCAT_w_Child, $childCAT->id);
+
+
+                if ($childCAT->categories):
+
+                    $allCAT_w_Child = Category::fetchChildCAT_IDs($childCAT->categories,$allCAT_w_Child);
+
+                endif;
+
+            }
+
+        }
+
+        return $allCAT_w_Child;
+
+    }
+
+    public static function fetchChildCAT_IDs($categories,$allCAT_w_Child)
+    {
+
+        foreach ($categories as $childCAT) {
+
+            array_push($allCAT_w_Child, $childCAT->id);
+
+            if ($childCAT->categories):
+
+                $allCAT_w_Child = Category::fetchChildCAT_IDs($childCAT->categories,$allCAT_w_Child);
+
+            endif;
+
+        }
+
+        return $allCAT_w_Child;
+    }
+    // nadji ALL CHILD CATEGORIES ---------------------------------------------------------- //
+
+
     public static function edu_MainCategories($parent_id){
         $catsWithPosts = Category::where('parent_id',$parent_id)->with('posts')->get()->toArray();
         return $catsWithPosts;

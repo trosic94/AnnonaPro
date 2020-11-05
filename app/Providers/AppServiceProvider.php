@@ -9,6 +9,7 @@ use App\Dimension;
 use App\Order;
 use App\ProductFavourites;
 use App\Banner;
+use App\AppSpotlight;
 
 use Illuminate\Support\Facades\View;
 
@@ -73,8 +74,32 @@ class AppServiceProvider extends ServiceProvider
                 $userDATA['msg'] = trans('shop.title_hello').' '.$ulogovan->name;
                 $userDATA['customer']['name'] = $ulogovan->name;
                 $userDATA['customer']['last_name'] = $ulogovan->name;
+                $userDATA['customer']['barcode'] = $ulogovan->loy_barcode;
 
+                // Orders
                 $orders = Order::orderDATAbyUser($ulogovan->id);
+
+                // LOY SpotLight ----------------------------------------------- //
+                $loyDATA = AppSpotlight::first();
+
+                $userDATA['loy'] = '';
+
+                if ($loyDATA && $loyDATA->active != 0):
+
+                    $loyData = AppSpotlight::userData();
+                    $userDATA['loy'] = $loyData;
+
+                    $sviKuponi = AppSpotlight::couponsData();
+                    $userDATA['loy']->coupons = $sviKuponi;
+
+                    $sviKuponi_challengeQuantity = AppSpotlight::couponsData_challengeQuantity($loyDATA->api_base_url,$loyDATA->api_key,$ulogovan->loy_barcode);
+                    $userDATA['loy']->coupons_challenge_quantity = $sviKuponi_challengeQuantity;
+
+                    $sviKuponi_challengeAmount = AppSpotlight::couponsData_challengeAmount($loyDATA->api_base_url,$loyDATA->api_key,$ulogovan->loy_barcode);
+                    $userDATA['loy']->coupons_challenge_amaount = $sviKuponi_challengeAmount;
+
+                endif;
+                // LOY SpotLight ----------------------------------------------- //
 
             endif;
 

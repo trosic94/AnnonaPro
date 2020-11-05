@@ -49,6 +49,77 @@
 
         	<hr>
 
+          @if ($userDATA['loy'] != '' && $userDATA['customer']['barcode'] != '')
+          <div>
+
+            @if (property_exists($userDATA['loy'], 'info'))
+            <h3>@lang('shop.title_loyalty_program')</h3>
+            <div class="row">
+              
+              <div class="col-lg-12">
+
+                <div><label>@lang('shop.title_number_of_points')</label>: {{ $userDATA['loy']->info->points_amount }}</div>
+                <div><label>@lang('shop.title_rang')</label>: {{ $userDATA['loy']->info->rank_title }}</div>
+
+              </div>
+
+            </div>
+            @endif
+
+            @if ($userDATA['loy']->coupons)
+            <h3>@lang('shop.title_available_coupons')</h3>
+
+            <div class="row mb-4">
+              
+              <div class="col-lg-12">
+
+                @foreach ($userDATA['loy']->coupons as $cKey => $coupon)
+                  <div class="mb-3">
+                    <h4 class="small">{{ $coupon->name }}</h4>
+                    <img src="{{ $coupon->image_url }}" class="img-fluid w-100">
+                  </div>
+                @endforeach
+
+              </div>
+
+            </div>
+            @endif
+
+            @if ($userDATA['loy']->coupons_challenge_quantity && !array_key_exists('errors', $userDATA['loy']->coupons_challenge_quantity))
+
+            <div class="row mb-4">
+              
+              <div class="col-lg-12">
+
+                @foreach ($userDATA['loy']->coupons_challenge_quantity as $qKey => $couponChallengeQuantity)
+                  <div>
+                    <h4 class="small">{{ $couponChallengeQuantity->coupon_title }}</h4>
+                    <img src="{{ $couponChallengeQuantity->image }}" class="img-fluid w-100">
+                  </div>
+                  <div>
+                    @for ($i=0; $i<$couponChallengeQuantity->challenged_quantity; $i++)
+
+                      @if ($i < $couponChallengeQuantity->purchased_quantity)
+                      <img src="{{ $couponChallengeQuantity->sticker_on }}" class="img-fluid" style="width: 40px;">
+                      @else
+                      <img src="{{ $couponChallengeQuantity->sticker_off }}" class="img-fluid" style="width: 40px;">
+                      @endif
+
+                    @endfor
+                  </div>
+                  <div class="small">@lang('shop.title_coupons_won'): {{ $couponChallengeQuantity->coupons_won }}</div>
+                  <div class="small">@lang('shop.title_purchased'): {{ $couponChallengeQuantity->purchased_quantity }}</div>
+                  <div class="small">@lang('shop.title_required_amount_to_win_the_coupon'): {{ $couponChallengeQuantity->challenged_quantity }}</div>
+                @endforeach
+
+              </div>
+
+            </div>
+            @endif
+
+          </div>
+          @endif
+
 @php
 // echo '<pre class="text-white">';
 // print_r($userDATA['orders']);

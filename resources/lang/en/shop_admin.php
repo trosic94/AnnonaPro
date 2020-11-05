@@ -21,6 +21,8 @@ return [
     'btn_confirm_order' => 'Confirm order',
     'btn_view' => 'View',
     'btn_view_all' => 'View All',
+    'btn_export_categories' => 'Export categories',
+    'btn_export_products' => 'Export products',
 
     'title_edit' => 'Edit',
     'title_index' => 'View',
@@ -211,6 +213,9 @@ return [
     'title_comment_status' => 'Comment satus',
     'title_tags' => 'Tags',
     'title_product_tags' => 'Product Tags',
+    'title_basic_informations' => 'Basic informations',
+    'title_export_categories_txt' => 'Export all first level categories to the SpotLight Database.',
+    'title_export_products_txt' => 'Export all products to the SpotLight Database.',
 
     'title_input_select' => 'Select',
     'title_input_check_list' => 'Check List',

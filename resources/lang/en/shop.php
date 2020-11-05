@@ -133,6 +133,12 @@ return [
     'title_rate' => 'Rate',
     'title_related_products' => 'Related products',
     'title_pricelist_overview' => 'Pricelist overview',
+    'title_loyalty_program' => 'Loyalty program',
+    'title_number_of_points' => 'Points',
+    'title_available_coupons' => 'Available coupons',
+    'title_coupons_won' => 'Coupons won',
+    'title_purchased products' => 'Purchased products',
+    'title_required_amount_to_win_the_coupon' => 'Required amount to win the coupon',
 
     'title_input_select' => 'Select',
     'title_input_check_list' => 'Check List',

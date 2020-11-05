@@ -156,6 +156,12 @@ return [
     'title_rate' => 'Ocena',
     'title_related_products' => 'Povezani proizvodi',
     'title_pricelist_overview' => 'Pogledajte cenovnik salona',
+    'title_loyalty_program' => 'Loyalty program',
+    'title_number_of_points' => 'Poeni',
+    'title_available_coupons' => 'Dostupni kuponi',
+    'title_coupons_won' => 'Osvojeno kupona',
+    'title_purchased products' => 'Kupljeno proizvoda',
+    'title_required_amount_to_win_the_coupon' => 'Potrebna količina za osvajanje kupona',
 
     'title_input_select' => 'Lista',
     'title_input_check_list' => 'Ček lista',

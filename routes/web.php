@@ -98,6 +98,9 @@ Auth::routes();
 		Route::post('banners/insert', 'BannerController@storeProcessingInsert');
 		Route::post('banners/edit', 'BannerController@storeProcessingEdit');
 
+		Route::post('/loy-categories-export', 'AppSpotlightController@categoriesExport');
+		Route::post('/loy-products-export', 'AppSpotlightController@productExport');
+
 	});
 
 
