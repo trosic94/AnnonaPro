@@ -292,7 +292,7 @@ class CategoryController extends Controller
             $relatedProducts = Product::productsBy_Tags($tagIDs,$productDATA->prod_id);
 
             return view('product.index', compact('intro','slug','favLIST','metaTitle','metaDescription','metaKeywords',
-                                                    'productDATA','selectedAttributes','allAttributesForProduct','odabraneVrednostiAtributaZaProizvod','productImages',
+                                                    'productDATA','allAttributesForProduct','odabraneVrednostiAtributaZaProizvod','productImages',
                                                     'ratingOptions','productRate','ratingComments','daLiJeKupioProizvod','daLiMozeDaOcenjujeIKomentarise',
                                                     'relatedProducts'));
 

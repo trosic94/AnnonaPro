@@ -85,8 +85,6 @@ class HomeController extends Controller
 
 
     	return view('home.index', compact('sliderHOME','favLIST',
-                                            'specialOptions_tabs','productWithSelectedOptions_groupped',
-                                            'productsFor_Row1','productsFor_Row2',
                                             'banners_homeWide','banners_homeRow_1','banners_homeRow_2','banners_homeRow_3',
                                             'specialOptionBlockTitle_Novo','productFor_Novo',
                                             'specialOptionBlockTitle_Preporuceno','productFor_Preporuceno',
