@@ -10,6 +10,7 @@ use App\BadgeProducts;
 use App\Tag;
 use App\ProductTag;
 use App\Banner;
+use App\AppSpotlight;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -722,6 +723,36 @@ class ProductController extends Controller
 
         endif;
         // TAGs ----------------------------------------------------------------------------------------- //
+
+        // LOY integracija ------------------------------------------------------------------------------ //
+
+        // Kategorija za SHOP
+        $shopCAT = Category::shopCAT();
+
+        // Basic LOY data
+        $useLOY_DATA = AppSpotlight::first();
+
+        // proveravam da li je SHOP povezan za LOY i da li se kreira NOVA Top Level kategoija
+        // ako je povezan, radi se insert kategorije na app.SL
+        if ($useLOY_DATA && $useLOY_DATA->active == 1):
+
+            // tazim TOP Level kategoriju u zavisnosti od odabrane kategorije na SHOPu kod unosa proizvoda
+            $catIDs = Category::findAllCAT_IDs_list($product->category_id);
+            $topLevelCat = end($catIDs);
+
+            // pripremam podatke za EXPORT
+            $exportDATA = array();
+            $exportDATA['apikey'] = $useLOY_DATA->api_key;
+
+            $exportDATA['stavke'][0]['p_sifra'] = $product->sku;
+            $exportDATA['stavke'][0]['p_barkod'] = $product->sku;
+            $exportDATA['stavke'][0]['p_kategorija'] = $topLevelCat;
+            $exportDATA['stavke'][0]['p_naziv'] = $product->title;
+
+            $catExport = AppSpotlight::productExport($useLOY_DATA->api_base_url,$exportDATA);
+
+        endif;
+        // LOY integracija ------------------------------------------------------------------------------ //
 
     	return  redirect('/SDFSDf345345--DFgghjtyut-6/products')
                 ->with([

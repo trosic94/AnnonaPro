@@ -451,10 +451,15 @@ class Category extends Model
     }
     // nadji ALL CHILD CATEGORIES ---------------------------------------------------------- //
 
+    // Reverse CAT ----------------------------------------------------------------//
+    public function parentReverse()
+    {
+        return $this->belongsTo('App\Category', 'parent_id');
+    }
 
-    public static function edu_MainCategories($parent_id){
-        $catsWithPosts = Category::where('parent_id',$parent_id)->with('posts')->get()->toArray();
-        return $catsWithPosts;
+    public function childrenReverse()
+    {
+        return $this->hasMany('App\Category', 'parent_id');
     }
 
 
@@ -471,7 +476,36 @@ class Category extends Model
 
         return $parents;
     }
+    // Reverse CAT ----------------------------------------------------------------//
 
+    // Pronadji sve Parent Kategorije (IDs)
+    public static function findAllCAT_IDs_list($catID)
+    {
+
+        $categoryW_Parents = Category::where('id',$catID)->first();
+
+        $allCATdata = array();
+
+        array_push($allCATdata, $categoryW_Parents->id);
+
+        // dodajem sve parent kategorije u niz
+        foreach ($categoryW_Parents->getParentsAttribute() as $pCAT):
+            if (!in_array($pCAT['id'], $allCATdata) && $pCAT['parent_id'] != ''):
+                array_push($allCATdata, $pCAT['id']);
+            endif;
+        endforeach;
+
+        return $allCATdata;
+
+    }
+
+
+
+
+    public static function edu_MainCategories($parent_id){
+        $catsWithPosts = Category::where('parent_id',$parent_id)->with('posts')->get()->toArray();
+        return $catsWithPosts;
+    }
 
     public static function slugify($text)
     {
