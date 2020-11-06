@@ -528,6 +528,8 @@ class ProductController extends Controller
             return Redirect::back()->withErrors($err)->withInput();
 
         endif;
+
+        $this->productValidate($request);
     	
         if (request('status') == 'on'):
             $product->status = 1;
@@ -812,6 +814,23 @@ class ProductController extends Controller
 
         endif;
 
+        //proveravam da li postoji proizvod sa unetim SKUom
+        $podaciOProizvodu = Product::where('id',$product->product_id)->first();
+
+        if ($podaciOProizvodu->sku != $product->sku):
+
+            $daLiPostojiProizvodsaSKUom = Product::where('sku',$product->sku)->first();
+
+            if ($daLiPostojiProizvodsaSKUom):
+
+                $err['sku'] = trans('shop_admin.err_sku');
+
+                return Redirect::back()->withErrors($err);
+
+            endif;
+
+        endif;
+
 
     	if (request('status') == 'on'):
     		$product->status = 1;
@@ -1083,5 +1102,12 @@ class ProductController extends Controller
             $htmlRSP .= '<input type="hidden" name="attr_all" value="'.json_encode($listOfAttributes).'">';
 
         return $htmlRSP;
+    }
+
+    public function productValidate($request)
+    {
+        return $this->validate($request, [
+            'sku' => 'required|unique:products,sku'
+        ]);
     }
 }

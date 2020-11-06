@@ -242,6 +242,7 @@ return [
     'err_try_again' => 'There us an error. Please try again!',
 
     'err_slug' => 'SLUG name is taken!',
+    'err_sku' => 'SKU value is taken!',
 
 
     /* SHOP admin  -----------------------------------------------------------------------------*/

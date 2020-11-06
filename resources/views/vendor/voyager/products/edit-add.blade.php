@@ -133,6 +133,7 @@
                                 <div class="form-group">
                                     <label class="control-label" for="name">@lang('shop_admin.title_sku')</label>
                                     <input type="text" class="form-control" name="sku" required step="any" placeholder="SKU" value="{{ $dataTypeContent->sku }}">
+                                    {!! $errors->first('sku', '<div class="alert-danger small col-md-12" style="padding: 2px 5px; margin: 3px 0 10px;">:message</div>') !!}
                                 </div>
                                 <div class="form-group">
                                     <label for="category_id">@lang('shop_admin.title_category')</label>
